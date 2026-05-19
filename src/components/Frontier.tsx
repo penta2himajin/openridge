@@ -223,6 +223,7 @@ export default function Frontier(props: Props) {
       xScale,
       yScale,
       mobile,
+      xview: props.state.xview(),
       selectedId: props.state.selectedModelId(),
       onSelect: (id) => props.state.setSelectedModelId(id),
       onSelectedPos: (cx, cy) => setSelectedPos({ cx, cy }),
@@ -306,9 +307,19 @@ interface OverlayContext {
   xScale: d3.ScaleLogarithmic<number, number>;
   yScale: d3.ScaleLinear<number, number>;
   mobile: boolean;
+  xview: "active" | "total" | "compare";
   selectedId: string | null;
   onSelect: (id: string | null) => void;
   onSelectedPos: (cx: number, cy: number) => void;
+}
+
+/**
+ * Rough pixel width estimate for the closed-anchor label, used to space the
+ * callout markers along the X axis without measuring real text.
+ */
+function estimateLabelWidth(text: string, fontPx: number): number {
+  // 0.55em average glyph width for Geist/Inter — close enough for layout.
+  return Math.ceil(text.length * fontPx * 0.55);
 }
 
 /**
@@ -326,72 +337,147 @@ function formatClosedLabel(name: string, mobile: boolean): string {
 }
 
 function drawOverlay(ctx: OverlayContext) {
-  const { svg, width, height, points, closed, xScale, yScale, mobile, selectedId, onSelect, onSelectedPos } = ctx;
+  const { svg, width, height, points, closed, xScale, yScale, mobile, xview, selectedId, onSelect, onSelectedPos } = ctx;
   const svgSel = d3.select(svg).attr("viewBox", `0 0 ${width} ${height}`);
   svgSel.selectAll("*").remove();
 
-  // Closed anchor lines with stagger-out labels + leader arms.
-  // Per docs/ui.md §7.5.4 + §4.4 — keep --closed single-tone, push label Y
-  // upward when crowded (closed anchors are typically high-score; empty space
-  // is above), draw a short leader from the line's right end to the label.
-  const closedLayer = svgSel.append("g").attr("class", "closed-anchors").style("pointer-events", "none");
-  const labelPaddingRight = mobile ? 8 : 12;
-  const minGap = mobile ? 14 : 18;
+  // Closed anchors — callout layout (docs/ui.md §4.4, §7.5.4).
+  //
+  // Lines span the full X range; each gets a marker dot at a unique X
+  // position so the eye can pair it with its label without having to count
+  // dashed lines. Labels are right-anchored above their markers; if labels
+  // crowd vertically (typical when closed flagships cluster within a 5-pt
+  // score band) they push upward into the empty space above the data.
+  const closedLayer = svgSel
+    .append("g")
+    .attr("class", "closed-anchors")
+    .style("pointer-events", "none");
+  const lineLeftX = xScale.range()[0];
   const lineRightX = xScale.range()[1];
-  const chartTop = yScale.range()[1]; // smallest screen Y (top of chart)
+  const chartTop = yScale.range()[1];
+  const labelFontPx = mobile ? 10 : 12;
+  const minGap = mobile ? 14 : 18;
+  const labelLift = 10;
 
-  // Sort by score ASC so we iterate from low (large screen Y) to high (small Y),
-  // pushing upward when crowded.
-  const placements = [...closed]
-    .filter(({ score }) => Number.isFinite(yScale(score)))
-    .sort((a, b) => a.score - b.score)
-    .map(({ m, score }) => ({ m, score, lineY: yScale(score), labelY: yScale(score) }));
+  // Validate.
+  const valid = closed.filter(({ score }) => Number.isFinite(yScale(score)));
 
-  for (let i = 1; i < placements.length; i++) {
-    const prev = placements[i - 1];
-    const curr = placements[i];
-    // curr has higher score → smaller Y. Push up if gap < minGap.
+  // Sort by score DESC: highest first so we lay out rightmost → leftmost.
+  const sortedDesc = [...valid].sort((a, b) => b.score - a.score);
+  const labels = sortedDesc.map(({ m }) => formatClosedLabel(m.name, mobile));
+  const labelWidths = labels.map((t) => estimateLabelWidth(t, labelFontPx));
+
+  // Choose a stride that fits all labels across the chart width. Leave a
+  // small lead-in on the left so the lowest-score callout still sits inside
+  // the chart frame.
+  const innerWidth = Math.max(0, lineRightX - lineLeftX - 32);
+  const naturalStride = Math.max(...labelWidths, 0) + 24;
+  const stride = sortedDesc.length > 1
+    ? Math.max(60, Math.min(naturalStride, innerWidth / Math.max(1, sortedDesc.length - 1)))
+    : 0;
+
+  const placements = sortedDesc.map(({ m, score }, i) => ({
+    m,
+    score,
+    text: labels[i],
+    lineY: yScale(score),
+    labelY: yScale(score) - labelLift,
+    markerX: lineRightX - 8 - i * stride,
+    labelRightX: lineRightX - 8 - i * stride,
+  }));
+
+  // Vertical stagger — iterate ASC by score (bottom → top of chart) and
+  // push labels upward when crowded.
+  const byScoreAsc = [...placements].sort((a, b) => a.score - b.score);
+  for (let i = 1; i < byScoreAsc.length; i++) {
+    const prev = byScoreAsc[i - 1];
+    const curr = byScoreAsc[i];
     if (prev.labelY - curr.labelY < minGap) {
       curr.labelY = prev.labelY - minGap;
     }
   }
-  // Clamp to chart top.
   for (const p of placements) {
     if (p.labelY < chartTop + 10) p.labelY = chartTop + 10;
   }
 
-  for (const { m, lineY, labelY } of placements) {
+  // Render each callout.
+  for (const p of placements) {
     closedLayer
       .append("line")
       .attr("class", "ridge-closed-line")
-      .attr("x1", xScale.range()[0])
+      .attr("x1", lineLeftX)
       .attr("x2", lineRightX)
-      .attr("y1", lineY)
-      .attr("y2", lineY);
-    // Marker at line right end so the eye lands at the line, not the label.
+      .attr("y1", p.lineY)
+      .attr("y2", p.lineY);
     closedLayer
       .append("circle")
       .attr("class", "ridge-closed-marker")
-      .attr("cx", lineRightX - 2)
-      .attr("cy", lineY)
-      .attr("r", 2);
-    // Leader arm only when label is displaced from its line.
-    if (Math.abs(lineY - labelY) >= 1) {
+      .attr("cx", p.markerX)
+      .attr("cy", p.lineY)
+      .attr("r", 2.5);
+    if (Math.abs(p.lineY - p.labelY) >= 1) {
       closedLayer
         .append("line")
         .attr("class", "ridge-closed-leader")
-        .attr("x1", lineRightX - 2)
-        .attr("x2", lineRightX - 2)
-        .attr("y1", lineY)
-        .attr("y2", labelY);
+        .attr("x1", p.markerX)
+        .attr("x2", p.markerX)
+        .attr("y1", p.lineY)
+        .attr("y2", p.labelY);
     }
     closedLayer
       .append("text")
       .attr("class", "ridge-closed-label")
-      .attr("x", lineRightX - labelPaddingRight)
-      .attr("y", labelY - 4)
+      .attr("x", p.labelRightX - 4)
+      .attr("y", p.labelY - 4)
       .attr("text-anchor", "end")
-      .text(formatClosedLabel(m.name, mobile));
+      .text(p.text);
+  }
+
+  // Compare-mode barbells (docs/ui.md §4.2).
+  //
+  // Primary dot already sits at xScale(active) because xAccessor returns
+  // params.active for "compare". For MoE models (active != total) we
+  // extend a thin connector to xScale(total) and stamp an open circle at
+  // the total position. Dense models render as a plain dot (no barbell).
+  if (xview === "compare") {
+    const barbellLayer = svgSel
+      .append("g")
+      .attr("class", "barbells")
+      .style("pointer-events", "none");
+    for (const p of points) {
+      const totalParam = p.m.params.total;
+      if (
+        totalParam == null ||
+        !Number.isFinite(totalParam) ||
+        Math.abs(totalParam - p.x) < 1
+      ) {
+        continue; // dense or missing — no barbell
+      }
+      const xa = xScale(p.x);
+      const xt = xScale(totalParam);
+      const cy = yScale(p.y);
+      if (!Number.isFinite(xa) || !Number.isFinite(xt) || !Number.isFinite(cy)) continue;
+      const stroke = p.isFrontier ? "var(--frontier)" : "var(--fg-subtle)";
+      const opacity = p.isFrontier ? 0.9 : 0.45;
+      barbellLayer
+        .append("line")
+        .attr("class", "ridge-barbell-line")
+        .attr("x1", xa)
+        .attr("x2", xt)
+        .attr("y1", cy)
+        .attr("y2", cy)
+        .attr("stroke", stroke)
+        .attr("stroke-opacity", opacity);
+      barbellLayer
+        .append("circle")
+        .attr("class", "ridge-barbell-total")
+        .attr("cx", xt)
+        .attr("cy", cy)
+        .attr("r", 4)
+        .attr("fill", "none")
+        .attr("stroke", stroke)
+        .attr("stroke-opacity", opacity);
+    }
   }
 
   // Frontier path through frontier points (sorted by x).

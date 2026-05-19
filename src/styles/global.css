@@ -81,6 +81,16 @@ body {
   pointer-events: none;
 }
 
+.ridge-barbell-line {
+  stroke-width: 1;
+  pointer-events: none;
+}
+
+.ridge-barbell-total {
+  stroke-width: 1.25;
+  pointer-events: none;
+}
+
 .ridge-closed-label {
   fill: var(--closed);
   font-family: theme("fontFamily.mono");

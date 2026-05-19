@@ -62,6 +62,16 @@ body {
   stroke-linejoin: round;
 }
 
+.ridge-frontier-total {
+  fill: none;
+  stroke: var(--frontier);
+  stroke-width: 1.25;
+  stroke-opacity: 0.5;
+  stroke-dasharray: 5 4;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+
 .ridge-closed-line {
   stroke: var(--closed);
   stroke-width: 1;

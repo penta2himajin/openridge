@@ -178,16 +178,29 @@ async function main(): Promise<void> {
     });
   }
 
-  // Pre-compute the Pareto frontier (open models, active params, per metric).
-  const open = models.filter((x) => !x.isClosed && x.params.active != null);
-  const paretoByMetric: Partial<Record<MetricId, string[]>> = {};
+  // Pre-compute the Pareto frontier (open models) on BOTH X-axes per metric.
+  // The UI exposes "Active", "Total", and "Compare" — Total mode in particular
+  // needs its own frontier because a dense small model (e.g. Qwen3.5 4B) sits
+  // on the total-axis frontier even when it's dominated by a small-active
+  // MoE on the active-axis frontier.
+  const openActive = models.filter((x) => !x.isClosed && x.params.active != null);
+  const openTotal = models.filter((x) => !x.isClosed && x.params.total != null);
+  const paretoByMetric: Partial<Record<MetricId, { active: string[]; total: string[] }>> = {};
   for (const metric of METRICS) {
-    const frontier = computeParetoFrontier(
-      open,
+    const fActive = computeParetoFrontier(
+      openActive,
       (m) => m.params.active,
       (m) => m.scores[metric.id] ?? null,
     );
-    paretoByMetric[metric.id] = frontier.map((m) => m.id);
+    const fTotal = computeParetoFrontier(
+      openTotal,
+      (m) => m.params.total,
+      (m) => m.scores[metric.id] ?? null,
+    );
+    paretoByMetric[metric.id] = {
+      active: fActive.map((m) => m.id),
+      total: fTotal.map((m) => m.id),
+    };
   }
 
   const out: ModelsSnapshot = {
@@ -198,7 +211,7 @@ async function main(): Promise<void> {
 
   writeFileSync(DATA("models.json"), JSON.stringify(out, null, 2) + "\n");
   console.error(`Wrote ${models.length} models to data/models.json`);
-  console.error(`  open: ${open.length}, closed: ${models.length - open.length}`);
+  console.error(`  open w/ active: ${openActive.length}, open w/ total: ${openTotal.length}, closed: ${models.filter((m) => m.isClosed).length}`);
   if (missing.length > 0) {
     console.error(
       `  ${missing.length} open models without extractable params (skipped from scatter):`,

@@ -93,7 +93,19 @@ export default function Frontier(props: Props) {
 
   const paretoIds = createMemo(() => {
     const m = props.state.metric();
-    return new Set(props.snapshot.paretoByMetric[m] ?? []);
+    const entry = props.snapshot.paretoByMetric[m];
+    if (!entry) return new Set<string>();
+    // Active mode + Compare mode use the active-axis frontier as the
+    // primary line. Compare additionally overlays the total-axis frontier
+    // (see drawOverlay). Total mode uses the total-axis frontier directly.
+    const ids = props.state.xview() === "total" ? entry.total : entry.active;
+    return new Set(ids);
+  });
+
+  /** Ids of points that belong on the total-axis frontier (for Compare overlay). */
+  const totalFrontierIds = createMemo(() => {
+    const m = props.state.metric();
+    return new Set(props.snapshot.paretoByMetric[m]?.total ?? []);
   });
 
   const xAccessor = (m: ModelRecord): number | null => {
@@ -214,6 +226,17 @@ export default function Frontier(props: Props) {
       .nice()
       .range([height - 36, 24]);
 
+    // Total-axis frontier line for Compare overlay. We need each model's
+    // total-X coord, not active-X.
+    const tfIds = totalFrontierIds();
+    const compareTotalFrontier = open
+      .filter((m) => tfIds.has(m.id) && m.params.total != null && m.scores[metric] != null)
+      .map((m) => ({
+        x: m.params.total as number,
+        y: m.scores[metric] as number,
+      }))
+      .filter((p) => Number.isFinite(p.x) && Number.isFinite(p.y));
+
     drawOverlay({
       svg: overlayRef,
       width,
@@ -224,6 +247,7 @@ export default function Frontier(props: Props) {
       yScale,
       mobile,
       xview: props.state.xview(),
+      compareTotalFrontier,
       selectedId: props.state.selectedModelId(),
       onSelect: (id) => props.state.setSelectedModelId(id),
       onSelectedPos: (cx, cy) => setSelectedPos({ cx, cy }),
@@ -308,6 +332,8 @@ interface OverlayContext {
   yScale: d3.ScaleLinear<number, number>;
   mobile: boolean;
   xview: "active" | "total" | "compare";
+  /** Total-axis frontier points (x=total params) for the dotted overlay in Compare mode. */
+  compareTotalFrontier: { x: number; y: number }[];
   selectedId: string | null;
   onSelect: (id: string | null) => void;
   onSelectedPos: (cx: number, cy: number) => void;
@@ -337,7 +363,7 @@ function formatClosedLabel(name: string, mobile: boolean): string {
 }
 
 function drawOverlay(ctx: OverlayContext) {
-  const { svg, width, height, points, closed, xScale, yScale, mobile, xview, selectedId, onSelect, onSelectedPos } = ctx;
+  const { svg, width, height, points, closed, xScale, yScale, mobile, xview, compareTotalFrontier, selectedId, onSelect, onSelectedPos } = ctx;
   const svgSel = d3.select(svg).attr("viewBox", `0 0 ${width} ${height}`);
   svgSel.selectAll("*").remove();
 
@@ -433,13 +459,32 @@ function drawOverlay(ctx: OverlayContext) {
       .text(p.text);
   }
 
-  // Compare-mode barbells (docs/ui.md §4.2).
+  // Compare-mode overlays (docs/ui.md §4.2): barbells + total-axis frontier.
   //
   // Primary dot already sits at xScale(active) because xAccessor returns
   // params.active for "compare". For MoE models (active != total) we
   // extend a thin connector to xScale(total) and stamp an open circle at
   // the total position. Dense models render as a plain dot (no barbell).
+  //
+  // The active-axis frontier line (solid, --frontier) is drawn below by the
+  // generic frontier-path step. The TOTAL-axis frontier is added here as a
+  // dotted line in the same colour at 50% opacity so the two are visually
+  // distinct but obviously the same data dimension.
   if (xview === "compare") {
+    // Total-axis frontier line first so barbells sit on top.
+    if (compareTotalFrontier.length >= 2) {
+      const sorted = [...compareTotalFrontier].sort((a, b) => a.x - b.x);
+      const totalLine = d3
+        .line<{ x: number; y: number }>()
+        .x((p) => xScale(p.x))
+        .y((p) => yScale(p.y))
+        .curve(d3.curveMonotoneX);
+      svgSel
+        .append("path")
+        .attr("class", "ridge-frontier-total")
+        .attr("d", totalLine(sorted)!);
+    }
+
     const barbellLayer = svgSel
       .append("g")
       .attr("class", "barbells")

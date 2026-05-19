@@ -8,7 +8,11 @@ export function formatParams(n: number | null | undefined, decimals = 1): string
 }
 
 function trim(x: number, decimals: number): string {
-  return x.toFixed(decimals).replace(/\.?0+$/, "");
+  const s = x.toFixed(decimals);
+  // Only strip trailing zeros that follow a decimal point — otherwise
+  // "10" would collapse to "1".
+  if (!s.includes(".")) return s;
+  return s.replace(/\.?0+$/, "");
 }
 
 /** Score formatter — preserves 0-1 fraction precision or 0-100 integer-ish display. */

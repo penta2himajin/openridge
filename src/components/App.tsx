@@ -5,7 +5,6 @@ import { createSignal, Show } from "solid-js";
 import Header from "./Header";
 import Frontier from "./Frontier";
 import Filters from "./Filters";
-import Tooltip from "./Tooltip";
 import { loadModels } from "../lib/models";
 import { createAppState } from "../lib/state";
 
@@ -19,7 +18,6 @@ export default function App() {
     <div class="h-screen flex flex-col bg-bg-base text-fg-default">
       <Header state={state} onInfoClick={() => setInfoOpen(true)} />
       <Frontier snapshot={snapshot} state={state} />
-      <Tooltip snapshot={snapshot} state={state} />
       <Filters state={state} />
       <Show when={infoOpen()}>
         <InfoModal

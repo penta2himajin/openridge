@@ -1,12 +1,12 @@
 /**
  * Root Solid component — owns app state and composes the three sections.
  */
-import { createSignal, Show } from "solid-js";
+import { createSignal, For, Show } from "solid-js";
 import Header from "./Header";
 import Frontier from "./Frontier";
 import Filters from "./Filters";
 import { loadModels } from "../lib/models";
-import { createAppState } from "../lib/state";
+import { CLOSED_VENDORS, createAppState, type AppState } from "../lib/state";
 
 const snapshot = loadModels();
 
@@ -22,6 +22,7 @@ export default function App() {
       <Show when={infoOpen()}>
         <InfoModal
           snapshot={snapshot}
+          state={state}
           onClose={() => setInfoOpen(false)}
         />
       </Show>
@@ -29,7 +30,11 @@ export default function App() {
   );
 }
 
-function InfoModal(props: { snapshot: ReturnType<typeof loadModels>; onClose: () => void }) {
+function InfoModal(props: {
+  snapshot: ReturnType<typeof loadModels>;
+  state: AppState;
+  onClose: () => void;
+}) {
   const generated = props.snapshot.generatedAt
     ? new Date(props.snapshot.generatedAt).toUTCString()
     : "—";
@@ -80,6 +85,40 @@ function InfoModal(props: { snapshot: ReturnType<typeof loadModels>; onClose: ()
             github.com/penta2himajin/openridge
           </a>.
         </p>
+
+        <div class="mt-5 pt-4 border-t border-fg-subtle/60">
+          <div class="font-mono uppercase tracking-wide text-fg-muted text-[10px] mb-2">
+            Closest-closed comparison
+          </div>
+          <p class="text-fg-muted text-xs leading-relaxed mb-3">
+            When a single open model is selected, the tooltip shows the
+            score-nearest closed model above and below from the vendors below.
+            Stored in your browser only.
+          </p>
+          <div class="flex gap-2 flex-wrap">
+            <For each={CLOSED_VENDORS}>
+              {(v) => {
+                const on = () => props.state.closedVendors().has(v.slug);
+                return (
+                  <button
+                    type="button"
+                    role="switch"
+                    aria-checked={on()}
+                    class="rounded-full border px-3 text-xs font-medium h-8 transition-colors"
+                    classList={{
+                      "bg-bg-high border-fg-subtle text-fg-default": on(),
+                      "border-fg-subtle text-fg-muted hover:text-fg-default": !on(),
+                    }}
+                    onClick={() => props.state.toggleClosedVendor(v.slug)}
+                  >
+                    {v.label}
+                  </button>
+                );
+              }}
+            </For>
+          </div>
+        </div>
+
         <button
           type="button"
           class="mt-5 w-full rounded-md bg-bg-high text-fg-default py-2 text-sm hover:bg-bg-high/80"

@@ -7,6 +7,16 @@ export type XView = "active" | "total" | "compare";
 export type LicenseFilter = "apache-mit" | "other-open";
 export type SizeFilter = "lt10b" | "lt30b" | "lt100b" | "ge100b";
 
+/** Creator slugs eligible as "neighbour" closed models in the tooltip. */
+export const CLOSED_VENDORS: { slug: string; label: string }[] = [
+  { slug: "openai", label: "OpenAI" },
+  { slug: "anthropic", label: "Anthropic" },
+  { slug: "google", label: "Google" },
+  { slug: "xai", label: "xAI" },
+];
+const DEFAULT_CLOSED_VENDORS: readonly string[] = ["openai", "anthropic", "google"];
+const CLOSED_VENDORS_LS_KEY = "ridge:closed-vendors";
+
 export interface AppState {
   metric: () => MetricId;
   setMetric: (m: MetricId) => void;
@@ -20,6 +30,23 @@ export interface AppState {
   toggleSizeFilter: (f: SizeFilter) => void;
   licenseFilters: () => Set<LicenseFilter>;
   toggleLicenseFilter: (f: LicenseFilter) => void;
+  /** Vendor slugs used to pick "closest closed" comparisons in the tooltip. */
+  closedVendors: () => Set<string>;
+  toggleClosedVendor: (slug: string) => void;
+}
+
+function loadClosedVendors(): Set<string> {
+  if (typeof window === "undefined") return new Set(DEFAULT_CLOSED_VENDORS);
+  try {
+    const raw = window.localStorage.getItem(CLOSED_VENDORS_LS_KEY);
+    if (!raw) return new Set(DEFAULT_CLOSED_VENDORS);
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return new Set(DEFAULT_CLOSED_VENDORS);
+    const valid = new Set(CLOSED_VENDORS.map((v) => v.slug));
+    return new Set(parsed.filter((s): s is string => typeof s === "string" && valid.has(s)));
+  } catch {
+    return new Set(DEFAULT_CLOSED_VENDORS);
+  }
 }
 
 const VALID_METRICS: MetricId[] = [
@@ -55,6 +82,7 @@ export function createAppState(): AppState {
   const [showAllClosed, setShowAllClosed] = createSignal(false);
   const [sizeFilters, setSizeFilters] = createSignal<Set<SizeFilter>>(new Set());
   const [licenseFilters, setLicenseFilters] = createSignal<Set<LicenseFilter>>(new Set());
+  const [closedVendors, setClosedVendors] = createSignal<Set<string>>(loadClosedVendors());
 
   // URL sync (one-way: state → url).
   onMount(() => {
@@ -70,6 +98,16 @@ export function createAppState(): AppState {
       const next = `${window.location.pathname}${qs ? "?" + qs : ""}`;
       if (next !== window.location.pathname + window.location.search) {
         window.history.replaceState({}, "", next);
+      }
+    });
+
+    // Persist vendor selection.
+    createEffect(() => {
+      const v = [...closedVendors()];
+      try {
+        window.localStorage.setItem(CLOSED_VENDORS_LS_KEY, JSON.stringify(v));
+      } catch {
+        /* localStorage unavailable — ignore */
       }
     });
 
@@ -101,5 +139,7 @@ export function createAppState(): AppState {
     toggleSizeFilter: (f) => toggle(sizeFilters, setSizeFilters, f),
     licenseFilters,
     toggleLicenseFilter: (f) => toggle(licenseFilters, setLicenseFilters, f),
+    closedVendors,
+    toggleClosedVendor: (slug) => toggle(closedVendors, setClosedVendors, slug),
   };
 }

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <title>openridge</title>
+  <path d="M 5 25 C 6.8 23.5, 12.3 18.8, 16 16 C 19.7 13.2, 25.2 9.3, 27 8"
+        stroke="#BEEE7E" stroke-width="3"
+        stroke-linecap="round" stroke-linejoin="round"
+        fill="none"/>
+  <circle cx="5"  cy="25" r="3.5" fill="#BEEE7E"/>
+  <circle cx="16" cy="16" r="3.5" fill="#BEEE7E"/>
+  <circle cx="27" cy="8"  r="3.5" fill="#BEEE7E"/>
+</svg>

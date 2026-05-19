@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 144" fill="none" role="img" aria-label="ridge">
+  <title>ridge</title>
+  <desc>In-product brand mark. The letters r-i-d-g-e sit on a gently rising Pareto frontier — each character is its own data point on the ridge.</desc>
+
+  <!-- Closed-model anchor (dashed horizontal) -->
+  <line x1="16" y1="26" x2="240" y2="26"
+        stroke="#D89882" stroke-width="1.4"
+        stroke-dasharray="4 5" stroke-linecap="round"
+        opacity="0.75"/>
+
+  <!-- Pareto frontier line under the letters -->
+  <path d="M 20 114 C 37 114, 45 105, 64 105 C 83 105, 89 98, 108 98 C 127 98, 133 93, 152 93 C 171 93, 177 90, 196 90"
+        stroke="#BEEE7E" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round"
+        fill="none"/>
+
+  <!-- "ridge" — gently rising baselines -->
+  <g font-family="'Geist Mono', ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace"
+     font-size="56" font-weight="500"
+     fill="#F2F2F5">
+    <text x="20"  y="114">r</text>
+    <text x="64"  y="105">i</text>
+    <text x="108" y="98">d</text>
+    <text x="152" y="93">g</text>
+    <text x="196" y="90">e</text>
+  </g>
+</svg>

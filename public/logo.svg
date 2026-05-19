@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 472 144" fill="none" role="img" aria-label="openridge">
+  <title>openridge</title>
+  <desc>The letters of "ridge" plot themselves along the Pareto frontier — each baseline rises monotonically with diminishing returns while "open" stays on the flat axis. A lime frontier line traces the baselines; a dashed warm-orange line above stands in for closed-model anchors.</desc>
+
+  <!-- Closed-model anchor (dashed horizontal) -->
+  <line x1="24" y1="26" x2="448" y2="26"
+        stroke="#D89882" stroke-width="1.4"
+        stroke-dasharray="4 5" stroke-linecap="round"
+        opacity="0.75"/>
+
+  <!-- Non-frontier (muted) points scattered below the ridge -->
+  <g fill="#9A9CA3" opacity="0.42">
+    <circle cx="284" cy="124" r="2"/>
+    <circle cx="338" cy="116" r="2"/>
+    <circle cx="396" cy="108" r="2"/>
+  </g>
+
+  <!-- Pareto frontier line under the "ridge" letters -->
+  <path d="M 200 114 C 217 114, 225 105, 244 105 C 263 105, 269 98, 288 98 C 307 98, 313 93, 332 93 C 351 93, 357 90, 376 90"
+        stroke="#BEEE7E" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round"
+        fill="none"/>
+
+  <!-- "open" — flat baseline, muted -->
+  <g font-family="'Geist Mono', ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace"
+     font-size="56" font-weight="500"
+     fill="#9A9CA3">
+    <text x="24"  y="114">o</text>
+    <text x="68"  y="114">p</text>
+    <text x="112" y="114">e</text>
+    <text x="156" y="114">n</text>
+  </g>
+
+  <!-- "ridge" — gently rising baselines, default fg -->
+  <g font-family="'Geist Mono', ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace"
+     font-size="56" font-weight="500"
+     fill="#F2F2F5">
+    <text x="200" y="114">r</text>
+    <text x="244" y="105">i</text>
+    <text x="288" y="98">d</text>
+    <text x="332" y="93">g</text>
+    <text x="376" y="90">e</text>
+  </g>
+</svg>

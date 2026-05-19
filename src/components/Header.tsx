@@ -28,7 +28,7 @@ export default function Header(props: HeaderProps) {
           aria-label="OpenRidge home"
         >
           <span class="font-sans font-normal text-fg-muted">Open</span>
-          <span class="font-mono font-medium text-fg-default">Ridge</span>
+          <span class="font-mono font-bold text-fg-default">Ridge</span>
         </a>
 
         <div class="flex-1 min-w-0">

@@ -36,7 +36,7 @@
 ロゴは 2 つのスパンを連結した typesetting:
 
 - **`Open`**: Geist Sans, regular weight, `--fg-muted`
-- **`Ridge`**: Geist Mono, medium weight, `--fg-default`
+- **`Ridge`**: Geist Mono, bold weight, `--fg-default`
 - サイズはどちらも 16px、tracking -0.02em
 - ベースライン揃え (`items-baseline`)、空白なしで密着
 - クリックで現状の view state を保ったまま `/` にナビゲート（履歴ノイズ最小）

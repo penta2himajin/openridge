@@ -141,8 +141,17 @@ export default function Frontier(props: Props) {
         p.x != null && p.y != null && Number.isFinite(p.x) && Number.isFinite(p.y),
       );
 
-    // Robust x domain even if filter empties points.
+    // Robust x domain even if filter empties points. In Compare mode the
+    // barbells extend the visible range out to each MoE's total params, so
+    // include those in the domain — otherwise the barbell line and the
+    // open-circle "total" end clip off the right edge.
     const xs = points.map((p) => p.x);
+    if (props.state.xview() === "compare") {
+      for (const p of points) {
+        const t = p.m.params.total;
+        if (t != null && Number.isFinite(t)) xs.push(t);
+      }
+    }
     const xMin = xs.length ? Math.max(1e8, Math.min(...xs) / 2) : 5e8;
     const xMax = xs.length ? Math.max(...xs) * 1.4 : 2e12;
     const yMax = metricInfo.maxValue <= 1 ? 1 : 100;

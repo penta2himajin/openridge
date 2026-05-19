@@ -16,39 +16,80 @@ interface HeaderProps {
 export default function Header(props: HeaderProps) {
   const isMobile = useIsMobile();
   return (
-    <header class="flex-shrink-0 border-b border-fg-subtle bg-bg-base">
-      <div
-        class="h-14 flex items-center px-3 sm:px-4 gap-2 sm:gap-4"
-        style={{ "padding-top": "env(safe-area-inset-top)" }}
-      >
+    <header
+      class="flex-shrink-0 border-b border-fg-subtle bg-bg-base"
+      style={{ "padding-top": "env(safe-area-inset-top)" }}
+    >
+      {/* Desktop: single row, brand left, settings right. */}
+      <div class="hidden sm:flex h-14 items-center px-4 gap-3">
         <a
           href={import.meta.env.BASE_URL}
-          class="flex items-baseline select-none flex-shrink-0 text-base"
+          class="flex items-baseline select-none flex-shrink-0 text-2xl leading-none"
           style={{ "letter-spacing": "-0.02em" }}
           aria-label="OpenRidge home"
         >
           <span class="font-sans font-normal italic text-fg-muted">Open</span>
-          <span class="font-mono font-bold text-fg-default">Ridge</span>
+          <span
+            class="font-mono font-bold text-fg-default"
+            style={{ "margin-left": "0.08em" }}
+          >
+            Ridge
+          </span>
         </a>
 
-        <div class="flex-1 min-w-0">
-          <IndexDropdown state={props.state} compact={isMobile()} />
+        <div class="flex-1" />
+
+        <IndexDropdown state={props.state} compact={false} />
+        <SegmentedControl state={props.state} compact={false} />
+        <InfoButton onClick={props.onInfoClick} compact={false} />
+      </div>
+
+      {/* Mobile: 2 rows. Row 1 = brand + ⓘ; Row 2 = Index dropdown + segmented. */}
+      <div class="sm:hidden">
+        <div class="h-12 flex items-center justify-between px-3">
+          <a
+            href={import.meta.env.BASE_URL}
+            class="flex items-baseline select-none flex-shrink-0 text-2xl leading-none"
+            style={{ "letter-spacing": "-0.02em" }}
+            aria-label="OpenRidge home"
+          >
+            <span class="font-sans font-normal italic text-fg-muted">Open</span>
+            <span
+              class="font-mono font-bold text-fg-default"
+              style={{ "margin-left": "0.08em" }}
+            >
+              Ridge
+            </span>
+          </a>
+          <InfoButton onClick={props.onInfoClick} compact={true} />
         </div>
-
-        <SegmentedControl state={props.state} compact={isMobile()} />
-
-        <button
-          type="button"
-          class="flex-shrink-0 grid place-items-center w-11 h-11 sm:w-8 sm:h-8 text-fg-muted hover:text-fg-default transition-colors"
-          aria-label="About this dataset"
-          onClick={props.onInfoClick}
-        >
-          <span aria-hidden="true" class="text-base">
-            ⓘ
-          </span>
-        </button>
+        <div class="h-12 flex items-center px-3 gap-2 pb-1">
+          <div class="flex-1 min-w-0">
+            <IndexDropdown state={props.state} compact={true} />
+          </div>
+          <SegmentedControl state={props.state} compact={true} />
+        </div>
       </div>
     </header>
+  );
+}
+
+function InfoButton(props: { onClick: () => void; compact: boolean }) {
+  return (
+    <button
+      type="button"
+      class="flex-shrink-0 grid place-items-center text-fg-muted hover:text-fg-default transition-colors"
+      classList={{
+        "w-11 h-11": props.compact,
+        "w-8 h-8": !props.compact,
+      }}
+      aria-label="About this dataset"
+      onClick={props.onClick}
+    >
+      <span aria-hidden="true" class="text-base">
+        ⓘ
+      </span>
+    </button>
   );
 }
 

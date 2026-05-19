@@ -1,8 +1,6 @@
 ---
 import "../styles/global.css";
-import Header from "../components/Header";
-import Frontier from "../components/Frontier";
-import Filters from "../components/Filters";
+import App from "../components/App";
 
 const title = "Ridge — Pareto frontier of open-weight LLMs";
 const description =
@@ -13,13 +11,15 @@ const description =
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#1A1B22" />
     <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
     <title>{title}</title>
   </head>
-  <body class="h-screen flex flex-col">
-    <Header client:load />
-    <Frontier client:load />
-    <Filters client:load />
+  <body class="h-screen overflow-hidden">
+    <App client:load />
   </body>
 </html>

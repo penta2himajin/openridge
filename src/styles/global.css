@@ -13,26 +13,21 @@
  */
 :root {
   /* surfaces (dark, default) */
-  --bg-base: oklch(0.18 0.01 270);      /* #1A1B22 */
-  --bg-elevated: oklch(0.22 0.01 270);  /* #20222A */
-  --bg-high: oklch(0.28 0.01 270);      /* #2A2D34 */
+  --bg-base: oklch(0.18 0.01 270);
+  --bg-elevated: oklch(0.22 0.01 270);
+  --bg-high: oklch(0.28 0.01 270);
 
   /* foreground */
-  --fg-default: oklch(0.96 0.005 270);  /* #F2F2F5 */
-  --fg-muted: oklch(0.65 0.01 270);     /* #9A9CA3 */
-  --fg-subtle: oklch(0.40 0.01 270);    /* #58595F */
+  --fg-default: oklch(0.96 0.005 270);
+  --fg-muted: oklch(0.65 0.01 270);
+  --fg-subtle: oklch(0.40 0.01 270);
 
   /* accents (sparing — see docs/design.md §3) */
-  --accent: oklch(0.78 0.15 195);       /* #4DD3C7 — keyboard focus only */
-  --frontier: oklch(0.92 0.18 145);     /* #BEEE7E — Pareto line + points */
-  --closed: oklch(0.70 0.10 35);        /* #D89882 — closed-model anchors */
+  --accent: oklch(0.78 0.15 195);
+  --frontier: oklch(0.92 0.18 145);
+  --closed: oklch(0.70 0.10 35);
 
   color-scheme: dark;
-}
-
-@media (prefers-color-scheme: light) {
-  /* Light-mode tokens TBD per docs/design.md §Open — track invariants:
-     elevation ordering (base < elevated < high) and semantic accents stay. */
 }
 
 html,
@@ -41,4 +36,84 @@ body {
   color: var(--fg-default);
   font-family: theme("fontFamily.sans");
   -webkit-font-smoothing: antialiased;
+  overscroll-behavior: none;
+}
+
+/* Hide horizontal scroll bars on the filter chip strip but keep scrolling. */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Plot output overrides — Plot's defaults emit some inline styles we strip. */
+:where(figure[data-plot-output]) {
+  margin: 0;
+}
+
+/* Frontier line — drawn by D3 overlay, styled here for consistency. */
+.ridge-frontier-line {
+  fill: none;
+  stroke: var(--frontier);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ridge-closed-line {
+  stroke: var(--closed);
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+  pointer-events: none;
+}
+
+.ridge-closed-label {
+  fill: var(--closed);
+  font-family: theme("fontFamily.mono");
+  font-size: 12px;
+  paint-order: stroke;
+  stroke: var(--bg-base);
+  stroke-width: 3;
+  pointer-events: none;
+}
+@media (max-width: 639px) {
+  .ridge-closed-label {
+    font-size: 10px;
+  }
+}
+
+.ridge-point {
+  transition:
+    r 80ms ease-out,
+    opacity 80ms ease-out;
+}
+.ridge-point.frontier {
+  fill: var(--frontier);
+}
+.ridge-point.open-nonfrontier {
+  fill: var(--fg-subtle);
+  opacity: 0.25;
+}
+.ridge-point.hover,
+.ridge-point.selected {
+  r: 9;
+  opacity: 1;
+}
+
+.ridge-axis text {
+  fill: var(--fg-muted);
+  font-family: theme("fontFamily.mono");
+  font-size: 11px;
+}
+.ridge-axis line,
+.ridge-axis path {
+  stroke: var(--fg-subtle);
+}
+
+/* Focus ring across all interactive primitives. */
+:where(button, [role="button"], [role="option"], input):focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 2px;
 }

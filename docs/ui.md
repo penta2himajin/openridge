@@ -35,7 +35,7 @@
 
 ロゴは 2 つのスパンを連結した typesetting:
 
-- **`Open`**: Geist Sans, regular weight, `--fg-muted`
+- **`Open`**: Geist Sans, regular weight, **italic**, `--fg-muted`
 - **`Ridge`**: Geist Mono, bold weight, `--fg-default`
 - サイズはどちらも 16px、tracking -0.02em
 - ベースライン揃え (`items-baseline`)、空白なしで密着

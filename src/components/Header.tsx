@@ -27,7 +27,7 @@ export default function Header(props: HeaderProps) {
           style={{ "letter-spacing": "-0.02em" }}
           aria-label="OpenRidge home"
         >
-          <span class="font-sans font-normal text-fg-muted">Open</span>
+          <span class="font-sans font-normal italic text-fg-muted">Open</span>
           <span class="font-mono font-bold text-fg-default">Ridge</span>
         </a>
 

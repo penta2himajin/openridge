@@ -22,7 +22,7 @@ export default function Header(props: HeaderProps) {
         style={{ "padding-top": "env(safe-area-inset-top)" }}
       >
         <a
-          href="/"
+          href={import.meta.env.BASE_URL}
           class="font-mono lowercase text-base tracking-tight text-fg-default select-none flex-shrink-0"
           style={{ "letter-spacing": "-0.02em" }}
         >

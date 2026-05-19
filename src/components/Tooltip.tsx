@@ -36,7 +36,9 @@ export default function Tooltip(props: Props) {
   const isOnFrontier = createMemo(() => {
     const m = model();
     if (!m) return false;
-    const ids = props.snapshot.paretoByMetric[props.state.metric()] ?? [];
+    const entry = props.snapshot.paretoByMetric[props.state.metric()];
+    if (!entry) return false;
+    const ids = props.state.xview() === "total" ? entry.total : entry.active;
     return ids.includes(m.id);
   });
 

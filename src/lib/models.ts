@@ -52,10 +52,19 @@ export interface ModelRecord {
   releaseDate: string | null;
 }
 
+/** Frontier model ids for the two X-axis bases the UI exposes. */
+export interface MetricFrontiers {
+  /** Pareto frontier on (active params, score). */
+  active: string[];
+  /** Pareto frontier on (total params, score). */
+  total: string[];
+}
+
 export interface ModelsSnapshot {
   generatedAt: string | null;
   models: ModelRecord[];
-  paretoByMetric: Partial<Record<MetricId, string[]>>;
+  /** Pre-computed frontier ids per metric per X-axis. */
+  paretoByMetric: Partial<Record<MetricId, MetricFrontiers>>;
 }
 
 export function loadModels(): ModelsSnapshot {

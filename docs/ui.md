@@ -6,7 +6,7 @@
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
-│  ridge   Index: [AA Intelligence Index ▾]  ◤Active│Total│Compare◢   ⓘ │ ← header (56px)
+│  OpenRidge  Index: [AA Intelligence Index ▾]  ◤Active│Total│Compare◢ ⓘ│ ← header (56px)
 ├──────────────────────────────────────────────────────────────────────────┤
 │                                                                          │
 │   ┊┄┄┄┄┄┄┄┄┄┄┄┄ GPT-5.5 (xhigh) ┄┄┄┄┄┄┄┄┄┄┄┄┄┄                          │ ← クローズド横線
@@ -31,11 +31,17 @@
 
 ヘッダは4要素のみ。左から:
 
-### 2.1 ブランドマーク `ridge`
+### 2.1 ブランドマーク `OpenRidge`
 
-- Geist Mono lowercase 16px、tracking -0.02em
-- 色は `--fg-default`
+ロゴは 2 つのスパンを連結した typesetting:
+
+- **`Open`**: Geist Sans, regular weight, **italic**, `--fg-muted`
+- **`Ridge`**: Geist Mono, bold weight, `--fg-default`
+- サイズはどちらも 16px、tracking -0.02em
+- ベースライン揃え (`items-baseline`)、空白なしで密着
 - クリックで現状の view state を保ったまま `/` にナビゲート（履歴ノイズ最小）
+
+意味分担: `Open` は修飾語（open-weight, open data）として控えめに、`Ridge` は固有名として強調する。design.md §3 の「Mono = 数値・ブランド」方針と整合し、現状の `--frontier`（lime）・`--closed`（warm orange）のアクセント色とは別レイヤとして 2 種のタイプフェイスをブランディング上のシグナルに使う。
 
 ### 2.2 Index dropdown — Y軸ベンチマーク選択
 

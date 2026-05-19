@@ -2,7 +2,7 @@
 
 ## Overview
 
-Pareto-frontier visualisation site for self-hostable open-weight LLMs. One scatter plot, X = parameters (active/total/compare), Y = a switchable benchmark, with the Pareto frontier drawn as a line and closed-model anchors as horizontal dashes. In-product brand mark: **Ridge**. Public domain (planned): `openridge.dev`.
+Pareto-frontier visualisation site for self-hostable open-weight LLMs. One scatter plot, X = parameters (active/total/compare), Y = a switchable benchmark, with the Pareto frontier drawn as a line and closed-model anchors as horizontal dashes. In-product brand mark: **OpenRidge** (rendered as Geist Sans "Open" + Geist Mono "Ridge"). Public domain (planned): `openridge.dev`.
 
 Full specification: see `docs/`. The repo is currently scaffolded, **not implemented**.
 

@@ -9,6 +9,7 @@ import type { ModelsSnapshot } from "../lib/models";
 import { METRICS_BY_ID } from "../lib/metrics";
 import { formatParams, formatScore } from "../lib/format";
 import { useIsMobile } from "../lib/breakpoint";
+import { findClosedNeighbours, type Neighbours, type NeighbourEntry } from "../lib/neighbours";
 
 interface Props {
   snapshot: ModelsSnapshot;
@@ -40,6 +41,17 @@ export default function Tooltip(props: Props) {
     if (!entry) return false;
     const ids = props.state.xview() === "total" ? entry.total : entry.active;
     return ids.includes(m.id);
+  });
+
+  const neighbours = createMemo<Neighbours | null>(() => {
+    const m = model();
+    if (!m || m.isClosed) return null;
+    return findClosedNeighbours(
+      m,
+      props.snapshot.models,
+      props.state.metric(),
+      props.state.closedVendors(),
+    );
   });
 
   // Compute placement near the selected point with quadrant flip.
@@ -130,6 +142,32 @@ export default function Tooltip(props: Props) {
               </span>
             </div>
 
+            <Show when={neighbours()}>
+              {(n) => (
+                <>
+                  <div class="my-2 h-px bg-fg-subtle/60" />
+                  <div class="font-mono uppercase tracking-wide text-fg-muted text-[10px] mb-1">
+                    Closest closed
+                  </div>
+                  <Show when={n().tie}>
+                    {(t) => (
+                      <NeighbourRow label="≈" entry={t()} info={info} />
+                    )}
+                  </Show>
+                  <Show when={!n().tie && n().above}>
+                    {(a) => (
+                      <NeighbourRow label="↑" entry={a()} info={info} />
+                    )}
+                  </Show>
+                  <Show when={!n().tie && n().below}>
+                    {(b) => (
+                      <NeighbourRow label="↓" entry={b()} info={info} />
+                    )}
+                  </Show>
+                </>
+              )}
+            </Show>
+
             <Show when={isOnFrontier() || m().isClosed}>
               <div class="mt-2 pt-2 border-t border-fg-subtle/60 font-mono text-[11px] text-fg-muted">
                 {m().isClosed ? "closed · anchor" : "Pareto · active"}
@@ -139,5 +177,32 @@ export default function Tooltip(props: Props) {
         );
       }}
     </Show>
+  );
+}
+
+function NeighbourRow(props: {
+  label: string;
+  entry: NeighbourEntry;
+  info: { maxValue: number };
+}) {
+  const display = () => {
+    // Strip the parenthetical mode if present to keep the row short.
+    return props.entry.model.name.replace(/\s*\([^)]+\)\s*$/, (paren) =>
+      paren.length <= 14 ? paren : "",
+    );
+  };
+  const fmt = (d: number) => {
+    const v = props.info.maxValue <= 1 ? d * 100 : d;
+    const sign = v > 0 ? "+" : v < 0 ? "" : "±";
+    return sign + v.toFixed(1);
+  };
+  return (
+    <div class="flex items-baseline gap-2 text-xs leading-tight py-0.5">
+      <span class="font-mono text-fg-muted w-3 text-center flex-shrink-0">{props.label}</span>
+      <span class="text-fg-default truncate flex-1 min-w-0">{display()}</span>
+      <span class="font-mono text-fg-muted tabular-nums flex-shrink-0">
+        {fmt(props.entry.delta)}
+      </span>
+    </div>
   );
 }

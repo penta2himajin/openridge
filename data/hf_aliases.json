@@ -1,0 +1,8 @@
+{
+  "_comment": "AA slug → HF repo id. Use null for closed models (no HF lookup). See docs/data-sources.md §2.",
+  "_examples": {
+    "deepseek-v3-1": "deepseek-ai/DeepSeek-V3.1",
+    "qwen3-235b-a22b": "Qwen/Qwen3-235B-A22B",
+    "gpt-5-5-xhigh": null
+  }
+}

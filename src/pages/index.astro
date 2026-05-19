@@ -1,0 +1,25 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header";
+import Frontier from "../components/Frontier";
+import Filters from "../components/Filters";
+
+const title = "Ridge — Pareto frontier of open-weight LLMs";
+const description =
+  "Single-screen visualisation of the Pareto-efficient frontier among self-hostable open-weight LLMs, with closed-model anchors for reference.";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+  </head>
+  <body class="h-screen flex flex-col">
+    <Header client:load />
+    <Frontier client:load />
+    <Filters client:load />
+  </body>
+</html>

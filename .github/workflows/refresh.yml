@@ -1,0 +1,46 @@
+name: Daily Refresh
+
+# Fetch AA + HF, regenerate data/models.json, commit if changed.
+# Spec: docs/architecture.md §5.
+
+on:
+  schedule:
+    - cron: "0 4 * * *"   # 04:00 UTC daily
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build data
+        run: npm run refresh
+        env:
+          AA_API_KEY: ${{ secrets.AA_API_KEY }}
+
+      - name: Commit if changed
+        run: |
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name  "github-actions[bot]"
+          git add data/models.json
+          if git diff --cached --quiet; then
+            echo "No data changes."
+          else
+            git commit -m "chore(data): refresh $(date -u +%Y-%m-%d)"
+            git push
+          fi

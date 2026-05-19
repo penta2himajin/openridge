@@ -1,0 +1,9 @@
+{
+  "_comment": "Display rules for closed-model horizontal anchor lines. See docs/ui.md §4.4.",
+  "defaults": {
+    "maxLines": 5,
+    "selection": "frontier-touching"
+  },
+  "include": [],
+  "exclude": []
+}

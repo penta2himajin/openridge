@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Design tokens — single source of truth.
+ * Spec: docs/design.md §3.
+ *
+ * OKLCH values are the canonical declarations; hex comments record the
+ * approximate equivalents used in Framer mocks. Do not introduce raw hex
+ * into components — use the token names (bg-base, fg-default, etc.) which
+ * Tailwind resolves via tailwind.config.ts.
+ */
+:root {
+  /* surfaces (dark, default) */
+  --bg-base: oklch(0.18 0.01 270);      /* #1A1B22 */
+  --bg-elevated: oklch(0.22 0.01 270);  /* #20222A */
+  --bg-high: oklch(0.28 0.01 270);      /* #2A2D34 */
+
+  /* foreground */
+  --fg-default: oklch(0.96 0.005 270);  /* #F2F2F5 */
+  --fg-muted: oklch(0.65 0.01 270);     /* #9A9CA3 */
+  --fg-subtle: oklch(0.40 0.01 270);    /* #58595F */
+
+  /* accents (sparing — see docs/design.md §3) */
+  --accent: oklch(0.78 0.15 195);       /* #4DD3C7 — keyboard focus only */
+  --frontier: oklch(0.92 0.18 145);     /* #BEEE7E — Pareto line + points */
+  --closed: oklch(0.70 0.10 35);        /* #D89882 — closed-model anchors */
+
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: light) {
+  /* Light-mode tokens TBD per docs/design.md §Open — track invariants:
+     elevation ordering (base < elevated < high) and semantic accents stay. */
+}
+
+html,
+body {
+  background-color: var(--bg-base);
+  color: var(--fg-default);
+  font-family: theme("fontFamily.sans");
+  -webkit-font-smoothing: antialiased;
+}

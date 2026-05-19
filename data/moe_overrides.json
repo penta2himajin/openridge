@@ -1,0 +1,7 @@
+{
+  "_comment": "HF repo id → { active: number }. Manual override for MoE active params when automated estimation is unreliable. See docs/data-sources.md §2.",
+  "_examples": {
+    "deepseek-ai/DeepSeek-V3.1": { "active": 37000000000 },
+    "Qwen/Qwen3-235B-A22B": { "active": 22000000000 }
+  }
+}

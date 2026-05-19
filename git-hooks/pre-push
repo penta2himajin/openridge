@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+# Pre-push hook: run format / lint / clippy locally before pushing.
+#
+# Tests are intentionally omitted by default: under the TDD cycle declared in
+# CLAUDE.md, the suite is expected to be green on every commit, so re-running
+# it on push is redundant. Uncomment the test block at the bottom if a
+# project wants belt-and-suspenders safety.
+#
+# Install (per repo):
+#
+#     ln -s ../../git-hooks/pre-push .git/hooks/pre-push
+#
+# or with `core.hooksPath`:
+#
+#     git config core.hooksPath git-hooks
+#
+# Detection is by file presence (Cargo.toml, package.json, ...). Steps the
+# project doesn't have are skipped silently. Failing steps abort the push.
+
+set -euo pipefail
+
+red()   { printf '\033[31m%s\033[0m\n' "$*" >&2; }
+green() { printf '\033[32m%s\033[0m\n' "$*"; }
+step()  { printf '\n\033[1m▶ %s\033[0m\n' "$*"; }
+
+run() {
+    step "$1"
+    shift
+    if ! "$@"; then
+        red "pre-push: \`$*\` failed. Push aborted."
+        exit 1
+    fi
+}
+
+# --- Rust (Cargo) ----------------------------------------------------------
+if [[ -f Cargo.toml ]]; then
+    run "cargo fmt --check"      cargo fmt --all -- --check
+    run "cargo clippy"           cargo clippy --workspace --all-targets -- -D warnings
+    # run "cargo test"           cargo test  --workspace
+fi
+
+# --- Node (npm / pnpm / yarn) ----------------------------------------------
+if [[ -f package.json ]]; then
+    if   command -v pnpm >/dev/null 2>&1 && [[ -f pnpm-lock.yaml ]]; then PKG=pnpm
+    elif command -v yarn >/dev/null 2>&1 && [[ -f yarn.lock ]];      then PKG=yarn
+    else                                                                  PKG=npm
+    fi
+    has_script() { grep -q "\"$1\"" package.json; }
+    has_script format && run "$PKG run format -- --check (or format:check)" "$PKG" run --silent format:check 2>/dev/null \
+        || has_script format && run "$PKG run format --check" "$PKG" run --silent format -- --check || true
+    has_script lint   && run "$PKG run lint"   "$PKG" run --silent lint
+    # has_script test && run "$PKG test"      "$PKG" test --silent
+fi
+
+# --- Python (ruff / mypy) --------------------------------------------------
+if [[ -f pyproject.toml || -f setup.cfg ]]; then
+    command -v ruff >/dev/null 2>&1 && run "ruff format --check" ruff format --check .
+    command -v ruff >/dev/null 2>&1 && run "ruff check"          ruff check .
+    # command -v pytest >/dev/null 2>&1 && run "pytest" pytest -q
+fi
+
+# --- Repo-specific extras --------------------------------------------------
+# Add per-repo commands below. Example:
+#     run "markdownlint" markdownlint '**/*.md'
+
+green "pre-push: all checks passed."

@@ -23,10 +23,12 @@ export default function Header(props: HeaderProps) {
       >
         <a
           href={import.meta.env.BASE_URL}
-          class="font-mono lowercase text-base tracking-tight text-fg-default select-none flex-shrink-0"
+          class="flex items-baseline select-none flex-shrink-0 text-base"
           style={{ "letter-spacing": "-0.02em" }}
+          aria-label="OpenRidge home"
         >
-          ridge
+          <span class="font-sans font-normal text-fg-muted">Open</span>
+          <span class="font-mono font-medium text-fg-default">Ridge</span>
         </a>
 
         <div class="flex-1 min-w-0">

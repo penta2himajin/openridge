@@ -58,7 +58,10 @@ function InfoModal(props: {
         onClick={props.onClose}
       />
       <div class="relative max-w-md w-full rounded-lg border border-fg-subtle bg-bg-elevated p-5 text-sm">
-        <h2 class="font-mono text-base text-fg-default">about ridge</h2>
+        <h2 class="text-base text-fg-default flex items-baseline gap-1.5">
+          <span class="font-mono">about</span>
+          <span class="font-sans font-normal text-fg-muted">Open</span><span class="font-mono font-medium">Ridge</span>
+        </h2>
         <p class="mt-2 text-fg-muted">
           Pareto frontier of open-weight LLMs, plotted against an intelligence
           benchmark. Closed flagship models appear as horizontal dashed anchors.

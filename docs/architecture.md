@@ -27,11 +27,11 @@
                                     │   - Observable Plot     │
                                     │   - imports JSON        │
                                     └────────────┬────────────┘
-                                                 │ wrangler deploy
+                                                 │ actions/deploy-pages
                                                  ▼
                                     ┌─────────────────────────┐
-                                    │  Cloudflare Workers     │
-                                    │  (Static Assets)        │
+                                    │  GitHub Pages           │
+                                    │  (static, HTTPS, CDN)   │
                                     └────────────┬────────────┘
                                                  │ HTTPS / CDN
                                                  ▼
@@ -53,14 +53,14 @@
 | チャート | **Observable Plot** をベースに、足りないインタラクションは **D3** / 手書き SVG で上書き |
 | スタイル | **Tailwind CSS**（OKLCH ベースのカスタムパレット） |
 | データ取得スクリプト | **TypeScript** (`tsx` で直接実行 / Node 20) |
-| ホスティング | **Cloudflare Workers (Static Assets)** |
-| デプロイ | `cloudflare/wrangler-action@v3` |
+| ホスティング | **GitHub Pages** |
+| デプロイ | `actions/upload-pages-artifact@v3` + `actions/deploy-pages@v4` |
 | データ更新基盤 | **GitHub Actions**（schedule + manual dispatch） |
 
-## 3. リポジトリ構成（graduate 後の別repo想定）
+## 3. リポジトリ構成
 
 ```
-local-lm-frontier/
+openridge/
 ├─ data/
 │  ├─ models.json           ← Daily Refresh の成果物（commit対象）
 │  ├─ hf_aliases.json       ← AA slug → HF repo id の手動マップ
@@ -80,10 +80,10 @@ local-lm-frontier/
 │     ├─ pareto.ts          ← フロンティア計算
 │     └─ models.ts          ← データ型・ロード
 ├─ public/
+│  └─ CNAME                 ← `openridge.dev` (GH Pages custom domain)
 ├─ .github/workflows/
 │  ├─ refresh.yml           ← Daily Refresh: cron + manual dispatch
-│  └─ deploy.yml            ← Workers にデプロイ
-├─ wrangler.jsonc           ← assets = { directory = "./dist" }
+│  └─ deploy.yml            ← GH Pages へデプロイ
 ├─ astro.config.mjs
 ├─ tailwind.config.ts
 └─ package.json
@@ -190,47 +190,58 @@ jobs:
 on:
   push:
     branches: [main]
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: { node-version: 20, cache: npm }
       - run: npm ci && npm run build
-      - uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CF_API_TOKEN }}
-          accountId: ${{ secrets.CF_ACCOUNT_ID }}
-          command: deploy
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: dist }
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
 ```
 
-## 6. Cloudflare Workers (Static Assets)
+## 6. GitHub Pages
 
-- **公開ドメイン**: [`openridge.dev`](https://openridge.dev)（Cloudflare Registrar で取得、$12/年）
-- **Worker 名**: `ridge`（サイト内表示名と合わせる）
-- Registrar と Workers が同一 CF アカウントなので DNS / カスタムドメイン紐付けは UI 1クリック
+- **公開ドメイン**: [`openridge.dev`](https://openridge.dev)
+- **CNAME**: `public/CNAME` に `openridge.dev` を入れる（Astro が `public/` を `dist/` ルートにコピーするので、Pages がカスタムドメインとして拾う）
+- **DNS** (apex `openridge.dev`): A レコード4本を GitHub Pages の IP に向ける
+  - `185.199.108.153`
+  - `185.199.109.153`
+  - `185.199.110.153`
+  - `185.199.111.153`
+- **DNS** (`www.openridge.dev`): CNAME `penta2himajin.github.io`
+- **DNS proxy 注意**: Cloudflare DNS を使う場合は **グレー雲 (DNS only)** にする。オレンジ雲 (proxy ON) は Pages 側の Let's Encrypt 証明書発行と稀に喧嘩する
+- **HTTPS**: GH Pages が Let's Encrypt で自動発行・更新。`.dev` は HSTS preloaded なので HTTPS 必須だが追加設定は不要
+- **Repo Settings → Pages**: Source = "GitHub Actions"（このリポは workflow 経由で deploy する）
 
-`wrangler.jsonc`:
+### Cloudflare Workers ではなく Pages を選んだ理由
 
-```jsonc
-{
-  "name": "ridge",
-  "compatibility_date": "2026-01-01",
-  "assets": {
-    "directory": "./dist",
-    "not_found_handling": "single-page-application"
-  },
-  "routes": [
-    { "pattern": "openridge.dev", "custom_domain": true },
-    { "pattern": "www.openridge.dev", "custom_domain": true }
-  ]
-}
-```
+初期構想（ideabook 期）では CF Workers (Static Assets) を想定していたが、graduate 直後に Pages に切り替えた。
 
-- **JS は不要**（純粋に静的配信）。`main` を書かなくていい
-- 将来 KV / Cron Triggers / R2 が欲しくなったら追加可能
-- カスタムドメインは無料、グローバル CDN 標準装備、HTTPS 自動
+- 本サイトは純粋静的 + JSON のみ。Workers の旨味（KV / Durable Objects / Cron / SSR / 関数ルート）は使わない
+- Daily Refresh は GH Actions の cron で完結。CF Cron Triggers は不要
+- prior-art.md の "1画面・機能を増やさない" を core invariant として持っているので、将来 Worker 機能要件が発生する確率は低い
+- Pages なら `wrangler.jsonc` / `wrangler` deps / `CF_API_TOKEN` / `CF_ACCOUNT_ID` の secret セットアップ / 別アカウント運用が一切不要
+- 将来本当に Worker 機能が必要になったら `pages.dev` を捨てて Workers に戻す移行コストは小さい（DNS 切替 + workflow 差替えのみ）
 
 ## 7. graduate までの段階
 

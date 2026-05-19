@@ -48,7 +48,6 @@ src/
 astro.config.mjs
 tailwind.config.ts
 tsconfig.json
-wrangler.jsonc          Cloudflare Workers (Static Assets) デプロイ先
 package.json
 ```
 
@@ -61,7 +60,7 @@ npm install
 npm run dev        # Astro ローカル dev server
 npm run refresh    # scripts/build-data.ts: AA + HF → data/models.json
 npm run build      # dist/ への静的ビルド
-npx wrangler deploy
+# デプロイは GitHub Actions (.github/workflows/deploy.yml) 経由
 ```
 
 pre-push hook（フォーマッタ・lint）:

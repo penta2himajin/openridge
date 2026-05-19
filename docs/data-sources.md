@@ -112,7 +112,7 @@ AA API が HF id を返さないため手動 alias map が **唯一の同定経�
 ## 4. データの新鮮さ
 
 - GH Actions の cron: 日次（UTC 04:00 想定）
-- diff があれば commit → push トリガで Cloudflare Workers に再デプロイ
+- diff があれば commit → push トリガで GH Pages に再デプロイ
 - 取得失敗時は前回 JSON をそのまま保持（落ちないことを優先、リトライ機構なし）
 - 副産物として **git 履歴がそのままモデル指標の時系列データ** になる（将来 "frontier 推移" ビューを作るための無料の素材）
 

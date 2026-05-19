@@ -46,7 +46,6 @@ src/
 astro.config.mjs
 tailwind.config.ts
 tsconfig.json
-wrangler.jsonc          Cloudflare Workers (Static Assets) deploy target
 package.json
 ```
 
@@ -59,7 +58,7 @@ npm install
 npm run dev        # local Astro dev server
 npm run refresh    # scripts/build-data.ts: AA + HF → data/models.json
 npm run build      # static build to dist/
-npx wrangler deploy
+# Deploys happen via GitHub Actions (.github/workflows/deploy.yml).
 ```
 
 Pre-push hook (format / lint where applicable):

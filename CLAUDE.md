@@ -32,7 +32,7 @@ src/
 astro.config.mjs
 tailwind.config.ts
 tsconfig.json
-wrangler.jsonc          Cloudflare Workers (Static Assets); name = "ridge"
+public/CNAME            `openridge.dev` — GH Pages custom domain
 package.json
 ```
 
@@ -47,10 +47,11 @@ npm install
 git config core.hooksPath git-hooks
 ```
 
-Secrets (set in GH Actions and locally in `.dev.vars` / `.env`):
+Secrets (set in GH Actions; locally in `.env`):
 
-- `AA_API_KEY` — Artificial Analysis Insights Platform key (free tier 1,000 req/day)
-- `CF_API_TOKEN`, `CF_ACCOUNT_ID` — Cloudflare deploy
+- `AA_API_KEY` — Artificial Analysis Insights Platform key (free tier 1,000 req/day). Required by `scripts/build-data.ts` only.
+
+Deploy needs no secrets — GitHub Pages publishes via the workflow's built-in `GITHUB_TOKEN` and OIDC.
 
 ## Build & Test
 
@@ -58,7 +59,7 @@ Secrets (set in GH Actions and locally in `.dev.vars` / `.env`):
 npm run dev        # Astro dev server
 npm run refresh    # scripts/build-data.ts — fetch AA + HF, write data/models.json
 npm run build      # static build to dist/
-npx wrangler deploy
+# Deploys are workflow-driven (.github/workflows/deploy.yml); no local deploy command.
 ```
 
 CI verification commands live in `.github/workflows/`. Tests are not yet wired; the spec docs are the closest thing to a verification surface today.

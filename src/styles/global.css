@@ -69,6 +69,18 @@ body {
   pointer-events: none;
 }
 
+.ridge-closed-marker {
+  fill: var(--closed);
+  pointer-events: none;
+}
+
+.ridge-closed-leader {
+  stroke: var(--closed);
+  stroke-width: 1;
+  stroke-opacity: 0.75;
+  pointer-events: none;
+}
+
 .ridge-closed-label {
   fill: var(--closed);
   font-family: theme("fontFamily.mono");

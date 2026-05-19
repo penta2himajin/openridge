@@ -12,7 +12,7 @@
  * The chart is not virtualised — at <600 points it's well within SVG
  * performance budget. Re-renders on every relevant signal change.
  */
-import { createEffect, createMemo, onCleanup, onMount } from "solid-js";
+import { createEffect, createMemo, createSignal, onCleanup, onMount } from "solid-js";
 import * as Plot from "@observablehq/plot";
 import * as d3 from "d3";
 import type { ModelRecord, ModelsSnapshot } from "../lib/models";
@@ -20,6 +20,7 @@ import type { AppState } from "../lib/state";
 import { METRICS_BY_ID } from "../lib/metrics";
 import { formatParams } from "../lib/format";
 import { useIsMobile } from "../lib/breakpoint";
+import Tooltip from "./Tooltip";
 
 interface Props {
   snapshot: ModelsSnapshot;
@@ -35,6 +36,11 @@ export default function Frontier(props: Props) {
   let containerRef!: HTMLDivElement;
   let plotRef!: HTMLDivElement;
   let overlayRef!: SVGSVGElement;
+
+  // Chart-relative coords of the currently selected/hovered point. Used by
+  // Tooltip to position itself near the point (per docs/ui.md §4.5).
+  const [selectedPos, setSelectedPos] = createSignal<{ cx: number; cy: number } | null>(null);
+  const [chartSize, setChartSize] = createSignal({ w: 0, h: 0 });
 
   const sizeMatchers = (m: ModelRecord) => {
     const a = m.params.active ?? 0;
@@ -101,6 +107,10 @@ export default function Frontier(props: Props) {
     const width = Math.max(280, Math.floor(rect.width));
     const height = Math.max(300, Math.floor(rect.height));
     const mobile = isMobile();
+    setChartSize({ w: width, h: height });
+    // Reset before drawOverlay so that if the selected point is filtered out
+    // of `points` (license/size filter), the stale position is dropped.
+    setSelectedPos(null);
 
     const metric = props.state.metric();
     const metricInfo = METRICS_BY_ID.get(metric)!;
@@ -155,7 +165,7 @@ export default function Frontier(props: Props) {
       },
       y: {
         domain: [yMin, yMax],
-        nice: true,
+        ticks: mobile ? 4 : 6,
         grid: false,
         label: null,
       },
@@ -215,6 +225,7 @@ export default function Frontier(props: Props) {
       mobile,
       selectedId: props.state.selectedModelId(),
       onSelect: (id) => props.state.setSelectedModelId(id),
+      onSelectedPos: (cx, cy) => setSelectedPos({ cx, cy }),
     });
   };
 
@@ -259,26 +270,28 @@ export default function Frontier(props: Props) {
         style={{ "pointer-events": "none" }}
       />
       <AxisLegend metric={props.state.metric()} xview={props.state.xview()} />
+      <Tooltip
+        snapshot={props.snapshot}
+        state={props.state}
+        pos={selectedPos()}
+        chartW={chartSize().w}
+        chartH={chartSize().h}
+      />
     </section>
   );
 }
 
 function AxisLegend(props: { metric: string; xview: string }) {
+  // Only label the X axis here; the Y axis is named by the Index dropdown in
+  // the header, so a duplicate vertical legend just collides with the Y tick
+  // labels at small widths.
+  void props.metric;
   const xLabel = () =>
     props.xview === "total" ? "total params (log)" : "active params (log)";
-  const yLabel = () => METRICS_BY_ID.get(props.metric as never)?.label ?? "";
   return (
-    <>
-      <span class="pointer-events-none absolute bottom-1 right-2 sm:right-4 text-[10px] sm:text-[11px] font-mono uppercase tracking-wide text-fg-muted">
-        {xLabel()}
-      </span>
-      <span
-        class="pointer-events-none absolute top-1 left-2 sm:left-4 text-[10px] sm:text-[11px] font-mono uppercase tracking-wide text-fg-muted"
-        style={{ "writing-mode": "vertical-rl", transform: "rotate(180deg)" }}
-      >
-        {yLabel()}
-      </span>
-    </>
+    <span class="pointer-events-none absolute bottom-1 right-2 sm:right-4 text-[10px] sm:text-[11px] font-mono uppercase tracking-wide text-fg-muted">
+      {xLabel()}
+    </span>
   );
 }
 
@@ -295,37 +308,90 @@ interface OverlayContext {
   mobile: boolean;
   selectedId: string | null;
   onSelect: (id: string | null) => void;
+  onSelectedPos: (cx: number, cy: number) => void;
+}
+
+/**
+ * Truncate "GPT-5.5 (xhigh)" → keep mode suffix on desktop; "Claude Opus 4.7
+ * (Adaptive Reasoning, Max Effort)" → drop long parentheticals. On mobile,
+ * strip all parentheticals.
+ */
+function formatClosedLabel(name: string, mobile: boolean): string {
+  const m = name.match(/^(.+?)\s*\(([^)]+)\)\s*$/);
+  if (!m) return name;
+  const base = m[1];
+  const paren = m[2];
+  if (mobile) return base;
+  return paren.length <= 12 ? `${base} (${paren})` : base;
 }
 
 function drawOverlay(ctx: OverlayContext) {
-  const { svg, width, height, points, closed, xScale, yScale, mobile, selectedId, onSelect } = ctx;
+  const { svg, width, height, points, closed, xScale, yScale, mobile, selectedId, onSelect, onSelectedPos } = ctx;
   const svgSel = d3.select(svg).attr("viewBox", `0 0 ${width} ${height}`);
   svgSel.selectAll("*").remove();
 
-  // Closed anchor lines (drawn first → behind dots).
+  // Closed anchor lines with stagger-out labels + leader arms.
+  // Per docs/ui.md §7.5.4 + §4.4 — keep --closed single-tone, push label Y
+  // upward when crowded (closed anchors are typically high-score; empty space
+  // is above), draw a short leader from the line's right end to the label.
   const closedLayer = svgSel.append("g").attr("class", "closed-anchors").style("pointer-events", "none");
   const labelPaddingRight = mobile ? 8 : 12;
-  for (const { m, score } of closed) {
-    const y = yScale(score);
-    if (!Number.isFinite(y)) continue;
+  const minGap = mobile ? 14 : 18;
+  const lineRightX = xScale.range()[1];
+  const chartTop = yScale.range()[1]; // smallest screen Y (top of chart)
+
+  // Sort by score ASC so we iterate from low (large screen Y) to high (small Y),
+  // pushing upward when crowded.
+  const placements = [...closed]
+    .filter(({ score }) => Number.isFinite(yScale(score)))
+    .sort((a, b) => a.score - b.score)
+    .map(({ m, score }) => ({ m, score, lineY: yScale(score), labelY: yScale(score) }));
+
+  for (let i = 1; i < placements.length; i++) {
+    const prev = placements[i - 1];
+    const curr = placements[i];
+    // curr has higher score → smaller Y. Push up if gap < minGap.
+    if (prev.labelY - curr.labelY < minGap) {
+      curr.labelY = prev.labelY - minGap;
+    }
+  }
+  // Clamp to chart top.
+  for (const p of placements) {
+    if (p.labelY < chartTop + 10) p.labelY = chartTop + 10;
+  }
+
+  for (const { m, lineY, labelY } of placements) {
     closedLayer
       .append("line")
       .attr("class", "ridge-closed-line")
       .attr("x1", xScale.range()[0])
-      .attr("x2", xScale.range()[1])
-      .attr("y1", y)
-      .attr("y2", y);
-    // Truncate "(mode)" on mobile per docs/ui.md §7.5.4
-    const displayName = mobile
-      ? m.name.replace(/\s*\([^)]*\)\s*$/, "")
-      : m.name;
+      .attr("x2", lineRightX)
+      .attr("y1", lineY)
+      .attr("y2", lineY);
+    // Marker at line right end so the eye lands at the line, not the label.
+    closedLayer
+      .append("circle")
+      .attr("class", "ridge-closed-marker")
+      .attr("cx", lineRightX - 2)
+      .attr("cy", lineY)
+      .attr("r", 2);
+    // Leader arm only when label is displaced from its line.
+    if (Math.abs(lineY - labelY) >= 1) {
+      closedLayer
+        .append("line")
+        .attr("class", "ridge-closed-leader")
+        .attr("x1", lineRightX - 2)
+        .attr("x2", lineRightX - 2)
+        .attr("y1", lineY)
+        .attr("y2", labelY);
+    }
     closedLayer
       .append("text")
       .attr("class", "ridge-closed-label")
-      .attr("x", xScale.range()[1] - labelPaddingRight)
-      .attr("y", y - 4)
+      .attr("x", lineRightX - labelPaddingRight)
+      .attr("y", labelY - 4)
       .attr("text-anchor", "end")
-      .text(displayName);
+      .text(formatClosedLabel(m.name, mobile));
   }
 
   // Frontier path through frontier points (sorted by x).
@@ -369,6 +435,7 @@ function drawOverlay(ctx: OverlayContext) {
         .attr("fill", p.isFrontier ? "var(--frontier)" : "var(--fg-default)")
         .attr("stroke", "var(--bg-base)")
         .attr("stroke-width", 2);
+      onSelectedPos(cx, cy);
     }
     g.attr("role", "button")
       .attr("tabindex", 0)

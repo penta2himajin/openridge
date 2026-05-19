@@ -1,6 +1,7 @@
 /**
- * Hover/tap detail card.
- * Spec: docs/ui.md §4.5, §7.6.
+ * Hover/tap detail card. Positioned in chart-local coordinates so it sits
+ * near the selected point (docs/ui.md §4.5). On mobile, pinned top-center of
+ * the chart area so the thumb doesn't cover it (docs/ui.md §7.6).
  */
 import { createMemo, Show } from "solid-js";
 import type { AppState } from "../lib/state";
@@ -12,7 +13,17 @@ import { useIsMobile } from "../lib/breakpoint";
 interface Props {
   snapshot: ModelsSnapshot;
   state: AppState;
+  /** Chart-relative coords of the selected point (desktop only). */
+  pos: { cx: number; cy: number } | null;
+  /** Chart container dimensions for flip logic. */
+  chartW: number;
+  chartH: number;
 }
+
+// Estimated tooltip box; only used for flip thresholds, not measured.
+const ESTIMATED_CARD_W = 260;
+const ESTIMATED_CARD_H = 200;
+const POINT_OFFSET = 12;
 
 export default function Tooltip(props: Props) {
   const isMobile = useIsMobile();
@@ -29,6 +40,51 @@ export default function Tooltip(props: Props) {
     return ids.includes(m.id);
   });
 
+  // Compute placement near the selected point with quadrant flip.
+  const cardStyle = (): Record<string, string> => {
+    if (isMobile()) {
+      return {
+        position: "absolute",
+        top: "12px",
+        left: "50%",
+        transform: "translateX(-50%)",
+        width: "min(280px, calc(100% - 24px))",
+      };
+    }
+    const p = props.pos;
+    if (!p) {
+      // Selected without coords (e.g., a closed-anchor selection in the
+      // future): fall back to top-right corner.
+      return {
+        position: "absolute",
+        top: "12px",
+        right: "16px",
+        width: `${ESTIMATED_CARD_W}px`,
+      };
+    }
+    // Default placement: point's upper-right. Flip horizontally if the card
+    // would overflow the right side; flip vertically if it would overflow
+    // the top of the chart.
+    const placeOnLeft = p.cx + POINT_OFFSET + ESTIMATED_CARD_W > props.chartW - 8;
+    const placeBelow = p.cy - POINT_OFFSET - ESTIMATED_CARD_H < 8;
+
+    const style: Record<string, string> = {
+      position: "absolute",
+      width: `${ESTIMATED_CARD_W}px`,
+    };
+    if (placeOnLeft) {
+      style.right = `${props.chartW - p.cx + POINT_OFFSET}px`;
+    } else {
+      style.left = `${p.cx + POINT_OFFSET}px`;
+    }
+    if (placeBelow) {
+      style.top = `${p.cy + POINT_OFFSET}px`;
+    } else {
+      style.bottom = `${props.chartH - p.cy + POINT_OFFSET}px`;
+    }
+    return style;
+  };
+
   return (
     <Show when={model()}>
       {(m) => {
@@ -37,21 +93,8 @@ export default function Tooltip(props: Props) {
         const primary = m().scores[metric];
         return (
           <div
-            class="absolute z-30 rounded-lg border border-fg-subtle bg-bg-elevated/95 backdrop-blur-md p-3 pointer-events-none"
-            style={
-              isMobile()
-                ? {
-                    top: "calc(env(safe-area-inset-top) + 64px)",
-                    left: "50%",
-                    transform: "translateX(-50%)",
-                    width: "min(280px, calc(100vw - 32px))",
-                  }
-                : {
-                    top: "72px",
-                    right: "20px",
-                    width: "260px",
-                  }
-            }
+            class="z-30 rounded-lg border border-fg-subtle bg-bg-elevated/95 backdrop-blur-md p-3 pointer-events-none shadow-lg"
+            style={cardStyle()}
             role="status"
             aria-live="polite"
           >

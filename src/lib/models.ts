@@ -1,8 +1,10 @@
 /**
  * Model data types and loader.
- * Spec: docs/architecture.md §4 (build-data.ts output shape),
- *       docs/data-sources.md §1–§3 (field provenance).
+ * Output shape spec: docs/architecture.md §4.
+ * Field provenance: docs/data-sources.md §1–§3.
  */
+
+import snapshot from "../../data/models.json";
 
 export type MetricId =
   | "artificial_analysis_intelligence_index"
@@ -34,8 +36,10 @@ export interface ModelSpeed {
 
 export interface ModelRecord {
   id: string;
+  slug: string;
   name: string;
   creator: string;
+  creatorSlug: string;
   isClosed: boolean;
   params: ModelParams;
   license: string | null;
@@ -43,17 +47,17 @@ export interface ModelRecord {
   pricing: ModelPricing;
   speed: ModelSpeed;
   hfId: string | null;
+  /** For closed models the AA "mode" suffix, e.g. "(xhigh)", "(high)". null when no mode. */
+  mode: string | null;
+  releaseDate: string | null;
 }
 
 export interface ModelsSnapshot {
-  generatedAt: string;
+  generatedAt: string | null;
   models: ModelRecord[];
-  /** Pre-computed: model ids on the Pareto frontier per tracked metric. */
   paretoByMetric: Partial<Record<MetricId, string[]>>;
 }
 
-// TODO: implement. Import the committed JSON at build time so the bundle
-// embeds the snapshot — the browser must never fetch AA/HF at runtime.
-export async function loadModels(): Promise<ModelsSnapshot> {
-  throw new Error("not implemented: see docs/architecture.md §4");
+export function loadModels(): ModelsSnapshot {
+  return snapshot as ModelsSnapshot;
 }

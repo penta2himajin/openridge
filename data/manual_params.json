@@ -1,0 +1,75 @@
+{
+  "_comment": "AA slug → { total, active } overrides for models that do not encode params in their AA name. Numbers are absolute (not in billions). See docs/data-sources.md §2.",
+  "_format_example": {
+    "deepseek-v3-1": { "total": 684000000000, "active": 37000000000 }
+  },
+
+  "deepseek-v3-1": { "total": 684000000000, "active": 37000000000 },
+  "deepseek-v3-1-terminus": { "total": 684000000000, "active": 37000000000 },
+  "deepseek-v3-2-exp": { "total": 684000000000, "active": 37000000000 },
+  "deepseek-r1": { "total": 671000000000, "active": 37000000000 },
+  "deepseek-r1-0528": { "total": 671000000000, "active": 37000000000 },
+  "deepseek-v3-0324": { "total": 671000000000, "active": 37000000000 },
+
+  "llama-4-maverick": { "total": 400000000000, "active": 17000000000 },
+  "llama-4-scout": { "total": 109000000000, "active": 17000000000 },
+
+  "qwq-32b": { "total": 32000000000, "active": 32000000000 },
+  "qwen3-coder": { "total": 480000000000, "active": 35000000000 },
+  "qwen3-coder-30b-a3b-instruct": { "total": 30000000000, "active": 3000000000 },
+  "qwen3-next-80b-a3b-instruct": { "total": 80000000000, "active": 3000000000 },
+  "qwen3-next-80b-a3b-thinking": { "total": 80000000000, "active": 3000000000 },
+
+  "mistral-large-2": { "total": 123000000000, "active": 123000000000 },
+  "mistral-large-2-2": { "total": 123000000000, "active": 123000000000 },
+  "mistral-medium-3": { "total": 70000000000, "active": 70000000000 },
+  "mistral-medium-3-1": { "total": 70000000000, "active": 70000000000 },
+  "mistral-small-3": { "total": 24000000000, "active": 24000000000 },
+  "mistral-small-3-1": { "total": 24000000000, "active": 24000000000 },
+  "mistral-small-3-2": { "total": 24000000000, "active": 24000000000 },
+  "magistral-medium": { "total": 70000000000, "active": 70000000000 },
+  "magistral-small": { "total": 24000000000, "active": 24000000000 },
+  "codestral-25-01": { "total": 22000000000, "active": 22000000000 },
+  "ministral-8b": { "total": 8000000000, "active": 8000000000 },
+  "ministral-3b": { "total": 3000000000, "active": 3000000000 },
+
+  "kimi-k2": { "total": 1000000000000, "active": 32000000000 },
+  "kimi-k2-instruct-0905": { "total": 1000000000000, "active": 32000000000 },
+  "kimi-k2-thinking": { "total": 1000000000000, "active": 32000000000 },
+
+  "minimax-m2": { "total": 230000000000, "active": 10000000000 },
+
+  "glm-4-5": { "total": 355000000000, "active": 32000000000 },
+  "glm-4-5-air": { "total": 106000000000, "active": 12000000000 },
+  "glm-4-6": { "total": 355000000000, "active": 32000000000 },
+
+  "ling-1-mini": { "total": 16000000000, "active": 16000000000 },
+  "ling-1-flash": { "total": 100000000000, "active": 6000000000 },
+  "ring-1-mini": { "total": 16000000000, "active": 16000000000 },
+  "ring-1-flash": { "total": 100000000000, "active": 6000000000 },
+
+  "ibm-granite-3-3-8b": { "total": 8000000000, "active": 8000000000 },
+  "ibm-granite-4-h-tiny": { "total": 7000000000, "active": 1000000000 },
+  "ibm-granite-4-h-small": { "total": 32000000000, "active": 9000000000 },
+  "ibm-granite-4-h-medium": { "total": 80000000000, "active": 18000000000 },
+
+  "olmo-2-32b": { "total": 32000000000, "active": 32000000000 },
+  "olmo-2-13b": { "total": 13000000000, "active": 13000000000 },
+
+  "exaone-3-5-32b": { "total": 32000000000, "active": 32000000000 },
+  "exaone-deep-32b": { "total": 32000000000, "active": 32000000000 },
+
+  "command-a-03-2025": { "total": 111000000000, "active": 111000000000 },
+
+  "phi-4": { "total": 14000000000, "active": 14000000000 },
+
+  "jamba-1-7-large": { "total": 398000000000, "active": 94000000000 },
+  "jamba-1-7-mini": { "total": 52000000000, "active": 12000000000 },
+
+  "solar-pro-2": { "total": 30000000000, "active": 30000000000 },
+
+  "nous-hermes-3-llama-405b": { "total": 405000000000, "active": 405000000000 },
+
+  "hunyuan-large": { "total": 389000000000, "active": 52000000000 },
+  "hunyuan-turbos": { "total": 389000000000, "active": 52000000000 }
+}

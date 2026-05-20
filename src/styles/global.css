@@ -144,8 +144,11 @@ body {
   stroke: var(--fg-subtle);
 }
 
-/* Focus ring across all interactive primitives. */
-:where(button, [role="button"], [role="option"], input):focus-visible {
+/* Focus ring across interactive primitives. Inputs use a bottom-border
+   highlight instead (driven by `focus-within:` on their wrapper) — see the
+   IndexDropdown search field — because a full outline reads as a giant
+   cyan box on autofocus. */
+:where(button, [role="button"], [role="option"]):focus-visible {
   outline: 1px solid var(--accent);
   outline-offset: 2px;
 }

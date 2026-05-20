@@ -300,7 +300,7 @@ function DropdownBody(props: {
   });
   return (
     <div ref={props.ref} class="flex flex-col">
-      <div class="sticky top-0 bg-bg-elevated border-b border-fg-subtle px-3 py-2">
+      <div class="sticky top-0 bg-bg-elevated border-b border-fg-subtle focus-within:border-accent transition-colors px-3 py-2">
         <input
           ref={inputRef}
           type="search"

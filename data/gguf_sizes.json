@@ -1,0 +1,279 @@
+{
+  "_comment": "AA slug → cached GGUF Q4_K_M size. Populated by scripts/build-data.ts for Pareto-frontier models only. `bytes` is the file size (or sum of shards) in bytes; null means the lookup completed but no Q4_K_M was found. `source` is hf for an automatic HF API lookup, manual for hand-curated entries. Existing entries are never re-fetched (the daily refresh only fills in missing slugs).",
+  "apriel-v1-6-15b-thinker": {
+    "bytes": null,
+    "source": "not-found",
+    "fetchedAt": "2026-05-19T23:57:41.325Z"
+  },
+  "deepseek-r1": {
+    "bytes": 409227727328,
+    "source": "hf",
+    "repo": "lmstudio-community/DeepSeek-R1-0528-GGUF",
+    "fetchedAt": "2026-05-19T23:59:38.880Z"
+  },
+  "deepseek-r1-distill-qwen-1-5b": {
+    "bytes": 1117320800,
+    "source": "hf",
+    "repo": "bartowski/DeepSeek-R1-Distill-Qwen-1.5B-GGUF",
+    "fetchedAt": "2026-05-19T23:57:46.469Z"
+  },
+  "exaone-4-0-1-2b-reasoning": {
+    "bytes": 812438304,
+    "source": "hf",
+    "repo": "bartowski/LGAI-EXAONE_EXAONE-4.0-1.2B-GGUF",
+    "fetchedAt": "2026-05-19T23:57:39.643Z"
+  },
+  "exaone-4-0-32b-reasoning": {
+    "bytes": 19343827232,
+    "source": "hf",
+    "repo": "bartowski/LGAI-EXAONE_EXAONE-4.0-32B-GGUF",
+    "fetchedAt": "2026-05-19T23:57:40.077Z"
+  },
+  "falcon-h1r-7b": {
+    "bytes": 4598344288,
+    "source": "hf",
+    "repo": "unsloth/Falcon-H1R-7B-GGUF",
+    "fetchedAt": "2026-05-19T23:57:36.044Z"
+  },
+  "gemma-4-26b-a4b": {
+    "bytes": 17035038112,
+    "source": "hf",
+    "repo": "bartowski/google_gemma-4-26B-A4B-it-GGUF",
+    "fetchedAt": "2026-05-19T23:57:34.445Z"
+  },
+  "gemma-4-26b-a4b-non-reasoning": {
+    "bytes": 17035038112,
+    "source": "hf",
+    "repo": "bartowski/google_gemma-4-26B-A4B-it-GGUF",
+    "fetchedAt": "2026-05-19T23:57:35.152Z"
+  },
+  "gemma-4-31b": {
+    "bytes": 19598488192,
+    "source": "hf",
+    "repo": "bartowski/google_gemma-4-31B-it-GGUF",
+    "fetchedAt": "2026-05-19T23:57:34.040Z"
+  },
+  "gemma-4-e2b": {
+    "bytes": 3462678272,
+    "source": "hf",
+    "repo": "bartowski/google_gemma-4-E2B-it-GGUF",
+    "fetchedAt": "2026-05-19T23:59:37.932Z"
+  },
+  "gpt-oss-120b": {
+    "bytes": null,
+    "source": "not-found",
+    "fetchedAt": "2026-05-19T23:57:33.325Z"
+  },
+  "gpt-oss-20b": {
+    "bytes": 11673418816,
+    "source": "hf",
+    "repo": "bartowski/openai_gpt-oss-20b-GGUF",
+    "fetchedAt": "2026-05-19T23:57:33.683Z"
+  },
+  "granite-4-0-nano-1b": {
+    "bytes": 901162560,
+    "source": "hf",
+    "repo": "unsloth/granite-4.0-h-1b-GGUF",
+    "fetchedAt": "2026-05-19T23:57:39.178Z"
+  },
+  "kimi-k2-thinking": {
+    "bytes": null,
+    "source": "not-found",
+    "fetchedAt": "2026-05-19T23:59:39.887Z"
+  },
+  "lfm2-5-1-2b-instruct": {
+    "bytes": 730895712,
+    "source": "hf",
+    "repo": "bartowski/LiquidAI_LFM2.5-1.2B-Instruct-GGUF",
+    "fetchedAt": "2026-05-19T23:57:36.812Z"
+  },
+  "lfm2-8b-a1b": {
+    "bytes": 5051071424,
+    "source": "hf",
+    "repo": "bartowski/LiquidAI_LFM2-8B-A1B-GGUF",
+    "fetchedAt": "2026-05-19T23:57:36.437Z"
+  },
+  "llama-3-1-nemotron-nano-4b-reasoning": {
+    "bytes": 2778285600,
+    "source": "hf",
+    "repo": "bartowski/nvidia_Llama-3.1-Nemotron-Nano-4B-v1.1-GGUF",
+    "fetchedAt": "2026-05-19T23:57:37.186Z"
+  },
+  "llama-nemotron-super-49b-v1-5-reasoning": {
+    "bytes": null,
+    "source": "not-found",
+    "fetchedAt": "2026-05-19T23:57:38.383Z"
+  },
+  "magistral-small": {
+    "bytes": 14333914624,
+    "source": "hf",
+    "repo": "mradermacher/Magistral-Small-2507-Rebased-Vision-i1-GGUF",
+    "fetchedAt": "2026-05-19T23:57:46.117Z"
+  },
+  "minicpm-v4-6-1-3b": {
+    "bytes": null,
+    "source": "not-found",
+    "fetchedAt": "2026-05-19T23:57:41.050Z"
+  },
+  "minimax-m2": {
+    "bytes": 138342384096,
+    "source": "hf",
+    "repo": "lmstudio-community/MiniMax-M2.7-GGUF",
+    "fetchedAt": "2026-05-19T23:57:47.143Z"
+  },
+  "motif-2-12-7b": {
+    "bytes": null,
+    "source": "not-found",
+    "fetchedAt": "2026-05-19T23:57:40.346Z"
+  },
+  "nanbeige4-1-3b": {
+    "bytes": 2443113024,
+    "source": "hf",
+    "repo": "mradermacher/Nanbeige4.1-3B-GGUF",
+    "fetchedAt": "2026-05-19T23:57:40.776Z"
+  },
+  "nvidia-nemotron-3-nano-30b-a3b-reasoning": {
+    "bytes": 24655899872,
+    "source": "hf",
+    "repo": "bartowski/nvidia_Nemotron-3-Nano-30B-A3B-GGUF",
+    "fetchedAt": "2026-05-19T23:57:37.557Z"
+  },
+  "nvidia-nemotron-nano-12b-v2-vl-reasoning": {
+    "bytes": 7501771584,
+    "source": "hf",
+    "repo": "Vastined/NVIDIA-Nemotron-Nano-12B-v2-VL-BF16-GGUF",
+    "fetchedAt": "2026-05-19T23:57:38.109Z"
+  },
+  "qwen3-0.6b-instruct": {
+    "bytes": 484220320,
+    "source": "hf",
+    "repo": "bartowski/Qwen_Qwen3-0.6B-GGUF",
+    "fetchedAt": "2026-05-19T23:57:52.136Z"
+  },
+  "qwen3-0.6b-instruct-reasoning": {
+    "bytes": 484220320,
+    "source": "hf",
+    "repo": "bartowski/Qwen_Qwen3-0.6B-GGUF",
+    "fetchedAt": "2026-05-19T23:57:51.787Z"
+  },
+  "qwen3-1.7b-instruct-reasoning": {
+    "bytes": 1282439584,
+    "source": "hf",
+    "repo": "bartowski/Qwen_Qwen3-1.7B-GGUF",
+    "fetchedAt": "2026-05-19T23:57:51.075Z"
+  },
+  "qwen3-14b-instruct-reasoning": {
+    "bytes": 9001753632,
+    "source": "hf",
+    "repo": "bartowski/Qwen_Qwen3-14B-GGUF",
+    "fetchedAt": "2026-05-19T23:57:52.491Z"
+  },
+  "qwen3-235b-a22b-instruct-2507-reasoning": {
+    "bytes": 142646904992,
+    "source": "hf",
+    "repo": "lmstudio-community/Qwen3-235B-A22B-Instruct-2507-GGUF",
+    "fetchedAt": "2026-05-19T23:57:49.127Z"
+  },
+  "qwen3-30b-a3b-2507-reasoning": {
+    "bytes": 18632183808,
+    "source": "hf",
+    "repo": "bartowski/Qwen_Qwen3-30B-A3B-Thinking-2507-GGUF",
+    "fetchedAt": "2026-05-19T23:57:49.863Z"
+  },
+  "qwen3-4b-2507-instruct-reasoning": {
+    "bytes": 2497280736,
+    "source": "hf",
+    "repo": "bartowski/Qwen_Qwen3-4B-Instruct-2507-GGUF",
+    "fetchedAt": "2026-05-19T23:57:51.431Z"
+  },
+  "qwen3-5-0-8b": {
+    "bytes": 579615840,
+    "source": "hf",
+    "repo": "bartowski/Qwen_Qwen3.5-0.8B-GGUF",
+    "fetchedAt": "2026-05-19T23:57:44.952Z"
+  },
+  "qwen3-5-122b-a10b": {
+    "bytes": 74208240192,
+    "source": "hf",
+    "repo": "lmstudio-community/Qwen3.5-122B-A10B-GGUF",
+    "fetchedAt": "2026-05-19T23:57:43.513Z"
+  },
+  "qwen3-5-27b": {
+    "bytes": 17984872928,
+    "source": "hf",
+    "repo": "bartowski/Qwen_Qwen3.5-27B-GGUF",
+    "fetchedAt": "2026-05-19T23:57:49.497Z"
+  },
+  "qwen3-5-2b": {
+    "bytes": 1396198496,
+    "source": "hf",
+    "repo": "bartowski/Qwen_Qwen3.5-2B-GGUF",
+    "fetchedAt": "2026-05-19T23:57:45.342Z"
+  },
+  "qwen3-5-397b-a17b": {
+    "bytes": 240590681792,
+    "source": "hf",
+    "repo": "lmstudio-community/Qwen3.5-397B-A17B-GGUF",
+    "fetchedAt": "2026-05-19T23:57:42.166Z"
+  },
+  "qwen3-5-4b": {
+    "bytes": 3013027808,
+    "source": "hf",
+    "repo": "bartowski/Qwen_Qwen3.5-4B-GGUF",
+    "fetchedAt": "2026-05-19T23:57:44.237Z"
+  },
+  "qwen3-5-9b": {
+    "bytes": 5680522464,
+    "source": "hf",
+    "repo": "unsloth/Qwen3.5-9B-GGUF",
+    "fetchedAt": "2026-05-19T23:57:42.894Z"
+  },
+  "qwen3-5-9b-non-reasoning": {
+    "bytes": 5680522464,
+    "source": "hf",
+    "repo": "unsloth/Qwen3.5-9B-GGUF",
+    "fetchedAt": "2026-05-19T23:57:45.694Z"
+  },
+  "qwen3-6-27b": {
+    "bytes": 17533552192,
+    "source": "hf",
+    "repo": "bartowski/Qwen_Qwen3.6-27B-GGUF",
+    "fetchedAt": "2026-05-19T23:57:43.867Z"
+  },
+  "qwen3-6-35b-a3b": {
+    "bytes": 21391448384,
+    "source": "hf",
+    "repo": "bartowski/Qwen_Qwen3.6-35B-A3B-GGUF",
+    "fetchedAt": "2026-05-19T23:57:44.593Z"
+  },
+  "qwen3-8b-instruct-reasoning": {
+    "bytes": 5027784224,
+    "source": "hf",
+    "repo": "bartowski/Qwen_Qwen3-8B-GGUF",
+    "fetchedAt": "2026-05-19T23:57:50.579Z"
+  },
+  "qwen3-next-80b-a3b-reasoning": {
+    "bytes": 48727678848,
+    "source": "hf",
+    "repo": "bartowski/Qwen_Qwen3-Next-80B-A3B-Thinking-GGUF",
+    "fetchedAt": "2026-05-19T23:57:42.538Z"
+  },
+  "qwen3-vl-30b-a3b-reasoning": {
+    "bytes": 18632185056,
+    "source": "hf",
+    "repo": "bartowski/Qwen_Qwen3-VL-30B-A3B-Instruct-GGUF",
+    "fetchedAt": "2026-05-19T23:57:48.349Z"
+  },
+  "qwen3-vl-8b-reasoning": {
+    "bytes": 5027785184,
+    "source": "hf",
+    "repo": "bartowski/Qwen_Qwen3-VL-8B-Instruct-GGUF",
+    "fetchedAt": "2026-05-19T23:57:50.216Z"
+  },
+  "step-3-vl-10b": {
+    "bytes": 5027780256,
+    "source": "hf",
+    "repo": "mradermacher/Step3-VL-10B-Base-i1-GGUF",
+    "fetchedAt": "2026-05-19T23:57:38.823Z"
+  }
+}

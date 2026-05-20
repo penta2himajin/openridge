@@ -15,6 +15,15 @@ function trim(x: number, decimals: number): string {
   return s.replace(/\.?0+$/, "");
 }
 
+/** Format byte counts as GB-style strings. */
+export function formatBytes(n: number | null | undefined): string {
+  if (n == null || !Number.isFinite(n) || n <= 0) return "—";
+  const gb = n / 1e9;
+  if (gb >= 100) return `${Math.round(gb)} GB`;
+  if (gb >= 10) return `${gb.toFixed(0)} GB`;
+  return `${gb.toFixed(1)} GB`;
+}
+
 /** Score formatter — preserves 0-1 fraction precision or 0-100 integer-ish display. */
 export function formatScore(v: number | null | undefined, maxValue: number): string {
   if (v == null || !Number.isFinite(v)) return "—";

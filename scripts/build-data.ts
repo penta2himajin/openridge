@@ -110,6 +110,107 @@ async function fetchAA(apiKey: string): Promise<AAResponse> {
   return res.json() as Promise<AAResponse>;
 }
 
+// ─── GGUF Q4_K_M lookup on HuggingFace ────────────────────────────────────
+
+interface GgufEntry {
+  bytes: number | null;
+  source: "hf" | "manual" | "not-found";
+  repo?: string;
+  fetchedAt?: string;
+}
+
+const TRUSTED_GGUF_UPLOADERS = [
+  "bartowski",
+  "unsloth",
+  "lmstudio-community",
+  "MaziyarPanahi",
+  "mradermacher",
+];
+
+async function fetchWithTimeout(url: string, ms = 8000): Promise<Response | null> {
+  const ctl = new AbortController();
+  const t = setTimeout(() => ctl.abort(), ms);
+  try {
+    const res = await fetch(url, { signal: ctl.signal });
+    return res;
+  } catch {
+    return null;
+  } finally {
+    clearTimeout(t);
+  }
+}
+
+/**
+ * Best-effort search HF Hub for a GGUF repo holding a Q4_K_M file.
+ *
+ * Sanity check: HF search is fuzzy ("DeepSeek R1" surfaces both the real
+ * 671B model and 8B distills of it). When the measured size lands outside
+ * [0.4×, 2.5×] of the formula estimate from total params, treat the
+ * candidate as a mismatch (almost always a smaller distill picked because
+ * the original creator didn't upload a Q4_K_M) and try the next candidate.
+ *
+ * Returns the summed shard size and the matched repo on success, null on miss.
+ */
+async function findGgufQ4KM(
+  modelName: string,
+  expectedBytes: number | null,
+): Promise<{ bytes: number; repo: string } | null> {
+  const cleaned = modelName.replace(/\s*\([^)]*\)\s*$/g, "").trim();
+  const searchUrl = `https://huggingface.co/api/models?search=${encodeURIComponent(
+    cleaned + " GGUF",
+  )}&limit=20`;
+  const res = await fetchWithTimeout(searchUrl);
+  if (!res || !res.ok) return null;
+  const repos = (await res.json()) as { modelId: string; downloads?: number }[];
+  if (!Array.isArray(repos) || repos.length === 0) return null;
+
+  // Prefer trusted uploaders, then break ties by repo download count.
+  const ranked = [...repos].sort((a, b) => {
+    const oa = a.modelId.split("/")[0];
+    const ob = b.modelId.split("/")[0];
+    const ai = TRUSTED_GGUF_UPLOADERS.indexOf(oa);
+    const bi = TRUSTED_GGUF_UPLOADERS.indexOf(ob);
+    const ar = ai === -1 ? 999 : ai;
+    const br = bi === -1 ? 999 : bi;
+    if (ar !== br) return ar - br;
+    return (b.downloads ?? 0) - (a.downloads ?? 0);
+  });
+
+  for (const r of ranked.slice(0, 6)) {
+    const treeRes = await fetchWithTimeout(
+      `https://huggingface.co/api/models/${r.modelId}/tree/main`,
+    );
+    if (!treeRes || !treeRes.ok) continue;
+    const files = (await treeRes.json()) as {
+      path: string;
+      size?: number;
+      type?: string;
+    }[];
+    if (!Array.isArray(files)) continue;
+    const q4 = files.filter(
+      (f) =>
+        f.type !== "directory" &&
+        /Q4_K_M/i.test(f.path) &&
+        f.path.toLowerCase().endsWith(".gguf"),
+    );
+    if (q4.length === 0) continue;
+    const bytes = q4.reduce((sum, f) => sum + (f.size ?? 0), 0);
+    if (bytes <= 0) continue;
+    // Reject candidates whose Q4_K_M is far smaller / larger than the
+    // formula expects — almost always a distill or unrelated model that
+    // happened to share part of the name.
+    if (expectedBytes != null && expectedBytes > 0) {
+      const ratio = bytes / expectedBytes;
+      // [0.3, 3.5] catches distills (typically <0.1) and unrelated repos
+      // (often <0.05) while keeping legitimate architectural quirks like
+      // Gemma's "E2B" effective-params embedding-bloat case.
+      if (ratio < 0.3 || ratio > 3.5) continue;
+    }
+    return { bytes, repo: r.modelId };
+  }
+  return null;
+}
+
 function readJson<T>(path: string): T {
   return JSON.parse(readFileSync(path, "utf8")) as T;
 }
@@ -203,10 +304,85 @@ async function main(): Promise<void> {
     };
   }
 
+  // GGUF Q4_K_M lookup — bounded to the Pareto frontier union across all
+  // metrics × both axes (~50 unique models). Existing entries are kept as-is
+  // per user guidance ("既にあるものは更新しない"); only missing slugs are
+  // fetched. `bytes: null` means we looked up and didn't find a community
+  // Q4_K_M upload yet; the entry sticks until manually cleared.
+  const ggufPath = DATA("gguf_sizes.json");
+  const ggufRaw = readJson<Record<string, GgufEntry | string>>(ggufPath);
+  const ggufEntries: Record<string, GgufEntry> = {};
+  const ggufComment = typeof ggufRaw._comment === "string" ? ggufRaw._comment : undefined;
+  for (const [k, v] of Object.entries(ggufRaw)) {
+    if (k.startsWith("_")) continue;
+    if (typeof v === "object" && v !== null && "bytes" in v && "source" in v) {
+      ggufEntries[k] = v as GgufEntry;
+    }
+  }
+
+  const frontierIds = new Set<string>();
+  for (const f of Object.values(paretoByMetric)) {
+    if (!f) continue;
+    for (const id of f.active) frontierIds.add(id);
+    for (const id of f.total) frontierIds.add(id);
+  }
+  const frontierModels = models.filter((m) => frontierIds.has(m.id));
+  console.error(`Pareto frontier union: ${frontierModels.length} unique models`);
+
+  let fetchedCount = 0;
+  let foundCount = 0;
+  for (const m of frontierModels) {
+    if (ggufEntries[m.slug]) continue; // skip cached entries (including not-found)
+    console.error(`  → GGUF lookup: ${m.slug} (${m.name})`);
+    // 0.6 bytes/param matches the formula estimate in src/lib/quant.ts.
+    const expectedBytes =
+      m.params.total != null && Number.isFinite(m.params.total)
+        ? m.params.total * 0.6
+        : null;
+    const hit = await findGgufQ4KM(m.name, expectedBytes);
+    fetchedCount++;
+    if (hit) {
+      ggufEntries[m.slug] = {
+        bytes: hit.bytes,
+        source: "hf",
+        repo: hit.repo,
+        fetchedAt: new Date().toISOString(),
+      };
+      foundCount++;
+      console.error(`     ${(hit.bytes / 1e9).toFixed(1)} GB · ${hit.repo}`);
+    } else {
+      ggufEntries[m.slug] = {
+        bytes: null,
+        source: "not-found",
+        fetchedAt: new Date().toISOString(),
+      };
+      console.error(`     no community Q4_K_M found`);
+    }
+    // Be polite to HF Hub.
+    await new Promise((r) => setTimeout(r, 200));
+  }
+  if (fetchedCount > 0) {
+    console.error(`GGUF: ${fetchedCount} new lookups, ${foundCount} hits`);
+  } else {
+    console.error("GGUF: all frontier slugs already cached");
+  }
+
+  const ggufOut: Record<string, unknown> = {};
+  if (ggufComment) ggufOut._comment = ggufComment;
+  // Sort keys for stable diffs.
+  for (const k of Object.keys(ggufEntries).sort()) ggufOut[k] = ggufEntries[k];
+  writeFileSync(ggufPath, JSON.stringify(ggufOut, null, 2) + "\n");
+
+  const ggufSizes: Record<string, number | null> = {};
+  for (const [slug, entry] of Object.entries(ggufEntries)) {
+    ggufSizes[slug] = entry.bytes;
+  }
+
   const out: ModelsSnapshot = {
     generatedAt: new Date().toISOString(),
     models,
     paretoByMetric,
+    ggufSizes,
   };
 
   writeFileSync(DATA("models.json"), JSON.stringify(out, null, 2) + "\n");

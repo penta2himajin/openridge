@@ -7,7 +7,8 @@ import { createMemo, Show } from "solid-js";
 import type { AppState } from "../lib/state";
 import type { ModelsSnapshot } from "../lib/models";
 import { METRICS_BY_ID } from "../lib/metrics";
-import { formatParams, formatScore } from "../lib/format";
+import { formatBytes, formatParams, formatScore } from "../lib/format";
+import { estimateQ4KMBytes } from "../lib/quant";
 import { useIsMobile } from "../lib/breakpoint";
 import { findClosedNeighbours, type Neighbours, type NeighbourEntry } from "../lib/neighbours";
 
@@ -41,6 +42,14 @@ export default function Tooltip(props: Props) {
     if (!entry) return false;
     const ids = props.state.xview() === "total" ? entry.total : entry.active;
     return ids.includes(m.id);
+  });
+
+  const gguf = createMemo(() => {
+    const mod = model();
+    if (!mod) return { bytes: null, estimate: null };
+    const measured = props.snapshot.ggufSizes?.[mod.slug] ?? null;
+    if (measured != null) return { bytes: measured, estimate: null };
+    return { bytes: null, estimate: estimateQ4KMBytes(mod.params.total) };
   });
 
   const neighbours = createMemo<Neighbours | null>(() => {
@@ -129,6 +138,14 @@ export default function Tooltip(props: Props) {
               <span class="font-mono text-fg-default text-right">
                 {formatParams(m().params.total)}
               </span>
+              <Show when={!m().isClosed && (gguf().bytes != null || gguf().estimate != null)}>
+                <span class="font-mono uppercase tracking-wide text-fg-muted">Q4_K_M</span>
+                <span class="font-mono text-fg-default text-right">
+                  {gguf().bytes != null
+                    ? formatBytes(gguf().bytes)
+                    : `~${formatBytes(gguf().estimate)}`}
+                </span>
+              </Show>
             </div>
 
             <div class="my-2 h-px bg-fg-subtle/60" />

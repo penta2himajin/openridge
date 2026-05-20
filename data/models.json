@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-19T22:47:34.990Z",
+  "generatedAt": "2026-05-19T23:59:40.088Z",
   "models": [
     {
       "id": "f0083258-8646-45b8-8082-7aaf6c2ea82a",
@@ -19376,5 +19376,54 @@
         "f6ccbe1d-bd7e-484b-9795-18cc9f91552d"
       ]
     }
+  },
+  "ggufSizes": {
+    "apriel-v1-6-15b-thinker": null,
+    "deepseek-r1-distill-qwen-1-5b": 1117320800,
+    "exaone-4-0-1-2b-reasoning": 812438304,
+    "exaone-4-0-32b-reasoning": 19343827232,
+    "falcon-h1r-7b": 4598344288,
+    "gemma-4-26b-a4b": 17035038112,
+    "gemma-4-26b-a4b-non-reasoning": 17035038112,
+    "gemma-4-31b": 19598488192,
+    "gpt-oss-120b": null,
+    "gpt-oss-20b": 11673418816,
+    "granite-4-0-nano-1b": 901162560,
+    "lfm2-5-1-2b-instruct": 730895712,
+    "lfm2-8b-a1b": 5051071424,
+    "llama-3-1-nemotron-nano-4b-reasoning": 2778285600,
+    "llama-nemotron-super-49b-v1-5-reasoning": null,
+    "magistral-small": 14333914624,
+    "minicpm-v4-6-1-3b": null,
+    "minimax-m2": 138342384096,
+    "motif-2-12-7b": null,
+    "nanbeige4-1-3b": 2443113024,
+    "nvidia-nemotron-3-nano-30b-a3b-reasoning": 24655899872,
+    "nvidia-nemotron-nano-12b-v2-vl-reasoning": 7501771584,
+    "qwen3-0.6b-instruct": 484220320,
+    "qwen3-0.6b-instruct-reasoning": 484220320,
+    "qwen3-1.7b-instruct-reasoning": 1282439584,
+    "qwen3-14b-instruct-reasoning": 9001753632,
+    "qwen3-235b-a22b-instruct-2507-reasoning": 142646904992,
+    "qwen3-30b-a3b-2507-reasoning": 18632183808,
+    "qwen3-4b-2507-instruct-reasoning": 2497280736,
+    "qwen3-5-0-8b": 579615840,
+    "qwen3-5-122b-a10b": 74208240192,
+    "qwen3-5-27b": 17984872928,
+    "qwen3-5-2b": 1396198496,
+    "qwen3-5-397b-a17b": 240590681792,
+    "qwen3-5-4b": 3013027808,
+    "qwen3-5-9b": 5680522464,
+    "qwen3-5-9b-non-reasoning": 5680522464,
+    "qwen3-6-27b": 17533552192,
+    "qwen3-6-35b-a3b": 21391448384,
+    "qwen3-8b-instruct-reasoning": 5027784224,
+    "qwen3-next-80b-a3b-reasoning": 48727678848,
+    "qwen3-vl-30b-a3b-reasoning": 18632185056,
+    "qwen3-vl-8b-reasoning": 5027785184,
+    "step-3-vl-10b": 5027780256,
+    "gemma-4-e2b": 3462678272,
+    "deepseek-r1": 409227727328,
+    "kimi-k2-thinking": null
   }
 }

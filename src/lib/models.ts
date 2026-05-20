@@ -65,6 +65,13 @@ export interface ModelsSnapshot {
   models: ModelRecord[];
   /** Pre-computed frontier ids per metric per X-axis. */
   paretoByMetric: Partial<Record<MetricId, MetricFrontiers>>;
+  /**
+   * Map: model slug → measured GGUF Q4_K_M size in bytes. `null` means the
+   * lookup happened but no community Q4_K_M file was found. Only Pareto
+   * frontier models are looked up; everything else falls back to the
+   * formula estimate in lib/quant.ts at render time.
+   */
+  ggufSizes?: Record<string, number | null>;
 }
 
 export function loadModels(): ModelsSnapshot {

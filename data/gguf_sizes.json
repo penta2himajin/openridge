@@ -35,6 +35,12 @@
     "repo": "unsloth/Falcon-H1R-7B-GGUF",
     "fetchedAt": "2026-05-19T23:57:36.044Z"
   },
+  "gemma-4-12b": {
+    "bytes": 7662531872,
+    "source": "hf",
+    "repo": "bartowski/gemma-4-12B-it-GGUF",
+    "fetchedAt": "2026-07-01T12:09:08.920Z"
+  },
   "gemma-4-26b-a4b": {
     "bytes": 17035038112,
     "source": "hf",
@@ -87,6 +93,11 @@
     "repo": "bartowski/LiquidAI_LFM2.5-1.2B-Instruct-GGUF",
     "fetchedAt": "2026-05-19T23:57:36.812Z"
   },
+  "lfm2-5-8b-a1b": {
+    "bytes": null,
+    "source": "not-found",
+    "fetchedAt": "2026-07-01T12:09:09.335Z"
+  },
   "lfm2-8b-a1b": {
     "bytes": 5051071424,
     "source": "hf",
@@ -115,6 +126,12 @@
     "source": "not-found",
     "fetchedAt": "2026-05-19T23:57:41.050Z"
   },
+  "minicpm5-1b": {
+    "bytes": 688067328,
+    "source": "hf",
+    "repo": "mradermacher/Huihui-MiniCPM5-1B-abliterated-i1-GGUF",
+    "fetchedAt": "2026-07-01T12:09:10.020Z"
+  },
   "minimax-m2": {
     "bytes": 138342384096,
     "source": "hf",
@@ -137,6 +154,12 @@
     "source": "hf",
     "repo": "bartowski/nvidia_Nemotron-3-Nano-30B-A3B-GGUF",
     "fetchedAt": "2026-05-19T23:57:37.557Z"
+  },
+  "nvidia-nemotron-3-ultra-550b-a55b": {
+    "bytes": 345131239808,
+    "source": "hf",
+    "repo": "DevQuasar/nvidia.NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16-GGUF",
+    "fetchedAt": "2026-07-01T12:09:09.749Z"
   },
   "nvidia-nemotron-nano-12b-v2-vl-reasoning": {
     "bytes": 7501771584,
@@ -191,6 +214,12 @@
     "source": "hf",
     "repo": "bartowski/Qwen_Qwen3.5-0.8B-GGUF",
     "fetchedAt": "2026-05-19T23:57:44.952Z"
+  },
+  "qwen3-5-0-8b-non-reasoning": {
+    "bytes": 579615840,
+    "source": "hf",
+    "repo": "bartowski/Qwen_Qwen3.5-0.8B-GGUF",
+    "fetchedAt": "2026-07-01T12:09:10.264Z"
   },
   "qwen3-5-122b-a10b": {
     "bytes": 74208240192,

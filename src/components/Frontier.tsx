@@ -257,6 +257,7 @@ export default function Frontier(props: Props) {
       mobile,
       xview: props.state.xview(),
       compareTotalFrontier,
+      totalFrontierIds: tfIds,
       selectedId: props.state.selectedModelId(),
       onSelect: (id) => props.state.setSelectedModelId(id),
       onSelectedPos: (cx, cy) => setSelectedPos({ cx, cy }),
@@ -343,6 +344,8 @@ interface OverlayContext {
   xview: "active" | "total" | "compare";
   /** Total-axis frontier points (x=total params) for the dotted overlay in Compare mode. */
   compareTotalFrontier: { x: number; y: number }[];
+  /** Ids of models on the total-axis frontier (for Compare total-end markers). */
+  totalFrontierIds: Set<string>;
   selectedId: string | null;
   onSelect: (id: string | null) => void;
   onSelectedPos: (cx: number, cy: number) => void;
@@ -372,7 +375,7 @@ function formatClosedLabel(name: string, mobile: boolean): string {
 }
 
 function drawOverlay(ctx: OverlayContext) {
-  const { svg, width, height, points, closed, xScale, yScale, mobile, xview, compareTotalFrontier, selectedId, onSelect, onSelectedPos } = ctx;
+  const { svg, width, height, points, closed, xScale, yScale, mobile, xview, compareTotalFrontier, totalFrontierIds, selectedId, onSelect, onSelectedPos } = ctx;
   const svgSel = d3.select(svg).attr("viewBox", `0 0 ${width} ${height}`);
   svgSel.selectAll("*").remove();
 
@@ -511,8 +514,16 @@ function drawOverlay(ctx: OverlayContext) {
       const xt = xScale(totalParam);
       const cy = yScale(p.y);
       if (!Number.isFinite(xa) || !Number.isFinite(xt) || !Number.isFinite(cy)) continue;
-      const stroke = p.isFrontier ? "var(--frontier)" : "var(--fg-subtle)";
-      const opacity = p.isFrontier ? 0.9 : 0.45;
+      // The connector + active end track the ACTIVE-axis frontier (that's the
+      // primary line). The total end lands on the TOTAL-axis frontier line, so
+      // its open circle is lime whenever the model sits on either frontier —
+      // this is what marks a total-only-frontier MoE whose active point is
+      // dominated (and therefore grey).
+      const lineStroke = p.isFrontier ? "var(--frontier)" : "var(--fg-subtle)";
+      const lineOpacity = p.isFrontier ? 0.9 : 0.45;
+      const totalOnFrontier = p.isFrontier || totalFrontierIds.has(p.m.id);
+      const totalStroke = totalOnFrontier ? "var(--frontier)" : "var(--fg-subtle)";
+      const totalOpacity = totalOnFrontier ? 0.9 : 0.45;
       barbellLayer
         .append("line")
         .attr("class", "ridge-barbell-line")
@@ -520,8 +531,8 @@ function drawOverlay(ctx: OverlayContext) {
         .attr("x2", xt)
         .attr("y1", cy)
         .attr("y2", cy)
-        .attr("stroke", stroke)
-        .attr("stroke-opacity", opacity);
+        .attr("stroke", lineStroke)
+        .attr("stroke-opacity", lineOpacity);
       barbellLayer
         .append("circle")
         .attr("class", "ridge-barbell-total")
@@ -529,8 +540,36 @@ function drawOverlay(ctx: OverlayContext) {
         .attr("cy", cy)
         .attr("r", 4)
         .attr("fill", "none")
-        .attr("stroke", stroke)
-        .attr("stroke-opacity", opacity);
+        .attr("stroke", totalStroke)
+        .attr("stroke-opacity", totalOpacity);
+    }
+
+    // Dense models (active == total, so no barbell) that sit on the total-axis
+    // frontier but not the active-axis frontier get no lime marker from the
+    // steps above — their primary dot is the faint non-frontier grey. Stamp an
+    // open lime ○ at their position so every point on the total-frontier line
+    // is marked, matching the barbell's total-end circle.
+    for (const p of points) {
+      if (p.isFrontier) continue; // already a filled lime dot
+      if (!totalFrontierIds.has(p.m.id)) continue;
+      const totalParam = p.m.params.total;
+      const hasBarbell =
+        totalParam != null &&
+        Number.isFinite(totalParam) &&
+        Math.abs(totalParam - p.x) >= 1;
+      if (hasBarbell) continue; // total end already marked in the barbell loop
+      const cx = xScale(p.x);
+      const cy = yScale(p.y);
+      if (!Number.isFinite(cx) || !Number.isFinite(cy)) continue;
+      barbellLayer
+        .append("circle")
+        .attr("class", "ridge-barbell-total")
+        .attr("cx", cx)
+        .attr("cy", cy)
+        .attr("r", 4)
+        .attr("fill", "none")
+        .attr("stroke", "var(--frontier)")
+        .attr("stroke-opacity", 0.9);
     }
   }
 

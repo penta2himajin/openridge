@@ -1,0 +1,50 @@
+name: PR Preview
+
+# Deploy a live preview of each pull request to
+#   gh-pages/pr-preview/pr-<N>/
+# served at
+#   https://penta2himajin.github.io/openridge/pr-preview/pr-<N>/
+#
+# rossjrw/pr-preview-action deploys into the pr-preview/ umbrella on open /
+# reopen / synchronize and removes it on close, then leaves a sticky comment
+# with the URL. Production (deploy.yml) preserves this umbrella via
+# clean-exclude. Spec: docs/architecture.md §6.
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, closed]
+
+permissions:
+  contents: write        # push the preview to gh-pages
+  pull-requests: write   # sticky preview-URL comment
+
+concurrency:
+  group: preview-${{ github.event.number }}
+  cancel-in-progress: true
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    # Forked PRs get a read-only token and cannot push to gh-pages; skip them.
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        if: github.event.action != 'closed'
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Build with preview base path
+        if: github.event.action != 'closed'
+        run: npm ci && npm run build
+        env:
+          # Assets must resolve under the preview subpath; base is env-driven
+          # in astro.config.mjs.
+          SITE_BASE: /openridge/pr-preview/pr-${{ github.event.number }}
+
+      - uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: ./dist
+          umbrella-dir: pr-preview

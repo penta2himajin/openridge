@@ -1,29 +1,33 @@
 name: Deploy
 
-# Static build → GitHub Pages.
-# Spec: docs/architecture.md §6.
+# Static build → GitHub Pages, published to the `gh-pages` branch root.
+#
+# We publish to a branch (not the deploy-pages artifact) so that PR previews
+# can live alongside production under gh-pages/pr-preview/ (see preview.yml).
+# A repo serves Pages from a single source, so both production and previews
+# share the gh-pages branch. Spec: docs/architecture.md §6.
+#
+# Repo setting required once: Settings → Pages → Source = "Deploy from a
+# branch" → gh-pages / (root).
 
 on:
   push:
     branches: [main]
-  # Daily redeploy so the site picks up the refresh.yml data commit. A push
-  # made with GITHUB_TOKEN does not trigger this workflow's `push` event, so
-  # we rebuild on a schedule shortly after Daily Refresh (04:00 UTC) instead.
+  # Daily redeploy so the site picks up the refresh.yml data commit even if
+  # that commit's push did not trigger this workflow.
   schedule:
     - cron: "0 5 * * *"   # 05:00 UTC daily, ~1h after refresh
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
   group: pages
   cancel-in-progress: false
 
 jobs:
-  build:
+  build-deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -37,18 +41,14 @@ jobs:
 
       - run: npm run build
 
-      - uses: actions/configure-pages@v5
-
-      - uses: actions/upload-pages-artifact@v3
+      # Publish dist to the gh-pages branch root. `clean` removes stale files
+      # but `clean-exclude` preserves the pr-preview/ umbrella so a production
+      # deploy never wipes an in-flight PR preview. CNAME ships inside dist
+      # (copied from public/), so the custom domain survives each deploy.
+      - uses: JamesIves/github-pages-deploy-action@v4
         with:
-          path: dist
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+          branch: gh-pages
+          folder: dist
+          clean: true
+          clean-exclude: |
+            pr-preview/

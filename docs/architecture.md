@@ -186,38 +186,39 @@ jobs:
 
 ### `deploy.yml`
 
+本番は **`gh-pages` ブランチのルートに publish** する（`actions/deploy-pages` の artifact 方式ではなく）。理由は PR プレビュー（`preview.yml`）を同じ Pages サイト上の `gh-pages/pr-preview/pr-<N>/` に共存させるため。1リポジトリ = 1 Pages ソースなので本番とプレビューは同じ `gh-pages` ブランチを共有する。
+
 ```yaml
 on:
-  push:
-    branches: [main]
+  push: { branches: [main] }
+  schedule: [{ cron: "0 5 * * *" }]   # 日次再デプロイ（refresh の約1h後）
+  workflow_dispatch:
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 concurrency:
   group: pages
   cancel-in-progress: false
 jobs:
-  build:
+  build-deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: { node-version: 20, cache: npm }
       - run: npm ci && npm run build
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
-        with: { path: dist }
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+      # clean-exclude で pr-preview/ を残し、本番デプロイが進行中のプレビューを消さない
+      - uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: dist
+          clean: true
+          clean-exclude: |
+            pr-preview/
 ```
+
+### `preview.yml`（PR プレビュー）
+
+`pull_request`（open / reopen / synchronize / close）で発火。`SITE_BASE=/openridge/pr-preview/pr-<N>` としてビルドし、`rossjrw/pr-preview-action` が `gh-pages/pr-preview/pr-<N>/` へ配置・close で削除し、URL を sticky コメントする。プレビュー URL は `https://penta2himajin.github.io/openridge/pr-preview/pr-<N>/`。fork 由来 PR はトークンが read-only で gh-pages に push できないためスキップ。
 
 ## 6. GitHub Pages
 
@@ -231,7 +232,8 @@ jobs:
 - **DNS** (`www.openridge.dev`): CNAME `penta2himajin.github.io`
 - **DNS proxy 注意**: Cloudflare DNS を使う場合は **グレー雲 (DNS only)** にする。オレンジ雲 (proxy ON) は Pages 側の Let's Encrypt 証明書発行と稀に喧嘩する
 - **HTTPS**: GH Pages が Let's Encrypt で自動発行・更新。`.dev` は HSTS preloaded なので HTTPS 必須だが追加設定は不要
-- **Repo Settings → Pages**: Source = "GitHub Actions"（このリポは workflow 経由で deploy する）
+- **Repo Settings → Pages**: Source = **"Deploy from a branch" → `gh-pages` / (root)**。本番・PR プレビュー双方がこのブランチから配信される（初回は `deploy.yml` が `main` push で `gh-pages` を作成してから設定を切り替える）
+- **PR プレビュー**: `preview.yml` が `gh-pages/pr-preview/pr-<N>/` に配置。本番の `deploy.yml` は `clean-exclude: pr-preview/` でこのディレクトリを保持する
 
 ### Cloudflare Workers ではなく Pages を選んだ理由
 

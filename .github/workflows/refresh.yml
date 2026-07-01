@@ -31,6 +31,16 @@ jobs:
           node-version: 20
           cache: npm
 
+      - name: Diagnose push identity (temporary)
+        env:
+          TOKEN: ${{ secrets.REFRESH_PAT || secrets.GITHUB_TOKEN }}
+          HAS_PAT: ${{ secrets.REFRESH_PAT != '' }}
+        run: |
+          echo "REFRESH_PAT present: $HAS_PAT"
+          echo "git push will authenticate as:"
+          curl -s -H "Authorization: Bearer $TOKEN" https://api.github.com/user \
+            | grep '"login"' || echo "  (no login field — token is likely GITHUB_TOKEN)"
+
       - run: npm ci
 
       - name: Build data

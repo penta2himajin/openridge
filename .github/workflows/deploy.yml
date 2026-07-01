@@ -6,6 +6,11 @@ name: Deploy
 on:
   push:
     branches: [main]
+  # Daily redeploy so the site picks up the refresh.yml data commit. A push
+  # made with GITHUB_TOKEN does not trigger this workflow's `push` event, so
+  # we rebuild on a schedule shortly after Daily Refresh (04:00 UTC) instead.
+  schedule:
+    - cron: "0 5 * * *"   # 05:00 UTC daily, ~1h after refresh
   workflow_dispatch:
 
 permissions:

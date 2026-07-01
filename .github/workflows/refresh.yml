@@ -20,6 +20,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Falls back to GITHUB_TOKEN when REFRESH_PAT is unset. Supply a PAT
+          # (with `contents: write`) as REFRESH_PAT if `main`'s ruleset can't
+          # grant the github-actions bot a direct-push bypass.
+          token: ${{ secrets.REFRESH_PAT || secrets.GITHUB_TOKEN }}
 
       - uses: actions/setup-node@v4
         with:
@@ -37,7 +42,7 @@ jobs:
         run: |
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name  "github-actions[bot]"
-          git add data/models.json
+          git add data/models.json data/gguf_sizes.json
           if git diff --cached --quiet; then
             echo "No data changes."
           else

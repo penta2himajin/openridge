@@ -39,7 +39,13 @@ jobs:
 
       - run: npm ci
 
-      - run: npm run build
+      - name: Build (root base for the openridge.dev apex domain)
+        run: npm run build
+        env:
+          # Served at the apex custom domain root, so assets live at /_assets,
+          # not /openridge/_assets. astro.config.mjs reads these.
+          SITE_BASE: /
+          SITE_URL: https://openridge.dev
 
       # Publish dist to the gh-pages branch root. `clean` removes stale files
       # but `clean-exclude` preserves the pr-preview/ umbrella so a production

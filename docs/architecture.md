@@ -218,7 +218,9 @@ jobs:
 
 ### `preview.yml`（PR プレビュー）
 
-`pull_request`（open / reopen / synchronize / close）で発火。`SITE_BASE=/openridge/pr-preview/pr-<N>` としてビルドし、`rossjrw/pr-preview-action` が `gh-pages/pr-preview/pr-<N>/` へ配置・close で削除し、URL を sticky コメントする。プレビュー URL は `https://penta2himajin.github.io/openridge/pr-preview/pr-<N>/`。fork 由来 PR はトークンが read-only で gh-pages に push できないためスキップ。
+`pull_request`（open / reopen / synchronize / close）で発火。`SITE_BASE=/pr-preview/pr-<N>` としてビルドし、`rossjrw/pr-preview-action` が `gh-pages/pr-preview/pr-<N>/` へ配置・close で削除し、URL を sticky コメントする。プレビュー URL は `https://openridge.dev/pr-preview/pr-<N>/`（`custom-url` で apex ドメインに向ける）。fork 由来 PR はトークンが read-only で gh-pages に push できないためスキップ。
+
+**base の運用**: 本サイトは apex カスタムドメイン `openridge.dev` のルート配信なので、本番は `SITE_BASE=/`・`SITE_URL=https://openridge.dev` でビルドする（`deploy.yml` の env）。プレビューは `SITE_BASE=/pr-preview/pr-<N>`。`astro.config.mjs` が両 env を読む。プロジェクト URL（`penta2himajin.github.io/openridge`）配信に戻す場合は `SITE_BASE=/openridge` に戻し、`public/CNAME` を外す。
 
 ## 6. GitHub Pages
 

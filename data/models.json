@@ -1341,8 +1341,8 @@
       "creatorSlug": "google",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 270000000,
+        "active": 270000000
       },
       "license": null,
       "scores": {
@@ -5300,8 +5300,8 @@
       "creatorSlug": "ibm",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 350000000,
+        "active": 350000000
       },
       "license": null,
       "scores": {
@@ -5522,8 +5522,8 @@
       "creatorSlug": "ibm",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 350000000,
+        "active": 350000000
       },
       "license": null,
       "scores": {
@@ -9074,8 +9074,8 @@
       "creatorSlug": "inclusionai",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 1000000000000,
+        "active": 1000000000000
       },
       "license": null,
       "scores": {
@@ -9185,8 +9185,8 @@
       "creatorSlug": "inclusionai",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 1000000000000,
+        "active": 1000000000000
       },
       "license": null,
       "scores": {
@@ -20211,8 +20211,8 @@
       "creatorSlug": "inclusionai",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 1000000000000,
+        "active": 1000000000000
       },
       "license": null,
       "scores": {
@@ -20285,8 +20285,8 @@
       "creatorSlug": "inclusionai",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 1000000000000,
+        "active": 1000000000000
       },
       "license": null,
       "scores": {
@@ -20355,7 +20355,7 @@
   "paretoByMetric": {
     "artificial_analysis_intelligence_index": {
       "active": [
-        "4ae6c88d-9e4a-4850-89fe-18a1c04a66cc",
+        "04781a0e-40f0-4e2a-a4e5-18e389364a79",
         "a6ea7ec0-0aca-4442-98fb-4296c6d18b31",
         "77f5ff8b-1536-474a-a337-e1bfd138d343",
         "8665ca00-c687-44c7-875c-22618cb31c4f",
@@ -20365,7 +20365,7 @@
         "5b52def2-ac9b-4465-ad80-91ea8079e253"
       ],
       "total": [
-        "4ae6c88d-9e4a-4850-89fe-18a1c04a66cc",
+        "04781a0e-40f0-4e2a-a4e5-18e389364a79",
         "a6ea7ec0-0aca-4442-98fb-4296c6d18b31",
         "77f5ff8b-1536-474a-a337-e1bfd138d343",
         "651ef7ae-9a8f-477e-9c8e-460aa156ba02",
@@ -20394,6 +20394,7 @@
     },
     "artificial_analysis_math_index": {
       "active": [
+        "04781a0e-40f0-4e2a-a4e5-18e389364a79",
         "4ae6c88d-9e4a-4850-89fe-18a1c04a66cc",
         "686ab020-ee58-4a70-a9ac-24d675a73506",
         "d734e2ce-5cf8-467f-8148-586d02671333",
@@ -20401,6 +20402,7 @@
         "bddebfd3-0a8d-47f5-b722-bc4c2ca5a5dc"
       ],
       "total": [
+        "04781a0e-40f0-4e2a-a4e5-18e389364a79",
         "4ae6c88d-9e4a-4850-89fe-18a1c04a66cc",
         "d734e2ce-5cf8-467f-8148-586d02671333",
         "2aacdc07-5f4e-4ab9-8ea5-5f7ab93f9eeb",
@@ -20413,6 +20415,8 @@
     },
     "mmlu_pro": {
       "active": [
+        "04781a0e-40f0-4e2a-a4e5-18e389364a79",
+        "a68afa0b-7fe2-4e9d-bf3e-741cce3c6aeb",
         "4ae6c88d-9e4a-4850-89fe-18a1c04a66cc",
         "686ab020-ee58-4a70-a9ac-24d675a73506",
         "d734e2ce-5cf8-467f-8148-586d02671333",
@@ -20422,6 +20426,8 @@
         "a83f84b3-473a-4276-9ae1-8909da723159"
       ],
       "total": [
+        "04781a0e-40f0-4e2a-a4e5-18e389364a79",
+        "a68afa0b-7fe2-4e9d-bf3e-741cce3c6aeb",
         "4ae6c88d-9e4a-4850-89fe-18a1c04a66cc",
         "d734e2ce-5cf8-467f-8148-586d02671333",
         "2aacdc07-5f4e-4ab9-8ea5-5f7ab93f9eeb",
@@ -20437,7 +20443,8 @@
     },
     "gpqa": {
       "active": [
-        "4ae6c88d-9e4a-4850-89fe-18a1c04a66cc",
+        "04781a0e-40f0-4e2a-a4e5-18e389364a79",
+        "54c7f3fc-7078-442a-b472-e8691257a88c",
         "e2b664ca-7992-4de6-8839-4867f035c892",
         "d734e2ce-5cf8-467f-8148-586d02671333",
         "7d73161f-002f-4c9c-b4f8-6c4d91f2ba8e",
@@ -20445,7 +20452,8 @@
         "0e66bae9-41f1-42fc-9276-ce8cb6f72919"
       ],
       "total": [
-        "4ae6c88d-9e4a-4850-89fe-18a1c04a66cc",
+        "04781a0e-40f0-4e2a-a4e5-18e389364a79",
+        "54c7f3fc-7078-442a-b472-e8691257a88c",
         "e2b664ca-7992-4de6-8839-4867f035c892",
         "d734e2ce-5cf8-467f-8148-586d02671333",
         "7d73161f-002f-4c9c-b4f8-6c4d91f2ba8e",
@@ -20455,14 +20463,16 @@
     },
     "hle": {
       "active": [
-        "4ae6c88d-9e4a-4850-89fe-18a1c04a66cc",
+        "04781a0e-40f0-4e2a-a4e5-18e389364a79",
+        "a68afa0b-7fe2-4e9d-bf3e-741cce3c6aeb",
         "e2b664ca-7992-4de6-8839-4867f035c892",
         "8665ca00-c687-44c7-875c-22618cb31c4f",
         "2236df45-0699-40d1-b5cc-69ee345d2257",
         "0e66bae9-41f1-42fc-9276-ce8cb6f72919"
       ],
       "total": [
-        "4ae6c88d-9e4a-4850-89fe-18a1c04a66cc",
+        "04781a0e-40f0-4e2a-a4e5-18e389364a79",
+        "a68afa0b-7fe2-4e9d-bf3e-741cce3c6aeb",
         "e2b664ca-7992-4de6-8839-4867f035c892",
         "7d73161f-002f-4c9c-b4f8-6c4d91f2ba8e",
         "c76e0ae8-0fd2-45c0-a39d-d398fce9b128",
@@ -20477,6 +20487,8 @@
     },
     "livecodebench": {
       "active": [
+        "04781a0e-40f0-4e2a-a4e5-18e389364a79",
+        "54c7f3fc-7078-442a-b472-e8691257a88c",
         "4ae6c88d-9e4a-4850-89fe-18a1c04a66cc",
         "686ab020-ee58-4a70-a9ac-24d675a73506",
         "d734e2ce-5cf8-467f-8148-586d02671333",
@@ -20486,6 +20498,8 @@
         "f0083258-8646-45b8-8082-7aaf6c2ea82a"
       ],
       "total": [
+        "04781a0e-40f0-4e2a-a4e5-18e389364a79",
+        "54c7f3fc-7078-442a-b472-e8691257a88c",
         "4ae6c88d-9e4a-4850-89fe-18a1c04a66cc",
         "d734e2ce-5cf8-467f-8148-586d02671333",
         "2aacdc07-5f4e-4ab9-8ea5-5f7ab93f9eeb",
@@ -20496,6 +20510,8 @@
     },
     "scicode": {
       "active": [
+        "04781a0e-40f0-4e2a-a4e5-18e389364a79",
+        "a68afa0b-7fe2-4e9d-bf3e-741cce3c6aeb",
         "0e5f6140-1154-4583-a3e0-8c032a338892",
         "a2c8e7b2-57bf-4d1e-96ea-7944d786d94d",
         "d734e2ce-5cf8-467f-8148-586d02671333",
@@ -20507,6 +20523,8 @@
         "cd26a386-4873-46ff-b853-d239050025a2"
       ],
       "total": [
+        "04781a0e-40f0-4e2a-a4e5-18e389364a79",
+        "a68afa0b-7fe2-4e9d-bf3e-741cce3c6aeb",
         "0e5f6140-1154-4583-a3e0-8c032a338892",
         "a2c8e7b2-57bf-4d1e-96ea-7944d786d94d",
         "d734e2ce-5cf8-467f-8148-586d02671333",

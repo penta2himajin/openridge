@@ -12,7 +12,7 @@
  * The chart is not virtualised — at <600 points it's well within SVG
  * performance budget. Re-renders on every relevant signal change.
  */
-import { createEffect, createMemo, createSignal, onCleanup, onMount } from "solid-js";
+import { batch, createEffect, createMemo, createSignal, onCleanup, onMount } from "solid-js";
 import * as Plot from "@observablehq/plot";
 import * as d3 from "d3";
 import type { ModelRecord, ModelsSnapshot } from "../lib/models";
@@ -41,6 +41,17 @@ export default function Frontier(props: Props) {
   // Tooltip to position itself near the point (per docs/ui.md §4.5).
   const [selectedPos, setSelectedPos] = createSignal<{ cx: number; cy: number } | null>(null);
   const [chartSize, setChartSize] = createSignal({ w: 0, h: 0 });
+
+  // Which end of a Compare-mode barbell the current selection points at. The
+  // tooltip anchors to this end so hovering the total-side ○ shows the card
+  // beside that ○ rather than jumping to the far-away active ● (docs/ui.md §4.5).
+  const [selectedEnd, setSelectedEnd] = createSignal<"active" | "total">("active");
+  const selectPoint = (id: string | null, end: "active" | "total" = "active") => {
+    batch(() => {
+      setSelectedEnd(end);
+      props.state.setSelectedModelId(id);
+    });
+  };
 
   const sizeMatchers = (m: ModelRecord) => {
     const a = m.params.active ?? 0;
@@ -152,15 +163,20 @@ export default function Frontier(props: Props) {
         if (t != null && Number.isFinite(t)) xs.push(t);
       }
     }
-    const xMin = xs.length ? Math.max(1e8, Math.min(...xs) / 2) : 5e8;
+    // Floor kept low (0.5M) so genuinely tiny models aren't clipped off the
+    // left; in practice min/2 dominates for any real model.
+    const xMin = xs.length ? Math.max(5e5, Math.min(...xs) / 2) : 5e8;
     const xMax = xs.length ? Math.max(...xs) * 1.4 : 2e12;
     const yMax = metricInfo.maxValue <= 1 ? 1 : 100;
     const yMin = 0;
 
     const fmtX = (n: number) => formatParams(n, 0);
-    const tickMajor = mobile
-      ? [1e9, 1e10, 1e11, 1e12]
-      : [1e9, 3e9, 1e10, 3e10, 1e11, 3e11, 1e12];
+    // Ticks adapt to the domain so both the sub-1B small models and the ~1T
+    // top tier get labelled decades. Desktop adds the 3× minor per decade.
+    const decades = [1e6, 1e7, 1e8, 1e9, 1e10, 1e11, 1e12, 1e13];
+    const tickMajor = decades
+      .flatMap((d) => (mobile ? [d] : [d, 3 * d]))
+      .filter((t) => t >= xMin && t <= xMax);
 
     const plot = Plot.plot({
       width,
@@ -259,7 +275,8 @@ export default function Frontier(props: Props) {
       compareTotalFrontier,
       totalFrontierIds: tfIds,
       selectedId: props.state.selectedModelId(),
-      onSelect: (id) => props.state.setSelectedModelId(id),
+      selectedEnd: selectedEnd(),
+      onSelect: selectPoint,
       onSelectedPos: (cx, cy) => setSelectedPos({ cx, cy }),
     });
   };
@@ -288,6 +305,7 @@ export default function Frontier(props: Props) {
     void props.state.licenseFilters();
     void props.state.showAllClosed();
     void props.state.selectedModelId();
+    void selectedEnd();
     void isMobile();
     renderPlot();
   });
@@ -347,7 +365,9 @@ interface OverlayContext {
   /** Ids of models on the total-axis frontier (for Compare total-end markers). */
   totalFrontierIds: Set<string>;
   selectedId: string | null;
-  onSelect: (id: string | null) => void;
+  /** Which barbell end the selection anchors to (Compare mode). */
+  selectedEnd: "active" | "total";
+  onSelect: (id: string | null, end?: "active" | "total") => void;
   onSelectedPos: (cx: number, cy: number) => void;
 }
 
@@ -375,7 +395,7 @@ function formatClosedLabel(name: string, mobile: boolean): string {
 }
 
 function drawOverlay(ctx: OverlayContext) {
-  const { svg, width, height, points, closed, xScale, yScale, mobile, xview, compareTotalFrontier, totalFrontierIds, selectedId, onSelect, onSelectedPos } = ctx;
+  const { svg, width, height, points, closed, xScale, yScale, mobile, xview, compareTotalFrontier, totalFrontierIds, selectedId, selectedEnd, onSelect, onSelectedPos } = ctx;
   const svgSel = d3.select(svg).attr("viewBox", `0 0 ${width} ${height}`);
   svgSel.selectAll("*").remove();
 
@@ -497,6 +517,7 @@ function drawOverlay(ctx: OverlayContext) {
         .attr("d", totalLine(sorted)!);
     }
 
+    const dotR = mobile ? 5.5 : 6;
     const barbellLayer = svgSel
       .append("g")
       .attr("class", "barbells")
@@ -514,16 +535,17 @@ function drawOverlay(ctx: OverlayContext) {
       const xt = xScale(totalParam);
       const cy = yScale(p.y);
       if (!Number.isFinite(xa) || !Number.isFinite(xt) || !Number.isFinite(cy)) continue;
-      // The connector + active end track the ACTIVE-axis frontier (that's the
-      // primary line). The total end lands on the TOTAL-axis frontier line, so
-      // its open circle is lime whenever the model sits on either frontier —
-      // this is what marks a total-only-frontier MoE whose active point is
-      // dominated (and therefore grey).
-      const lineStroke = p.isFrontier ? "var(--frontier)" : "var(--fg-subtle)";
-      const lineOpacity = p.isFrontier ? 0.9 : 0.45;
-      const totalOnFrontier = p.isFrontier || totalFrontierIds.has(p.m.id);
-      const totalStroke = totalOnFrontier ? "var(--frontier)" : "var(--fg-subtle)";
-      const totalOpacity = totalOnFrontier ? 0.9 : 0.45;
+      // A barbell reads as "on the frontier" when EITHER end sits on its axis's
+      // frontier. Colour the whole barbell (connector + both ends) lime in that
+      // case so the two directions are symmetric: an active-frontier MoE colours
+      // its total-end ○, and a total-only-frontier MoE — whose active ● is
+      // dominated and thus drawn grey by Plot — gets its connector and active ●
+      // coloured here instead. Only barbells on neither frontier stay grey.
+      const onActive = p.isFrontier;
+      const onTotal = totalFrontierIds.has(p.m.id);
+      const onEither = onActive || onTotal;
+      const stroke = onEither ? "var(--frontier)" : "var(--fg-subtle)";
+      const opacity = onEither ? 0.9 : 0.45;
       barbellLayer
         .append("line")
         .attr("class", "ridge-barbell-line")
@@ -531,8 +553,20 @@ function drawOverlay(ctx: OverlayContext) {
         .attr("x2", xt)
         .attr("y1", cy)
         .attr("y2", cy)
-        .attr("stroke", lineStroke)
-        .attr("stroke-opacity", lineOpacity);
+        .attr("stroke", stroke)
+        .attr("stroke-opacity", opacity);
+      // Active end: Plot already draws a filled lime ● when the model is on the
+      // active frontier. When it is on the total frontier only, Plot drew it
+      // grey, so stamp the lime ● here to colour the active side.
+      if (onTotal && !onActive) {
+        barbellLayer
+          .append("circle")
+          .attr("class", "ridge-frontier-dot")
+          .attr("cx", xa)
+          .attr("cy", cy)
+          .attr("r", dotR);
+      }
+      // Total end: open ○, lime whenever the barbell is on either frontier.
       barbellLayer
         .append("circle")
         .attr("class", "ridge-barbell-total")
@@ -540,36 +574,33 @@ function drawOverlay(ctx: OverlayContext) {
         .attr("cy", cy)
         .attr("r", 4)
         .attr("fill", "none")
-        .attr("stroke", totalStroke)
-        .attr("stroke-opacity", totalOpacity);
+        .attr("stroke", stroke)
+        .attr("stroke-opacity", opacity);
     }
 
     // Dense models (active == total, so no barbell) that sit on the total-axis
-    // frontier but not the active-axis frontier get no lime marker from the
-    // steps above — their primary dot is the faint non-frontier grey. Stamp an
-    // open lime ○ at their position so every point on the total-frontier line
-    // is marked, matching the barbell's total-end circle.
+    // frontier but not the active-axis frontier are drawn faint grey by Plot.
+    // Because active == total there is no "total end" to distinguish — the point
+    // simply is a frontier point at that location — so render it as a filled
+    // lime ●, not an open ○ (docs/ui.md §4.2: dense renders as a single point).
     for (const p of points) {
-      if (p.isFrontier) continue; // already a filled lime dot
+      if (p.isFrontier) continue; // already a filled lime dot from Plot
       if (!totalFrontierIds.has(p.m.id)) continue;
       const totalParam = p.m.params.total;
       const hasBarbell =
         totalParam != null &&
         Number.isFinite(totalParam) &&
         Math.abs(totalParam - p.x) >= 1;
-      if (hasBarbell) continue; // total end already marked in the barbell loop
+      if (hasBarbell) continue; // handled in the barbell loop above
       const cx = xScale(p.x);
       const cy = yScale(p.y);
       if (!Number.isFinite(cx) || !Number.isFinite(cy)) continue;
       barbellLayer
         .append("circle")
-        .attr("class", "ridge-barbell-total")
+        .attr("class", "ridge-frontier-dot")
         .attr("cx", cx)
         .attr("cy", cy)
-        .attr("r", 4)
-        .attr("fill", "none")
-        .attr("stroke", "var(--frontier)")
-        .attr("stroke-opacity", 0.9);
+        .attr("r", dotR);
     }
   }
 
@@ -587,47 +618,98 @@ function drawOverlay(ctx: OverlayContext) {
       .attr("d", line(frontierPoints)!);
   }
 
-  // Transparent hit circles for all points (enlarged tap targets per docs §7.2).
+  // Transparent hit circles (enlarged tap targets per docs §7.2). Every point
+  // gets an active-side target; in Compare mode the total-side ○ of a frontier
+  // barbell gets its own target too, so hovering that ○ shows the card beside
+  // it rather than doing nothing (docs/ui.md §4.5). Non-frontier total ends
+  // stay non-interactive — you reach those models via their active-side point.
+  interface HitTarget {
+    id: string;
+    name: string;
+    param: number;
+    cx: number;
+    cy: number;
+    end: "active" | "total";
+    /** Whether the marker under this target is lime — drives highlight colour. */
+    frontier: boolean;
+    /** True when the underlying marker is an open ○ (a barbell's total end). The
+     * hover/focus highlight preserves this shape — an open ○ enlarges to a
+     * bigger ○, a filled ● to a bigger ● (the ○/● shape encodes total vs
+     * active per docs/ui.md §4.2, §8). */
+    open: boolean;
+  }
+  const hits: HitTarget[] = [];
+  for (const p of points) {
+    const cx = xScale(p.x);
+    const cy = yScale(p.y);
+    if (!Number.isFinite(cx) || !Number.isFinite(cy)) continue;
+    // In Compare the active ● is also lime when the model is on the total
+    // frontier (see the barbell / dense loops above).
+    const activeLime = p.isFrontier || (xview === "compare" && totalFrontierIds.has(p.m.id));
+    hits.push({ id: p.m.id, name: p.m.name, param: p.x, cx, cy, end: "active", frontier: activeLime, open: false });
+  }
+  if (xview === "compare") {
+    for (const p of points) {
+      const t = p.m.params.total;
+      if (t == null || !Number.isFinite(t) || Math.abs(t - p.x) < 1) continue; // dense — no ○
+      const onEither = p.isFrontier || totalFrontierIds.has(p.m.id);
+      if (!onEither) continue; // non-frontier total end stays non-interactive
+      const cx = xScale(t);
+      const cy = yScale(p.y);
+      if (!Number.isFinite(cx) || !Number.isFinite(cy)) continue;
+      hits.push({ id: p.m.id, name: p.m.name, param: t, cx, cy, end: "total", frontier: true, open: true });
+    }
+  }
+
   const hitLayer = svgSel
     .append("g")
     .attr("class", "hit-layer")
     .style("pointer-events", "auto");
 
-  for (const p of points) {
-    const cx = xScale(p.x);
-    const cy = yScale(p.y);
-    if (!Number.isFinite(cx) || !Number.isFinite(cy)) continue;
-    const isSelected = selectedId === p.m.id;
+  for (const h of hits) {
+    const isSelected = selectedId === h.id && selectedEnd === h.end;
     const g = hitLayer
       .append("g")
-      .attr("transform", `translate(${cx},${cy})`)
+      .attr("transform", `translate(${h.cx},${h.cy})`)
       .style("cursor", "pointer");
     // Invisible hit circle
     g.append("circle")
       .attr("r", mobile ? 14 : 10)
       .attr("fill", "transparent")
       .attr("stroke", "transparent");
-    // Visible highlight when selected (overdraw the Plot dot)
+    // Visible highlight when selected — enlarge the marker while preserving its
+    // ○/● shape (open total end vs filled active/dense point).
     if (isSelected) {
-      g.append("circle")
-        .attr("r", 9)
-        .attr("fill", p.isFrontier ? "var(--frontier)" : "var(--fg-default)")
-        .attr("stroke", "var(--bg-base)")
-        .attr("stroke-width", 2);
-      onSelectedPos(cx, cy);
+      const colour = h.frontier ? "var(--frontier)" : "var(--fg-default)";
+      if (h.open) {
+        // Open ○ enlarged to a bigger ○, not filled in.
+        g.append("circle")
+          .attr("r", 8)
+          .attr("fill", "none")
+          .attr("stroke", colour)
+          .attr("stroke-width", 2);
+      } else {
+        // Filled ● enlarged, with a bg ring so it reads over nearby marks.
+        g.append("circle")
+          .attr("r", 9)
+          .attr("fill", colour)
+          .attr("stroke", "var(--bg-base)")
+          .attr("stroke-width", 2);
+      }
+      onSelectedPos(h.cx, h.cy);
     }
     g.attr("role", "button")
       .attr("tabindex", 0)
-      .attr("aria-label", `${p.m.name}, ${formatParams(p.x)} parameters`)
+      .attr("aria-label", `${h.name}, ${formatParams(h.param)} parameters`)
       .on("click", (e) => {
         e.stopPropagation();
-        onSelect(isSelected ? null : p.m.id);
+        onSelect(isSelected ? null : h.id, h.end);
       })
       .on("mouseenter", () => {
-        if (!mobile) onSelect(p.m.id);
+        if (!mobile) onSelect(h.id, h.end);
       })
       .on("mouseleave", () => {
-        if (!mobile && selectedId === p.m.id) {
+        if (!mobile && selectedId === h.id) {
           // Keep selection on desktop only if user explicitly clicked; mouseleave clears hover.
           onSelect(null);
         }
@@ -635,7 +717,7 @@ function drawOverlay(ctx: OverlayContext) {
       .on("keydown", (e: KeyboardEvent) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
-          onSelect(isSelected ? null : p.m.id);
+          onSelect(isSelected ? null : h.id, h.end);
         }
       });
   }

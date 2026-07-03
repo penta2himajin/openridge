@@ -35,13 +35,23 @@ export default function Tooltip(props: Props) {
     return props.snapshot.models.find((m) => m.id === id) ?? null;
   });
 
-  const isOnFrontier = createMemo(() => {
+  // Which frontier the selected open model sits on, honouring the X-axis view.
+  // In Compare both axes are live, so a model can be on the active frontier,
+  // the total frontier, or both (docs/ui.md §4.5).
+  const frontierKind = createMemo<null | "active" | "total" | "both">(() => {
     const m = model();
-    if (!m) return false;
+    if (!m || m.isClosed) return null;
     const entry = props.snapshot.paretoByMetric[props.state.metric()];
-    if (!entry) return false;
-    const ids = props.state.xview() === "total" ? entry.total : entry.active;
-    return ids.includes(m.id);
+    if (!entry) return null;
+    const onActive = entry.active.includes(m.id);
+    const onTotal = entry.total.includes(m.id);
+    const view = props.state.xview();
+    if (view === "active") return onActive ? "active" : null;
+    if (view === "total") return onTotal ? "total" : null;
+    if (onActive && onTotal) return "both";
+    if (onActive) return "active";
+    if (onTotal) return "total";
+    return null;
   });
 
   const gguf = createMemo(() => {
@@ -185,9 +195,9 @@ export default function Tooltip(props: Props) {
               )}
             </Show>
 
-            <Show when={isOnFrontier() || m().isClosed}>
+            <Show when={frontierKind() || m().isClosed}>
               <div class="mt-2 pt-2 border-t border-fg-subtle/60 font-mono text-[11px] text-fg-muted">
-                {m().isClosed ? "closed · anchor" : "Pareto · active"}
+                {m().isClosed ? "closed · anchor" : `Pareto · ${frontierKind()}`}
               </div>
             </Show>
           </div>

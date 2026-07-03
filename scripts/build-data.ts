@@ -79,19 +79,29 @@ function isClosed(m: AAEntry): boolean {
   return false;
 }
 
-function parseParamsFromName(name: string): { total: number; active: number } | null {
-  // Match the LAST "<X>B" optionally followed by " A<Y>B" in the name.
+const PARAM_UNIT: Record<string, number> = { t: 1e12, b: 1e9, m: 1e6 };
+
+export function parseParamsFromName(name: string): { total: number; active: number } | null {
+  // Match the LAST "<X>{T,B,M}" optionally followed by " A<Y>{T,B,M}".
+  // Unit suffix: T = 1e12 (trillions), B = 1e9 (billions), M = 1e6 (millions).
+  // Both ends of the size range parse to null without their unit branch and so
+  // drop off the scatter entirely: the top tier of open weights now reaches
+  // ~1T total (e.g. "Ling-1T", "Ring-1T") while the smallest dense models state
+  // their size in millions (e.g. "Gemma 3 270M", "Granite 4.0 350M").
   // Examples:
   //   "Llama 3.3 Instruct 70B" → total=70B active=70B (dense)
   //   "Qwen3 235B A22B" → total=235B active=22B (MoE)
   //   "Gemma 4 26B A4B (Non-reasoning)" → total=26B active=4B
-  const re = /(\d+(?:\.\d+)?)\s*B\b(?:\s*A\s*(\d+(?:\.\d+)?)\s*B\b)?/gi;
+  //   "Ling-1T" → total=1T active=1T (name carries no active; MoE active can be
+  //               refined via data/manual_params.json, which takes precedence)
+  //   "Gemma 3 270M" → total=270M active=270M (dense)
+  const re = /(\d+(?:\.\d+)?)\s*([TBM])\b(?:\s*A\s*(\d+(?:\.\d+)?)\s*([TBM])\b)?/gi;
   let m: RegExpExecArray | null;
   let last: RegExpExecArray | null = null;
   while ((m = re.exec(name)) !== null) last = m;
   if (!last) return null;
-  const total = parseFloat(last[1]) * 1e9;
-  const active = last[2] ? parseFloat(last[2]) * 1e9 : total;
+  const total = parseFloat(last[1]) * PARAM_UNIT[last[2].toLowerCase()];
+  const active = last[3] ? parseFloat(last[3]) * PARAM_UNIT[last[4].toLowerCase()] : total;
   return { total, active };
 }
 
@@ -396,7 +406,14 @@ async function main(): Promise<void> {
   }
 }
 
-main().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+// Only run the full refresh (which requires AA_API_KEY + network) when this
+// file is executed directly, not when imported for its pure helpers such as
+// parseParamsFromName (e.g. by a deterministic regeneration script).
+const invokedDirectly =
+  process.argv[1] != null && resolve(process.argv[1]) === import.meta.filename;
+if (invokedDirectly) {
+  main().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
+}

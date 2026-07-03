@@ -101,6 +101,15 @@ body {
   pointer-events: none;
 }
 
+/* Filled lime ● stamped by the D3 overlay for frontier points Plot drew grey:
+   the active end of a total-only-frontier MoE, and dense (active == total)
+   models sitting on the total-axis frontier. */
+.ridge-frontier-dot {
+  fill: var(--frontier);
+  stroke: none;
+  pointer-events: none;
+}
+
 .ridge-closed-label {
   fill: var(--closed);
   font-family: theme("fontFamily.mono");

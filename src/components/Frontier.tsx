@@ -27,8 +27,6 @@ interface Props {
   state: AppState;
 }
 
-const CLOSED_DEFAULT_TOP = 3;
-const CLOSED_DEFAULT_TOP_DESKTOP = 5;
 const CLOSED_FULL_TOP = 12;
 
 export default function Frontier(props: Props) {
@@ -87,19 +85,35 @@ export default function Frontier(props: Props) {
 
   const closedAnchors = createMemo(() => {
     const metric = props.state.metric();
-    // Group closed entries by name root (strip the "(mode)" suffix) — show one
-    // anchor per (root × mode). Filter to those with scores, sort desc, take N.
     const items = props.snapshot.models
       .filter((m) => m.isClosed && m.scores[metric] != null)
       .map((m) => ({ m, score: m.scores[metric] as number }))
       .sort((a, b) => b.score - a.score);
+    if (items.length === 0) return [];
+    if (props.state.showAllClosed()) return items.slice(0, CLOSED_FULL_TOP);
 
-    const cap = props.state.showAllClosed()
-      ? CLOSED_FULL_TOP
-      : isMobile()
-        ? CLOSED_DEFAULT_TOP
-        : CLOSED_DEFAULT_TOP_DESKTOP;
-    return items.slice(0, cap);
+    // Default: two reference lines only (docs/ui.md §4.4) —
+    //   1) the single top closed model, and
+    //   2) the closed model whose score is nearest the top plotted open model
+    //      (the peak of the open Pareto frontier), giving a like-for-like
+    //      marker right beside the best open weight.
+    const top = items[0];
+    const openScores = props.snapshot.models
+      .filter((m) => !m.isClosed && m.params.active != null && m.scores[metric] != null)
+      .map((m) => m.scores[metric] as number);
+    if (openScores.length === 0) return [top];
+    const topOpen = Math.max(...openScores);
+    let nearest: (typeof items)[number] | null = null;
+    let bestDelta = Infinity;
+    for (const it of items) {
+      if (it === top) continue;
+      const d = Math.abs(it.score - topOpen);
+      if (d < bestDelta) {
+        bestDelta = d;
+        nearest = it;
+      }
+    }
+    return nearest ? [top, nearest] : [top];
   });
 
   const paretoIds = createMemo(() => {
@@ -141,7 +155,7 @@ export default function Frontier(props: Props) {
     const closed = closedAnchors();
     const pareto = paretoIds();
 
-    const points = open
+    let points = open
       .map((m) => ({
         m,
         x: xAccessor(m),
@@ -151,6 +165,14 @@ export default function Frontier(props: Props) {
       .filter((p): p is { m: ModelRecord; x: number; y: number; isFrontier: boolean } =>
         p.x != null && p.y != null && Number.isFinite(p.x) && Number.isFinite(p.y),
       );
+
+    // "Frontier only" drops every dominated point. In Compare a point counts as
+    // on-frontier if it sits on either the active or the total frontier.
+    if (props.state.frontierOnly()) {
+      const tf = totalFrontierIds();
+      const compare = props.state.xview() === "compare";
+      points = points.filter((p) => p.isFrontier || (compare && tf.has(p.m.id)));
+    }
 
     // Robust x domain even if filter empties points. In Compare mode the
     // barbells extend the visible range out to each MoE's total params, so
@@ -167,8 +189,19 @@ export default function Frontier(props: Props) {
     // left; in practice min/2 dominates for any real model.
     const xMin = xs.length ? Math.max(5e5, Math.min(...xs) / 2) : 5e8;
     const xMax = xs.length ? Math.max(...xs) * 1.4 : 2e12;
-    const yMax = metricInfo.maxValue <= 1 ? 1 : 100;
+    // Tighten the Y range to just above the highest visible mark (top open
+    // point or top closed anchor) instead of pinning to the metric's full
+    // ceiling — the closed anchors sit well below 100, so a fixed 0–100 axis
+    // wastes the upper third and squashes the data. Keep a headroom band for
+    // the top anchor's label.
     const yMin = 0;
+    const yFull = metricInfo.maxValue <= 1 ? 1 : 100;
+    const visibleY = [...points.map((p) => p.y), ...closed.map((c) => c.score)];
+    const yTop = visibleY.length ? Math.max(...visibleY) : yFull;
+    const yMax =
+      metricInfo.maxValue <= 1
+        ? Math.min(yFull, Math.max(0.2, yTop * 1.15))
+        : Math.min(yFull, Math.max(20, Math.ceil((yTop * 1.15) / 5) * 5));
 
     const fmtX = (n: number) => formatParams(n, 0);
     // Ticks adapt to the domain so both the sub-1B small models and the ~1T
@@ -245,10 +278,12 @@ export default function Frontier(props: Props) {
       .scaleLog<number, number>()
       .domain([xMin, xMax])
       .range([44, width - (mobile ? 16 : 32)]);
+    // No .nice(): the overlay must use the exact same Y domain as Plot (which
+    // does not nice by default), otherwise adaptive yMax would misalign the
+    // overlaid points/lines from Plot's dots.
     const yScale = d3
       .scaleLinear<number, number>()
       .domain([yMin, yMax])
-      .nice()
       .range([height - 36, 24]);
 
     // Total-axis frontier line for Compare overlay. We need each model's
@@ -304,6 +339,7 @@ export default function Frontier(props: Props) {
     void props.state.sizeFilters();
     void props.state.licenseFilters();
     void props.state.showAllClosed();
+    void props.state.frontierOnly();
     void props.state.selectedModelId();
     void selectedEnd();
     void isMobile();
@@ -372,15 +408,6 @@ interface OverlayContext {
 }
 
 /**
- * Rough pixel width estimate for the closed-anchor label, used to space the
- * callout markers along the X axis without measuring real text.
- */
-function estimateLabelWidth(text: string, fontPx: number): number {
-  // 0.55em average glyph width for Geist/Inter — close enough for layout.
-  return Math.ceil(text.length * fontPx * 0.55);
-}
-
-/**
  * Truncate "GPT-5.5 (xhigh)" → keep mode suffix on desktop; "Claude Opus 4.7
  * (Adaptive Reasoning, Max Effort)" → drop long parentheticals. On mobile,
  * strip all parentheticals.
@@ -413,35 +440,29 @@ function drawOverlay(ctx: OverlayContext) {
   const lineLeftX = xScale.range()[0];
   const lineRightX = xScale.range()[1];
   const chartTop = yScale.range()[1];
-  const labelFontPx = mobile ? 10 : 12;
   const minGap = mobile ? 14 : 18;
   const labelLift = 10;
 
   // Validate.
   const valid = closed.filter(({ score }) => Number.isFinite(yScale(score)));
 
-  // Sort by score DESC: highest first so we lay out rightmost → leftmost.
+  // Sort by score DESC.
   const sortedDesc = [...valid].sort((a, b) => b.score - a.score);
   const labels = sortedDesc.map(({ m }) => formatClosedLabel(m.name, mobile));
-  const labelWidths = labels.map((t) => estimateLabelWidth(t, labelFontPx));
 
-  // Choose a stride that fits all labels across the chart width. Leave a
-  // small lead-in on the left so the lowest-score callout still sits inside
-  // the chart frame.
-  const innerWidth = Math.max(0, lineRightX - lineLeftX - 32);
-  const naturalStride = Math.max(...labelWidths, 0) + 24;
-  const stride = sortedDesc.length > 1
-    ? Math.max(60, Math.min(naturalStride, innerWidth / Math.max(1, sortedDesc.length - 1)))
-    : 0;
-
+  // Anchor every label at the right end above its own line; the vertical
+  // stagger below lifts any that would collide. The default two-line set
+  // (top closed + nearest-to-top-open) is far enough apart that neither is
+  // lifted, so both sit flush right — clean and easy to pair with their line.
+  const markerX = lineRightX - 8;
   const placements = sortedDesc.map(({ m, score }, i) => ({
     m,
     score,
     text: labels[i],
     lineY: yScale(score),
     labelY: yScale(score) - labelLift,
-    markerX: lineRightX - 8 - i * stride,
-    labelRightX: lineRightX - 8 - i * stride,
+    markerX,
+    labelRightX: markerX,
   }));
 
   // Vertical stagger — iterate ASC by score (bottom → top of chart) and

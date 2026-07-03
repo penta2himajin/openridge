@@ -120,6 +120,57 @@ async function fetchAA(apiKey: string): Promise<AAResponse> {
   return res.json() as Promise<AAResponse>;
 }
 
+/**
+ * Fetch real total/active parameter counts from AA's Data API
+ * (`/api/v2/language/models`). This is a *different* endpoint from the
+ * benchmark feed above: it carries "model identity" (params, context, license)
+ * and, per AA's tier table, that identity data is available on the free tier.
+ * The benchmark endpoint we rely on for scores/pricing does not expose params,
+ * which is why flagship MoE models whose names omit the size (GLM 5.2,
+ * MiniMax-M3, DeepSeek V4 Pro, …) otherwise fall off the scatter entirely.
+ *
+ * Best-effort: any failure (endpoint gated, renamed, offline) returns an empty
+ * map and the caller falls back to name-parse / manual overrides, so the daily
+ * refresh never breaks on it. Keyed by AA `slug` to join with the benchmark
+ * feed. Values are normalised to absolute counts (AA may report either
+ * billions like `22` or absolute like `22000000000`).
+ */
+async function fetchAAParameters(
+  apiKey: string,
+): Promise<Map<string, { total: number | null; active: number | null }>> {
+  const map = new Map<string, { total: number | null; active: number | null }>();
+  const norm = (v: unknown): number | null => {
+    if (typeof v !== "number" || !Number.isFinite(v) || v <= 0) return null;
+    // Anything under a million can't be an absolute param count — it's the
+    // "in billions" notation (e.g. 22, 4.4) — so scale it up.
+    return v < 1e6 ? v * 1e9 : v;
+  };
+  try {
+    const res = await fetch("https://artificialanalysis.ai/api/v2/language/models", {
+      headers: { "x-api-key": apiKey },
+    });
+    if (!res.ok) {
+      console.error(`[params] language/models ${res.status} ${res.statusText} — falling back to name/manual`);
+      return map;
+    }
+    const json = (await res.json()) as { data?: unknown };
+    const data = Array.isArray(json.data) ? json.data : [];
+    for (const raw of data) {
+      const m = raw as { slug?: string; parameters?: { total?: unknown; active?: unknown } };
+      if (typeof m.slug !== "string" || !m.parameters) continue;
+      const total = norm(m.parameters.total);
+      const active = norm(m.parameters.active);
+      if (total != null || active != null) {
+        map.set(m.slug, { total: total ?? active, active: active ?? total });
+      }
+    }
+    console.error(`[params] language/models: ${map.size} models carry parameter counts`);
+  } catch (err) {
+    console.error(`[params] language/models fetch failed (${(err as Error).message}) — falling back to name/manual`);
+  }
+  return map;
+}
+
 // ─── GGUF Q4_K_M lookup on HuggingFace ────────────────────────────────────
 
 interface GgufEntry {
@@ -236,6 +287,9 @@ async function main(): Promise<void> {
   const aa = await fetchAA(apiKey);
   console.error(`  → ${aa.data.length} entries`);
 
+  console.error("Fetching AA parameters (language/models) …");
+  const apiParams = await fetchAAParameters(apiKey);
+
   const manualRaw = readJson<Record<string, ManualParams | string | object>>(DATA("manual_params.json"));
   const manual: Record<string, ManualParams> = {};
   for (const [k, v] of Object.entries(manualRaw)) {
@@ -251,8 +305,16 @@ async function main(): Promise<void> {
 
   for (const m of aa.data) {
     const closed = isClosed(m);
+    // Precedence: hand-curated override → real AA parameters → name parse.
+    // Manual entries are deliberate corrections so they win; AA's own counts
+    // beat the fuzzy name parse when present.
     const manualP = manual[m.slug];
-    const parsedP = manualP ?? parseParamsFromName(m.name);
+    const apiP = apiParams.get(m.slug);
+    const apiPair =
+      apiP && (apiP.total != null || apiP.active != null)
+        ? { total: apiP.total ?? apiP.active!, active: apiP.active ?? apiP.total! }
+        : null;
+    const parsedP = manualP ?? apiPair ?? parseParamsFromName(m.name);
     const params = parsedP ?? { total: null, active: null };
 
     if (!closed && parsedP === null) {

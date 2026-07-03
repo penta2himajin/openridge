@@ -632,6 +632,11 @@ function drawOverlay(ctx: OverlayContext) {
     end: "active" | "total";
     /** Whether the marker under this target is lime — drives highlight colour. */
     frontier: boolean;
+    /** True when the underlying marker is an open ○ (a barbell's total end). The
+     * hover/focus highlight preserves this shape — an open ○ enlarges to a
+     * bigger ○, a filled ● to a bigger ● (the ○/● shape encodes total vs
+     * active per docs/ui.md §4.2, §8). */
+    open: boolean;
   }
   const hits: HitTarget[] = [];
   for (const p of points) {
@@ -641,7 +646,7 @@ function drawOverlay(ctx: OverlayContext) {
     // In Compare the active ● is also lime when the model is on the total
     // frontier (see the barbell / dense loops above).
     const activeLime = p.isFrontier || (xview === "compare" && totalFrontierIds.has(p.m.id));
-    hits.push({ id: p.m.id, name: p.m.name, param: p.x, cx, cy, end: "active", frontier: activeLime });
+    hits.push({ id: p.m.id, name: p.m.name, param: p.x, cx, cy, end: "active", frontier: activeLime, open: false });
   }
   if (xview === "compare") {
     for (const p of points) {
@@ -652,7 +657,7 @@ function drawOverlay(ctx: OverlayContext) {
       const cx = xScale(t);
       const cy = yScale(p.y);
       if (!Number.isFinite(cx) || !Number.isFinite(cy)) continue;
-      hits.push({ id: p.m.id, name: p.m.name, param: t, cx, cy, end: "total", frontier: true });
+      hits.push({ id: p.m.id, name: p.m.name, param: t, cx, cy, end: "total", frontier: true, open: true });
     }
   }
 
@@ -672,13 +677,25 @@ function drawOverlay(ctx: OverlayContext) {
       .attr("r", mobile ? 14 : 10)
       .attr("fill", "transparent")
       .attr("stroke", "transparent");
-    // Visible highlight when selected (overdraw the marker at this end)
+    // Visible highlight when selected — enlarge the marker while preserving its
+    // ○/● shape (open total end vs filled active/dense point).
     if (isSelected) {
-      g.append("circle")
-        .attr("r", 9)
-        .attr("fill", h.frontier ? "var(--frontier)" : "var(--fg-default)")
-        .attr("stroke", "var(--bg-base)")
-        .attr("stroke-width", 2);
+      const colour = h.frontier ? "var(--frontier)" : "var(--fg-default)";
+      if (h.open) {
+        // Open ○ enlarged to a bigger ○, not filled in.
+        g.append("circle")
+          .attr("r", 8)
+          .attr("fill", "none")
+          .attr("stroke", colour)
+          .attr("stroke-width", 2);
+      } else {
+        // Filled ● enlarged, with a bg ring so it reads over nearby marks.
+        g.append("circle")
+          .attr("r", 9)
+          .attr("fill", colour)
+          .attr("stroke", "var(--bg-base)")
+          .attr("stroke-width", 2);
+      }
       onSelectedPos(h.cx, h.cy);
     }
     g.attr("role", "button")

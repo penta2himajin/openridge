@@ -17,6 +17,22 @@
     "repo": "bartowski/DeepSeek-R1-Distill-Qwen-1.5B-GGUF",
     "fetchedAt": "2026-05-19T23:57:46.469Z"
   },
+  "deepseek-v3-2-speciale": {
+    "bytes": null,
+    "source": "not-found",
+    "fetchedAt": "2026-07-04T02:29:52.277Z"
+  },
+  "deepseek-v4-flash": {
+    "bytes": null,
+    "source": "not-found",
+    "fetchedAt": "2026-07-04T02:29:47.581Z"
+  },
+  "devstral-small-2": {
+    "bytes": 14333916096,
+    "source": "hf",
+    "repo": "bartowski/mistralai_Devstral-Small-2507-GGUF",
+    "fetchedAt": "2026-07-04T02:29:47.014Z"
+  },
   "exaone-4-0-1-2b-reasoning": {
     "bytes": 812438304,
     "source": "hf",
@@ -71,6 +87,17 @@
     "repo": "bartowski/google_gemma-4-E2B-it-GGUF",
     "fetchedAt": "2026-05-19T23:59:37.932Z"
   },
+  "glm-4-7": {
+    "bytes": null,
+    "source": "not-found",
+    "fetchedAt": "2026-07-04T02:29:53.880Z"
+  },
+  "glm-5-2": {
+    "bytes": 454552364896,
+    "source": "hf",
+    "repo": "DevQuasar/zai-org.GLM-5.2-GGUF",
+    "fetchedAt": "2026-07-04T02:29:50.999Z"
+  },
   "gpt-oss-120b": {
     "bytes": null,
     "source": "not-found",
@@ -100,6 +127,16 @@
     "repo": "unsloth/granite-4.0-h-1b-GGUF",
     "fetchedAt": "2026-05-19T23:57:39.178Z"
   },
+  "kimi-k2-6": {
+    "bytes": null,
+    "source": "not-found",
+    "fetchedAt": "2026-07-04T02:29:49.193Z"
+  },
+  "kimi-k2-7-code": {
+    "bytes": null,
+    "source": "not-found",
+    "fetchedAt": "2026-07-04T02:29:49.881Z"
+  },
   "kimi-k2-thinking": {
     "bytes": null,
     "source": "not-found",
@@ -122,6 +159,12 @@
     "repo": "bartowski/LiquidAI_LFM2-8B-A1B-GGUF",
     "fetchedAt": "2026-05-19T23:57:36.437Z"
   },
+  "ling-mini-2-0": {
+    "bytes": 9941894336,
+    "source": "hf",
+    "repo": "bartowski/inclusionAI_Ling-mini-2.0-GGUF",
+    "fetchedAt": "2026-07-04T02:29:51.623Z"
+  },
   "llama-3-1-nemotron-nano-4b-reasoning": {
     "bytes": 2778285600,
     "source": "hf",
@@ -139,6 +182,17 @@
     "repo": "mradermacher/Magistral-Small-2507-Rebased-Vision-i1-GGUF",
     "fetchedAt": "2026-05-19T23:57:46.117Z"
   },
+  "mimo-v2-5-pro": {
+    "bytes": null,
+    "source": "not-found",
+    "fetchedAt": "2026-07-04T02:29:50.534Z"
+  },
+  "mimo-v2-flash-reasoning": {
+    "bytes": 186798293088,
+    "source": "hf",
+    "repo": "mradermacher/MiMo-V2-Flash-i1-GGUF",
+    "fetchedAt": "2026-07-04T02:29:53.254Z"
+  },
   "minicpm-v4-6-1-3b": {
     "bytes": null,
     "source": "not-found",
@@ -155,6 +209,24 @@
     "source": "hf",
     "repo": "lmstudio-community/MiniMax-M2.7-GGUF",
     "fetchedAt": "2026-05-19T23:57:47.143Z"
+  },
+  "minimax-m2-1": {
+    "bytes": 138342384832,
+    "source": "hf",
+    "repo": "mradermacher/MiniMax-M2.1-i1-GGUF",
+    "fetchedAt": "2026-07-04T02:29:52.777Z"
+  },
+  "minimax-m2-7": {
+    "bytes": 138342384096,
+    "source": "hf",
+    "repo": "lmstudio-community/MiniMax-M2.7-GGUF",
+    "fetchedAt": "2026-07-04T02:29:48.498Z"
+  },
+  "minimax-m3": {
+    "bytes": 257110212864,
+    "source": "hf",
+    "repo": "DevQuasar/MiniMaxAI.MiniMax-M3-GGUF",
+    "fetchedAt": "2026-07-04T02:29:48.085Z"
   },
   "motif-2-12-7b": {
     "bytes": null,
@@ -298,6 +370,12 @@
     "source": "hf",
     "repo": "bartowski/Qwen_Qwen3-8B-GGUF",
     "fetchedAt": "2026-05-19T23:57:50.579Z"
+  },
+  "qwen3-coder-next": {
+    "bytes": 48556632000,
+    "source": "hf",
+    "repo": "bartowski/huihui-ai_Qwen3-Coder-Next-abliterated-GGUF",
+    "fetchedAt": "2026-07-04T02:29:51.305Z"
   },
   "qwen3-next-80b-a3b-reasoning": {
     "bytes": 48727678848,

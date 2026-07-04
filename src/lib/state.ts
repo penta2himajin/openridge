@@ -26,6 +26,9 @@ export interface AppState {
   setSelectedModelId: (id: string | null) => void;
   showAllClosed: () => boolean;
   setShowAllClosed: (v: boolean) => void;
+  /** When on, only Pareto-frontier models are drawn; dominated points hidden. */
+  frontierOnly: () => boolean;
+  setFrontierOnly: (v: boolean) => void;
   sizeFilters: () => Set<SizeFilter>;
   toggleSizeFilter: (f: SizeFilter) => void;
   licenseFilters: () => Set<LicenseFilter>;
@@ -63,7 +66,7 @@ const VALID_METRICS: MetricId[] = [
 ];
 const VALID_VIEWS: XView[] = ["active", "total", "compare"];
 
-function readUrl(): { metric?: MetricId; xview?: XView } {
+function readUrl(): { metric?: MetricId; xview?: XView; frontierOnly?: boolean } {
   if (typeof window === "undefined") return {};
   const p = new URLSearchParams(window.location.search);
   const metric = p.get("index") as MetricId | null;
@@ -71,6 +74,7 @@ function readUrl(): { metric?: MetricId; xview?: XView } {
   return {
     metric: metric && VALID_METRICS.includes(metric) ? metric : undefined,
     xview: xview && VALID_VIEWS.includes(xview) ? xview : undefined,
+    frontierOnly: p.get("frontier") === "1" ? true : undefined,
   };
 }
 
@@ -80,6 +84,7 @@ export function createAppState(): AppState {
   const [xview, setXview] = createSignal<XView>(url.xview ?? "active");
   const [selectedModelId, setSelectedModelId] = createSignal<string | null>(null);
   const [showAllClosed, setShowAllClosed] = createSignal(false);
+  const [frontierOnly, setFrontierOnly] = createSignal(url.frontierOnly ?? false);
   const [sizeFilters, setSizeFilters] = createSignal<Set<SizeFilter>>(new Set());
   const [licenseFilters, setLicenseFilters] = createSignal<Set<LicenseFilter>>(new Set());
   const [closedVendors, setClosedVendors] = createSignal<Set<string>>(loadClosedVendors());
@@ -94,6 +99,8 @@ export function createAppState(): AppState {
       const v = xview();
       if (v === "active") p.delete("view");
       else p.set("view", v);
+      if (frontierOnly()) p.set("frontier", "1");
+      else p.delete("frontier");
       const qs = p.toString();
       const next = `${window.location.pathname}${qs ? "?" + qs : ""}`;
       if (next !== window.location.pathname + window.location.search) {
@@ -135,6 +142,8 @@ export function createAppState(): AppState {
     setSelectedModelId,
     showAllClosed,
     setShowAllClosed,
+    frontierOnly,
+    setFrontierOnly,
     sizeFilters,
     toggleSizeFilter: (f) => toggle(sizeFilters, setSizeFilters, f),
     licenseFilters,

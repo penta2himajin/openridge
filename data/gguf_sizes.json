@@ -35,6 +35,12 @@
     "repo": "unsloth/Falcon-H1R-7B-GGUF",
     "fetchedAt": "2026-05-19T23:57:36.044Z"
   },
+  "gemma-3-270m": {
+    "bytes": 253115168,
+    "source": "hf",
+    "repo": "bartowski/google_gemma-3-270m-it-GGUF",
+    "fetchedAt": "2026-07-03T19:59:32.228Z"
+  },
   "gemma-4-12b": {
     "bytes": 7662531872,
     "source": "hf",
@@ -75,6 +81,18 @@
     "source": "hf",
     "repo": "bartowski/openai_gpt-oss-20b-GGUF",
     "fetchedAt": "2026-05-19T23:57:33.683Z"
+  },
+  "granite-4-0-350m": {
+    "bytes": 236986144,
+    "source": "hf",
+    "repo": "unsloth/granite-4.0-350m-GGUF",
+    "fetchedAt": "2026-07-03T19:59:32.496Z"
+  },
+  "granite-4-0-h-350m": {
+    "bytes": 222662944,
+    "source": "hf",
+    "repo": "unsloth/granite-4.0-h-350m-GGUF",
+    "fetchedAt": "2026-07-03T19:59:32.773Z"
   },
   "granite-4-0-nano-1b": {
     "bytes": 901162560,

@@ -38,30 +38,44 @@ export default function Filters(props: { state: AppState }) {
     },
   ];
 
+  const chipClass = (on: boolean) =>
+    on
+      ? "bg-bg-elevated border-fg-subtle text-fg-default"
+      : "border-fg-subtle text-fg-muted hover:text-fg-default";
+
   return (
     <nav
       class="flex-shrink-0 border-t border-fg-subtle bg-bg-base"
       style={{ "padding-bottom": "env(safe-area-inset-bottom)" }}
       aria-label="Model filters"
     >
-      <div class="h-12 flex items-center px-3 sm:px-4 gap-2 sm:gap-3 overflow-x-auto no-scrollbar">
-        <For each={chips}>
-          {(c) => (
-            <button
-              type="button"
-              role="switch"
-              aria-checked={c.isOn()}
-              class="flex-shrink-0 rounded-full border px-3 text-sm font-medium transition-colors h-9 sm:h-7"
-              classList={{
-                "bg-bg-elevated border-fg-subtle text-fg-default": c.isOn(),
-                "border-fg-subtle text-fg-muted hover:text-fg-default": !c.isOn(),
-              }}
-              onClick={c.toggle}
-            >
-              {c.label}
-            </button>
-          )}
-        </For>
+      <div class="h-12 flex items-center px-3 sm:px-4 gap-2 sm:gap-3">
+        <div class="flex items-center gap-2 sm:gap-3 overflow-x-auto no-scrollbar flex-1 min-w-0">
+          <For each={chips}>
+            {(c) => (
+              <button
+                type="button"
+                role="switch"
+                aria-checked={c.isOn()}
+                class={`flex-shrink-0 rounded-full border px-3 text-sm font-medium transition-colors h-9 sm:h-7 ${chipClass(c.isOn())}`}
+                onClick={c.toggle}
+              >
+                {c.label}
+              </button>
+            )}
+          </For>
+        </div>
+        {/* Frontier-only toggle, pinned bottom-right (docs/ui.md §5). */}
+        <button
+          type="button"
+          role="switch"
+          aria-checked={props.state.frontierOnly()}
+          title="Show only Pareto-frontier models"
+          class={`flex-shrink-0 rounded-full border px-3 text-sm font-medium transition-colors h-9 sm:h-7 ${chipClass(props.state.frontierOnly())}`}
+          onClick={() => props.state.setFrontierOnly(!props.state.frontierOnly())}
+        >
+          Frontier only
+        </button>
       </div>
     </nav>
   );

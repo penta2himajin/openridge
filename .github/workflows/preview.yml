@@ -28,7 +28,15 @@ jobs:
     # Forked PRs get a read-only token and cannot push to gh-pages; skip them.
     if: github.event.pull_request.head.repo.full_name == github.repository
     steps:
+      # Check out the PR's head commit explicitly. The default checkout for a
+      # pull_request event uses the auto-generated merge ref, which GitHub
+      # recomputes asynchronously and is frequently still stale when the run
+      # starts on a `synchronize` push — that built the previous commit, so the
+      # preview lagged a commit behind every update. Pinning to head.sha builds
+      # exactly what was just pushed.
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - uses: actions/setup-node@v4
         if: github.event.action != 'closed'

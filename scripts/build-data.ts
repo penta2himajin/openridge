@@ -287,6 +287,26 @@ async function main(): Promise<void> {
   const aa = await fetchAA(apiKey);
   console.error(`  → ${aa.data.length} entries`);
 
+  // [DIAG] Empirically dump the raw field set of the free models endpoint to
+  // settle whether it now carries parameter counts. Remove after inspection.
+  {
+    const keySet = new Set<string>();
+    const paramLike = new Set<string>();
+    for (const m of aa.data as unknown as Record<string, unknown>[]) {
+      for (const k of Object.keys(m)) {
+        keySet.add(k);
+        if (/param|size|weights|billion/i.test(k)) paramLike.add(k);
+      }
+    }
+    console.error(`[DIAG] top-level model keys: ${[...keySet].sort().join(", ")}`);
+    console.error(`[DIAG] param-like keys: ${paramLike.size ? [...paramLike].join(", ") : "(none)"}`);
+    const sample = (aa.data as unknown as Record<string, unknown>[]).find(
+      (m) => typeof m.slug === "string" && (m.slug as string).includes("glm-5-2"),
+    );
+    console.error(`[DIAG] glm-5-2 raw object: ${JSON.stringify(sample).slice(0, 1500)}`);
+    process.exit(0);
+  }
+
   console.error("Fetching AA parameters (language/models) …");
   const apiParams = await fetchAAParameters(apiKey);
 

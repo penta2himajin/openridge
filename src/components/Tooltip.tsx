@@ -73,7 +73,7 @@ export default function Tooltip(props: Props) {
     );
   });
 
-  // Compute placement near the selected point with quadrant flip.
+  // Compute placement near the selected point, always fully inside the chart.
   const cardStyle = (): Record<string, string> => {
     if (isMobile()) {
       return {
@@ -84,38 +84,41 @@ export default function Tooltip(props: Props) {
         width: "min(280px, calc(100% - 24px))",
       };
     }
+    const MARGIN = 8;
+    const W = ESTIMATED_CARD_W;
     const p = props.pos;
     if (!p) {
-      // Selected without coords (e.g., a closed-anchor selection in the
-      // future): fall back to top-right corner.
+      // Selected without coords (e.g., a closed-anchor selection): top-right.
       return {
         position: "absolute",
         top: "12px",
         right: "16px",
-        width: `${ESTIMATED_CARD_W}px`,
+        width: `${W}px`,
+        "max-height": `calc(100% - 24px)`,
+        "overflow-y": "auto",
       };
     }
-    // Default placement: point's upper-right. Flip horizontally if the card
-    // would overflow the right side; flip vertically if it would overflow
-    // the top of the chart.
-    const placeOnLeft = p.cx + POINT_OFFSET + ESTIMATED_CARD_W > props.chartW - 8;
-    const placeBelow = p.cy - POINT_OFFSET - ESTIMATED_CARD_H < 8;
-
-    const style: Record<string, string> = {
+    // Horizontal: prefer the point's right; flip left on overflow; then clamp
+    // into [MARGIN, chartW - W - MARGIN] so the card never runs off an edge.
+    let left = p.cx + POINT_OFFSET;
+    if (left + W > props.chartW - MARGIN) left = p.cx - POINT_OFFSET - W;
+    left = Math.max(MARGIN, Math.min(left, props.chartW - W - MARGIN));
+    // Vertical: prefer above the point; drop below if that clips the top; clamp
+    // the top edge on-screen. A dynamic max-height caps the bottom (scrolls in
+    // the rare case the card is taller than the space) — the header can never
+    // be cut off as it was for tall cards on high frontier points.
+    let top = p.cy - POINT_OFFSET - ESTIMATED_CARD_H;
+    if (top < MARGIN) top = p.cy + POINT_OFFSET;
+    top = Math.max(MARGIN, top);
+    const maxH = Math.max(96, props.chartH - top - MARGIN);
+    return {
       position: "absolute",
-      width: `${ESTIMATED_CARD_W}px`,
+      left: `${left}px`,
+      top: `${top}px`,
+      width: `${W}px`,
+      "max-height": `${maxH}px`,
+      "overflow-y": "auto",
     };
-    if (placeOnLeft) {
-      style.right = `${props.chartW - p.cx + POINT_OFFSET}px`;
-    } else {
-      style.left = `${p.cx + POINT_OFFSET}px`;
-    }
-    if (placeBelow) {
-      style.top = `${p.cy + POINT_OFFSET}px`;
-    } else {
-      style.bottom = `${props.chartH - p.cy + POINT_OFFSET}px`;
-    }
-    return style;
   };
 
   return (

@@ -29,6 +29,55 @@ interface Props {
 
 const CLOSED_FULL_TOP = 12;
 
+// Trailing parentheticals that denote an inference *mode* of one model (same
+// weights, same params) rather than a distinct model — reasoning on/off and
+// effort levels. Dates, "(Preview)", "(Vision)", "(32B)", "(V1)" etc. are NOT
+// modes and stay separate.
+const MODE_TOKEN =
+  /^(non[- ]?reasoning|reasoning|thinking|minimal|xhigh|(max|high|medium|low|minimal)(\s+effort)?)$/i;
+
+/** Group key that collapses reasoning/effort variants of the same model. */
+function baseModelKey(m: ModelRecord): string {
+  const paren = m.name.match(/^(.*?)\s*\(([^)]+)\)\s*$/);
+  let base = m.name;
+  if (paren) {
+    const tokens = paren[2].split(",").map((t) => t.trim());
+    if (tokens.every((t) => MODE_TOKEN.test(t))) base = paren[1];
+  }
+  return `${m.creatorSlug} ${base.trim()}`;
+}
+
+interface Pt {
+  m: ModelRecord;
+  x: number;
+  y: number;
+  isFrontier: boolean;
+}
+
+/**
+ * Collapse reasoning/effort variants of the same model to a single point: keep
+ * the frontier member if the group has one (it's the highest-scoring, since the
+ * variants share params so lower scores are dominated), else the top score for
+ * the current metric. Distinct models/versions are untouched.
+ */
+function dedupeVariants(points: Pt[]): Pt[] {
+  const groups = new Map<string, Pt[]>();
+  for (const p of points) {
+    const k = baseModelKey(p.m);
+    (groups.get(k) ?? groups.set(k, []).get(k)!).push(p);
+  }
+  const out: Pt[] = [];
+  for (const group of groups.values()) {
+    if (group.length === 1) {
+      out.push(group[0]);
+      continue;
+    }
+    const frontier = group.find((p) => p.isFrontier);
+    out.push(frontier ?? group.reduce((best, p) => (p.y > best.y ? p : best)));
+  }
+  return out;
+}
+
 export default function Frontier(props: Props) {
   const isMobile = useIsMobile();
   let containerRef!: HTMLDivElement;
@@ -155,16 +204,19 @@ export default function Frontier(props: Props) {
     const closed = closedAnchors();
     const pareto = paretoIds();
 
-    let points = open
+    let points: Pt[] = open
       .map((m) => ({
         m,
         x: xAccessor(m),
         y: m.scores[metric] as number | null,
         isFrontier: pareto.has(m.id),
       }))
-      .filter((p): p is { m: ModelRecord; x: number; y: number; isFrontier: boolean } =>
+      .filter((p): p is Pt =>
         p.x != null && p.y != null && Number.isFinite(p.x) && Number.isFinite(p.y),
       );
+
+    // Collapse reasoning/effort variants of one model to its top-scoring point.
+    points = dedupeVariants(points);
 
     // "Frontier only" drops every dominated point. In Compare a point counts as
     // on-frontier if it sits on either the active or the total frontier.

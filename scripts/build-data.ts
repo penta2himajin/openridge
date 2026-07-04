@@ -171,6 +171,159 @@ async function fetchAAParameters(
   return map;
 }
 
+// ─── HuggingFace parameter lookup ─────────────────────────────────────────
+//
+// AA supplies no param counts on the free tier, so for open models whose name
+// doesn't encode a size we resolve the official HF repo and read the real
+// `safetensors.total`. Active (MoE) params come from `moe_overrides.json`, else
+// a config-based estimate, else fall back to total (dense). Original design:
+// docs/architecture.md §4, docs/data-sources.md §2.
+
+/** AA creator slug → allowed HF org(s). Constrains repo resolution so a search
+ *  can't wander onto a same-named model from a different creator. */
+const HF_ORGS_BY_CREATOR: Record<string, string[]> = {
+  deepseek: ["deepseek-ai"],
+  mistral: ["mistralai"],
+  zai: ["zai-org", "THUDM"],
+  alibaba: ["Qwen"],
+  xiaomi: ["XiaomiMiMo"],
+  minimax: ["MiniMaxAI"],
+  kimi: ["moonshotai"],
+  upstage: ["upstage"],
+  inclusionai: ["inclusionAI"],
+  stepfun: ["stepfun-ai"],
+  ibm: ["ibm-granite"],
+  lg: ["LGAI-EXAONE"],
+  tencent: ["tencent"],
+  meta: ["meta-llama"],
+  "prime-intellect": ["PrimeIntellect"],
+  arcee: ["arcee-ai"],
+  bytedance_seed: ["ByteDance-Seed"],
+  databricks: ["databricks"],
+  snowflake: ["Snowflake"],
+  nvidia: ["nvidia"],
+  google: ["google"],
+  openai: ["openai"],
+};
+
+/** Proprietary, API-only families whose parameter counts are never published —
+ *  we mark these "unknown" rather than hide them or guess. */
+function hasUndisclosedParams(m: AAEntry): boolean {
+  const n = m.name.toLowerCase();
+  // Alibaba's Qwen "Max"/"Turbo" tiers are closed-weight; params undisclosed.
+  if (m.model_creator.slug === "alibaba" && /\b(max|turbo)\b/.test(n)) return true;
+  return false;
+}
+
+function cleanModelName(name: string): string {
+  return name.replace(/\s*\([^)]*\)\s*$/g, "").trim();
+}
+
+const HF_HEADERS = (token?: string): Record<string, string> | undefined =>
+  token ? { authorization: `Bearer ${token}` } : undefined;
+
+interface HfConfig {
+  text_config?: HfConfig;
+  hidden_size?: number;
+  num_hidden_layers?: number;
+  num_experts_per_tok?: number;
+  n_shared_experts?: number;
+  num_shared_experts?: number;
+  moe_intermediate_size?: number;
+  shared_intermediate_size?: number;
+  intermediate_size?: number;
+  first_k_dense_replace?: number;
+  vocab_size?: number;
+}
+
+/**
+ * Estimate MoE active params from an HF config. Multimodal models nest the LLM
+ * config under `text_config`. Returns null for dense models (no expert routing)
+ * or when key fields are missing — the caller then uses `safetensors.total`.
+ *
+ * Approximation (good to ~±15%, which is well under a tick on the log X axis):
+ *   embeddings + Σ_layers[ 4·H² attention ] + Σ_moe_layers[ (K+shared)·3·H·moe_int ]
+ *   + Σ_dense_layers[ 3·H·intermediate ]
+ * Attention is taken as a plain 4·H² (GQA/MLA compression is ignored — small on
+ * a log axis). `moe_overrides.json` supplies exact values where this is off.
+ */
+function computeActiveParams(cfg: HfConfig | null): number | null {
+  const t = cfg?.text_config ?? cfg;
+  if (!t) return null;
+  const H = t.hidden_size;
+  const L = t.num_hidden_layers;
+  const K = t.num_experts_per_tok;
+  const moeInt = t.moe_intermediate_size ?? t.shared_intermediate_size;
+  if (!H || !L || !K || !moeInt) return null; // dense or insufficient → use total
+  const shared = t.n_shared_experts ?? t.num_shared_experts ?? 0;
+  const denseInt = t.intermediate_size ?? moeInt;
+  const denseLayers = Math.min(L, t.first_k_dense_replace ?? 0);
+  const moeLayers = Math.max(0, L - denseLayers);
+  const emb = t.vocab_size ? t.vocab_size * H : 0;
+  const attn = L * 4 * H * H;
+  const moeFFN = moeLayers * (K + shared) * 3 * H * moeInt;
+  const denseFFN = denseLayers * 3 * H * denseInt;
+  const active = emb + attn + moeFFN + denseFFN;
+  return active > 0 ? active : null;
+}
+
+async function fetchHfTotal(repo: string, token?: string): Promise<number | null> {
+  const res = await fetchWithTimeout(`https://huggingface.co/api/models/${repo}`, 8000, HF_HEADERS(token));
+  if (!res || !res.ok) return null;
+  const j = (await res.json()) as { safetensors?: { total?: unknown } };
+  const total = j.safetensors?.total;
+  return typeof total === "number" && Number.isFinite(total) && total > 0 ? total : null;
+}
+
+async function fetchHfConfig(repo: string, token?: string): Promise<HfConfig | null> {
+  const res = await fetchWithTimeout(`https://huggingface.co/${repo}/raw/main/config.json`, 8000, HF_HEADERS(token));
+  if (!res || !res.ok) return null;
+  try {
+    return (await res.json()) as HfConfig;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Resolve the official HF repo for an AA model: try canonical `<org>/<name>`
+ * candidates first (cheap, exact), then a creator-org-constrained search. A
+ * repo counts only if it actually carries `safetensors.total`. Returns null
+ * when nothing verifiable is found (logged for a manual alias later).
+ */
+async function resolveHfRepo(m: AAEntry, token?: string): Promise<string | null> {
+  const orgs = HF_ORGS_BY_CREATOR[m.model_creator.slug];
+  if (!orgs) return null; // no trusted org for this creator — don't guess
+  const clean = cleanModelName(m.name);
+  const variants = [clean.replace(/\s+/g, "-"), clean.replace(/\s+/g, "")];
+  for (const org of orgs) {
+    for (const v of variants) {
+      if (await fetchHfTotal(`${org}/${v}`, token)) return `${org}/${v}`;
+    }
+  }
+  const res = await fetchWithTimeout(
+    `https://huggingface.co/api/models?search=${encodeURIComponent(clean)}&limit=20`,
+    8000,
+    HF_HEADERS(token),
+  );
+  if (!res || !res.ok) return null;
+  const repos = (await res.json()) as { modelId: string }[];
+  if (!Array.isArray(repos)) return null;
+  const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
+  const target = norm(clean);
+  const cands = repos
+    .filter((r) => orgs.includes(r.modelId.split("/")[0]))
+    .sort((a, b) => {
+      const am = norm(a.modelId.split("/")[1] ?? "") === target ? 0 : 1;
+      const bm = norm(b.modelId.split("/")[1] ?? "") === target ? 0 : 1;
+      return am - bm;
+    });
+  for (const r of cands.slice(0, 5)) {
+    if (await fetchHfTotal(r.modelId, token)) return r.modelId;
+  }
+  return null;
+}
+
 // ─── GGUF Q4_K_M lookup on HuggingFace ────────────────────────────────────
 
 interface GgufEntry {
@@ -188,11 +341,15 @@ const TRUSTED_GGUF_UPLOADERS = [
   "mradermacher",
 ];
 
-async function fetchWithTimeout(url: string, ms = 8000): Promise<Response | null> {
+async function fetchWithTimeout(
+  url: string,
+  ms = 8000,
+  headers?: Record<string, string>,
+): Promise<Response | null> {
   const ctl = new AbortController();
   const t = setTimeout(() => ctl.abort(), ms);
   try {
-    const res = await fetch(url, { signal: ctl.signal });
+    const res = await fetch(url, { signal: ctl.signal, headers });
     return res;
   } catch {
     return null;
@@ -300,24 +457,77 @@ async function main(): Promise<void> {
   }
   console.error(`  → ${Object.keys(manual).length} manual param entries`);
 
+  const hfToken = process.env.HF_API_TOKEN;
+  console.error(hfToken ? "  → HF_API_TOKEN present" : "  → HF_API_TOKEN missing (unauthenticated HF)");
+
+  // Alias cache (AA slug → HF repo | null). Hand entries + resolved entries are
+  // persisted so subsequent runs skip the search. `_comment`/`_examples` kept.
+  const aliasRaw = readJson<Record<string, unknown>>(DATA("hf_aliases.json"));
+  const aliasComment = typeof aliasRaw._comment === "string" ? aliasRaw._comment : undefined;
+  const aliasExamples = aliasRaw._examples;
+  const aliases: Record<string, string | null> = {};
+  for (const [k, v] of Object.entries(aliasRaw)) {
+    if (k.startsWith("_")) continue;
+    if (typeof v === "string" || v === null) aliases[k] = v;
+  }
+
+  // MoE active overrides (HF repo → { active }).
+  const moeRaw = readJson<Record<string, unknown>>(DATA("moe_overrides.json"));
+  const moeOverrides: Record<string, { active: number }> = {};
+  for (const [k, v] of Object.entries(moeRaw)) {
+    if (k.startsWith("_")) continue;
+    if (typeof v === "object" && v !== null && "active" in v && typeof (v as { active: unknown }).active === "number") {
+      moeOverrides[k] = v as { active: number };
+    }
+  }
+
   const models: ModelRecord[] = [];
   const missing: string[] = [];
+  let hfHits = 0;
 
   for (const m of aa.data) {
     const closed = isClosed(m);
-    // Precedence: hand-curated override → real AA parameters → name parse.
+    // Precedence: hand-curated override → real AA parameters → name parse →
+    // HuggingFace safetensors (gap-fill for open models still unresolved).
     // Manual entries are deliberate corrections so they win; AA's own counts
-    // beat the fuzzy name parse when present.
+    // beat the fuzzy name parse.
     const manualP = manual[m.slug];
     const apiP = apiParams.get(m.slug);
     const apiPair =
       apiP && (apiP.total != null || apiP.active != null)
         ? { total: apiP.total ?? apiP.active!, active: apiP.active ?? apiP.total! }
         : null;
-    const parsedP = manualP ?? apiPair ?? parseParamsFromName(m.name);
-    const params = parsedP ?? { total: null, active: null };
+    let resolved: { total: number; active: number } | null = manualP ?? apiPair ?? parseParamsFromName(m.name);
+    let paramsUnknown = false;
+    let hfRepo: string | null = null;
 
-    if (!closed && parsedP === null) {
+    if (!closed && resolved === null) {
+      if (hasUndisclosedParams(m)) {
+        // Proprietary/API-only family — mark explicitly rather than guess.
+        paramsUnknown = true;
+      } else {
+        // Resolve the official HF repo (cached) and read real params.
+        if (m.slug in aliases) {
+          hfRepo = aliases[m.slug];
+        } else {
+          hfRepo = await resolveHfRepo(m, hfToken);
+          aliases[m.slug] = hfRepo; // cache hit or miss
+        }
+        if (hfRepo) {
+          const total = await fetchHfTotal(hfRepo, hfToken);
+          if (total) {
+            const cfg = await fetchHfConfig(hfRepo, hfToken);
+            const active = moeOverrides[hfRepo]?.active ?? computeActiveParams(cfg) ?? total;
+            resolved = { total, active };
+            hfHits++;
+            console.error(`  → HF ${m.slug}: total=${(total / 1e9).toFixed(1)}B active=${(active / 1e9).toFixed(1)}B (${hfRepo})`);
+          }
+        }
+      }
+    }
+
+    const params = resolved ?? { total: null, active: null };
+    if (!closed && resolved === null && !paramsUnknown) {
       missing.push(m.slug);
     }
 
@@ -338,6 +548,7 @@ async function main(): Promise<void> {
         total: params.total ?? null,
         active: params.active ?? null,
       },
+      paramsUnknown,
       license: null,
       scores,
       pricing: m.pricing,
@@ -345,11 +556,19 @@ async function main(): Promise<void> {
         tps: m.median_output_tokens_per_second,
         ttft: m.median_time_to_first_token_seconds,
       },
-      hfId: null,
+      hfId: hfRepo,
       mode: extractMode(m.name),
       releaseDate: m.release_date,
     });
   }
+  console.error(`HF param gap-fill: ${hfHits} models resolved`);
+
+  // Persist the alias cache (stable key order for clean diffs).
+  const aliasOut: Record<string, unknown> = {};
+  if (aliasComment) aliasOut._comment = aliasComment;
+  if (aliasExamples !== undefined) aliasOut._examples = aliasExamples;
+  for (const k of Object.keys(aliases).sort()) aliasOut[k] = aliases[k];
+  writeFileSync(DATA("hf_aliases.json"), JSON.stringify(aliasOut, null, 2) + "\n");
 
   // Pre-compute the Pareto frontier (open models) on BOTH X-axes per metric.
   // The UI exposes "Active", "Total", and "Compare" — Total mode in particular

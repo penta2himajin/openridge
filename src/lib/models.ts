@@ -42,6 +42,9 @@ export interface ModelRecord {
   creatorSlug: string;
   isClosed: boolean;
   params: ModelParams;
+  /** True for open models whose parameter counts are undisclosed (e.g. Qwen Max
+   *  tiers): shown as "unknown" rather than hidden as a data gap or guessed. */
+  paramsUnknown?: boolean;
   license: string | null;
   scores: Partial<Record<MetricId, number | null>>;
   pricing: ModelPricing;

@@ -233,13 +233,17 @@ function IndexDropdown(props: { state: AppState; compact: boolean }) {
   };
 
   return (
-    <>
+    // `relative` gives the desktop panel a positioned ancestor to anchor to —
+    // without it the `absolute` panel resolves against the viewport and jumps
+    // to the top-left, clipped. min-w-0 lets the trigger label truncate on
+    // mobile where this sits inside a flex-1 column.
+    <div class="relative flex max-w-full min-w-0">
       <button
         ref={triggerRef}
         type="button"
         aria-haspopup="listbox"
         aria-expanded={open()}
-        class="inline-flex items-center gap-1 max-w-full px-2 py-1 rounded-md hover:bg-bg-elevated transition-colors min-h-[36px] sm:min-h-[28px]"
+        class="inline-flex items-center gap-1 max-w-full min-w-0 px-2 py-1 rounded-md hover:bg-bg-elevated transition-colors min-h-[36px] sm:min-h-[28px]"
         onClick={() => setOpen((v) => !v)}
       >
         <Show when={!props.compact}>
@@ -268,7 +272,7 @@ function IndexDropdown(props: { state: AppState; compact: boolean }) {
         ) : (
           <div
             ref={panelRef}
-            class="absolute z-50 mt-1 w-[320px] max-h-[480px] overflow-auto rounded-lg border border-fg-subtle bg-bg-elevated shadow-2xl"
+            class="absolute z-50 top-full right-0 mt-1 w-[320px] max-w-[calc(100vw-1rem)] max-h-[480px] overflow-auto rounded-lg border border-fg-subtle bg-bg-elevated shadow-2xl"
             role="listbox"
           >
             <DropdownBody
@@ -282,7 +286,7 @@ function IndexDropdown(props: { state: AppState; compact: boolean }) {
           </div>
         )}
       </Show>
-    </>
+    </div>
   );
 }
 

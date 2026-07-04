@@ -42,8 +42,15 @@ function InfoModal(props: {
     const all = props.snapshot.models;
     const open = all.filter((m) => !m.isClosed);
     const openWithParams = open.filter((m) => m.params.active != null);
+    const unknown = open.filter((m) => m.paramsUnknown);
     const closed = all.filter((m) => m.isClosed);
-    return { all: all.length, open: open.length, openWithParams: openWithParams.length, closed: closed.length };
+    return {
+      all: all.length,
+      open: open.length,
+      openWithParams: openWithParams.length,
+      unknown: unknown.length,
+      closed: closed.length,
+    };
   })();
   return (
     <div
@@ -77,7 +84,8 @@ function InfoModal(props: {
           <dd class="text-fg-default">{generated}</dd>
           <dt class="text-fg-muted uppercase tracking-wide">Entries</dt>
           <dd class="text-fg-default">
-            {counts.all} total · {counts.open} open ({counts.openWithParams} with params) · {counts.closed} closed
+            {counts.all} total · {counts.open} open ({counts.openWithParams} with params
+            {counts.unknown > 0 ? `, ${counts.unknown} params undisclosed` : ""}) · {counts.closed} closed
           </dd>
         </dl>
         <p class="mt-4 text-fg-muted text-xs leading-relaxed">

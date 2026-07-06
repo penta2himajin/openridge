@@ -329,6 +329,12 @@
     "repo": "bartowski/Qwen_Qwen3.5-2B-GGUF",
     "fetchedAt": "2026-05-19T23:57:45.342Z"
   },
+  "qwen3-5-2b-non-reasoning": {
+    "bytes": 1396198496,
+    "source": "hf",
+    "repo": "bartowski/Qwen_Qwen3.5-2B-GGUF",
+    "fetchedAt": "2026-07-06T08:37:50.723Z"
+  },
   "qwen3-5-397b-a17b": {
     "bytes": 240590681792,
     "source": "hf",

@@ -6,7 +6,7 @@
 
 Pareto-frontier visualisation for self-hostable open-weight LLMs. Single-screen, minimal-chrome scatter of model parameters vs an intelligence benchmark, with closed-model horizontal anchors for "roughly that good" reference. In-product brand mark: **OpenRidge**.
 
-Public site (planned): [openridge.dev](https://openridge.dev).
+Public site: [openridge.dev](https://openridge.dev).
 
 ## What it is
 

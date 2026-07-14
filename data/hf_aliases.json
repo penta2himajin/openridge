@@ -56,6 +56,7 @@
   "granite-4-0-micro": "ibm-granite/Granite-4.0-Micro",
   "hy3": "tencent/Hy3-preview",
   "hy3-non-reasoning": "tencent/Hy3-preview",
+  "hy3-preview": "tencent/Hy3-preview",
   "intellect-3": "PrimeIntellect/INTELLECT-3",
   "k-exaone": null,
   "k-exaone-non-reasoning": null,

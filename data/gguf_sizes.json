@@ -127,6 +127,12 @@
     "repo": "unsloth/granite-4.0-h-1b-GGUF",
     "fetchedAt": "2026-05-19T23:57:39.178Z"
   },
+  "hy3": {
+    "bytes": 182560831008,
+    "source": "hf",
+    "repo": "satgeze/Hy3-1M-GGUF",
+    "fetchedAt": "2026-07-14T06:19:23.605Z"
+  },
   "kimi-k2-6": {
     "bytes": null,
     "source": "not-found",

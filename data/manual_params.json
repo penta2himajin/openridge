@@ -37,10 +37,20 @@
   "kimi-k2-instruct-0905": { "total": 1000000000000, "active": 32000000000 },
   "kimi-k2-thinking": { "total": 1000000000000, "active": 32000000000 },
 
+  "minimax-m1-40k": { "total": 456089655296, "active": 45900000000 },
+  "minimax-m1-80k": { "total": 456089655296, "active": 45900000000 },
   "minimax-m2": { "total": 230000000000, "active": 10000000000 },
   "minimax-m2-1": { "total": 230000000000, "active": 10000000000 },
   "minimax-m2-5": { "total": 230000000000, "active": 10000000000 },
   "minimax-m2-7": { "total": 230000000000, "active": 10000000000 },
+
+  "arctic-instruct": { "total": 478584608768, "active": 17000000000 },
+
+  "gpt-oss-120b": { "total": 120000000000, "active": 5100000000 },
+  "gpt-oss-120b-low": { "total": 120000000000, "active": 5100000000 },
+
+  "ling-1t": { "total": 1000000000000, "active": 51000000000 },
+  "ring-1t": { "total": 1000000000000, "active": 51000000000 },
 
   "glm-4-5": { "total": 355000000000, "active": 32000000000 },
   "glm-4-5-air": { "total": 106000000000, "active": 12000000000 },

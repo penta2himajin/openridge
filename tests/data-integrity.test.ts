@@ -119,10 +119,17 @@ test("known-MoE families are stored as MoE (active < total)", () => {
   // (and add the matching data/manual_params.json entry) — the two move
   // together. Names have no reliable is_moe flag, so this stays hand-kept.
   const KNOWN_MOE_SLUGS = [
+    "minimax-m1-40k",
+    "minimax-m1-80k",
     "minimax-m2",
     "minimax-m2-1",
     "minimax-m2-5",
     "minimax-m2-7",
+    "arctic-instruct",
+    "gpt-oss-120b",
+    "gpt-oss-120b-low",
+    "ling-1t",
+    "ring-1t",
   ];
   const offenders: string[] = [];
   for (const slug of KNOWN_MOE_SLUGS) {

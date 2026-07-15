@@ -13,7 +13,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "refresh": "tsx scripts/build-data.ts",
-    "test": "tsx --test \"src/**/*.test.ts\" \"scripts/**/*.test.ts\" \"tests/**/*.test.ts\"",
+    "test": "tsx --test src/lib/pareto.test.ts scripts/build-data.test.ts tests/data-integrity.test.ts",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "astro check && tsc --noEmit"

@@ -1,0 +1,27 @@
+name: Test
+
+# Run the unit + data-integrity test suite on every PR and on pushes to main.
+# The data-integrity tests assert that data/models.json stays internally
+# consistent — MoE models are not silently stored as dense, manual_params
+# overrides reach the snapshot, and the committed Pareto frontier matches a
+# fresh recomputation. Spec: docs/architecture.md §4.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm test

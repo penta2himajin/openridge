@@ -38,6 +38,9 @@
   "kimi-k2-thinking": { "total": 1000000000000, "active": 32000000000 },
 
   "minimax-m2": { "total": 230000000000, "active": 10000000000 },
+  "minimax-m2-1": { "total": 230000000000, "active": 10000000000 },
+  "minimax-m2-5": { "total": 230000000000, "active": 10000000000 },
+  "minimax-m2-7": { "total": 230000000000, "active": 10000000000 },
 
   "glm-4-5": { "total": 355000000000, "active": 32000000000 },
   "glm-4-5-air": { "total": 106000000000, "active": 12000000000 },

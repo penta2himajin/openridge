@@ -39,6 +39,18 @@ body {
   overscroll-behavior: none;
 }
 
+/* Full-viewport height that stays correct when a mobile browser's chrome
+   (address bar / bottom toolbar) is showing. `100vh` sizes to the *largest*
+   possible viewport, so on mobile it overshoots the actual visible area and
+   pushes flex children past the bottom of the screen — e.g. the Filters bar
+   in App.tsx. `100dvh` tracks the real visible viewport; the `100vh` line
+   above it is a fallback for browsers that don't support `dvh` (an
+   unsupported value is ignored, leaving the previous declaration in place). */
+.h-viewport {
+  height: 100vh;
+  height: 100dvh;
+}
+
 /* Hide horizontal scroll bars on the filter chip strip but keep scrolling. */
 .no-scrollbar {
   scrollbar-width: none;

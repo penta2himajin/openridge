@@ -15,7 +15,7 @@ export default function App() {
   const [infoOpen, setInfoOpen] = createSignal(false);
 
   return (
-    <div class="h-screen flex flex-col bg-bg-base text-fg-default">
+    <div class="h-viewport flex flex-col bg-bg-base text-fg-default">
       <Header state={state} onInfoClick={() => setInfoOpen(true)} />
       <Frontier snapshot={snapshot} state={state} />
       <Filters state={state} />

@@ -5,14 +5,21 @@
  *
  * Required env: AA_API_KEY (Insights Platform, free tier 1k req/day).
  *
- * Param-extraction strategy (incremental, no HF dependency at first):
+ * Param-resolution strategy (resolveParams, see docs/data-sources.md §2):
  *   1) Hand-curated overrides in data/manual_params.json (AA slug → params).
- *   2) Parse "<N>B" / "<N>B A<M>B" from the AA name.
- *   3) Otherwise: open model with unknown params (logged, scatter-omitted)
+ *   2) Real AA parameters from the language/models endpoint.
+ *   3) HuggingFace safetensors.total + config.json (data/hf_aliases.json for
+ *      the repo, data/moe_overrides.json for active when the config-based
+ *      MoE estimate can't be computed).
+ *   4) Otherwise: open model with unknown params (logged, scatter-omitted)
  *      or closed model (anchor-only, params not needed).
  *
- * Closed classification: by creator slug + name pattern. We do not yet
- * call the HF API; that's an MVP+ task once alias maintenance is needed.
+ * There is deliberately no name-parsing step: an AA display name like
+ * "Gemma 4 E2B" or "Mixtral 8x7B" encodes a marketing size, not the true
+ * total/active split, and no regex can reliably tell a trustworthy "<N>B"
+ * from a misleading one.
+ *
+ * Closed classification: by creator slug + name pattern.
  */
 
 import { readFileSync, writeFileSync } from "node:fs";
@@ -24,7 +31,7 @@ import type { MetricId, ModelRecord, ModelsSnapshot } from "../src/lib/models";
 const ROOT = resolve(import.meta.dirname, "..");
 const DATA = (p: string) => resolve(ROOT, "data", p);
 
-interface AAEntry {
+export interface AAEntry {
   id: string;
   name: string;
   slug: string;
@@ -45,7 +52,7 @@ interface AAResponse {
   data: AAEntry[];
 }
 
-interface ManualParams {
+export interface ManualParams {
   total: number;
   active: number;
 }
@@ -79,41 +86,18 @@ function isClosed(m: AAEntry): boolean {
   return false;
 }
 
-const PARAM_UNIT: Record<string, number> = { t: 1e12, b: 1e9, m: 1e6 };
-
-export function parseParamsFromName(name: string): { total: number; active: number } | null {
-  // Match the LAST "<X>{T,B,M}" optionally followed by " A<Y>{T,B,M}".
-  // Unit suffix: T = 1e12 (trillions), B = 1e9 (billions), M = 1e6 (millions).
-  // Both ends of the size range parse to null without their unit branch and so
-  // drop off the scatter entirely: the top tier of open weights now reaches
-  // ~1T total (e.g. "Ling-1T", "Ring-1T") while the smallest dense models state
-  // their size in millions (e.g. "Gemma 3 270M", "Granite 4.0 350M").
-  // Examples:
-  //   "Llama 3.3 Instruct 70B" → total=70B active=70B (dense)
-  //   "Qwen3 235B A22B" → total=235B active=22B (MoE)
-  //   "Gemma 4 26B A4B (Non-reasoning)" → total=26B active=4B
-  //   "Ling-1T" → total=1T active=1T (name carries no active; MoE active can be
-  //               refined via data/manual_params.json, which takes precedence)
-  //   "Gemma 3 270M" → total=270M active=270M (dense)
-  const re = /(\d+(?:\.\d+)?)\s*([TBM])\b(?:\s*A\s*(\d+(?:\.\d+)?)\s*([TBM])\b)?/gi;
-  let m: RegExpExecArray | null;
-  let last: RegExpExecArray | null = null;
-  while ((m = re.exec(name)) !== null) last = m;
-  if (!last) return null;
-  const total = parseFloat(last[1]) * PARAM_UNIT[last[2].toLowerCase()];
-  const active = last[3] ? parseFloat(last[3]) * PARAM_UNIT[last[4].toLowerCase()] : total;
-  return { total, active };
-}
-
 function extractMode(name: string): string | null {
   const m = name.match(/\(([^)]+)\)/);
   return m ? m[1] : null;
 }
 
 async function fetchAA(apiKey: string): Promise<AAResponse> {
-  const res = await fetch("https://artificialanalysis.ai/api/v2/data/llms/models", {
-    headers: { "x-api-key": apiKey },
-  });
+  const res = await fetch(
+    "https://artificialanalysis.ai/api/v2/data/llms/models",
+    {
+      headers: { "x-api-key": apiKey },
+    },
+  );
   if (!res.ok) {
     throw new Error(`AA fetch failed: ${res.status} ${res.statusText}`);
   }
@@ -138,7 +122,10 @@ async function fetchAA(apiKey: string): Promise<AAResponse> {
 async function fetchAAParameters(
   apiKey: string,
 ): Promise<Map<string, { total: number | null; active: number | null }>> {
-  const map = new Map<string, { total: number | null; active: number | null }>();
+  const map = new Map<
+    string,
+    { total: number | null; active: number | null }
+  >();
   const norm = (v: unknown): number | null => {
     if (typeof v !== "number" || !Number.isFinite(v) || v <= 0) return null;
     // Anything under a million can't be an absolute param count — it's the
@@ -146,17 +133,25 @@ async function fetchAAParameters(
     return v < 1e6 ? v * 1e9 : v;
   };
   try {
-    const res = await fetch("https://artificialanalysis.ai/api/v2/language/models", {
-      headers: { "x-api-key": apiKey },
-    });
+    const res = await fetch(
+      "https://artificialanalysis.ai/api/v2/language/models",
+      {
+        headers: { "x-api-key": apiKey },
+      },
+    );
     if (!res.ok) {
-      console.error(`[params] language/models ${res.status} ${res.statusText} — falling back to name/manual`);
+      console.error(
+        `[params] language/models ${res.status} ${res.statusText} — falling back to name/manual`,
+      );
       return map;
     }
     const json = (await res.json()) as { data?: unknown };
     const data = Array.isArray(json.data) ? json.data : [];
     for (const raw of data) {
-      const m = raw as { slug?: string; parameters?: { total?: unknown; active?: unknown } };
+      const m = raw as {
+        slug?: string;
+        parameters?: { total?: unknown; active?: unknown };
+      };
       if (typeof m.slug !== "string" || !m.parameters) continue;
       const total = norm(m.parameters.total);
       const active = norm(m.parameters.active);
@@ -164,9 +159,13 @@ async function fetchAAParameters(
         map.set(m.slug, { total: total ?? active, active: active ?? total });
       }
     }
-    console.error(`[params] language/models: ${map.size} models carry parameter counts`);
+    console.error(
+      `[params] language/models: ${map.size} models carry parameter counts`,
+    );
   } catch (err) {
-    console.error(`[params] language/models fetch failed (${(err as Error).message}) — falling back to name/manual`);
+    console.error(
+      `[params] language/models fetch failed (${(err as Error).message}) — falling back to name/manual`,
+    );
   }
   return map;
 }
@@ -181,7 +180,7 @@ async function fetchAAParameters(
 
 /** AA creator slug → allowed HF org(s). Constrains repo resolution so a search
  *  can't wander onto a same-named model from a different creator. */
-const HF_ORGS_BY_CREATOR: Record<string, string[]> = {
+export const HF_ORGS_BY_CREATOR: Record<string, string[]> = {
   deepseek: ["deepseek-ai"],
   mistral: ["mistralai"],
   zai: ["zai-org", "THUDM"],
@@ -204,6 +203,18 @@ const HF_ORGS_BY_CREATOR: Record<string, string[]> = {
   nvidia: ["nvidia"],
   google: ["google"],
   openai: ["openai"],
+  "tii-uae": ["tiiuae"],
+  liquidai: ["LiquidAI"],
+  ai2: ["allenai"],
+  "nous-research": ["NousResearch"],
+  multiversecomputing: ["MultiverseComputingCAI"],
+  "motif-technologies": ["Motif-Technologies"],
+  naver: ["naver-hyperclovax"],
+  trillionlabs: ["trillionlabs"],
+  nanbeige: ["Nanbeige"],
+  "swiss-ai-initiative": ["swiss-ai"],
+  openbmb: ["openbmb"],
+  servicenow: ["ServiceNow-AI"],
 };
 
 /** Proprietary, API-only families whose parameter counts are never published —
@@ -211,7 +222,8 @@ const HF_ORGS_BY_CREATOR: Record<string, string[]> = {
 function hasUndisclosedParams(m: AAEntry): boolean {
   const n = m.name.toLowerCase();
   // Alibaba's Qwen "Max"/"Turbo" tiers are closed-weight; params undisclosed.
-  if (m.model_creator.slug === "alibaba" && /\b(max|turbo)\b/.test(n)) return true;
+  if (m.model_creator.slug === "alibaba" && /\b(max|turbo)\b/.test(n))
+    return true;
   return false;
 }
 
@@ -267,16 +279,32 @@ function computeActiveParams(cfg: HfConfig | null): number | null {
   return active > 0 ? active : null;
 }
 
-async function fetchHfTotal(repo: string, token?: string): Promise<number | null> {
-  const res = await fetchWithTimeout(`https://huggingface.co/api/models/${repo}`, 8000, HF_HEADERS(token));
+async function fetchHfTotal(
+  repo: string,
+  token?: string,
+): Promise<number | null> {
+  const res = await fetchWithTimeout(
+    `https://huggingface.co/api/models/${repo}`,
+    8000,
+    HF_HEADERS(token),
+  );
   if (!res || !res.ok) return null;
   const j = (await res.json()) as { safetensors?: { total?: unknown } };
   const total = j.safetensors?.total;
-  return typeof total === "number" && Number.isFinite(total) && total > 0 ? total : null;
+  return typeof total === "number" && Number.isFinite(total) && total > 0
+    ? total
+    : null;
 }
 
-async function fetchHfConfig(repo: string, token?: string): Promise<HfConfig | null> {
-  const res = await fetchWithTimeout(`https://huggingface.co/${repo}/raw/main/config.json`, 8000, HF_HEADERS(token));
+async function fetchHfConfig(
+  repo: string,
+  token?: string,
+): Promise<HfConfig | null> {
+  const res = await fetchWithTimeout(
+    `https://huggingface.co/${repo}/raw/main/config.json`,
+    8000,
+    HF_HEADERS(token),
+  );
   if (!res || !res.ok) return null;
   try {
     return (await res.json()) as HfConfig;
@@ -291,7 +319,10 @@ async function fetchHfConfig(repo: string, token?: string): Promise<HfConfig | n
  * repo counts only if it actually carries `safetensors.total`. Returns null
  * when nothing verifiable is found (logged for a manual alias later).
  */
-async function resolveHfRepo(m: AAEntry, token?: string): Promise<string | null> {
+async function resolveHfRepo(
+  m: AAEntry,
+  token?: string,
+): Promise<string | null> {
   const orgs = HF_ORGS_BY_CREATOR[m.model_creator.slug];
   if (!orgs) return null; // no trusted org for this creator — don't guess
   const clean = cleanModelName(m.name);
@@ -322,6 +353,77 @@ async function resolveHfRepo(m: AAEntry, token?: string): Promise<string | null>
     if (await fetchHfTotal(r.modelId, token)) return r.modelId;
   }
   return null;
+}
+
+export interface ResolveParamsResult {
+  resolved: ManualParams | null;
+  hfRepo: string | null;
+  paramsUnknown: boolean;
+  /** True iff `resolved` came from a live HF safetensors/config fetch. */
+  viaHf: boolean;
+}
+
+/**
+ * Resolve total/active params for one AA entry.
+ *
+ * Precedence: hand-curated override (data/manual_params.json) → real AA
+ * parameters (language/models endpoint) → HuggingFace safetensors + config
+ * (data/hf_aliases.json, data/moe_overrides.json). There is deliberately no
+ * name-parsing step: an AA display name like "Gemma 4 E2B" or "Mixtral 8x7B"
+ * encodes a marketing size, not the true total/active split, and a regex can't
+ * tell a trustworthy "<N>B" from a misleading one — see docs/data-sources.md §2.
+ * `aliases` is mutated in place (hit or miss cached) so repeat runs skip the
+ * HF repo search.
+ */
+export async function resolveParams(
+  m: AAEntry,
+  closed: boolean,
+  manual: Record<string, ManualParams>,
+  apiParams: Map<string, { total: number | null; active: number | null }>,
+  aliases: Record<string, string | null>,
+  moeOverrides: Record<string, { active: number }>,
+  hfToken?: string,
+): Promise<ResolveParamsResult> {
+  const manualP = manual[m.slug];
+  const apiP = apiParams.get(m.slug);
+  const apiPair =
+    apiP && (apiP.total != null || apiP.active != null)
+      ? {
+          total: apiP.total ?? apiP.active!,
+          active: apiP.active ?? apiP.total!,
+        }
+      : null;
+  let resolved: ManualParams | null = manualP ?? apiPair ?? null;
+  let paramsUnknown = false;
+  let hfRepo: string | null = null;
+  let viaHf = false;
+
+  if (!closed && resolved === null) {
+    if (hasUndisclosedParams(m)) {
+      // Proprietary/API-only family — mark explicitly rather than guess.
+      paramsUnknown = true;
+    } else {
+      // Resolve the official HF repo (cached) and read real params.
+      if (m.slug in aliases) {
+        hfRepo = aliases[m.slug];
+      } else {
+        hfRepo = await resolveHfRepo(m, hfToken);
+        aliases[m.slug] = hfRepo; // cache hit or miss
+      }
+      if (hfRepo) {
+        const total = await fetchHfTotal(hfRepo, hfToken);
+        if (total) {
+          const cfg = await fetchHfConfig(hfRepo, hfToken);
+          const active =
+            moeOverrides[hfRepo]?.active ?? computeActiveParams(cfg) ?? total;
+          resolved = { total, active };
+          viaHf = true;
+        }
+      }
+    }
+  }
+
+  return { resolved, hfRepo, paramsUnknown, viaHf };
 }
 
 // ─── GGUF Q4_K_M lookup on HuggingFace ────────────────────────────────────
@@ -447,7 +549,9 @@ async function main(): Promise<void> {
   console.error("Fetching AA parameters (language/models) …");
   const apiParams = await fetchAAParameters(apiKey);
 
-  const manualRaw = readJson<Record<string, ManualParams | string | object>>(DATA("manual_params.json"));
+  const manualRaw = readJson<Record<string, ManualParams | string | object>>(
+    DATA("manual_params.json"),
+  );
   const manual: Record<string, ManualParams> = {};
   for (const [k, v] of Object.entries(manualRaw)) {
     if (k.startsWith("_")) continue;
@@ -458,12 +562,17 @@ async function main(): Promise<void> {
   console.error(`  → ${Object.keys(manual).length} manual param entries`);
 
   const hfToken = process.env.HF_API_TOKEN;
-  console.error(hfToken ? "  → HF_API_TOKEN present" : "  → HF_API_TOKEN missing (unauthenticated HF)");
+  console.error(
+    hfToken
+      ? "  → HF_API_TOKEN present"
+      : "  → HF_API_TOKEN missing (unauthenticated HF)",
+  );
 
   // Alias cache (AA slug → HF repo | null). Hand entries + resolved entries are
   // persisted so subsequent runs skip the search. `_comment`/`_examples` kept.
   const aliasRaw = readJson<Record<string, unknown>>(DATA("hf_aliases.json"));
-  const aliasComment = typeof aliasRaw._comment === "string" ? aliasRaw._comment : undefined;
+  const aliasComment =
+    typeof aliasRaw._comment === "string" ? aliasRaw._comment : undefined;
   const aliasExamples = aliasRaw._examples;
   const aliases: Record<string, string | null> = {};
   for (const [k, v] of Object.entries(aliasRaw)) {
@@ -476,7 +585,12 @@ async function main(): Promise<void> {
   const moeOverrides: Record<string, { active: number }> = {};
   for (const [k, v] of Object.entries(moeRaw)) {
     if (k.startsWith("_")) continue;
-    if (typeof v === "object" && v !== null && "active" in v && typeof (v as { active: unknown }).active === "number") {
+    if (
+      typeof v === "object" &&
+      v !== null &&
+      "active" in v &&
+      typeof (v as { active: unknown }).active === "number"
+    ) {
       moeOverrides[k] = v as { active: number };
     }
   }
@@ -487,43 +601,20 @@ async function main(): Promise<void> {
 
   for (const m of aa.data) {
     const closed = isClosed(m);
-    // Precedence: hand-curated override → real AA parameters → name parse →
-    // HuggingFace safetensors (gap-fill for open models still unresolved).
-    // Manual entries are deliberate corrections so they win; AA's own counts
-    // beat the fuzzy name parse.
-    const manualP = manual[m.slug];
-    const apiP = apiParams.get(m.slug);
-    const apiPair =
-      apiP && (apiP.total != null || apiP.active != null)
-        ? { total: apiP.total ?? apiP.active!, active: apiP.active ?? apiP.total! }
-        : null;
-    let resolved: { total: number; active: number } | null = manualP ?? apiPair ?? parseParamsFromName(m.name);
-    let paramsUnknown = false;
-    let hfRepo: string | null = null;
-
-    if (!closed && resolved === null) {
-      if (hasUndisclosedParams(m)) {
-        // Proprietary/API-only family — mark explicitly rather than guess.
-        paramsUnknown = true;
-      } else {
-        // Resolve the official HF repo (cached) and read real params.
-        if (m.slug in aliases) {
-          hfRepo = aliases[m.slug];
-        } else {
-          hfRepo = await resolveHfRepo(m, hfToken);
-          aliases[m.slug] = hfRepo; // cache hit or miss
-        }
-        if (hfRepo) {
-          const total = await fetchHfTotal(hfRepo, hfToken);
-          if (total) {
-            const cfg = await fetchHfConfig(hfRepo, hfToken);
-            const active = moeOverrides[hfRepo]?.active ?? computeActiveParams(cfg) ?? total;
-            resolved = { total, active };
-            hfHits++;
-            console.error(`  → HF ${m.slug}: total=${(total / 1e9).toFixed(1)}B active=${(active / 1e9).toFixed(1)}B (${hfRepo})`);
-          }
-        }
-      }
+    const { resolved, hfRepo, paramsUnknown, viaHf } = await resolveParams(
+      m,
+      closed,
+      manual,
+      apiParams,
+      aliases,
+      moeOverrides,
+      hfToken,
+    );
+    if (viaHf && resolved) {
+      hfHits++;
+      console.error(
+        `  → HF ${m.slug}: total=${(resolved.total / 1e9).toFixed(1)}B active=${(resolved.active / 1e9).toFixed(1)}B (${hfRepo})`,
+      );
     }
 
     const params = resolved ?? { total: null, active: null };
@@ -568,16 +659,23 @@ async function main(): Promise<void> {
   if (aliasComment) aliasOut._comment = aliasComment;
   if (aliasExamples !== undefined) aliasOut._examples = aliasExamples;
   for (const k of Object.keys(aliases).sort()) aliasOut[k] = aliases[k];
-  writeFileSync(DATA("hf_aliases.json"), JSON.stringify(aliasOut, null, 2) + "\n");
+  writeFileSync(
+    DATA("hf_aliases.json"),
+    JSON.stringify(aliasOut, null, 2) + "\n",
+  );
 
   // Pre-compute the Pareto frontier (open models) on BOTH X-axes per metric.
   // The UI exposes "Active", "Total", and "Compare" — Total mode in particular
   // needs its own frontier because a dense small model (e.g. Qwen3.5 4B) sits
   // on the total-axis frontier even when it's dominated by a small-active
   // MoE on the active-axis frontier.
-  const openActive = models.filter((x) => !x.isClosed && x.params.active != null);
+  const openActive = models.filter(
+    (x) => !x.isClosed && x.params.active != null,
+  );
   const openTotal = models.filter((x) => !x.isClosed && x.params.total != null);
-  const paretoByMetric: Partial<Record<MetricId, { active: string[]; total: string[] }>> = {};
+  const paretoByMetric: Partial<
+    Record<MetricId, { active: string[]; total: string[] }>
+  > = {};
   for (const metric of METRICS) {
     const fActive = computeParetoFrontier(
       openActive,
@@ -603,7 +701,8 @@ async function main(): Promise<void> {
   const ggufPath = DATA("gguf_sizes.json");
   const ggufRaw = readJson<Record<string, GgufEntry | string>>(ggufPath);
   const ggufEntries: Record<string, GgufEntry> = {};
-  const ggufComment = typeof ggufRaw._comment === "string" ? ggufRaw._comment : undefined;
+  const ggufComment =
+    typeof ggufRaw._comment === "string" ? ggufRaw._comment : undefined;
   for (const [k, v] of Object.entries(ggufRaw)) {
     if (k.startsWith("_")) continue;
     if (typeof v === "object" && v !== null && "bytes" in v && "source" in v) {
@@ -618,7 +717,9 @@ async function main(): Promise<void> {
     for (const id of f.total) frontierIds.add(id);
   }
   const frontierModels = models.filter((m) => frontierIds.has(m.id));
-  console.error(`Pareto frontier union: ${frontierModels.length} unique models`);
+  console.error(
+    `Pareto frontier union: ${frontierModels.length} unique models`,
+  );
 
   let fetchedCount = 0;
   let foundCount = 0;
@@ -678,7 +779,9 @@ async function main(): Promise<void> {
 
   writeFileSync(DATA("models.json"), JSON.stringify(out, null, 2) + "\n");
   console.error(`Wrote ${models.length} models to data/models.json`);
-  console.error(`  open w/ active: ${openActive.length}, open w/ total: ${openTotal.length}, closed: ${models.filter((m) => m.isClosed).length}`);
+  console.error(
+    `  open w/ active: ${openActive.length}, open w/ total: ${openTotal.length}, closed: ${models.filter((m) => m.isClosed).length}`,
+  );
   if (missing.length > 0) {
     console.error(
       `  ${missing.length} open models without extractable params (skipped from scatter):`,
@@ -689,7 +792,7 @@ async function main(): Promise<void> {
 
 // Only run the full refresh (which requires AA_API_KEY + network) when this
 // file is executed directly, not when imported for its pure helpers such as
-// parseParamsFromName (e.g. by a deterministic regeneration script).
+// resolveParams (e.g. by tests or a deterministic regeneration script).
 const invokedDirectly =
   process.argv[1] != null && resolve(process.argv[1]) === import.meta.filename;
 if (invokedDirectly) {

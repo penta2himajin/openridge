@@ -3,5 +3,12 @@
   "_examples": {
     "deepseek-ai/DeepSeek-V3.1": { "active": 37000000000 },
     "Qwen/Qwen3-235B-A22B": { "active": 22000000000 }
-  }
+  },
+  "google/gemma-3n-E2B-it": { "active": 2000000000 },
+  "google/gemma-3n-E4B-it": { "active": 4000000000 },
+  "google/gemma-3n-E4B-it-litert-preview": { "active": 4000000000 },
+  "google/gemma-4-E2B": { "active": 2300000000 },
+  "google/gemma-4-E4B": { "active": 4500000000 },
+  "mistralai/Mixtral-8x22B-Instruct-v0.1": { "active": 39000000000 },
+  "mistralai/Mixtral-8x7B-Instruct-v0.1": { "active": 12900000000 }
 }

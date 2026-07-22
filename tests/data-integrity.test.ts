@@ -12,7 +12,6 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { computeParetoFrontier } from "../src/lib/pareto";
 import { METRICS } from "../src/lib/metrics";
-import { parseParamsFromName } from "../scripts/build-data";
 import type { ModelsSnapshot } from "../src/lib/models";
 
 const DATA = (p: string) => resolve(import.meta.dirname, "..", "data", p);
@@ -87,37 +86,22 @@ test("every manual_params override is honored in models.json", () => {
   );
 });
 
-test("a name-encoded 'A<M>B' active suffix is never flattened to dense", () => {
-  // When the AA name itself declares active params (e.g. "Qwen3 235B A22B"),
-  // the stored active MUST be below total. This catches MoE-as-dense bugs for
-  // every model whose name carries the size.
-  const offenders: string[] = [];
-  for (const m of models) {
-    if (m.isClosed || m.params.active == null || m.params.total == null)
-      continue;
-    const parsed = parseParamsFromName(m.name);
-    if (
-      parsed &&
-      parsed.active < parsed.total * MOE_RATIO &&
-      m.params.active >= m.params.total * MOE_RATIO
-    ) {
-      offenders.push(
-        `${m.slug} ("${m.name}") stored dense at ${(m.params.total / 1e9).toFixed(1)}B`,
-      );
-    }
-  }
-  assert.deepEqual(
-    offenders,
-    [],
-    `MoE names stored as dense:\n  ${offenders.join("\n  ")}`,
-  );
-});
-
-test("known-MoE families are stored as MoE (active < total)", () => {
-  // Curated registry of families confirmed to be MoE. Any member stored as
-  // dense is a missing override. Grow this list as new MoE families are added
-  // (and add the matching data/manual_params.json entry) — the two move
-  // together. Names have no reliable is_moe flag, so this stays hand-kept.
+test("known-MoE-shaped families are stored with active < total", () => {
+  // Curated registry of families confirmed to have active < total — whether
+  // true MoE routing or a Gemma-style "effective params" architecture. Any
+  // member stored as dense (active===total) is a missing override. Grow this
+  // list as new families are added (and add the matching data/manual_params.json
+  // or data/hf_aliases.json + data/moe_overrides.json entries) — the two move
+  // together. There is no reliable is_moe flag on the AA feed, and — per the
+  // removal of scripts/build-data.ts's name-parsing heuristic — the AA display
+  // name is never trusted for this either, so this list stays hand-kept.
+  //
+  // NOTE: lfm2-5-8b-a1b, mixtral-8x7b-instruct, mistral-8x22b-instruct,
+  // gemma-4-e2b(-non-reasoning), gemma-4-e4b(-non-reasoning), gemma-3n-e2b,
+  // gemma-3n-e4b(-preview-0520) are also confirmed active<total (see PR) but
+  // are deliberately omitted here until the next `npm run refresh` regenerates
+  // data/models.json from the newly-added hf_aliases.json/moe_overrides.json
+  // entries — adding them now would fail against the still-stale snapshot.
   const KNOWN_MOE_SLUGS = [
     "minimax-m1-40k",
     "minimax-m1-80k",

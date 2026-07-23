@@ -9,14 +9,13 @@ import snapshot from "../../data/models.json";
 export type MetricId =
   | "artificial_analysis_intelligence_index"
   | "artificial_analysis_coding_index"
-  | "artificial_analysis_math_index"
-  | "mmlu_pro"
   | "gpqa"
   | "hle"
-  | "livecodebench"
+  | "lcr"
+  | "ifbench"
   | "scicode"
-  | "math_500"
-  | "aime";
+  | "tau2"
+  | "terminalbench_hard";
 
 export interface ModelParams {
   total: number | null;

@@ -86,22 +86,23 @@ Index: [AA Intelligence Index ▾]
 │  ┃  AA Intelligence Index           ┃  │
 │  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  │
 │     AA Coding Index                    │
-│     AA Math Index                      │
 ├────────────────────────────────────────┤
 │  KNOWLEDGE & REASONING                 │
-│     MMLU-Pro                           │
 │     GPQA Diamond                       │
 │     HLE                                │
+│     AA-LCR                             │
+│     IFBench                            │
 ├────────────────────────────────────────┤
 │  CODE                                  │
-│     LiveCodeBench                      │
 │     SciCode                            │
 ├────────────────────────────────────────┤
-│  MATH                                  │
-│     AIME                               │
-│     Math-500                           │
+│  AGENTIC                               │
+│     τ²-Bench                           │
+│     Terminal-Bench Hard                │
 └────────────────────────────────────────┘
 ```
+
+Metric roster audited 2026-07-23 (see [data-sources.md §1](./data-sources.md#1-artificial-analysis-api) "Tracked evaluations"): AA Math Index / MMLU-Pro / LiveCodeBench / AIME / Math-500 were dropped after AA stopped scoring new open-weight releases on them; AA-LCR, IFBench, τ²-Bench and Terminal-Bench Hard replace them. The MATH category is retired — AA currently has no actively-maintained pure-math evaluation for open models. `AGENTIC` is new, covering multi-step tool-use / terminal-operation evaluations.
 
 ### 3.1 サイズ
 
@@ -123,7 +124,7 @@ transition: 80ms ease on background-color。
 ### 3.3 検索挙動
 
 - 入力中は **カテゴリヘッダを非表示** にしてフラット結果
-- Fuzzy match on `name + category`（"code" で LiveCodeBench / SciCode 両方ヒット）
+- Fuzzy match on `name + category`（"bench" で AA-LCR / IFBench / τ²-Bench / Terminal-Bench Hard が複数ヒット）
 - ヒット数 0 の場合: "No benchmarks match." を `--fg-muted` で中央表示
 
 ### 3.4 キーボード

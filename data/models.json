@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-23T07:34:02.098Z",
+  "generatedAt": "2026-07-23T08:18:51.166Z",
   "models": [
     {
       "id": "36f73aaf-d38a-4b56-a2b3-d04d17186910",
@@ -6114,8 +6114,8 @@
       "creatorSlug": "lg",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 237099669632,
+        "active": 24498929664
       },
       "paramsUnknown": false,
       "license": null,
@@ -6139,7 +6139,7 @@
         "tps": 0,
         "ttft": 0
       },
-      "hfId": null,
+      "hfId": "LGAI-EXAONE/K-EXAONE-236B-A23B",
       "mode": "Reasoning",
       "releaseDate": "2025-12-31"
     },
@@ -6336,8 +6336,8 @@
       "creatorSlug": "lg",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 237099669632,
+        "active": 24498929664
       },
       "paramsUnknown": false,
       "license": null,
@@ -6361,7 +6361,7 @@
         "tps": 0,
         "ttft": 0
       },
-      "hfId": null,
+      "hfId": "LGAI-EXAONE/K-EXAONE-236B-A23B",
       "mode": "Non-reasoning",
       "releaseDate": "2025-12-31"
     },
@@ -7150,8 +7150,8 @@
       "creatorSlug": "motif-technologies",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 314841775750,
+        "active": 314841775750
       },
       "paramsUnknown": false,
       "license": null,
@@ -7175,7 +7175,7 @@
         "tps": 0,
         "ttft": 0
       },
-      "hfId": null,
+      "hfId": "Motif-Technologies/Motif-3-Beta",
       "mode": "Beta",
       "releaseDate": null
     },
@@ -12478,8 +12478,8 @@
       "creatorSlug": "google",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 999885952,
+        "active": 999885952
       },
       "paramsUnknown": false,
       "license": null,
@@ -12503,7 +12503,7 @@
         "tps": 0,
         "ttft": 0
       },
-      "hfId": null,
+      "hfId": "google/gemma-3-1b-it",
       "mode": null,
       "releaseDate": "2025-03-13"
     },
@@ -12589,8 +12589,8 @@
       "creatorSlug": "google",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 12187325040,
+        "active": 12187325040
       },
       "paramsUnknown": false,
       "license": null,
@@ -12614,7 +12614,7 @@
         "tps": 0,
         "ttft": 0
       },
-      "hfId": null,
+      "hfId": "google/gemma-3-12b-it",
       "mode": null,
       "releaseDate": "2025-03-12"
     },
@@ -13181,8 +13181,8 @@
       "creatorSlug": "google",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 4300079472,
+        "active": 4300079472
       },
       "paramsUnknown": false,
       "license": null,
@@ -13206,7 +13206,7 @@
         "tps": 0,
         "ttft": 0
       },
-      "hfId": null,
+      "hfId": "google/gemma-3-4b-it",
       "mode": null,
       "releaseDate": "2025-03-12"
     },
@@ -13218,8 +13218,8 @@
       "creatorSlug": "google",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 27432406640,
+        "active": 27432406640
       },
       "paramsUnknown": false,
       "license": null,
@@ -13243,7 +13243,7 @@
         "tps": 0,
         "ttft": 0
       },
-      "hfId": null,
+      "hfId": "google/gemma-3-27b-it",
       "mode": null,
       "releaseDate": "2025-03-12"
     },
@@ -21450,6 +21450,7 @@
         "8c29d66d-bf98-4ea3-8572-5409353ecc66",
         "d8ddb241-b3e4-4c25-a6a3-72eb1b30c541",
         "b23e6c69-96e5-44c9-8f58-4b42e0c399d5",
+        "a3043d4f-9b92-4261-8ea2-a2d391b09cf4",
         "277f939a-985b-4b37-859d-b3eabc7c0b26",
         "f7a4ea75-e548-4069-80d4-9be8bc7c009b"
       ]
@@ -21480,6 +21481,7 @@
         "8c29d66d-bf98-4ea3-8572-5409353ecc66",
         "d8ddb241-b3e4-4c25-a6a3-72eb1b30c541",
         "b23e6c69-96e5-44c9-8f58-4b42e0c399d5",
+        "a3043d4f-9b92-4261-8ea2-a2d391b09cf4",
         "f7a4ea75-e548-4069-80d4-9be8bc7c009b"
       ]
     },
@@ -21539,7 +21541,7 @@
         "cd26a386-4873-46ff-b853-d239050025a2",
         "2236df45-0699-40d1-b5cc-69ee345d2257",
         "d8ddb241-b3e4-4c25-a6a3-72eb1b30c541",
-        "277f939a-985b-4b37-859d-b3eabc7c0b26",
+        "a3043d4f-9b92-4261-8ea2-a2d391b09cf4",
         "f7a4ea75-e548-4069-80d4-9be8bc7c009b"
       ]
     },
@@ -21686,6 +21688,7 @@
     "deepseek-r1-distill-qwen-1-5b": 1117320800,
     "deepseek-v3-2-speciale": null,
     "deepseek-v4-flash": null,
+    "deepseek-v4-flash-high": null,
     "devstral-small-2": 14333916096,
     "exaone-4-0-1-2b-reasoning": 812438304,
     "exaone-4-0-32b-reasoning": 19343827232,
@@ -21697,6 +21700,7 @@
     "gemma-4-31b": 19598488192,
     "gemma-4-e2b": 3462678272,
     "glm-4-7": null,
+    "glm-4-7-flash": 18474983296,
     "glm-5-2": 454552364896,
     "gpt-oss-120b": null,
     "gpt-oss-20b": 11673418816,
@@ -21721,14 +21725,18 @@
     "mimo-v2-flash-reasoning": 186798293088,
     "minicpm-v4-6-1-3b": null,
     "minicpm5-1b": 688067328,
+    "minicpm5-1b-non-reasoning": 688067328,
     "minimax-m2": 138342384096,
     "minimax-m2-1": 138342384832,
     "minimax-m2-7": 138342384096,
     "minimax-m3": 257110212864,
     "ministral-3-3b": 2146497824,
+    "motif-0714": 61326693568,
     "motif-2-12-7b": null,
     "nanbeige4-1-3b": 2443113024,
+    "nemotron-cascade-2-30b-a3b": 24725740992,
     "nvidia-nemotron-3-nano-30b-a3b-reasoning": 24655899872,
+    "nvidia-nemotron-3-nano-4b": 2978372672,
     "nvidia-nemotron-3-ultra-550b-a55b": 345131239808,
     "nvidia-nemotron-nano-12b-v2-vl-reasoning": 7501771584,
     "qwen3-0.6b-instruct": 484220320,
@@ -21759,11 +21767,6 @@
     "qwen3-vl-30b-a3b-reasoning": 18632185056,
     "qwen3-vl-8b-reasoning": 5027785184,
     "step-3-vl-10b": 5027780256,
-    "deepseek-v4-flash-high": null,
-    "nemotron-cascade-2-30b-a3b": 24725740992,
-    "nvidia-nemotron-3-nano-4b": 2978372672,
-    "tri-21b-think-preview": null,
-    "minicpm5-1b-non-reasoning": 688067328,
-    "glm-4-7-flash": 18474983296
+    "tri-21b-think-preview": null
   }
 }

@@ -313,11 +313,46 @@ async function fetchHfConfig(
   }
 }
 
+/** Trailing qualifier AA appends to a display name but that an official HF
+ *  repo slug abbreviates or omits entirely (e.g. "-it" not "-Instruct") — see
+ *  `resolveHfRepo`. Only the *last* word is ever stripped, and only to build
+ *  a secondary search query; the unstripped name is always tried first. */
+const HF_SEARCH_QUALIFIER_WORDS = new Set([
+  "instruct",
+  "reasoning",
+  "chat",
+  "base",
+  "preview",
+]);
+
+function stripTrailingQualifier(name: string): string | null {
+  const words = name.trim().split(/\s+/);
+  if (words.length < 2) return null;
+  const last = words[words.length - 1].toLowerCase();
+  return HF_SEARCH_QUALIFIER_WORDS.has(last)
+    ? words.slice(0, -1).join(" ")
+    : null;
+}
+
 /**
  * Resolve the official HF repo for an AA model: try canonical `<org>/<name>`
  * candidates first (cheap, exact), then a creator-org-constrained search. A
  * repo counts only if it actually carries `safetensors.total`. Returns null
  * when nothing verifiable is found (logged for a manual alias later).
+ *
+ * The canonical guesses miss whenever the official HF slug diverges from AA's
+ * display name in case or carries a suffix AA doesn't show — e.g. AA's
+ * "Gemma 3 1B Instruct" vs. the real `google/gemma-3-1b-it` (lowercase, `-it`
+ * not `-Instruct`). The search fallback is therefore scoped server-side per
+ * trusted org via HF's `author=` filter rather than an unscoped global search
+ * filtered client-side: a global search ranks by popularity across the whole
+ * Hub, so a small official repo can be buried behind hundreds of community
+ * fine-tunes sharing the same name fragment (confirmed for the Gemma 3
+ * family — none of the top 20 global results for "Gemma 3 1B Instruct" were
+ * from the `google` org). HF's search additionally appears to require every
+ * query token to roughly match, so a literal "Instruct" in the query returns
+ * zero results against repos that only ever spell it "-it" — a second query
+ * with that trailing word stripped is tried when the first comes up empty.
  */
 async function resolveHfRepo(
   m: AAEntry,
@@ -332,25 +367,38 @@ async function resolveHfRepo(
       if (await fetchHfTotal(`${org}/${v}`, token)) return `${org}/${v}`;
     }
   }
-  const res = await fetchWithTimeout(
-    `https://huggingface.co/api/models?search=${encodeURIComponent(clean)}&limit=20`,
-    8000,
-    HF_HEADERS(token),
-  );
-  if (!res || !res.ok) return null;
-  const repos = (await res.json()) as { modelId: string }[];
-  if (!Array.isArray(repos)) return null;
   const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
   const target = norm(clean);
-  const cands = repos
-    .filter((r) => orgs.includes(r.modelId.split("/")[0]))
-    .sort((a, b) => {
-      const am = norm(a.modelId.split("/")[1] ?? "") === target ? 0 : 1;
-      const bm = norm(b.modelId.split("/")[1] ?? "") === target ? 0 : 1;
-      return am - bm;
-    });
-  for (const r of cands.slice(0, 5)) {
-    if (await fetchHfTotal(r.modelId, token)) return r.modelId;
+  // Requantized/format re-upload of the same weights (GGUF, AWQ, QAT, ...):
+  // numerically identical `safetensors.total`, but never the repo we want to
+  // link out to from the tooltip. Rank these behind a plain-named repo when
+  // neither is an exact match (confirmed against google/gemma-3-12b-it-qat-*,
+  // which HF's search ranks ahead of the canonical google/gemma-3-12b-it).
+  const QUANT_MARKER = /gguf|awq|gptq|qat|exl2|mlx|-q\d|int4|int8|fp8|quant/i;
+  const queries = [clean];
+  const stripped = stripTrailingQualifier(clean);
+  if (stripped) queries.push(stripped);
+  for (const org of orgs) {
+    for (const q of queries) {
+      const res = await fetchWithTimeout(
+        `https://huggingface.co/api/models?author=${encodeURIComponent(org)}&search=${encodeURIComponent(q)}&limit=20`,
+        8000,
+        HF_HEADERS(token),
+      );
+      if (!res || !res.ok) continue;
+      const repos = (await res.json()) as { modelId: string }[];
+      if (!Array.isArray(repos) || repos.length === 0) continue;
+      const tier = (name: string): number =>
+        norm(name) === target ? 0 : QUANT_MARKER.test(name) ? 2 : 1;
+      const cands = [...repos].sort((a, b) => {
+        const am = tier(a.modelId.split("/")[1] ?? "");
+        const bm = tier(b.modelId.split("/")[1] ?? "");
+        return am - bm;
+      });
+      for (const r of cands.slice(0, 5)) {
+        if (await fetchHfTotal(r.modelId, token)) return r.modelId;
+      }
+    }
   }
   return null;
 }

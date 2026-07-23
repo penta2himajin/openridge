@@ -122,6 +122,76 @@ test("resolveParams: LFM2.5-8B-A1B resolves via real HF data, not the AA name", 
   );
 });
 
+test("resolveParams: search fallback is scoped per-org via author= and finds a repo whose HF slug diverges in case/suffix from AA's name", async (t) => {
+  // Regression: canonical guesses for "Gemma 3 1B Instruct" ("google/Gemma-3-1B-Instruct",
+  // "google/Gemma31BInstruct") never match the real slug google/gemma-3-1b-it
+  // (lowercase, "-it" not "-Instruct"). The old fallback ran one global,
+  // unscoped `search=` query and filtered client-side; live HF results (see
+  // PR) put zero `google`-org repos in the top 20 for that query, burying the
+  // one-off official repo behind hundreds of community forks named similarly.
+  // author=<org> scopes the query server-side to the trusted org instead.
+  // Live HF search also comes back empty for the *literal* "...1B Instruct"
+  // query (no `google` repo spells it that way — only "-it"), which is why
+  // the mock below returns nothing for that exact query and only succeeds
+  // once the trailing "Instruct" qualifier is stripped.
+  t.after(() => mock.restoreAll());
+  mockFetch({
+    "api/models/google/Gemma-3-1B-Instruct": "miss",
+    "api/models/google/Gemma31BInstruct": "miss",
+    "search=Gemma%203%201B%20Instruct": [],
+    "search=Gemma%203%201B": [
+      { modelId: "google/gemma-3-1b-it" },
+      { modelId: "google/gemma-3-1b-pt" },
+    ],
+    "api/models/google/gemma-3-1b-it": { safetensors: { total: 999885952 } },
+    "google/gemma-3-1b-it/raw/main/config.json": { model_type: "gemma3" }, // dense
+  });
+
+  const m = mkEntry({
+    name: "Gemma 3 1B Instruct",
+    slug: "gemma-3-1b",
+    creatorSlug: "google",
+  });
+  const result = await resolveParams(m, false, {}, new Map(), {}, {});
+
+  assert.equal(result.viaHf, true);
+  assert.equal(result.hfRepo, "google/gemma-3-1b-it");
+  assert.equal(result.resolved?.total, 999885952);
+});
+
+test("resolveParams: search fallback prefers the plain repo over a requantized re-upload with the same params", async (t) => {
+  // Regression: live HF search for "Gemma 3 12B Instruct" ranks
+  // google/gemma-3-12b-it-qat-q4_0-unquantized ahead of the canonical
+  // google/gemma-3-12b-it (both report an identical safetensors.total, since
+  // quantization doesn't change the logical param count) — the tooltip's "HF"
+  // link should point at the plain repo, not a QAT re-upload.
+  t.after(() => mock.restoreAll());
+  mockFetch({
+    "api/models/google/Gemma-3-12B-Instruct": "miss",
+    "api/models/google/Gemma312BInstruct": "miss",
+    "search=Gemma%203%2012B%20Instruct": [],
+    "search=Gemma%203%2012B": [
+      { modelId: "google/gemma-3-12b-it-qat-q4_0-unquantized" },
+      { modelId: "google/gemma-3-12b-it" },
+      { modelId: "google/gemma-3-12b-pt" },
+    ],
+    "api/models/google/gemma-3-12b-it-qat-q4_0-unquantized": {
+      safetensors: { total: 12187325040 },
+    },
+    "api/models/google/gemma-3-12b-it": { safetensors: { total: 12187325040 } },
+    "google/gemma-3-12b-it/raw/main/config.json": { model_type: "gemma3" },
+  });
+
+  const m = mkEntry({
+    name: "Gemma 3 12B Instruct",
+    slug: "gemma-3-12b",
+    creatorSlug: "google",
+  });
+  const result = await resolveParams(m, false, {}, new Map(), {}, {});
+
+  assert.equal(result.hfRepo, "google/gemma-3-12b-it");
+});
+
 test("resolveParams: Gemma 'E<N>B' models use HF total + moe_overrides active, not the glued digit", async (t) => {
   t.after(() => mock.restoreAll());
   mockFetch({

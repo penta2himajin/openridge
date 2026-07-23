@@ -27,6 +27,11 @@
     "source": "not-found",
     "fetchedAt": "2026-07-04T02:29:47.581Z"
   },
+  "deepseek-v4-flash-high": {
+    "bytes": null,
+    "source": "not-found",
+    "fetchedAt": "2026-07-23T07:34:00.128Z"
+  },
   "devstral-small-2": {
     "bytes": 14333916096,
     "source": "hf",
@@ -91,6 +96,12 @@
     "bytes": null,
     "source": "not-found",
     "fetchedAt": "2026-07-04T02:29:53.880Z"
+  },
+  "glm-4-7-flash": {
+    "bytes": 18474983296,
+    "source": "hf",
+    "repo": "bartowski/zai-org_GLM-4.7-Flash-GGUF",
+    "fetchedAt": "2026-07-23T07:34:01.895Z"
   },
   "glm-5-2": {
     "bytes": 454552364896,
@@ -227,6 +238,12 @@
     "repo": "mradermacher/Huihui-MiniCPM5-1B-abliterated-i1-GGUF",
     "fetchedAt": "2026-07-01T12:09:10.020Z"
   },
+  "minicpm5-1b-non-reasoning": {
+    "bytes": 688067328,
+    "source": "hf",
+    "repo": "mradermacher/Huihui-MiniCPM5-1B-abliterated-i1-GGUF",
+    "fetchedAt": "2026-07-23T07:34:01.532Z"
+  },
   "minimax-m2": {
     "bytes": 138342384096,
     "source": "hf",
@@ -274,11 +291,23 @@
     "repo": "mradermacher/Nanbeige4.1-3B-GGUF",
     "fetchedAt": "2026-05-19T23:57:40.776Z"
   },
+  "nemotron-cascade-2-30b-a3b": {
+    "bytes": 24725740992,
+    "source": "hf",
+    "repo": "bartowski/nvidia_Nemotron-Cascade-2-30B-A3B-GGUF",
+    "fetchedAt": "2026-07-23T07:34:00.502Z"
+  },
   "nvidia-nemotron-3-nano-30b-a3b-reasoning": {
     "bytes": 24655899872,
     "source": "hf",
     "repo": "bartowski/nvidia_Nemotron-3-Nano-30B-A3B-GGUF",
     "fetchedAt": "2026-05-19T23:57:37.557Z"
+  },
+  "nvidia-nemotron-3-nano-4b": {
+    "bytes": 2978372672,
+    "source": "hf",
+    "repo": "bartowski/nvidia_Nemotron-3-Nano-4B-GGUF",
+    "fetchedAt": "2026-07-23T07:34:00.877Z"
   },
   "nvidia-nemotron-3-ultra-550b-a55b": {
     "bytes": 345131239808,
@@ -459,5 +488,10 @@
     "source": "hf",
     "repo": "mradermacher/Step3-VL-10B-Base-i1-GGUF",
     "fetchedAt": "2026-05-19T23:57:38.823Z"
+  },
+  "tri-21b-think-preview": {
+    "bytes": null,
+    "source": "not-found",
+    "fetchedAt": "2026-07-23T07:34:01.152Z"
   }
 }

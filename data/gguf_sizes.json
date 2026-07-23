@@ -127,6 +127,12 @@
     "repo": "unsloth/granite-4.0-h-1b-GGUF",
     "fetchedAt": "2026-05-19T23:57:39.178Z"
   },
+  "granite-4-1-3b": {
+    "bytes": 2172615648,
+    "source": "hf",
+    "repo": "bartowski/ibm-granite_granite-4.1-3b-GGUF",
+    "fetchedAt": "2026-07-23T06:36:24.678Z"
+  },
   "hy3": {
     "bytes": 182560831008,
     "source": "hf",
@@ -153,6 +159,12 @@
     "source": "hf",
     "repo": "bartowski/LiquidAI_LFM2.5-1.2B-Instruct-GGUF",
     "fetchedAt": "2026-05-19T23:57:36.812Z"
+  },
+  "lfm2-5-1-2b-thinking": {
+    "bytes": 730895584,
+    "source": "hf",
+    "repo": "unsloth/LFM2.5-1.2B-Thinking-GGUF",
+    "fetchedAt": "2026-07-23T06:36:24.428Z"
   },
   "lfm2-5-8b-a1b": {
     "bytes": null,
@@ -239,6 +251,12 @@
     "repo": "DevQuasar/MiniMaxAI.MiniMax-M3-GGUF",
     "fetchedAt": "2026-07-04T02:29:48.085Z"
   },
+  "ministral-3-3b": {
+    "bytes": 2146497824,
+    "source": "hf",
+    "repo": "unsloth/Ministral-3-3B-Instruct-2512-GGUF",
+    "fetchedAt": "2026-07-23T06:36:24.159Z"
+  },
   "motif-2-12-7b": {
     "bytes": null,
     "source": "not-found",
@@ -310,6 +328,12 @@
     "repo": "bartowski/Qwen_Qwen3-4B-Instruct-2507-GGUF",
     "fetchedAt": "2026-05-19T23:57:51.431Z"
   },
+  "qwen3-4b-instruct-reasoning": {
+    "bytes": 2740937888,
+    "source": "hf",
+    "repo": "unsloth/Qwen3.5-4B-GGUF",
+    "fetchedAt": "2026-07-23T06:36:25.429Z"
+  },
   "qwen3-5-0-8b": {
     "bytes": 579615840,
     "source": "hf",
@@ -345,6 +369,12 @@
     "source": "hf",
     "repo": "bartowski/Qwen_Qwen3.5-2B-GGUF",
     "fetchedAt": "2026-07-06T08:37:50.723Z"
+  },
+  "qwen3-5-35b-a3b": {
+    "bytes": 22285080384,
+    "source": "hf",
+    "repo": "bartowski/Qwen_Qwen3.5-35B-A3B-GGUF",
+    "fetchedAt": "2026-07-23T06:36:25.180Z"
   },
   "qwen3-5-397b-a17b": {
     "bytes": 240590681792,
@@ -393,6 +423,12 @@
     "source": "hf",
     "repo": "bartowski/huihui-ai_Qwen3-Coder-Next-abliterated-GGUF",
     "fetchedAt": "2026-07-04T02:29:51.305Z"
+  },
+  "qwen3-next-80b-a3b-instruct": {
+    "bytes": 48727677408,
+    "source": "hf",
+    "repo": "bartowski/Qwen_Qwen3-Next-80B-A3B-Instruct-GGUF",
+    "fetchedAt": "2026-07-23T06:36:24.927Z"
   },
   "qwen3-next-80b-a3b-reasoning": {
     "bytes": 48727678848,

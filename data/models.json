@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-23T06:36:25.630Z",
+  "generatedAt": "2026-07-23T08:05:45.608Z",
   "models": [
     {
       "id": "36f73aaf-d38a-4b56-a2b3-d04d17186910",
@@ -6279,8 +6279,8 @@
       "creatorSlug": "lg",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 237099669632,
+        "active": 24498929664
       },
       "paramsUnknown": false,
       "license": null,
@@ -6305,7 +6305,7 @@
         "tps": 0,
         "ttft": 0
       },
-      "hfId": null,
+      "hfId": "LGAI-EXAONE/K-EXAONE-236B-A23B",
       "mode": "Reasoning",
       "releaseDate": "2025-12-31"
     },
@@ -6507,8 +6507,8 @@
       "creatorSlug": "lg",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 237099669632,
+        "active": 24498929664
       },
       "paramsUnknown": false,
       "license": null,
@@ -6533,7 +6533,7 @@
         "tps": 0,
         "ttft": 0
       },
-      "hfId": null,
+      "hfId": "LGAI-EXAONE/K-EXAONE-236B-A23B",
       "mode": "Non-reasoning",
       "releaseDate": "2025-12-31"
     },
@@ -7343,8 +7343,8 @@
       "creatorSlug": "motif-technologies",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 314841775750,
+        "active": 314841775750
       },
       "paramsUnknown": false,
       "license": null,
@@ -7369,7 +7369,7 @@
         "tps": 0,
         "ttft": 0
       },
-      "hfId": null,
+      "hfId": "Motif-Technologies/Motif-3-Beta",
       "mode": "Beta",
       "releaseDate": null
     },
@@ -12815,8 +12815,8 @@
       "creatorSlug": "google",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 999885952,
+        "active": 999885952
       },
       "paramsUnknown": false,
       "license": null,
@@ -12841,7 +12841,7 @@
         "tps": 0,
         "ttft": 0
       },
-      "hfId": null,
+      "hfId": "google/gemma-3-1b-it",
       "mode": null,
       "releaseDate": "2025-03-13"
     },
@@ -12929,8 +12929,8 @@
       "creatorSlug": "google",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 12187325040,
+        "active": 12187325040
       },
       "paramsUnknown": false,
       "license": null,
@@ -12955,7 +12955,7 @@
         "tps": 0,
         "ttft": 0
       },
-      "hfId": null,
+      "hfId": "google/gemma-3-12b-it",
       "mode": null,
       "releaseDate": "2025-03-12"
     },
@@ -13537,8 +13537,8 @@
       "creatorSlug": "google",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 4300079472,
+        "active": 4300079472
       },
       "paramsUnknown": false,
       "license": null,
@@ -13563,7 +13563,7 @@
         "tps": 0,
         "ttft": 0
       },
-      "hfId": null,
+      "hfId": "google/gemma-3-4b-it",
       "mode": null,
       "releaseDate": "2025-03-12"
     },
@@ -13575,8 +13575,8 @@
       "creatorSlug": "google",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 27432406640,
+        "active": 27432406640
       },
       "paramsUnknown": false,
       "license": null,
@@ -13601,7 +13601,7 @@
         "tps": 0,
         "ttft": 0
       },
-      "hfId": null,
+      "hfId": "google/gemma-3-27b-it",
       "mode": null,
       "releaseDate": "2025-03-12"
     },
@@ -22029,6 +22029,7 @@
         "8c29d66d-bf98-4ea3-8572-5409353ecc66",
         "d8ddb241-b3e4-4c25-a6a3-72eb1b30c541",
         "b23e6c69-96e5-44c9-8f58-4b42e0c399d5",
+        "a3043d4f-9b92-4261-8ea2-a2d391b09cf4",
         "277f939a-985b-4b37-859d-b3eabc7c0b26",
         "f7a4ea75-e548-4069-80d4-9be8bc7c009b"
       ]
@@ -22059,6 +22060,7 @@
         "8c29d66d-bf98-4ea3-8572-5409353ecc66",
         "d8ddb241-b3e4-4c25-a6a3-72eb1b30c541",
         "b23e6c69-96e5-44c9-8f58-4b42e0c399d5",
+        "a3043d4f-9b92-4261-8ea2-a2d391b09cf4",
         "f7a4ea75-e548-4069-80d4-9be8bc7c009b"
       ]
     },
@@ -22166,7 +22168,7 @@
         "cd26a386-4873-46ff-b853-d239050025a2",
         "2236df45-0699-40d1-b5cc-69ee345d2257",
         "d8ddb241-b3e4-4c25-a6a3-72eb1b30c541",
-        "277f939a-985b-4b37-859d-b3eabc7c0b26",
+        "a3043d4f-9b92-4261-8ea2-a2d391b09cf4",
         "f7a4ea75-e548-4069-80d4-9be8bc7c009b"
       ]
     },
@@ -22301,11 +22303,13 @@
     "granite-4-0-350m": 236986144,
     "granite-4-0-h-350m": 222662944,
     "granite-4-0-nano-1b": 901162560,
+    "granite-4-1-3b": 2172615648,
     "hy3": 182560831008,
     "kimi-k2-6": null,
     "kimi-k2-7-code": null,
     "kimi-k2-thinking": null,
     "lfm2-5-1-2b-instruct": 730895712,
+    "lfm2-5-1-2b-thinking": 730895584,
     "lfm2-5-8b-a1b": null,
     "lfm2-8b-a1b": 5051071424,
     "ling-mini-2-0": 9941894336,
@@ -22321,6 +22325,8 @@
     "minimax-m2-1": 138342384832,
     "minimax-m2-7": 138342384096,
     "minimax-m3": 257110212864,
+    "ministral-3-3b": 2146497824,
+    "motif-0714": 61326693568,
     "motif-2-12-7b": null,
     "nanbeige4-1-3b": 2443113024,
     "nvidia-nemotron-3-nano-30b-a3b-reasoning": 24655899872,
@@ -22333,12 +22339,14 @@
     "qwen3-235b-a22b-instruct-2507-reasoning": 142646904992,
     "qwen3-30b-a3b-2507-reasoning": 18632183808,
     "qwen3-4b-2507-instruct-reasoning": 2497280736,
+    "qwen3-4b-instruct-reasoning": 2740937888,
     "qwen3-5-0-8b": 579615840,
     "qwen3-5-0-8b-non-reasoning": 579615840,
     "qwen3-5-122b-a10b": 74208240192,
     "qwen3-5-27b": 17984872928,
     "qwen3-5-2b": 1396198496,
     "qwen3-5-2b-non-reasoning": 1396198496,
+    "qwen3-5-35b-a3b": 22285080384,
     "qwen3-5-397b-a17b": 240590681792,
     "qwen3-5-4b": 3013027808,
     "qwen3-5-9b": 5680522464,
@@ -22347,15 +22355,10 @@
     "qwen3-6-35b-a3b": 21391448384,
     "qwen3-8b-instruct-reasoning": 5027784224,
     "qwen3-coder-next": 48556632000,
+    "qwen3-next-80b-a3b-instruct": 48727677408,
     "qwen3-next-80b-a3b-reasoning": 48727678848,
     "qwen3-vl-30b-a3b-reasoning": 18632185056,
     "qwen3-vl-8b-reasoning": 5027785184,
-    "step-3-vl-10b": 5027780256,
-    "ministral-3-3b": 2146497824,
-    "lfm2-5-1-2b-thinking": 730895584,
-    "granite-4-1-3b": 2172615648,
-    "qwen3-next-80b-a3b-instruct": 48727677408,
-    "qwen3-5-35b-a3b": 22285080384,
-    "qwen3-4b-instruct-reasoning": 2740937888
+    "step-3-vl-10b": 5027780256
   }
 }

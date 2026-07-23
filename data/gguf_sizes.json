@@ -257,6 +257,12 @@
     "repo": "unsloth/Ministral-3-3B-Instruct-2512-GGUF",
     "fetchedAt": "2026-07-23T06:36:24.159Z"
   },
+  "motif-0714": {
+    "bytes": 61326693568,
+    "source": "hf",
+    "repo": "DevQuasar-6/moreh.Llama-3-Motif-102B-GGUF",
+    "fetchedAt": "2026-07-23T07:58:35.515Z"
+  },
   "motif-2-12-7b": {
     "bytes": null,
     "source": "not-found",

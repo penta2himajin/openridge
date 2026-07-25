@@ -132,6 +132,12 @@
     "repo": "unsloth/granite-4.0-h-350m-GGUF",
     "fetchedAt": "2026-07-03T19:59:32.773Z"
   },
+  "granite-4-0-micro": {
+    "bytes": 2099502496,
+    "source": "hf",
+    "repo": "bartowski/ibm-granite_granite-4.0-micro-GGUF",
+    "fetchedAt": "2026-07-25T06:25:27.784Z"
+  },
   "granite-4-0-nano-1b": {
     "bytes": 901162560,
     "source": "hf",

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-25T06:25:28.032Z",
+  "generatedAt": "2026-07-26T06:43:31.323Z",
   "models": [
     {
       "id": "36f73aaf-d38a-4b56-a2b3-d04d17186910",
@@ -21963,6 +21963,7 @@
     "gpt-oss-20b": 11673418816,
     "granite-4-0-350m": 236986144,
     "granite-4-0-h-350m": 222662944,
+    "granite-4-0-micro": 2099502496,
     "granite-4-0-nano-1b": 901162560,
     "granite-4-1-3b": 2172615648,
     "hy3": 182560831008,
@@ -22024,7 +22025,6 @@
     "qwen3-vl-30b-a3b-reasoning": 18632185056,
     "qwen3-vl-8b-reasoning": 5027785184,
     "step-3-vl-10b": 5027780256,
-    "tri-21b-think-preview": null,
-    "granite-4-0-micro": 2099502496
+    "tri-21b-think-preview": null
   }
 }

@@ -171,6 +171,11 @@
     "source": "not-found",
     "fetchedAt": "2026-05-19T23:59:39.887Z"
   },
+  "kimi-k3-low": {
+    "bytes": null,
+    "source": "not-found",
+    "fetchedAt": "2026-07-31T06:51:25.553Z"
+  },
   "lfm2-5-1-2b-instruct": {
     "bytes": 730895712,
     "source": "hf",

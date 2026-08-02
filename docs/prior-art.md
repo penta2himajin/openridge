@@ -7,6 +7,7 @@
 当初は「AAにはparam軸の効率比較がない」と仮定していたが、これは**誤り**。AAの `/models/open-source` ページに **"Intelligence vs Active Parameters"** と **"Intelligence vs Total Parameters"** の散布図が既に存在し、MoEのアクティブパラメータも明示的にトラックされている（"For Mixture of Experts (MoE) models, a routing mechanism selects a subset of experts per token, resulting in fewer active than total parameters. Dense models use all parameters, so active equals total."）。
 
 → 差別化レーンは当初想定より狭い。残るユニーク要素は次の3点:
+
 1. **明示的なParetoフロンティア線**（AAは "most attractive quadrant" のハイライトだけで、フロンティア上の点を結ぶ線は引いていない）
 2. **クローズドモデルのアンカー横線**（AA該当ページはオープン専用）
 3. **1画面・他要素を削り切ったミニマルUI**（AAは周りに表・他チャート・provider別データが密集）
@@ -17,49 +18,54 @@
 param軸でやってる既存例は調査範囲では**見つからなかった**。全てコスト軸。
 
 ### [Paraplouis/llm-pareto-frontier](https://github.com/Paraplouis/llm-pareto-frontier)
+
 最も思想が近い既存実装。
+
 - 軸: LM Arena ELO (Y) vs API cost (X)
 - 更新: 手動 `./refresh.sh` を走らせて commit、GH Actions が deploy
 - 対象: open/closed 両方
 - MoE 区別: ドキュメントに明記なし
 
 ### [bsamek/pareto-llm](https://github.com/bsamek/pareto-llm) / [michaelshi.me/pareto/](https://michaelshi.me/pareto/) / [modeldepot.io](https://modeldepot.io/)
+
 同趣旨の個人/小規模プロジェクト群。LessWrong に "LLM Pareto Frontier But Live" の議論記事あり。
 
 ## カテゴリB — 価格 vs 性能 scatter（Pareto線は明示せず）
 
 ### [WhatLLM.org](https://whatllm.org/explore)
+
 - 925モデル/54プロバイダ。quality-vs-price scatter
 - フィルタ豊富（creator / open-source / "best value" / "fastest"）
 - "Best Local LLM" 専用ランキングあり
 - MoE active params の扱いは明記なし
 
 ### [llm-stats.com](https://llm-stats.com/)
+
 - AAデータを流用したテーブル中心+ scatter補助
 - coding-arena / GPQA Diamond / throughput / latency / pricing
 
 ## カテゴリC — リーダーボード（テーブル主体）
 
-| サイト | 特徴 |
-|---|---|
-| [Vellum LLM Leaderboard](https://www.vellum.ai/llm-leaderboard) / [Open版](https://www.vellum.ai/open-llm-leaderboard) | 表形式、フィルタ多め、商用色強い |
-| [Onyx.app](https://onyx.app/open-llm-leaderboard) | bar chart hover中心 |
-| [DeployBase](https://deploybase.ai/articles/open-source-llm-leaderboard) | self-hosting cost付き |
-| [Open WebUI leaderboard](https://openwebui.com/leaderboard) | 実使用ベース（Open WebUI内ユーザーの利用統計） |
-| [HF Open LLM Leaderboard v2](https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard) | IFEval/BBH/MATH/GPQA/MUSR/MMLU-Pro。クローズドなし |
+| サイト                                                                                                                 | 特徴                                               |
+| ---------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| [Vellum LLM Leaderboard](https://www.vellum.ai/llm-leaderboard) / [Open版](https://www.vellum.ai/open-llm-leaderboard) | 表形式、フィルタ多め、商用色強い                   |
+| [Onyx.app](https://onyx.app/open-llm-leaderboard)                                                                      | bar chart hover中心                                |
+| [DeployBase](https://deploybase.ai/articles/open-source-llm-leaderboard)                                               | self-hosting cost付き                              |
+| [Open WebUI leaderboard](https://openwebui.com/leaderboard)                                                            | 実使用ベース（Open WebUI内ユーザーの利用統計）     |
+| [HF Open LLM Leaderboard v2](https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard)                  | IFEval/BBH/MATH/GPQA/MUSR/MMLU-Pro。クローズドなし |
 
 ## カテゴリD — ハードウェア適合（canirun.aiの仲間）
 
 副次機能として参考にする価値はあるが、**主体にはしない**（このプロジェクトの守備範囲外）。"詳細を見る" でこれらに外部リンクするのが筋。
 
-| ツール | 特徴 |
-|---|---|
-| [canirun.ai](https://www.canirun.ai/) | WebGPUで自動マシン判定 + S〜Fグレード、~60モデル |
+| ツール                                                                                           | 特徴                                             |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------ |
+| [canirun.ai](https://www.canirun.ai/)                                                            | WebGPUで自動マシン判定 + S〜Fグレード、~60モデル |
 | [NyxKrage LLM VRAM Calculator](https://huggingface.co/spaces/NyxKrage/LLM-Model-VRAM-Calculator) | **コミュニティ標準**。HFモデルID入力 + quant指定 |
-| [apxml.com VRAM Calculator](https://apxml.com/tools/vram-calculator) | Nvidia + Apple Silicon、quant別、TPS推定 |
-| [SelfHostLLM](https://selfhostllm.org/) ([リポ](https://github.com/erans/selfhostllm)) | 同時リクエスト数まで計算、OSS |
-| [LocalLLM.in VRAM Calculator](https://localllm.in/blog/interactive-vram-calculator) | 同類、Llama/Qwen/Mixtral中心 |
-| [Onyx GPU/VRAM Checker](https://onyx.app/llm-hardware-requirements) | Onyx系列のツール |
+| [apxml.com VRAM Calculator](https://apxml.com/tools/vram-calculator)                             | Nvidia + Apple Silicon、quant別、TPS推定         |
+| [SelfHostLLM](https://selfhostllm.org/) ([リポ](https://github.com/erans/selfhostllm))           | 同時リクエスト数まで計算、OSS                    |
+| [LocalLLM.in VRAM Calculator](https://localllm.in/blog/interactive-vram-calculator)              | 同類、Llama/Qwen/Mixtral中心                     |
+| [Onyx GPU/VRAM Checker](https://onyx.app/llm-hardware-requirements)                              | Onyx系列のツール                                 |
 
 ## カテゴリE — キュレーション記事（手動更新の比較表）
 
@@ -74,16 +80,16 @@ param軸でやってる既存例は調査範囲では**見つからなかった*
 
 ## 差別化マトリクス（更新版）
 
-| | AA | AA open-source page | canirun | Paraplouis | WhatLLM | llm-stats | Vellum | HF v2 | **local-lm-frontier** |
-|---|---|---|---|---|---|---|---|---|---|
-| Param軸 scatter | ❌ | ✅ | ❌ | ❌ | ❌ | △ | ❌ | △ | ✅ |
-| 明示 Pareto 線 | ❌ | ❌ (quadrantのみ) | ❌ | ✅ | ❌ | ❌ | ❌ | ❌ | ✅ |
-| クローズドアンカー | △ | ❌ (open専用) | ❌ | ❌ | ❌ | △ | △ | ❌ | ✅ |
-| MoE active params | ❌(API) | ✅ | ✅ | ? | ? | △ | △ | △ | ✅ |
-| Y軸即時切替 | ❌ | ❌ | ❌ | ❌ | △ | △ | ❌ | △ | ✅ |
-| 1画面で完結 | ❌ | △ | △ | ✅ | ❌ | ❌ | ❌ | △ | ✅ |
-| 自動データ更新 | ✅ | ✅ | △ | ❌ (手動) | ✅ | ✅ | ✅ | ✅ | ✅ |
-| VRAM/hw適合 | ❌ | ❌ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ (意図的) |
+|                    | AA      | AA open-source page | canirun | Paraplouis | WhatLLM | llm-stats | Vellum | HF v2 | **local-lm-frontier** |
+| ------------------ | ------- | ------------------- | ------- | ---------- | ------- | --------- | ------ | ----- | --------------------- |
+| Param軸 scatter    | ❌      | ✅                  | ❌      | ❌         | ❌      | △         | ❌     | △     | ✅                    |
+| 明示 Pareto 線     | ❌      | ❌ (quadrantのみ)   | ❌      | ✅         | ❌      | ❌        | ❌     | ❌    | ✅                    |
+| クローズドアンカー | △       | ❌ (open専用)       | ❌      | ❌         | ❌      | △         | △      | ❌    | ✅                    |
+| MoE active params  | ❌(API) | ✅                  | ✅      | ?          | ?       | △         | △      | △     | ✅                    |
+| Y軸即時切替        | ❌      | ❌                  | ❌      | ❌         | △       | △         | ❌     | △     | ✅                    |
+| 1画面で完結        | ❌      | △                   | △       | ✅         | ❌      | ❌        | ❌     | △     | ✅                    |
+| 自動データ更新     | ✅      | ✅                  | △       | ❌ (手動)  | ✅      | ✅        | ✅     | ✅    | ✅                    |
+| VRAM/hw適合        | ❌      | ❌                  | ✅      | ❌         | ❌      | ❌        | ❌     | ❌    | ❌ (意図的)           |
 
 「**param軸 × 明示Pareto線 × クローズドアンカー × ミニマル**」の組み合わせは依然空白。ただし**個々の要素は他所にある**ので、組み合わせの妙とUI洗練が勝負どころ。
 
@@ -93,19 +99,19 @@ param軸でやってる既存例は調査範囲では**見つからなかった*
 
 将来 graduate して公開する場合の参考に。
 
-| サイト | モデル | 詳細 |
-|---|---|---|
-| **Artificial Analysis** | 公開情報なし。Insights Platform / 法人サービス想定 | サイト・APIは無料（1k req/day）。pricing/about ページに金額情報なし。実態は AIラボや企業向けのカスタム評価データ販売/コンサルが収益源と推測される（業界における同類サービスの典型パターン） |
-| **canirun.ai** | 不明（ホビープロジェクト推定） | 広告・課金導線が見当たらない |
-| **WhatLLM.org** | アグリゲータSEO / アフィリエイト推定 | 925モデルを並べてプロバイダAPIへ送客する構造。明示的な課金プランなし |
-| **llm-stats.com** | Free。アフィリエイト可能性ありと明記 | "creators / freelancers / digital businesses" 向けの無料サイト |
-| **Vellum** | **リードジェネレーション** | リーダーボードは集客装置。本体は Pro $500/月、Enterprise 数万ドル/年規模のAI開発プラットフォーム |
-| **Onyx** | リードジェネレーション | OSS の Onyx エンタープライズAIプラットフォームへ送客 |
-| **DeployBase** | リードジェネレーション | self-hosting サービスへの送客 |
-| **HF Open LLM Leaderboard** | HF Hub 本体のコンテンツマーケティング | Hub の有料プラン (Pro/Enterprise) と inference Endpoint への送客 |
-| **Paraplouis pareto-frontier** | 非収益（OSS） | GitHub の個人プロジェクト |
-| **NyxKrage / SelfHostLLM** | 非収益（OSS / HF Space） | 同上 |
-| **apxml VRAM Calculator** | 有料コース/教材への送客 | apxml は AI/ML 教育コンテンツが本体 |
+| サイト                         | モデル                                             | 詳細                                                                                                                                                                                        |
+| ------------------------------ | -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Artificial Analysis**        | 公開情報なし。Insights Platform / 法人サービス想定 | サイト・APIは無料（1k req/day）。pricing/about ページに金額情報なし。実態は AIラボや企業向けのカスタム評価データ販売/コンサルが収益源と推測される（業界における同類サービスの典型パターン） |
+| **canirun.ai**                 | 不明（ホビープロジェクト推定）                     | 広告・課金導線が見当たらない                                                                                                                                                                |
+| **WhatLLM.org**                | アグリゲータSEO / アフィリエイト推定               | 925モデルを並べてプロバイダAPIへ送客する構造。明示的な課金プランなし                                                                                                                        |
+| **llm-stats.com**              | Free。アフィリエイト可能性ありと明記               | "creators / freelancers / digital businesses" 向けの無料サイト                                                                                                                              |
+| **Vellum**                     | **リードジェネレーション**                         | リーダーボードは集客装置。本体は Pro $500/月、Enterprise 数万ドル/年規模のAI開発プラットフォーム                                                                                            |
+| **Onyx**                       | リードジェネレーション                             | OSS の Onyx エンタープライズAIプラットフォームへ送客                                                                                                                                        |
+| **DeployBase**                 | リードジェネレーション                             | self-hosting サービスへの送客                                                                                                                                                               |
+| **HF Open LLM Leaderboard**    | HF Hub 本体のコンテンツマーケティング              | Hub の有料プラン (Pro/Enterprise) と inference Endpoint への送客                                                                                                                            |
+| **Paraplouis pareto-frontier** | 非収益（OSS）                                      | GitHub の個人プロジェクト                                                                                                                                                                   |
+| **NyxKrage / SelfHostLLM**     | 非収益（OSS / HF Space）                           | 同上                                                                                                                                                                                        |
+| **apxml VRAM Calculator**      | 有料コース/教材への送客                            | apxml は AI/ML 教育コンテンツが本体                                                                                                                                                         |
 
 ### 観察される収益化パターン3つ
 

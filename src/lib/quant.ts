@@ -11,7 +11,10 @@
  */
 const BYTES_PER_PARAM_Q4_K_M = 0.6;
 
-export function estimateQ4KMBytes(totalParams: number | null | undefined): number | null {
-  if (totalParams == null || !Number.isFinite(totalParams) || totalParams <= 0) return null;
+export function estimateQ4KMBytes(
+  totalParams: number | null | undefined,
+): number | null {
+  if (totalParams == null || !Number.isFinite(totalParams) || totalParams <= 0)
+    return null;
   return totalParams * BYTES_PER_PARAM_Q4_K_M;
 }

@@ -111,13 +111,13 @@ Metric roster audited 2026-07-23 (see [data-sources.md §1](./data-sources.md#1-
 
 ### 3.2 状態定義（**統一ルール**: 選択 = 容器より1段上の elevation）
 
-| 状態 | 背景 | テキスト | コーナー | 補助 |
-|---|---|---|---|---|
-| selected | `--bg-high` | `--fg-default` | 6px rounded | — |
-| hover (非選択) | `--bg-high` を 50% 透過 | `--fg-default` | 6px rounded | — |
-| idle | 透明 | `--fg-muted` | — | — |
-| keyboard-focused (非選択) | hover と同じ | `--fg-default` | 6px rounded | 1px outline `--accent` |
-| keyboard-focused + selected | selected と同じ | `--fg-default` | 6px rounded | 1px outline `--accent` |
+| 状態                        | 背景                    | テキスト       | コーナー    | 補助                   |
+| --------------------------- | ----------------------- | -------------- | ----------- | ---------------------- |
+| selected                    | `--bg-high`             | `--fg-default` | 6px rounded | —                      |
+| hover (非選択)              | `--bg-high` を 50% 透過 | `--fg-default` | 6px rounded | —                      |
+| idle                        | 透明                    | `--fg-muted`   | —           | —                      |
+| keyboard-focused (非選択)   | hover と同じ            | `--fg-default` | 6px rounded | 1px outline `--accent` |
+| keyboard-focused + selected | selected と同じ         | `--fg-default` | 6px rounded | 1px outline `--accent` |
 
 transition: 80ms ease on background-color。
 
@@ -129,12 +129,12 @@ transition: 80ms ease on background-color。
 
 ### 3.4 キーボード
 
-| キー | 動作 |
-|---|---|
+| キー      | 動作                                      |
+| --------- | ----------------------------------------- |
 | `↑` / `↓` | focused 項目を移動（selected は変えない） |
-| `Enter` | focused 項目を選択して dropdown を閉じる |
-| `Esc` | 選択変更せず閉じる |
-| `Tab` | 検索欄から最初の項目へ。ヘッダはスキップ |
+| `Enter`   | focused 項目を選択して dropdown を閉じる  |
+| `Esc`     | 選択変更せず閉じる                        |
+| `Tab`     | 検索欄から最初の項目へ。ヘッダはスキップ  |
 
 dropdown を開いた直後の focused は **selected と同じ位置**。
 
@@ -152,10 +152,10 @@ dropdown を開いた直後の focused は **selected と同じ位置**。
 
 ### 4.2 点・Barbell・frontier の見せ方
 
-| Segment | 点の表現 | Frontier |
-|---|---|---|
-| **Active** | 単一点（active params 位置） | 1本（active 基準、実線 `--frontier`） |
-| **Total** | 単一点（total params 位置） | 1本（total 基準、実線 `--frontier`） |
+| Segment     | 点の表現                                                                                   | Frontier                                                               |
+| ----------- | ------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------- |
+| **Active**  | 単一点（active params 位置）                                                               | 1本（active 基準、実線 `--frontier`）                                  |
+| **Total**   | 単一点（total params 位置）                                                                | 1本（total 基準、実線 `--frontier`）                                   |
 | **Compare** | **MoE: Barbell** (`active` 実点 → 細線 → `total` 開円)<br>**Dense: 単一点** (active=total) | 2本: active 基準 = 実線 `--frontier`、total 基準 = 同色 50% 透過の点線 |
 
 #### Barbell 表現の詳細（Compare 時）
@@ -253,13 +253,13 @@ Tailwind デフォルトを踏襲:
 
 WCAG 2.5.5 (AAA) は 44×44 CSS px、Apple HIG が 44pt、Material が 48dp を要求。本サイトはモバイル時に次へ昇格:
 
-| 要素 | デスクトップ | モバイル |
-|---|---|---|
-| segmented control セル | 32px tall | **40px tall** |
-| dropdown 項目 | 32px tall | **44px tall** |
-| フィルタ chip | 28px tall | **36px tall** |
-| ⓘ icon hit-area | 16×16 視覚 / 24×24 hit | **44×44 hit** |
-| 散布図の点 hit-area | 9px visible / 16px hit | **6px visible / 28px hit** (透明 hit-circle 重畳) |
+| 要素                   | デスクトップ           | モバイル                                          |
+| ---------------------- | ---------------------- | ------------------------------------------------- |
+| segmented control セル | 32px tall              | **40px tall**                                     |
+| dropdown 項目          | 32px tall              | **44px tall**                                     |
+| フィルタ chip          | 28px tall              | **36px tall**                                     |
+| ⓘ icon hit-area        | 16×16 視覚 / 24×24 hit | **44×44 hit**                                     |
+| 散布図の点 hit-area    | 9px visible / 16px hit | **6px visible / 28px hit** (透明 hit-circle 重畳) |
 
 視覚サイズは保ち、SVG/HTML の `pointer-events` 領域だけを広げて密集帯のタップを担保する。
 

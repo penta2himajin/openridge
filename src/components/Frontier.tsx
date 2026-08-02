@@ -12,7 +12,14 @@
  * The chart is not virtualised — at <600 points it's well within SVG
  * performance budget. Re-renders on every relevant signal change.
  */
-import { batch, createEffect, createMemo, createSignal, onCleanup, onMount } from "solid-js";
+import {
+  batch,
+  createEffect,
+  createMemo,
+  createSignal,
+  onCleanup,
+  onMount,
+} from "solid-js";
 import * as Plot from "@observablehq/plot";
 import * as d3 from "d3";
 import type { ModelRecord, ModelsSnapshot } from "../lib/models";
@@ -86,14 +93,22 @@ export default function Frontier(props: Props) {
 
   // Chart-relative coords of the currently selected/hovered point. Used by
   // Tooltip to position itself near the point (per docs/ui.md §4.5).
-  const [selectedPos, setSelectedPos] = createSignal<{ cx: number; cy: number } | null>(null);
+  const [selectedPos, setSelectedPos] = createSignal<{
+    cx: number;
+    cy: number;
+  } | null>(null);
   const [chartSize, setChartSize] = createSignal({ w: 0, h: 0 });
 
   // Which end of a Compare-mode barbell the current selection points at. The
   // tooltip anchors to this end so hovering the total-side ○ shows the card
   // beside that ○ rather than jumping to the far-away active ● (docs/ui.md §4.5).
-  const [selectedEnd, setSelectedEnd] = createSignal<"active" | "total">("active");
-  const selectPoint = (id: string | null, end: "active" | "total" = "active") => {
+  const [selectedEnd, setSelectedEnd] = createSignal<"active" | "total">(
+    "active",
+  );
+  const selectPoint = (
+    id: string | null,
+    end: "active" | "total" = "active",
+  ) => {
     batch(() => {
       setSelectedEnd(end);
       props.state.setSelectedModelId(id);
@@ -148,7 +163,10 @@ export default function Frontier(props: Props) {
     //      marker right beside the best open weight.
     const top = items[0];
     const openScores = props.snapshot.models
-      .filter((m) => !m.isClosed && m.params.active != null && m.scores[metric] != null)
+      .filter(
+        (m) =>
+          !m.isClosed && m.params.active != null && m.scores[metric] != null,
+      )
       .map((m) => m.scores[metric] as number);
     if (openScores.length === 0) return [top];
     const topOpen = Math.max(...openScores);
@@ -211,8 +229,12 @@ export default function Frontier(props: Props) {
         y: m.scores[metric] as number | null,
         isFrontier: pareto.has(m.id),
       }))
-      .filter((p): p is Pt =>
-        p.x != null && p.y != null && Number.isFinite(p.x) && Number.isFinite(p.y),
+      .filter(
+        (p): p is Pt =>
+          p.x != null &&
+          p.y != null &&
+          Number.isFinite(p.x) &&
+          Number.isFinite(p.y),
       );
 
     // Collapse reasoning/effort variants of one model to its top-scoring point.
@@ -223,7 +245,9 @@ export default function Frontier(props: Props) {
     if (props.state.frontierOnly()) {
       const tf = totalFrontierIds();
       const compare = props.state.xview() === "compare";
-      points = points.filter((p) => p.isFrontier || (compare && tf.has(p.m.id)));
+      points = points.filter(
+        (p) => p.isFrontier || (compare && tf.has(p.m.id)),
+      );
     }
 
     // Robust x domain even if filter empties points. In Compare mode the
@@ -296,32 +320,40 @@ export default function Frontier(props: Props) {
         Plot.frame({ stroke: "var(--fg-subtle)", strokeOpacity: 0.5 }),
 
         // Non-frontier open points (faint)
-        Plot.dot(points.filter((p) => !p.isFrontier), {
-          x: "x",
-          y: "y",
-          r: 4,
-          fill: "var(--fg-subtle)",
-          fillOpacity: 0.35,
-          stroke: null,
-        }),
+        Plot.dot(
+          points.filter((p) => !p.isFrontier),
+          {
+            x: "x",
+            y: "y",
+            r: 4,
+            fill: "var(--fg-subtle)",
+            fillOpacity: 0.35,
+            stroke: null,
+          },
+        ),
 
         // Frontier points (bright lime)
-        Plot.dot(points.filter((p) => p.isFrontier), {
-          x: "x",
-          y: "y",
-          r: mobile ? 5.5 : 6,
-          fill: "var(--frontier)",
-          stroke: null,
-        }),
+        Plot.dot(
+          points.filter((p) => p.isFrontier),
+          {
+            x: "x",
+            y: "y",
+            r: mobile ? 5.5 : 6,
+            fill: "var(--frontier)",
+            stroke: null,
+          },
+        ),
       ],
     });
     // Tag axes for CSS theming
-    plot.querySelectorAll("g[aria-label='x-axis tick label'], g[aria-label='y-axis tick label']").forEach((g) =>
-      g.classList.add("ridge-axis"),
-    );
-    plot.querySelectorAll("[aria-label^='x-axis'], [aria-label^='y-axis']").forEach((g) =>
-      g.classList.add("ridge-axis"),
-    );
+    plot
+      .querySelectorAll(
+        "g[aria-label='x-axis tick label'], g[aria-label='y-axis tick label']",
+      )
+      .forEach((g) => g.classList.add("ridge-axis"));
+    plot
+      .querySelectorAll("[aria-label^='x-axis'], [aria-label^='y-axis']")
+      .forEach((g) => g.classList.add("ridge-axis"));
 
     plotRef.replaceChildren(plot);
 
@@ -342,7 +374,10 @@ export default function Frontier(props: Props) {
     // total-X coord, not active-X.
     const tfIds = totalFrontierIds();
     const compareTotalFrontier = open
-      .filter((m) => tfIds.has(m.id) && m.params.total != null && m.scores[metric] != null)
+      .filter(
+        (m) =>
+          tfIds.has(m.id) && m.params.total != null && m.scores[metric] != null,
+      )
       .map((m) => ({
         x: m.params.total as number,
         y: m.scores[metric] as number,
@@ -474,7 +509,23 @@ function formatClosedLabel(name: string, mobile: boolean): string {
 }
 
 function drawOverlay(ctx: OverlayContext) {
-  const { svg, width, height, points, closed, xScale, yScale, mobile, xview, compareTotalFrontier, totalFrontierIds, selectedId, selectedEnd, onSelect, onSelectedPos } = ctx;
+  const {
+    svg,
+    width,
+    height,
+    points,
+    closed,
+    xScale,
+    yScale,
+    mobile,
+    xview,
+    compareTotalFrontier,
+    totalFrontierIds,
+    selectedId,
+    selectedEnd,
+    onSelect,
+    onSelectedPos,
+  } = ctx;
   const svgSel = d3.select(svg).attr("viewBox", `0 0 ${width} ${height}`);
   svgSel.selectAll("*").remove();
 
@@ -607,7 +658,8 @@ function drawOverlay(ctx: OverlayContext) {
       const xa = xScale(p.x);
       const xt = xScale(totalParam);
       const cy = yScale(p.y);
-      if (!Number.isFinite(xa) || !Number.isFinite(xt) || !Number.isFinite(cy)) continue;
+      if (!Number.isFinite(xa) || !Number.isFinite(xt) || !Number.isFinite(cy))
+        continue;
       // A barbell reads as "on the frontier" when EITHER end sits on its axis's
       // frontier. Colour the whole barbell (connector + both ends) lime in that
       // case so the two directions are symmetric: an active-frontier MoE colours
@@ -678,7 +730,9 @@ function drawOverlay(ctx: OverlayContext) {
   }
 
   // Frontier path through frontier points (sorted by x).
-  const frontierPoints = points.filter((p) => p.isFrontier).sort((a, b) => a.x - b.x);
+  const frontierPoints = points
+    .filter((p) => p.isFrontier)
+    .sort((a, b) => a.x - b.x);
   if (frontierPoints.length >= 2) {
     const line = d3
       .line<{ x: number; y: number }>()
@@ -718,8 +772,18 @@ function drawOverlay(ctx: OverlayContext) {
     if (!Number.isFinite(cx) || !Number.isFinite(cy)) continue;
     // In Compare the active ● is also lime when the model is on the total
     // frontier (see the barbell / dense loops above).
-    const activeLime = p.isFrontier || (xview === "compare" && totalFrontierIds.has(p.m.id));
-    hits.push({ id: p.m.id, name: p.m.name, param: p.x, cx, cy, end: "active", frontier: activeLime, open: false });
+    const activeLime =
+      p.isFrontier || (xview === "compare" && totalFrontierIds.has(p.m.id));
+    hits.push({
+      id: p.m.id,
+      name: p.m.name,
+      param: p.x,
+      cx,
+      cy,
+      end: "active",
+      frontier: activeLime,
+      open: false,
+    });
   }
   if (xview === "compare") {
     for (const p of points) {
@@ -730,7 +794,16 @@ function drawOverlay(ctx: OverlayContext) {
       const cx = xScale(t);
       const cy = yScale(p.y);
       if (!Number.isFinite(cx) || !Number.isFinite(cy)) continue;
-      hits.push({ id: p.m.id, name: p.m.name, param: t, cx, cy, end: "total", frontier: true, open: true });
+      hits.push({
+        id: p.m.id,
+        name: p.m.name,
+        param: t,
+        cx,
+        cy,
+        end: "total",
+        frontier: true,
+        open: true,
+      });
     }
   }
 

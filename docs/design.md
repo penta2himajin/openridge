@@ -16,14 +16,14 @@
 
 ### 一次参照
 
-| 出典 | 盗む要素 |
-|---|---|
-| [Linear](https://linear.app) | OKLCH ベースのダーク系配色、タイポのウェイト階段、アクセントカラーの抑制 |
-| [Vercel](https://vercel.com) | Geist フォント、罫線の引き方、データ表現のミニマリズム |
-| [Resend](https://resend.com) | グラデーションを使わない polished、コントラスト管理 |
-| [Observable Plot ギャラリー](https://observablehq.com/@observablehq/plot-gallery) | チャート自体の Bostock 美学（軸・ラベル・色） |
-| [The Pudding](https://pudding.cool) | データ可視化の "見せる" 美学（ただし本件は1画面なのでナラティブは借りない） |
-| [Stripe Press](https://press.stripe.com) | タイポ階層、長文ではない短文の品位 |
+| 出典                                                                              | 盗む要素                                                                    |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| [Linear](https://linear.app)                                                      | OKLCH ベースのダーク系配色、タイポのウェイト階段、アクセントカラーの抑制    |
+| [Vercel](https://vercel.com)                                                      | Geist フォント、罫線の引き方、データ表現のミニマリズム                      |
+| [Resend](https://resend.com)                                                      | グラデーションを使わない polished、コントラスト管理                         |
+| [Observable Plot ギャラリー](https://observablehq.com/@observablehq/plot-gallery) | チャート自体の Bostock 美学（軸・ラベル・色）                               |
+| [The Pudding](https://pudding.cool)                                               | データ可視化の "見せる" 美学（ただし本件は1画面なのでナラティブは借りない） |
+| [Stripe Press](https://press.stripe.com)                                          | タイポ階層、長文ではない短文の品位                                          |
 
 ### 避ける参照（在り来りの源泉）
 
@@ -40,26 +40,26 @@
 
 OKLCH ベース、ダーク優先（prefers-color-scheme でライト切替）。Framer は OKLCH を直接解釈しないため、プロンプト用の hex 近似値を併記。
 
-| トークン | OKLCH | hex 近似 | 用途 |
-|---|---|---|---|
-| `--bg-base` | `oklch(0.18 0.01 270)` | `#1A1B22` | ページ背景 |
-| `--bg-elevated` | `oklch(0.22 0.01 270)` | `#20222A` | カード・dropdown 容器・segmented control の選択 pill |
-| **`--bg-high`** | `oklch(0.28 0.01 270)` | `#2A2D34` | dropdown 内の選択 pill、tooltip hover 行 |
-| `--fg-default` | `oklch(0.96 0.005 270)` | `#F2F2F5` | 本文・選択中ラベル |
-| `--fg-muted` | `oklch(0.65 0.01 270)` | `#9A9CA3` | サブテキスト・idle ラベル |
-| `--fg-subtle` | `oklch(0.40 0.01 270)` | `#58595F` | 罫線・barbell 細線・frontier 外の点 |
-| `--accent` | `oklch(0.78 0.15 195)` | `#4DD3C7` | キーボード focus outline、interactive 強調 |
-| `--frontier` | `oklch(0.92 0.18 145)` | `#BEEE7E` | Pareto frontier 線・frontier 上の点 |
-| `--closed` | `oklch(0.70 0.10 35)` | `#D89882` | クローズドモデル横線 |
+| トークン        | OKLCH                   | hex 近似  | 用途                                                 |
+| --------------- | ----------------------- | --------- | ---------------------------------------------------- |
+| `--bg-base`     | `oklch(0.18 0.01 270)`  | `#1A1B22` | ページ背景                                           |
+| `--bg-elevated` | `oklch(0.22 0.01 270)`  | `#20222A` | カード・dropdown 容器・segmented control の選択 pill |
+| **`--bg-high`** | `oklch(0.28 0.01 270)`  | `#2A2D34` | dropdown 内の選択 pill、tooltip hover 行             |
+| `--fg-default`  | `oklch(0.96 0.005 270)` | `#F2F2F5` | 本文・選択中ラベル                                   |
+| `--fg-muted`    | `oklch(0.65 0.01 270)`  | `#9A9CA3` | サブテキスト・idle ラベル                            |
+| `--fg-subtle`   | `oklch(0.40 0.01 270)`  | `#58595F` | 罫線・barbell 細線・frontier 外の点                  |
+| `--accent`      | `oklch(0.78 0.15 195)`  | `#4DD3C7` | キーボード focus outline、interactive 強調           |
+| `--frontier`    | `oklch(0.92 0.18 145)`  | `#BEEE7E` | Pareto frontier 線・frontier 上の点                  |
+| `--closed`      | `oklch(0.70 0.10 35)`   | `#D89882` | クローズドモデル横線                                 |
 
 #### Elevation rule（重要・統一ルール）
 
 「**選択中 = 容器より1段上の elevation**」を全UIで一貫適用:
 
-| 容器 | 選択 pill |
-|---|---|
-| `--bg-base` (ページ) | `--bg-elevated` ← segmented control の選択 pill |
-| `--bg-elevated` (dropdown 容器) | `--bg-high` ← dropdown 内の選択項目 |
+| 容器                            | 選択 pill                                       |
+| ------------------------------- | ----------------------------------------------- |
+| `--bg-base` (ページ)            | `--bg-elevated` ← segmented control の選択 pill |
+| `--bg-elevated` (dropdown 容器) | `--bg-high` ← dropdown 内の選択項目             |
 
 このルールにより、横（segmented control）と縦（dropdown 選択項目）の選択表現が同じ視覚言語で揃う。
 
@@ -116,6 +116,7 @@ ui.md の内容を踏襲しつつ:
 ## 6. Framer モック作成の手順
 
 Framer の AI 系機能は2系統あり、ワークフローを使い分ける:
+
 - **Wireframer**: ページ全体の骨格を1プロンプトで生成（style-neutral）
 - **Workshop** (`⌘K`): コンポーネント単位で生成、canvas のトークンを継承
 

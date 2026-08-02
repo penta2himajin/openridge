@@ -67,7 +67,8 @@ function InfoModal(props: {
       <div class="relative max-w-md w-full rounded-lg border border-fg-subtle bg-bg-elevated p-5 text-sm">
         <h2 class="text-base text-fg-default">
           <span class="font-mono">about</span>{" "}
-          <span class="font-sans font-normal italic text-fg-muted">Open</span><span class="font-mono font-bold">Ridge</span>
+          <span class="font-sans font-normal italic text-fg-muted">Open</span>
+          <span class="font-mono font-bold">Ridge</span>
         </h2>
         <p class="mt-2 text-fg-muted">
           Pareto frontier of open-weight LLMs, plotted against an intelligence
@@ -76,7 +77,12 @@ function InfoModal(props: {
         <dl class="mt-4 grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 font-mono text-xs">
           <dt class="text-fg-muted uppercase tracking-wide">Source</dt>
           <dd class="text-fg-default">
-            <a class="underline decoration-fg-subtle hover:decoration-fg-default" href="https://artificialanalysis.ai" target="_blank" rel="noopener">
+            <a
+              class="underline decoration-fg-subtle hover:decoration-fg-default"
+              href="https://artificialanalysis.ai"
+              target="_blank"
+              rel="noopener"
+            >
               Artificial Analysis
             </a>
           </dd>
@@ -84,17 +90,26 @@ function InfoModal(props: {
           <dd class="text-fg-default">{generated}</dd>
           <dt class="text-fg-muted uppercase tracking-wide">Entries</dt>
           <dd class="text-fg-default">
-            {counts.all} total · {counts.open} open ({counts.openWithParams} with params
-            {counts.unknown > 0 ? `, ${counts.unknown} params undisclosed` : ""}) · {counts.closed} closed
+            {counts.all} total · {counts.open} open ({counts.openWithParams}{" "}
+            with params
+            {counts.unknown > 0 ? `, ${counts.unknown} params undisclosed` : ""}
+            ) · {counts.closed} closed
           </dd>
         </dl>
         <p class="mt-4 text-fg-muted text-xs leading-relaxed">
-          Params for open models come from the AA name (where encoded) or a small
-          manual override map. MoE active params are the AA-named "A{"<N>"}B" value
-          or a curated override. Browse the methodology and source at{" "}
-          <a class="underline decoration-fg-subtle hover:decoration-fg-default" href="https://github.com/penta2himajin/openridge" target="_blank" rel="noopener">
+          Params for open models come from the AA name (where encoded) or a
+          small manual override map. MoE active params are the AA-named "A
+          {"<N>"}B" value or a curated override. Browse the methodology and
+          source at{" "}
+          <a
+            class="underline decoration-fg-subtle hover:decoration-fg-default"
+            href="https://github.com/penta2himajin/openridge"
+            target="_blank"
+            rel="noopener"
+          >
             github.com/penta2himajin/openridge
-          </a>.
+          </a>
+          .
         </p>
 
         <div class="mt-5 pt-4 border-t border-fg-subtle/60">
@@ -118,7 +133,8 @@ function InfoModal(props: {
                     class="rounded-full border px-3 text-xs font-medium h-8 transition-colors"
                     classList={{
                       "bg-bg-high border-fg-subtle text-fg-default": on(),
-                      "border-fg-subtle text-fg-muted hover:text-fg-default": !on(),
+                      "border-fg-subtle text-fg-muted hover:text-fg-default":
+                        !on(),
                     }}
                     onClick={() => props.state.toggleClosedVendor(v.slug)}
                   >

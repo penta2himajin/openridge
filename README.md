@@ -18,14 +18,14 @@ Why this exists, what's already in the field, and how it intends to differ — s
 
 The repo currently contains specification documents, conventions, and project scaffolding. No working code yet. The full MVP is described across `docs/`:
 
-| Doc | Scope |
-|---|---|
-| `docs/architecture.md` | Stack, data pipeline, deploy story |
-| `docs/data-sources.md` | AA API / HuggingFace API survey, alias map design |
-| `docs/design.md` | Visual language, tokens, motion |
-| `docs/ui.md` | UI specification (header, dropdown, segmented control, scatter, filters) |
-| `docs/framer-prompts.md` | Framer Wireframer / Workshop prompts used to mock the UI |
-| `docs/prior-art.md` | Differentiation against AA, Paraplouis, WhatLLM, llm-stats, Vellum, HF, etc. |
+| Doc                      | Scope                                                                        |
+| ------------------------ | ---------------------------------------------------------------------------- |
+| `docs/architecture.md`   | Stack, data pipeline, deploy story                                           |
+| `docs/data-sources.md`   | AA API / HuggingFace API survey, alias map design                            |
+| `docs/design.md`         | Visual language, tokens, motion                                              |
+| `docs/ui.md`             | UI specification (header, dropdown, segmented control, scatter, filters)     |
+| `docs/framer-prompts.md` | Framer Wireframer / Workshop prompts used to mock the UI                     |
+| `docs/prior-art.md`      | Differentiation against AA, Paraplouis, WhatLLM, llm-stats, Vellum, HF, etc. |
 
 Genealogy: this repo graduated from `ideabook/ideas/local-lm-frontier/` (codename retained for the seed phase).
 

@@ -111,6 +111,17 @@ GET https://huggingface.co/api/models/<owner>/<repo>
    - `num_experts_per_tok` × `moe_intermediate_size` × `hidden_size` (per layer) + non-expert params
    - 厳密ではないが ±10% 程度に収まれば散布図用途には十分
 
+   **キー名と入れ子に注意**（MoE を dense と誤読する主因。推定が null を返すと呼び出し側は `total` にフォールバックし、それがそのまま dense 表示になる）:
+   - per-token のルーティング数は3通りの綴りがある: `num_experts_per_tok` (DeepSeek / Qwen / Nemotron) / `num_experts_per_token` (Kimi Linear) / `top_k_experts` (Gemma 4 / DiffusionGemma)
+   - **`num_experts` / `n_routed_experts` は expert プールの総数**であって per-token 数ではない。取り違えると sparsity 分だけ過大評価する（Gemma 4 なら 128 vs 8）
+   - マルチモーダルモデルは LLM config を wrapper の下に埋める: `text_config` (Gemma 4) / `llm_config` (Nemotron Omni) / `thinker_config.text_config` (Qwen3-Omni)。トップレベルだけ読むと routing が見つからず dense 判定になる
+   - shared expert は routed expert と幅が違うことがある。`moe_shared_expert_intermediate_size` (Nemotron-H) / `shared_expert_intermediate_size` (Qwen3-Omni) があればそちら（全 shared expert の合計幅）を優先する
+   - Gemma 4 は experts が dense MLP を**置き換えず併走**する（`enable_moe_block: true`、`model.safetensors.index.json` の weight map で確認済み）。この場合 `intermediate_size` は dense 層の幅ではなく常時オンの shared expert 幅
+
+   **推定が効かない構造**: Nemotron-H 系の Mamba-2 / MoE ハイブリッドは大半の層が Mamba で、`num_hidden_layers` から attention / MoE 層数を導けない。この系統は推定を諦めて `moe_overrides.json` に実測値を置く。
+
+   **不変条件**: `active > total` は物理的にありえない（チェックポイントに無い重みは活性化できない）。推定がこれを踏んだ場合は警告を出して `total` にフォールバックする。alias が量子化・部分アップロードの repo を指してしまった場合にも効く（`safetensors.total` が過小になるため）。
+
 3. **dense モデル**: `active = total` で確定（追加処理不要）
 
 ### モデル同定（AA ↔ HF）

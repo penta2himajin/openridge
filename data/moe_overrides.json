@@ -7,8 +7,16 @@
   "google/gemma-3n-E2B-it": { "active": 2000000000 },
   "google/gemma-3n-E4B-it": { "active": 4000000000 },
   "google/gemma-3n-E4B-it-litert-preview": { "active": 4000000000 },
+  "google/Gemma-4-26B-A4B": { "active": 3800000000 },
+  "google/diffusiongemma-26B-A4B-it": { "active": 3800000000 },
   "google/gemma-4-E2B": { "active": 2300000000 },
   "google/gemma-4-E4B": { "active": 4500000000 },
   "mistralai/Mixtral-8x22B-Instruct-v0.1": { "active": 39000000000 },
-  "mistralai/Mixtral-8x7B-Instruct-v0.1": { "active": 12900000000 }
+  "mistralai/Mixtral-8x7B-Instruct-v0.1": { "active": 12900000000 },
+  "moonshotai/Kimi-K3": { "active": 104000000000 },
+  "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16": { "active": 12000000000 },
+  "nvidia/Nemotron-Cascade-2-30B-A3B": { "active": 3000000000 },
+  "nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16": { "active": 55000000000 },
+  "nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning": { "active": 3000000000 },
+  "nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16": { "active": 3000000000 }
 }

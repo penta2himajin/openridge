@@ -96,12 +96,9 @@ test("known-MoE-shaped families are stored with active < total", () => {
   // removal of scripts/build-data.ts's name-parsing heuristic — the AA display
   // name is never trusted for this either, so this list stays hand-kept.
   //
-  // NOTE: lfm2-5-8b-a1b, mixtral-8x7b-instruct, mistral-8x22b-instruct,
-  // gemma-4-e2b(-non-reasoning), gemma-4-e4b(-non-reasoning), gemma-3n-e2b,
-  // gemma-3n-e4b(-preview-0520) are also confirmed active<total (see PR) but
-  // are deliberately omitted here until the next `npm run refresh` regenerates
-  // data/models.json from the newly-added hf_aliases.json/moe_overrides.json
-  // entries — adding them now would fail against the still-stale snapshot.
+  // NOTE: gemma-3n-e4b-preview-0520 is also a known "effective params" model
+  // but resolves to null params (the litert-preview repo ships no safetensors
+  // metadata), so it can't be asserted here.
   const KNOWN_MOE_SLUGS = [
     "minimax-m1-40k",
     "minimax-m1-80k",
@@ -114,6 +111,36 @@ test("known-MoE-shaped families are stored with active < total", () => {
     "gpt-oss-120b-low",
     "ling-1t",
     "ring-1t",
+    "lfm2-5-8b-a1b",
+    "mixtral-8x7b-instruct",
+    "mistral-8x22b-instruct",
+    "gemma-3n-e2b",
+    "gemma-3n-e4b",
+    "gemma-4-e2b",
+    "gemma-4-e2b-non-reasoning",
+    "gemma-4-e4b",
+    "gemma-4-e4b-non-reasoning",
+    // Gemma 4's routed-MoE pair: the estimator read `top_k_experts` as absent
+    // and stored these dense at 26.5B active until the key-alias fix.
+    "gemma-4-26b-a4b",
+    "gemma-4-26b-a4b-non-reasoning",
+    "diffusiongemma-26b-a4b",
+    // Mamba-2/MoE hybrids — the config estimator can't model them, so these
+    // ride entirely on data/moe_overrides.json.
+    "nemotron-3-nano-omni-30b-a3b",
+    "nvidia-nemotron-3-nano-30b-a3b",
+    "nvidia-nemotron-3-nano-30b-a3b-reasoning",
+    "nvidia-nemotron-3-super-120b-a12b",
+    "nvidia-nemotron-3-ultra-550b-a55b",
+    "nemotron-cascade-2-30b-a3b",
+    // 2.8T total / 104B active — was stored fully dense, the single largest
+    // misplacement on the chart.
+    "kimi-k3-low",
+    // Multimodal wrappers: the LLM config is nested a level or two down
+    // (`thinker_config.text_config`), which the estimator now walks.
+    "qwen3-omni-30b-a3b-instruct",
+    "qwen3-omni-30b-a3b-reasoning",
+    "kimi-linear-48b-a3b-instruct",
   ];
   const offenders: string[] = [];
   for (const slug of KNOWN_MOE_SLUGS) {
@@ -147,4 +174,28 @@ test("every open model with params is either on a frontier or dominated (no orph
       );
     }
   }
+});
+
+test("no model activates more parameters than it contains", () => {
+  // A token cannot route through more weights than the checkpoint holds, so
+  // active > total is always a bug — a bad MoE estimate, or an alias pointing
+  // at a quantized/partial repo whose `safetensors.total` understates the
+  // model. Regression: nvidia-nemotron-3-super-120b-a12b was aliased to the
+  // NVFP4 upload and stored 73.3B active against 67.2B total.
+  const offenders = models
+    .filter(
+      (m) =>
+        m.params.active != null &&
+        m.params.total != null &&
+        m.params.active > m.params.total,
+    )
+    .map(
+      (m) =>
+        `${m.slug}: active ${(m.params.active! / 1e9).toFixed(1)}B > total ${(m.params.total! / 1e9).toFixed(1)}B`,
+    );
+  assert.deepEqual(
+    offenders,
+    [],
+    `active exceeds total:\n  ${offenders.join("\n  ")}`,
+  );
 });

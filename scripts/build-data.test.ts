@@ -1,6 +1,11 @@
 import { test, mock } from "node:test";
 import assert from "node:assert/strict";
-import { resolveParams, HF_ORGS_BY_CREATOR, type AAEntry } from "./build-data";
+import {
+  resolveParams,
+  computeActiveParams,
+  HF_ORGS_BY_CREATOR,
+  type AAEntry,
+} from "./build-data";
 
 const B = 1e9;
 
@@ -297,5 +302,158 @@ test("resolveParams: manual_params.json still wins over everything, including HF
     fetchMock.mock.callCount(),
     0,
     "a manual override must pre-empt any HF lookup",
+  );
+});
+
+// ─── computeActiveParams: MoE configs must never read as dense ────────────
+//
+// Regression: `Gemma 4 26B A4B` plotted at 26.5B active (i.e. as a dense
+// model) because the estimator only recognised `num_experts_per_tok` and only
+// looked at `cfg.text_config ?? cfg`. Every vendor spells the routing keys
+// differently and multimodal models nest the LLM one or two wrappers deep; on
+// any miss the caller silently falls back to `total`, which is exactly the
+// dense reading. Each case below is a real published config (trimmed).
+
+test("computeActiveParams: Gemma 4 'top_k_experts' spelling is MoE, not dense", () => {
+  // google/gemma-4-26B-A4B: routing key is `top_k_experts`, and the per-layer
+  // dense `mlp` runs *alongside* the experts (confirmed in the repo's
+  // model.safetensors.index.json weight map), so `intermediate_size` is an
+  // always-on shared expert rather than a dense-layer width.
+  const active = computeActiveParams({
+    text_config: {
+      hidden_size: 2816,
+      num_hidden_layers: 30,
+      intermediate_size: 2112,
+      moe_intermediate_size: 704,
+      num_experts: 128,
+      top_k_experts: 8,
+      vocab_size: 262144,
+      enable_moe_block: true,
+    },
+  });
+  assert.ok(active !== null, "must not read as dense");
+  // Model card states 3.8B active against 26.5B total.
+  assert.ok(
+    active! > 3.2 * B && active! < 4.4 * B,
+    `expected ~3.8B active, got ${active}`,
+  );
+});
+
+test("computeActiveParams: genuinely dense Gemma 4 still returns null", () => {
+  // google/Gemma-4-31B — `enable_moe_block: false`, no expert fields at all.
+  // The alias/shared-expert handling above must not invent routing here.
+  assert.equal(
+    computeActiveParams({
+      text_config: {
+        hidden_size: 5376,
+        num_hidden_layers: 60,
+        intermediate_size: 21504,
+        vocab_size: 262144,
+        enable_moe_block: false,
+      },
+    }),
+    null,
+  );
+});
+
+test("computeActiveParams: finds the LLM config nested under a multimodal wrapper", () => {
+  // Qwen/Qwen3-Omni-30B-A3B-Instruct nests it at `thinker_config.text_config`;
+  // nvidia Nemotron Omni uses `llm_config`. Reading only the top level (or only
+  // `text_config`) returns null → dense.
+  const qwenOmni = computeActiveParams({
+    thinker_config: {
+      text_config: {
+        hidden_size: 2048,
+        num_hidden_layers: 48,
+        intermediate_size: 768,
+        moe_intermediate_size: 768,
+        num_experts: 128,
+        num_experts_per_tok: 8,
+        shared_expert_intermediate_size: 0,
+        vocab_size: 152064,
+      },
+    },
+  });
+  assert.ok(qwenOmni !== null, "thinker_config.text_config must be found");
+  assert.ok(
+    qwenOmni! > 2 * B && qwenOmni! < 4 * B,
+    `expected ~3B active, got ${qwenOmni}`,
+  );
+
+  const nested = computeActiveParams({
+    llm_config: {
+      hidden_size: 2688,
+      num_hidden_layers: 52,
+      intermediate_size: 1856,
+      moe_intermediate_size: 1856,
+      moe_shared_expert_intermediate_size: 3712,
+      n_routed_experts: 128,
+      n_shared_experts: 1,
+      num_experts_per_tok: 6,
+      vocab_size: 131072,
+    },
+  });
+  assert.ok(nested !== null, "llm_config must be found");
+});
+
+test("computeActiveParams: Kimi Linear's 'num_experts_per_token' spelling is MoE", () => {
+  // moonshotai/Kimi-Linear-48B-A3B-Instruct — note the `_token` suffix, which
+  // neither `num_experts_per_tok` nor `top_k_experts` matches.
+  const active = computeActiveParams({
+    hidden_size: 2304,
+    num_hidden_layers: 27,
+    intermediate_size: 9216,
+    moe_intermediate_size: 1024,
+    num_experts: 256,
+    num_experts_per_token: 8,
+    num_shared_experts: 1,
+    first_k_dense_replace: 1,
+    vocab_size: 163840,
+  });
+  assert.ok(active !== null, "must not read as dense");
+  assert.ok(
+    active! > 2 * B && active! < 4 * B,
+    `expected ~3B active, got ${active}`,
+  );
+});
+
+test("resolveParams: an active estimate above total is rejected, never plotted", async (t) => {
+  // Regression: NVIDIA-Nemotron-3-Super-120B-A12B resolved to active 73.3B
+  // against total 67.2B — impossible, and it dragged the point right of where
+  // the model sits. A token cannot activate more weights than the checkpoint
+  // holds, so such a result must fall back to total rather than ship.
+  t.after(() => mock.restoreAll());
+  mockFetch({
+    "api/models/nvidia/Fake-Hybrid": { safetensors: { total: 10 * B } },
+    "nvidia/Fake-Hybrid/raw/main/config.json": {
+      // Deliberately over-wide: a Mamba hybrid whose real layer count is far
+      // below `num_hidden_layers` makes the FFN term overshoot total.
+      hidden_size: 8192,
+      num_hidden_layers: 100,
+      moe_intermediate_size: 8192,
+      num_experts_per_tok: 32,
+      vocab_size: 131072,
+    },
+  });
+
+  const m = mkEntry({
+    name: "Fake Hybrid",
+    slug: "fake-hybrid",
+    creatorSlug: "nvidia",
+  });
+  const result = await resolveParams(
+    m,
+    false,
+    {},
+    new Map(),
+    { "fake-hybrid": "nvidia/Fake-Hybrid" },
+    {},
+  );
+
+  assert.equal(result.resolved?.total, 10 * B);
+  assert.equal(
+    result.resolved?.active,
+    10 * B,
+    "active must be clamped to total, not left above it",
   );
 });

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-02T06:40:53.426Z",
+  "generatedAt": "2026-08-02T15:42:01.252Z",
   "models": [
     {
       "id": "c99f3bde-7c08-4de8-bd5c-8ee9123ebffa",
@@ -1379,7 +1379,7 @@
       "isClosed": false,
       "params": {
         "total": 26544131376,
-        "active": 26544131376
+        "active": 3800000000
       },
       "paramsUnknown": false,
       "license": null,
@@ -1638,7 +1638,7 @@
       "isClosed": false,
       "params": {
         "total": 26544131376,
-        "active": 26544131376
+        "active": 3800000000
       },
       "paramsUnknown": false,
       "license": null,
@@ -1712,7 +1712,7 @@
       "isClosed": false,
       "params": {
         "total": 25823778864,
-        "active": 25823778864
+        "active": 3800000000
       },
       "paramsUnknown": false,
       "license": null,
@@ -4487,7 +4487,7 @@
       "isClosed": false,
       "params": {
         "total": 33015632214,
-        "active": 33015632214
+        "active": 3000000000
       },
       "paramsUnknown": false,
       "license": null,
@@ -4560,8 +4560,8 @@
       "creatorSlug": "nvidia",
       "isClosed": false,
       "params": {
-        "total": 67228556288,
-        "active": 73295462400
+        "total": 123611012096,
+        "active": 12000000000
       },
       "paramsUnknown": false,
       "license": null,
@@ -4585,7 +4585,7 @@
         "tps": 144.707,
         "ttft": 1.098
       },
-      "hfId": "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4",
+      "hfId": "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16",
       "mode": "Reasoning",
       "releaseDate": "2026-03-11"
     },
@@ -4598,7 +4598,7 @@
       "isClosed": false,
       "params": {
         "total": 31577937344,
-        "active": 7303102464
+        "active": 3000000000
       },
       "paramsUnknown": false,
       "license": null,
@@ -4635,7 +4635,7 @@
       "isClosed": false,
       "params": {
         "total": 33015632214,
-        "active": 33015632214
+        "active": 3000000000
       },
       "paramsUnknown": false,
       "license": null,
@@ -4672,7 +4672,7 @@
       "isClosed": false,
       "params": {
         "total": 560524578816,
-        "active": 560524578816
+        "active": 55000000000
       },
       "paramsUnknown": false,
       "license": null,
@@ -4783,7 +4783,7 @@
       "isClosed": false,
       "params": {
         "total": 33015632214,
-        "active": 33015632214
+        "active": 3000000000
       },
       "paramsUnknown": false,
       "license": null,
@@ -5116,7 +5116,7 @@
       "isClosed": false,
       "params": {
         "total": 49122681728,
-        "active": 49122681728
+        "active": 2670723072
       },
       "paramsUnknown": false,
       "license": null,
@@ -5153,7 +5153,7 @@
       "isClosed": false,
       "params": {
         "total": 2779931837184,
-        "active": 2779931837184
+        "active": 104000000000
       },
       "paramsUnknown": false,
       "license": null,
@@ -8483,7 +8483,7 @@
       "isClosed": false,
       "params": {
         "total": 403397928944,
-        "active": 12593397760
+        "active": 13348372480
       },
       "paramsUnknown": false,
       "license": null,
@@ -8520,7 +8520,7 @@
       "isClosed": false,
       "params": {
         "total": 79674391296,
-        "active": 2626420736
+        "active": 2777415680
       },
       "paramsUnknown": false,
       "license": null,
@@ -8631,7 +8631,7 @@
       "isClosed": false,
       "params": {
         "total": 35951822704,
-        "active": 2186280960
+        "active": 2312110080
       },
       "paramsUnknown": false,
       "license": null,
@@ -8742,7 +8742,7 @@
       "isClosed": false,
       "params": {
         "total": 403397928944,
-        "active": 12593397760
+        "active": 13348372480
       },
       "paramsUnknown": false,
       "license": null,
@@ -8779,7 +8779,7 @@
       "isClosed": false,
       "params": {
         "total": 35951822704,
-        "active": 2186280960
+        "active": 2312110080
       },
       "paramsUnknown": false,
       "license": null,
@@ -8816,7 +8816,7 @@
       "isClosed": false,
       "params": {
         "total": 125086497008,
-        "active": 6198657024
+        "active": 6651641856
       },
       "paramsUnknown": false,
       "license": null,
@@ -8890,7 +8890,7 @@
       "isClosed": false,
       "params": {
         "total": 81324862720,
-        "active": 2626420736
+        "active": 2777415680
       },
       "paramsUnknown": false,
       "license": null,
@@ -8964,7 +8964,7 @@
       "isClosed": false,
       "params": {
         "total": 35259818545,
-        "active": 35259818545
+        "active": 2928672768
       },
       "paramsUnknown": false,
       "license": null,
@@ -9038,7 +9038,7 @@
       "isClosed": false,
       "params": {
         "total": 35259818545,
-        "active": 35259818545
+        "active": 2928672768
       },
       "paramsUnknown": false,
       "license": null,
@@ -9075,7 +9075,7 @@
       "isClosed": false,
       "params": {
         "total": 125086497008,
-        "active": 6198657024
+        "active": 6651641856
       },
       "paramsUnknown": false,
       "license": null,
@@ -9260,7 +9260,7 @@
       "isClosed": false,
       "params": {
         "total": 35951822704,
-        "active": 2186280960
+        "active": 2312110080
       },
       "paramsUnknown": false,
       "license": null,
@@ -20323,7 +20323,7 @@
       "isClosed": false,
       "params": {
         "total": 35951822704,
-        "active": 2186280960
+        "active": 2312110080
       },
       "paramsUnknown": false,
       "license": null,
@@ -21860,6 +21860,8 @@
     "artificial_analysis_coding_index": {
       "active": [
         "405e2235-0925-4634-a3c7-fbd5f6394bc0",
+        "5d4acc80-7a88-4e84-bfe7-99071b84e6a4",
+        "b07aef0a-b192-46a1-b1c9-40b06d1b9061",
         "8665ca00-c687-44c7-875c-22618cb31c4f",
         "2236df45-0699-40d1-b5cc-69ee345d2257",
         "4bbceacb-cf47-464b-b60f-e1d1fe016d67",
@@ -21945,6 +21947,7 @@
       "active": [
         "04781a0e-40f0-4e2a-a4e5-18e389364a79",
         "405e2235-0925-4634-a3c7-fbd5f6394bc0",
+        "5d4acc80-7a88-4e84-bfe7-99071b84e6a4",
         "8665ca00-c687-44c7-875c-22618cb31c4f",
         "2236df45-0699-40d1-b5cc-69ee345d2257",
         "4bbceacb-cf47-464b-b60f-e1d1fe016d67",
@@ -21969,7 +21972,6 @@
         "77f5ff8b-1536-474a-a337-e1bfd138d343",
         "e2b664ca-7992-4de6-8839-4867f035c892",
         "46d8315e-1630-463f-ab62-84185fa0faab",
-        "2236df45-0699-40d1-b5cc-69ee345d2257",
         "9815da7d-70f4-44d6-b539-9ffef0faa152",
         "277f939a-985b-4b37-859d-b3eabc7c0b26"
       ],
@@ -21993,9 +21995,10 @@
         "0e5f6140-1154-4583-a3e0-8c032a338892",
         "77f5ff8b-1536-474a-a337-e1bfd138d343",
         "3d64bf83-232e-427e-8590-26b478bae4a8",
+        "b07aef0a-b192-46a1-b1c9-40b06d1b9061",
         "46d8315e-1630-463f-ab62-84185fa0faab",
         "c8a79180-7d16-4474-8701-9a77c0baa56a",
-        "f0083258-8646-45b8-8082-7aaf6c2ea82a",
+        "6e1b44ff-c227-496b-aef4-19b70cd18c76",
         "2236df45-0699-40d1-b5cc-69ee345d2257",
         "4bbceacb-cf47-464b-b60f-e1d1fe016d67",
         "fe4c0848-e284-4e52-a79d-cdc28392f1a9",

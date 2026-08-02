@@ -236,46 +236,119 @@ const HF_HEADERS = (token?: string): Record<string, string> | undefined =>
 
 interface HfConfig {
   text_config?: HfConfig;
+  llm_config?: HfConfig;
+  thinker_config?: HfConfig;
+  language_model?: HfConfig;
   hidden_size?: number;
   num_hidden_layers?: number;
+  // Experts-routed-per-token. Every vendor spells this differently:
+  // `num_experts_per_tok` (DeepSeek/Qwen/Nemotron), `num_experts_per_token`
+  // (Kimi Linear), `top_k_experts` (Gemma 4 / DiffusionGemma).
   num_experts_per_tok?: number;
+  num_experts_per_token?: number;
+  top_k_experts?: number;
+  // Size of the routed-expert *pool*, not the per-token count. Declared only
+  // so the two aren't confused: reading `num_experts` as the per-token figure
+  // inflates the estimate by the sparsity factor (128 vs 8 for Gemma 4).
+  num_experts?: number;
+  n_routed_experts?: number;
   n_shared_experts?: number;
   num_shared_experts?: number;
   moe_intermediate_size?: number;
   shared_intermediate_size?: number;
+  // Aggregate FFN width of the always-on shared expert(s), when sized
+  // independently of a routed expert (Nemotron-H, Qwen3-Omni).
+  moe_shared_expert_intermediate_size?: number;
+  shared_expert_intermediate_size?: number;
   intermediate_size?: number;
   first_k_dense_replace?: number;
   vocab_size?: number;
+  // Gemma 4 marker: every layer carries its dense `mlp` *and* routed experts,
+  // so `intermediate_size` is an always-on shared expert, not a dense-layer
+  // width. Verified against the model.safetensors.index.json weight map.
+  enable_moe_block?: boolean;
+}
+
+/** Wrapper keys under which a multimodal config nests its language model. */
+const LLM_CONFIG_KEYS = [
+  "text_config",
+  "llm_config",
+  "thinker_config",
+  "language_model",
+] as const;
+
+/** Routed-experts-per-token, across the three spellings in the wild. */
+function expertsPerTok(c: HfConfig): number | undefined {
+  return c.num_experts_per_tok ?? c.num_experts_per_token ?? c.top_k_experts;
+}
+
+/** Routed-expert FFN width, across its two spellings. */
+function moeIntermediate(c: HfConfig): number | undefined {
+  return c.moe_intermediate_size ?? c.shared_intermediate_size;
 }
 
 /**
- * Estimate MoE active params from an HF config. Multimodal models nest the LLM
- * config under `text_config`. Returns null for dense models (no expert routing)
- * or when key fields are missing — the caller then uses `safetensors.total`.
+ * Depth-first search for the sub-config that carries expert routing. Multimodal
+ * models bury the language model one or two wrappers deep — `text_config`
+ * (Gemma 4), `llm_config` (Nemotron Omni), `thinker_config.text_config`
+ * (Qwen3-Omni) — and reading only the top level silently mistakes them for
+ * dense. Returns null when nothing in the tree routes experts, which is the
+ * genuine dense case.
+ */
+function findMoeConfig(cfg: HfConfig, depth = 0): HfConfig | null {
+  if (expertsPerTok(cfg) && moeIntermediate(cfg)) return cfg;
+  if (depth >= 3) return null;
+  for (const key of LLM_CONFIG_KEYS) {
+    const sub = cfg[key];
+    if (sub) {
+      const hit = findMoeConfig(sub, depth + 1);
+      if (hit) return hit;
+    }
+  }
+  return null;
+}
+
+/**
+ * Estimate MoE active params from an HF config. The routing config is located
+ * by `findMoeConfig` (it may be nested under a multimodal wrapper). Returns
+ * null for dense models (no expert routing) or when key fields are missing —
+ * the caller then uses `safetensors.total`.
  *
  * Approximation (good to ~±15%, which is well under a tick on the log X axis):
- *   embeddings + Σ_layers[ 4·H² attention ] + Σ_moe_layers[ (K+shared)·3·H·moe_int ]
- *   + Σ_dense_layers[ 3·H·intermediate ]
+ *   embeddings + Σ_layers[ 4·H² attention ] + Σ_moe_layers[ K·3·H·moe_int ]
+ *   + Σ_moe_layers[ 3·H·shared_int ] + Σ_dense_layers[ 3·H·intermediate ]
  * Attention is taken as a plain 4·H² (GQA/MLA compression is ignored — small on
  * a log axis). `moe_overrides.json` supplies exact values where this is off.
  */
-function computeActiveParams(cfg: HfConfig | null): number | null {
-  const t = cfg?.text_config ?? cfg;
-  if (!t) return null;
+export function computeActiveParams(cfg: HfConfig | null): number | null {
+  if (!cfg) return null;
+  const t = findMoeConfig(cfg);
+  if (!t) return null; // dense or insufficient → use total
   const H = t.hidden_size;
   const L = t.num_hidden_layers;
-  const K = t.num_experts_per_tok;
-  const moeInt = t.moe_intermediate_size ?? t.shared_intermediate_size;
-  if (!H || !L || !K || !moeInt) return null; // dense or insufficient → use total
+  const K = expertsPerTok(t)!;
+  const moeInt = moeIntermediate(t)!;
+  if (!H || !L) return null;
   const shared = t.n_shared_experts ?? t.num_shared_experts ?? 0;
+  // A shared expert is not always a routed expert's width: Nemotron-H and
+  // Qwen3-Omni publish its aggregate size separately, so prefer that when
+  // present (it already covers all shared experts) over `shared × moeInt`.
+  const sharedInt =
+    t.moe_shared_expert_intermediate_size ??
+    t.shared_expert_intermediate_size ??
+    // Gemma 4 routes experts *next to* a per-layer dense MLP rather than
+    // replacing it, and names no shared-expert count — `intermediate_size` is
+    // that always-on width.
+    (t.enable_moe_block ? t.intermediate_size : undefined);
   const denseInt = t.intermediate_size ?? moeInt;
   const denseLayers = Math.min(L, t.first_k_dense_replace ?? 0);
   const moeLayers = Math.max(0, L - denseLayers);
   const emb = t.vocab_size ? t.vocab_size * H : 0;
   const attn = L * 4 * H * H;
-  const moeFFN = moeLayers * (K + shared) * 3 * H * moeInt;
+  const routedFFN = moeLayers * K * 3 * H * moeInt;
+  const sharedFFN = moeLayers * 3 * H * (sharedInt ?? shared * moeInt);
   const denseFFN = denseLayers * 3 * H * denseInt;
-  const active = emb + attn + moeFFN + denseFFN;
+  const active = emb + attn + routedFFN + sharedFFN + denseFFN;
   return active > 0 ? active : null;
 }
 
@@ -462,8 +535,18 @@ export async function resolveParams(
         const total = await fetchHfTotal(hfRepo, hfToken);
         if (total) {
           const cfg = await fetchHfConfig(hfRepo, hfToken);
-          const active =
+          let active =
             moeOverrides[hfRepo]?.active ?? computeActiveParams(cfg) ?? total;
+          if (active > total) {
+            // Physically impossible: a token can't activate more weights than
+            // the checkpoint holds. Means a bad estimate or a quantized/partial
+            // repo whose `safetensors.total` understates the model. Fall back
+            // to dense and surface it rather than plot the point too far right.
+            console.error(
+              `[active>total] ${hfRepo}: active ${active} > total ${total} — falling back to total`,
+            );
+            active = total;
+          }
           resolved = { total, active };
           viaHf = true;
         }

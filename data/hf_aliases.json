@@ -216,7 +216,7 @@
   "nvidia-nemotron-3-nano-30b-a3b": "nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16",
   "nvidia-nemotron-3-nano-30b-a3b-reasoning": "nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16",
   "nvidia-nemotron-3-nano-4b": "nvidia/NVIDIA-Nemotron-3-Nano-4B-BF16",
-  "nvidia-nemotron-3-super-120b-a12b": "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4",
+  "nvidia-nemotron-3-super-120b-a12b": "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16",
   "nvidia-nemotron-3-ultra-550b-a55b": "nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16",
   "nvidia-nemotron-nano-12b-v2-vl": "nvidia/NVIDIA-Nemotron-Nano-12B-v2-VL-BF16",
   "nvidia-nemotron-nano-12b-v2-vl-reasoning": "nvidia/NVIDIA-Nemotron-Nano-12B-v2-VL-BF16",

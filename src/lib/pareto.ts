@@ -17,7 +17,10 @@ export function computeParetoFrontier<T>(
     .map((ref) => ({ ref, x: xOf(ref), y: yOf(ref) }))
     .filter(
       (p): p is { ref: T; x: number; y: number } =>
-        p.x != null && p.y != null && Number.isFinite(p.x) && Number.isFinite(p.y),
+        p.x != null &&
+        p.y != null &&
+        Number.isFinite(p.x) &&
+        Number.isFinite(p.y),
     );
 
   // Sort by x ascending; tie-break by y descending so the survivor at each x is the best.

@@ -15,8 +15,8 @@ on:
     types: [opened, reopened, synchronize, closed]
 
 permissions:
-  contents: write        # push the preview to gh-pages
-  pull-requests: write   # sticky preview-URL comment
+  contents: write # push the preview to gh-pages
+  pull-requests: write # sticky preview-URL comment
 
 concurrency:
   group: preview-${{ github.event.number }}

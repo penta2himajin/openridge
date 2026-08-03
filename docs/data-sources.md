@@ -17,39 +17,39 @@ Headers: x-api-key: <KEY>
 
 ### 取得できるフィールド（確認済み）
 
-| カテゴリ | フィールド | 用途 |
-|---|---|---|
-| 識別子 | `id` / `name` / `slug` | DB のキー。`id` は stable |
-| 作成者 | `model_creator.{id, name, slug}` | モデル族でグルーピング |
-| ベンチ | `evaluations.artificial_analysis_intelligence_index` | **Y軸デフォルト** |
-| ベンチ | `evaluations.artificial_analysis_coding_index` | Y軸切替 |
-| 個別 | `evaluations.{gpqa, hle, lcr, ifbench, scicode, tau2, terminalbench_hard}` | Y軸切替 |
-| 速度 | `median_output_tokens_per_second` / `median_time_to_first_token_seconds` | 将来拡張用に保持 |
-| 価格 | `pricing.{price_1m_blended_3_to_1, price_1m_input_tokens, price_1m_output_tokens}` | 将来拡張用に保持 |
+| カテゴリ | フィールド                                                                         | 用途                      |
+| -------- | ---------------------------------------------------------------------------------- | ------------------------- |
+| 識別子   | `id` / `name` / `slug`                                                             | DB のキー。`id` は stable |
+| 作成者   | `model_creator.{id, name, slug}`                                                   | モデル族でグルーピング    |
+| ベンチ   | `evaluations.artificial_analysis_intelligence_index`                               | **Y軸デフォルト**         |
+| ベンチ   | `evaluations.artificial_analysis_coding_index`                                     | Y軸切替                   |
+| 個別     | `evaluations.{gpqa, hle, lcr, ifbench, scicode, tau2, terminalbench_hard}`         | Y軸切替                   |
+| 速度     | `median_output_tokens_per_second` / `median_time_to_first_token_seconds`           | 将来拡張用に保持          |
+| 価格     | `pricing.{price_1m_blended_3_to_1, price_1m_input_tokens, price_1m_output_tokens}` | 将来拡張用に保持          |
 
 ### Tracked evaluations（2026-07-23 監査）
 
 `evaluations` オブジェクトには実際には17キーが存在するが（`aime`, `aime_25`, `artificial_analysis_math_index`, `mmlu_pro`, `livecodebench`, `math_500`, `tau_banking`, `terminalbench_v2_1` を含む）、AA本体の Intelligence Index v4.1 移行に伴い一部が新モデルへの採点対象から外れている。`AA_API_KEY` で全579件（オープン339件）を取得し、2026年以降リリースのオープンモデル113件におけるカバレッジを確認した結果:
 
-| キー | オープン全体 | 2026年以降リリース | 判定 |
-|---|---|---|---|
-| `artificial_analysis_intelligence_index` | 337/339 (99%) | 112/113 (99%) | 採用 |
-| `artificial_analysis_coding_index` | 102/339 (30%) | 64/113 (57%) | 採用 |
-| `gpqa` | 328/339 (97%) | 112/113 (99%) | 採用 |
-| `hle` | 327/339 (96%) | 112/113 (99%) | 採用 |
-| `scicode` | 326/339 (96%) | 112/113 (99%) | 採用 |
-| `lcr` (AA-LCR) | 298/339 (88%) | 112/113 (99%) | 採用 |
-| `ifbench` (IFBench) | 292/339 (86%) | 107/113 (95%) | 採用 |
-| `tau2` (τ²-Bench) | 284/339 (84%) | 106/113 (94%) | 採用 |
-| `terminalbench_hard` | 277/339 (82%) | 105/113 (93%) | 採用 |
-| `tau_banking` (τ³-Banking) | 102/339 (30%) | 64/113 (57%) | 見送り（`tau2`/`coding_index`と同一サブセットで動いておりカバレッジが弱い） |
-| `terminalbench_v2_1` | 102/339 (30%) | 64/113 (57%) | 見送り（同上） |
-| `mmlu_pro` | 210/339 (62%) | 1/113 (1%) | **不採用（停止）** — 最新採点 2026-01-04 |
-| `livecodebench` | 208/339 (61%) | 1/113 (1%) | **不採用（停止）** — 最新採点 2026-01-04 |
-| `artificial_analysis_math_index` | 177/339 (52%) | 1/113 (1%) | **不採用（停止）** — 最新採点 2026-01-04 |
-| `aime_25` | 177/339 (52%) | 1/113 (1%) | **不採用（停止）** — 最新採点 2026-01-04 |
-| `math_500` | 120/339 (35%) | 4/113 (4%) | **不採用（停止・小型モデル偏重）** |
-| `aime` | 108/339 (32%) | 0/113 (0%) | **不採用（完全停止）** — 最新採点 2025-07-31（1年以上前） |
+| キー                                     | オープン全体  | 2026年以降リリース | 判定                                                                        |
+| ---------------------------------------- | ------------- | ------------------ | --------------------------------------------------------------------------- |
+| `artificial_analysis_intelligence_index` | 337/339 (99%) | 112/113 (99%)      | 採用                                                                        |
+| `artificial_analysis_coding_index`       | 102/339 (30%) | 64/113 (57%)       | 採用                                                                        |
+| `gpqa`                                   | 328/339 (97%) | 112/113 (99%)      | 採用                                                                        |
+| `hle`                                    | 327/339 (96%) | 112/113 (99%)      | 採用                                                                        |
+| `scicode`                                | 326/339 (96%) | 112/113 (99%)      | 採用                                                                        |
+| `lcr` (AA-LCR)                           | 298/339 (88%) | 112/113 (99%)      | 採用                                                                        |
+| `ifbench` (IFBench)                      | 292/339 (86%) | 107/113 (95%)      | 採用                                                                        |
+| `tau2` (τ²-Bench)                        | 284/339 (84%) | 106/113 (94%)      | 採用                                                                        |
+| `terminalbench_hard`                     | 277/339 (82%) | 105/113 (93%)      | 採用                                                                        |
+| `tau_banking` (τ³-Banking)               | 102/339 (30%) | 64/113 (57%)       | 見送り（`tau2`/`coding_index`と同一サブセットで動いておりカバレッジが弱い） |
+| `terminalbench_v2_1`                     | 102/339 (30%) | 64/113 (57%)       | 見送り（同上）                                                              |
+| `mmlu_pro`                               | 210/339 (62%) | 1/113 (1%)         | **不採用（停止）** — 最新採点 2026-01-04                                    |
+| `livecodebench`                          | 208/339 (61%) | 1/113 (1%)         | **不採用（停止）** — 最新採点 2026-01-04                                    |
+| `artificial_analysis_math_index`         | 177/339 (52%) | 1/113 (1%)         | **不採用（停止）** — 最新採点 2026-01-04                                    |
+| `aime_25`                                | 177/339 (52%) | 1/113 (1%)         | **不採用（停止）** — 最新採点 2026-01-04                                    |
+| `math_500`                               | 120/339 (35%) | 4/113 (4%)         | **不採用（停止・小型モデル偏重）**                                          |
+| `aime`                                   | 108/339 (32%) | 0/113 (0%)         | **不採用（完全停止）** — 最新採点 2025-07-31（1年以上前）                   |
 
 AA公式([methodology](https://artificialanalysis.ai/methodology/intelligence-benchmarking))によると、現行 Intelligence Index v4.1 は GDPval-AA v2 / τ³-Banking / Terminal-Bench v2.1 / SciCode / AA-LCR / AA-Omniscience / HLE / GPQA Diamond / CritPt で構成される。MMLU-Pro・LiveCodeBench・AIME・Math-500・AA Math Index は index から外れ新規モデルの採点も停止済み。IFBench はv4.1で index からは外れたが新モデルへの採点は継続中（AA公式リーダーボードページに明記）。
 
@@ -98,13 +98,15 @@ GET https://huggingface.co/api/models/<owner>/<repo>
 **方針（推奨）: ハイブリッド**
 
 1. **手動オーバーライド優先**: `data/moe_overrides.json` に主要MoEの { repo_id → active_params } を手で書く。例:
+
    ```json
    {
      "deepseek-ai/DeepSeek-V3.1": { "active": 37000000000 },
-     "Qwen/Qwen3-235B-A22B":      { "active": 22000000000 },
-     "XiaomiMiMo/MiMo-V2-Flash":  { "active": 15000000000 }
+     "Qwen/Qwen3-235B-A22B": { "active": 22000000000 },
+     "XiaomiMiMo/MiMo-V2-Flash": { "active": 15000000000 }
    }
    ```
+
    50モデル程度の手動メンテで、シーンで観測されるMoEはほぼカバー可能。
 
 2. **自動計算フォールバック**: オーバーライド未設定なら HF から `config.json` を生で取得して概算:
@@ -131,9 +133,9 @@ AA API が HF id を返さないため手動 alias map が **唯一の同定経�
 - AA の `slug` をキーに、`data/hf_aliases.json` で明示的にマッピング:
   ```json
   {
-    "deepseek-v3-1":    "deepseek-ai/DeepSeek-V3.1",
-    "qwen3-235b-a22b":  "Qwen/Qwen3-235B-A22B",
-    "gpt-5-5-xhigh":    null   // クローズドは null（HF不要）
+    "deepseek-v3-1": "deepseek-ai/DeepSeek-V3.1",
+    "qwen3-235b-a22b": "Qwen/Qwen3-235B-A22B",
+    "gpt-5-5-xhigh": null // クローズドは null（HF不要）
   }
   ```
 - ファイル末尾には `// missing: <slug>` のようなコメント形式で alias 未追加の AA slug を Daily Refresh ログから拾って書き溜める

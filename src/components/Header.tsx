@@ -108,7 +108,8 @@ function SegmentedControl(props: { state: AppState; compact: boolean }) {
   const measure = () => {
     if (!containerRef) return;
     const idx = VIEWS.findIndex((v) => v.id === props.state.xview());
-    const cell = containerRef.querySelectorAll<HTMLButtonElement>("[data-cell]")[idx];
+    const cell =
+      containerRef.querySelectorAll<HTMLButtonElement>("[data-cell]")[idx];
     if (cell) {
       setPillStyle({ left: cell.offsetLeft, width: cell.offsetWidth });
     }
@@ -131,13 +132,16 @@ function SegmentedControl(props: { state: AppState; compact: boolean }) {
       onKeyDown={(e) => {
         if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
           const idx = VIEWS.findIndex((v) => v.id === props.state.xview());
-          const next = e.key === "ArrowLeft"
-            ? (idx - 1 + VIEWS.length) % VIEWS.length
-            : (idx + 1) % VIEWS.length;
+          const next =
+            e.key === "ArrowLeft"
+              ? (idx - 1 + VIEWS.length) % VIEWS.length
+              : (idx + 1) % VIEWS.length;
           props.state.setXview(VIEWS[next].id);
           // Refocus the active cell after state change
           queueMicrotask(() => {
-            containerRef.querySelectorAll<HTMLButtonElement>("[data-cell]")[next]?.focus();
+            containerRef
+              .querySelectorAll<HTMLButtonElement>("[data-cell]")
+              [next]?.focus();
           });
           e.preventDefault();
         }
@@ -164,7 +168,8 @@ function SegmentedControl(props: { state: AppState; compact: boolean }) {
             class="relative z-[1] px-3 text-sm font-medium transition-colors"
             classList={{
               "text-fg-default": props.state.xview() === v.id,
-              "text-fg-muted hover:text-fg-default": props.state.xview() !== v.id,
+              "text-fg-muted hover:text-fg-default":
+                props.state.xview() !== v.id,
             }}
             onClick={() => props.state.setXview(v.id)}
             onTransitionEnd={measure}
@@ -185,7 +190,8 @@ function IndexDropdown(props: { state: AppState; compact: boolean }) {
   let triggerRef!: HTMLButtonElement;
   let panelRef!: HTMLDivElement;
 
-  const selectedLabel = () => METRICS_BY_ID.get(props.state.metric())?.label ?? "—";
+  const selectedLabel = () =>
+    METRICS_BY_ID.get(props.state.metric())?.label ?? "—";
 
   onMount(() => {
     const onDocClick = (e: MouseEvent) => {
@@ -251,7 +257,9 @@ function IndexDropdown(props: { state: AppState; compact: boolean }) {
             Index:
           </span>
         </Show>
-        <span class="text-sm font-medium text-fg-default truncate">{selectedLabel()}</span>
+        <span class="text-sm font-medium text-fg-default truncate">
+          {selectedLabel()}
+        </span>
         <span aria-hidden="true" class="text-fg-muted text-xs">
           ▾
         </span>
@@ -335,7 +343,8 @@ function DropdownBody(props: {
                         class="w-full text-left rounded-md px-2.5 py-1.5 min-h-[44px] sm:min-h-[32px] text-sm font-medium transition-colors flex items-center"
                         classList={{
                           "bg-bg-high text-fg-default": isSel(),
-                          "text-fg-muted hover:bg-bg-high/50 hover:text-fg-default": !isSel(),
+                          "text-fg-muted hover:bg-bg-high/50 hover:text-fg-default":
+                            !isSel(),
                         }}
                         onClick={() => props.onSelect(item.id)}
                       >

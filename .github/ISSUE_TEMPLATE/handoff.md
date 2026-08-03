@@ -1,8 +1,8 @@
 ---
 name: Session Handoff
 about: Long-running workstream that spans multiple Claude sessions
-title: '[handoff] '
-labels: ['session-handoff']
+title: "[handoff] "
+labels: ["session-handoff"]
 ---
 
 <!--

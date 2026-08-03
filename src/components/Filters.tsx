@@ -72,7 +72,9 @@ export default function Filters(props: { state: AppState }) {
           aria-checked={props.state.frontierOnly()}
           title="Show only Pareto-frontier models"
           class={`flex-shrink-0 rounded-full border px-3 text-sm font-medium transition-colors h-9 sm:h-7 ${chipClass(props.state.frontierOnly())}`}
-          onClick={() => props.state.setFrontierOnly(!props.state.frontierOnly())}
+          onClick={() =>
+            props.state.setFrontierOnly(!props.state.frontierOnly())
+          }
         >
           Frontier only
         </button>

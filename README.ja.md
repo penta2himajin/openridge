@@ -20,14 +20,14 @@
 
 現時点で repo に入っているのは仕様ドキュメント・規約・プロジェクト骨格のみで、動くコードは未実装。MVP は `docs/` 配下に分割された仕様で定義されている:
 
-| ドキュメント | 範囲 |
-|---|---|
-| `docs/architecture.md` | スタック、データパイプライン、デプロイ方針 |
-| `docs/data-sources.md` | AA API / HuggingFace API 調査、alias map 設計 |
-| `docs/design.md` | ビジュアル言語、トークン、モーション |
-| `docs/ui.md` | UI 仕様（ヘッダ・dropdown・segmented control・散布図・フィルタ） |
-| `docs/framer-prompts.md` | UI モック作成に投入する Framer プロンプト本文 |
-| `docs/prior-art.md` | AA, Paraplouis, WhatLLM, llm-stats, Vellum, HF 等との差分整理 |
+| ドキュメント             | 範囲                                                             |
+| ------------------------ | ---------------------------------------------------------------- |
+| `docs/architecture.md`   | スタック、データパイプライン、デプロイ方針                       |
+| `docs/data-sources.md`   | AA API / HuggingFace API 調査、alias map 設計                    |
+| `docs/design.md`         | ビジュアル言語、トークン、モーション                             |
+| `docs/ui.md`             | UI 仕様（ヘッダ・dropdown・segmented control・散布図・フィルタ） |
+| `docs/framer-prompts.md` | UI モック作成に投入する Framer プロンプト本文                    |
+| `docs/prior-art.md`      | AA, Paraplouis, WhatLLM, llm-stats, Vellum, HF 等との差分整理    |
 
 由来: `ideabook/ideas/local-lm-frontier/` から graduate した repo（seed 期間のコードネームはそのまま）。
 

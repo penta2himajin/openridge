@@ -14,7 +14,11 @@ export const CLOSED_VENDORS: { slug: string; label: string }[] = [
   { slug: "google", label: "Google" },
   { slug: "xai", label: "xAI" },
 ];
-const DEFAULT_CLOSED_VENDORS: readonly string[] = ["openai", "anthropic", "google"];
+const DEFAULT_CLOSED_VENDORS: readonly string[] = [
+  "openai",
+  "anthropic",
+  "google",
+];
 const CLOSED_VENDORS_LS_KEY = "ridge:closed-vendors";
 
 export interface AppState {
@@ -46,7 +50,9 @@ function loadClosedVendors(): Set<string> {
     const parsed = JSON.parse(raw);
     if (!Array.isArray(parsed)) return new Set(DEFAULT_CLOSED_VENDORS);
     const valid = new Set(CLOSED_VENDORS.map((v) => v.slug));
-    return new Set(parsed.filter((s): s is string => typeof s === "string" && valid.has(s)));
+    return new Set(
+      parsed.filter((s): s is string => typeof s === "string" && valid.has(s)),
+    );
   } catch {
     return new Set(DEFAULT_CLOSED_VENDORS);
   }
@@ -65,7 +71,11 @@ const VALID_METRICS: MetricId[] = [
 ];
 const VALID_VIEWS: XView[] = ["active", "total", "compare"];
 
-function readUrl(): { metric?: MetricId; xview?: XView; frontierOnly?: boolean } {
+function readUrl(): {
+  metric?: MetricId;
+  xview?: XView;
+  frontierOnly?: boolean;
+} {
   if (typeof window === "undefined") return {};
   const p = new URLSearchParams(window.location.search);
   const metric = p.get("index") as MetricId | null;
@@ -79,14 +89,25 @@ function readUrl(): { metric?: MetricId; xview?: XView; frontierOnly?: boolean }
 
 export function createAppState(): AppState {
   const url = readUrl();
-  const [metric, setMetric] = createSignal<MetricId>(url.metric ?? DEFAULT_METRIC);
+  const [metric, setMetric] = createSignal<MetricId>(
+    url.metric ?? DEFAULT_METRIC,
+  );
   const [xview, setXview] = createSignal<XView>(url.xview ?? "active");
-  const [selectedModelId, setSelectedModelId] = createSignal<string | null>(null);
+  const [selectedModelId, setSelectedModelId] = createSignal<string | null>(
+    null,
+  );
   const [showAllClosed, setShowAllClosed] = createSignal(false);
-  const [frontierOnly, setFrontierOnly] = createSignal(url.frontierOnly ?? false);
-  const [sizeFilters, setSizeFilters] = createSignal<Set<SizeFilter>>(new Set());
-  const [licenseFilters, setLicenseFilters] = createSignal<Set<LicenseFilter>>(new Set());
-  const [closedVendors, setClosedVendors] = createSignal<Set<string>>(loadClosedVendors());
+  const [frontierOnly, setFrontierOnly] = createSignal(
+    url.frontierOnly ?? false,
+  );
+  const [sizeFilters, setSizeFilters] = createSignal<Set<SizeFilter>>(
+    new Set(),
+  );
+  const [licenseFilters, setLicenseFilters] = createSignal<Set<LicenseFilter>>(
+    new Set(),
+  );
+  const [closedVendors, setClosedVendors] =
+    createSignal<Set<string>>(loadClosedVendors());
 
   // URL sync (one-way: state → url).
   onMount(() => {
@@ -125,7 +146,7 @@ export function createAppState(): AppState {
     onCleanup(() => window.removeEventListener("keydown", onKey));
   });
 
-  const toggle = <F,>(current: () => Set<F>, set: (s: Set<F>) => void, f: F) => {
+  const toggle = <F>(current: () => Set<F>, set: (s: Set<F>) => void, f: F) => {
     const next = new Set(current());
     if (next.has(f)) next.delete(f);
     else next.add(f);

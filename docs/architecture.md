@@ -46,16 +46,16 @@
 
 ## 2. スタック確定
 
-| レイヤ | 採用 |
-|---|---|
-| 静的サイト生成 | **Astro** |
-| UI コンポーネント | **Solid.js**（`@astrojs/solid-js` 統合経由） |
-| チャート | **Observable Plot** をベースに、足りないインタラクションは **D3** / 手書き SVG で上書き |
-| スタイル | **Tailwind CSS**（OKLCH ベースのカスタムパレット） |
-| データ取得スクリプト | **TypeScript** (`tsx` で直接実行 / Node 20) |
-| ホスティング | **GitHub Pages** |
-| デプロイ | `actions/upload-pages-artifact@v3` + `actions/deploy-pages@v4` |
-| データ更新基盤 | **GitHub Actions**（schedule + manual dispatch） |
+| レイヤ               | 採用                                                                                    |
+| -------------------- | --------------------------------------------------------------------------------------- |
+| 静的サイト生成       | **Astro**                                                                               |
+| UI コンポーネント    | **Solid.js**（`@astrojs/solid-js` 統合経由）                                            |
+| チャート             | **Observable Plot** をベースに、足りないインタラクションは **D3** / 手書き SVG で上書き |
+| スタイル             | **Tailwind CSS**（OKLCH ベースのカスタムパレット）                                      |
+| データ取得スクリプト | **TypeScript** (`tsx` で直接実行 / Node 20)                                             |
+| ホスティング         | **GitHub Pages**                                                                        |
+| デプロイ             | `actions/upload-pages-artifact@v3` + `actions/deploy-pages@v4`                          |
+| データ更新基盤       | **GitHub Actions**（schedule + manual dispatch）                                        |
 
 ## 3. リポジトリ構成
 
@@ -94,24 +94,24 @@ openridge/
 `scripts/build-data.ts` の概要:
 
 ```ts
-const aa = await fetchAA();                       // /api/v2/data/llms/models
+const aa = await fetchAA(); // /api/v2/data/llms/models
 const aliases = loadJson("data/hf_aliases.json");
 const overrides = loadJson("data/moe_overrides.json");
 
 const models = [];
 for (const m of aa.data) {
-  const hfId = aliases[m.slug];                   // undefined = 未登録, null = closed
-  let total = null, active = null, license = null;
+  const hfId = aliases[m.slug]; // undefined = 未登録, null = closed
+  let total = null,
+    active = null,
+    license = null;
 
   if (hfId) {
     const hf = await fetchHF(hfId);
     total = hf.safetensors?.total ?? null;
     license = extractLicense(hf);
-    active = overrides[hfId]?.active
-          ?? estimateActiveFromConfig(hf)
-          ?? total;                                // dense は total = active
+    active = overrides[hfId]?.active ?? estimateActiveFromConfig(hf) ?? total; // dense は total = active
   } else if (hfId === undefined) {
-    console.warn(`[alias-missing] ${m.slug}`);     // 新モデル検出ログ
+    console.warn(`[alias-missing] ${m.slug}`); // 新モデル検出ログ
   }
 
   models.push({
@@ -125,26 +125,26 @@ for (const m of aa.data) {
     pricing: m.pricing,
     speed: {
       tps: m.median_output_tokens_per_second,
-      ttft: m.median_time_to_first_token_seconds
+      ttft: m.median_time_to_first_token_seconds,
     },
-    hfId
+    hfId,
   });
 }
 
-const open = models.filter(x => !x.isClosed && x.params.active != null);
+const open = models.filter((x) => !x.isClosed && x.params.active != null);
 const paretoByMetric = {};
 for (const metric of TRACKED_METRICS) {
   paretoByMetric[metric] = computeParetoFrontier(
     open,
-    m => m.params.active,
-    m => m.scores[metric]
-  ).map(p => p.id);
+    (m) => m.params.active,
+    (m) => m.scores[metric],
+  ).map((p) => p.id);
 }
 
 writeJson("data/models.json", {
   generatedAt: new Date().toISOString(),
   models,
-  paretoByMetric
+  paretoByMetric,
 });
 ```
 
@@ -158,7 +158,7 @@ X 最小化・Y 最大化。O(n log n)（Y降順ソート → X を後ろから�
 
 ```yaml
 on:
-  schedule: [{ cron: "0 4 * * *" }]    # 毎日 04:00 UTC
+  schedule: [{ cron: "0 4 * * *" }] # 毎日 04:00 UTC
   workflow_dispatch:
 permissions:
   contents: write
@@ -191,7 +191,7 @@ jobs:
 ```yaml
 on:
   push: { branches: [main] }
-  schedule: [{ cron: "0 5 * * *" }]   # 日次再デプロイ（refresh の約1h後）
+  schedule: [{ cron: "0 5 * * *" }] # 日次再デプロイ（refresh の約1h後）
   workflow_dispatch:
 permissions:
   contents: write

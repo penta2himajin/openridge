@@ -10,7 +10,11 @@ import { METRICS_BY_ID } from "../lib/metrics";
 import { formatBytes, formatParams, formatScore } from "../lib/format";
 import { estimateQ4KMBytes } from "../lib/quant";
 import { useIsMobile } from "../lib/breakpoint";
-import { findClosedNeighbours, type Neighbours, type NeighbourEntry } from "../lib/neighbours";
+import {
+  findClosedNeighbours,
+  type Neighbours,
+  type NeighbourEntry,
+} from "../lib/neighbours";
 
 interface Props {
   snapshot: ModelsSnapshot;
@@ -134,7 +138,9 @@ export default function Tooltip(props: Props) {
             role="status"
             aria-live="polite"
           >
-            <div class="text-sm font-medium text-fg-default leading-snug">{m().name}</div>
+            <div class="text-sm font-medium text-fg-default leading-snug">
+              {m().name}
+            </div>
             <div class="text-xs text-fg-muted mt-0.5">
               {m().creator}
               {m().license ? ` · ${m().license}` : ""}
@@ -143,16 +149,27 @@ export default function Tooltip(props: Props) {
             <div class="my-2 h-px bg-fg-subtle/60" />
 
             <div class="grid grid-cols-2 gap-y-1 text-xs">
-              <span class="font-mono uppercase tracking-wide text-fg-muted">Active</span>
+              <span class="font-mono uppercase tracking-wide text-fg-muted">
+                Active
+              </span>
               <span class="font-mono text-fg-default text-right">
                 {formatParams(m().params.active)}
               </span>
-              <span class="font-mono uppercase tracking-wide text-fg-muted">Total</span>
+              <span class="font-mono uppercase tracking-wide text-fg-muted">
+                Total
+              </span>
               <span class="font-mono text-fg-default text-right">
                 {formatParams(m().params.total)}
               </span>
-              <Show when={!m().isClosed && (gguf().bytes != null || gguf().estimate != null)}>
-                <span class="font-mono uppercase tracking-wide text-fg-muted">Q4_K_M</span>
+              <Show
+                when={
+                  !m().isClosed &&
+                  (gguf().bytes != null || gguf().estimate != null)
+                }
+              >
+                <span class="font-mono uppercase tracking-wide text-fg-muted">
+                  Q4_K_M
+                </span>
                 <span class="font-mono text-fg-default text-right">
                   {gguf().bytes != null
                     ? formatBytes(gguf().bytes)
@@ -180,19 +197,13 @@ export default function Tooltip(props: Props) {
                     Closest closed
                   </div>
                   <Show when={n().tie}>
-                    {(t) => (
-                      <NeighbourRow label="≈" entry={t()} info={info} />
-                    )}
+                    {(t) => <NeighbourRow label="≈" entry={t()} info={info} />}
                   </Show>
                   <Show when={!n().tie && n().above}>
-                    {(a) => (
-                      <NeighbourRow label="↑" entry={a()} info={info} />
-                    )}
+                    {(a) => <NeighbourRow label="↑" entry={a()} info={info} />}
                   </Show>
                   <Show when={!n().tie && n().below}>
-                    {(b) => (
-                      <NeighbourRow label="↓" entry={b()} info={info} />
-                    )}
+                    {(b) => <NeighbourRow label="↓" entry={b()} info={info} />}
                   </Show>
                 </>
               )}
@@ -200,7 +211,9 @@ export default function Tooltip(props: Props) {
 
             <Show when={frontierKind() || m().isClosed}>
               <div class="mt-2 pt-2 border-t border-fg-subtle/60 font-mono text-[11px] text-fg-muted">
-                {m().isClosed ? "closed · anchor" : `Pareto · ${frontierKind()}`}
+                {m().isClosed
+                  ? "closed · anchor"
+                  : `Pareto · ${frontierKind()}`}
               </div>
             </Show>
           </div>
@@ -228,7 +241,9 @@ function NeighbourRow(props: {
   };
   return (
     <div class="flex items-baseline gap-2 text-xs leading-tight py-0.5">
-      <span class="font-mono text-fg-muted w-3 text-center flex-shrink-0">{props.label}</span>
+      <span class="font-mono text-fg-muted w-3 text-center flex-shrink-0">
+        {props.label}
+      </span>
       <span class="text-fg-default truncate flex-1 min-w-0">{display()}</span>
       <span class="font-mono text-fg-muted tabular-nums flex-shrink-0">
         {fmt(props.entry.delta)}

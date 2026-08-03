@@ -20,12 +20,12 @@
   /* foreground */
   --fg-default: oklch(0.96 0.005 270);
   --fg-muted: oklch(0.65 0.01 270);
-  --fg-subtle: oklch(0.40 0.01 270);
+  --fg-subtle: oklch(0.4 0.01 270);
 
   /* accents (sparing — see docs/design.md §3) */
   --accent: oklch(0.78 0.15 195);
   --frontier: oklch(0.92 0.18 145);
-  --closed: oklch(0.70 0.10 35);
+  --closed: oklch(0.7 0.1 35);
 
   color-scheme: dark;
 }

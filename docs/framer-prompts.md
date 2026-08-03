@@ -7,10 +7,12 @@
 Framer の AI（Wireframer / Workshop）は canvas のトークン（フォント・色）を継承する。**プロンプトを投入する前に** 以下を Framer プロジェクトに登録しておく:
 
 ### Fonts
+
 - **Geist Sans** (本文 / UI)
 - **Geist Mono** (数値・ブランド・small caps ラベル)
 
 ### Color tokens (hex)
+
 - `--bg-base` `#1A1B22` / `--bg-elevated` `#20222A` / `--bg-high` `#2A2D34`
 - `--fg-default` `#F2F2F5` / `--fg-muted` `#9A9CA3` / `--fg-subtle` `#58595F`
 - `--accent` `#4DD3C7` / `--frontier` `#BEEE7E` / `--closed` `#D89882`
@@ -21,7 +23,7 @@ Framer の AI（Wireframer / Workshop）は canvas のトークン（フォン�
 
 ページ全体の骨格を生成。マーケティング pages 向けに最適化された Wireframer に対し、「これは tool であって marketing page ではない」と明示的に伝えることが重要。
 
-````
+```
 Create a single-screen data visualization tool for developers and ML engineers
 who self-host open-source LLMs. The screen lets them see the Pareto-efficient
 frontier of those models on a single scatter plot of model parameters vs an
@@ -89,7 +91,7 @@ testimonial cards, social proof logos, CTA banners.
 
 Keep it ultra-minimal — this is a tool, not a marketing page. One screen,
 no scroll.
-````
+```
 
 ## Workshop プロンプト（コンポーネント単位）
 
@@ -97,7 +99,7 @@ no scroll.
 
 ### Filter chip
 
-````
+```
 Function: a toggle chip used in a horizontal filter row. Two states:
 off (default) and on. Clicking flips the state and emits an onChange
 event with the new boolean.
@@ -115,11 +117,11 @@ Font: Geist Sans 13px medium, inherit canvas tokens.
 
 Property controls: `label` (string, default "Apache/MIT"),
 `defaultOn` (boolean, default false), `onChange` (event handler).
-````
+```
 
 ### Index dropdown (Y-axis benchmark selector)
 
-````
+```
 Function: a dropdown that selects which benchmark to plot on the Y axis
 of a scatter chart. Trigger button sits in a top bar; clicking it
 opens a floating panel below. Items are grouped by category.
@@ -176,11 +178,11 @@ item.
 
 Property controls: `selected` (string), `categories` (array of
 `{name: string, items: string[]}`), `onChange` (event handler).
-````
+```
 
 ### X-axis segmented control (Active / Total / Compare)
 
-````
+```
 Function: a three-cell segmented control that switches between three
 views of a scatter chart: focused on active parameters, focused on
 total parameters, or a comparison view that shows both.
@@ -209,11 +211,11 @@ Interactions:
 
 Property controls: `selected` ("active" | "total" | "compare", default
 "active"), `onChange` (event handler).
-````
+```
 
 ### Info icon trigger
 
-````
+```
 Function: a small info icon glyph in the far right of the top bar.
 Click emits an onOpen event; the modal it opens is owned by a parent
 and not part of this component.
@@ -227,11 +229,11 @@ hover. No background, no border, no padding box visible.
 
 Property controls: `onOpen` (event handler), `ariaLabel` (string,
 default "About this dataset").
-````
+```
 
 ### Tooltip card
 
-````
+```
 Function: a floating detail card shown when a chart point is hovered.
 Used for state-B mockups. Not interactive itself — purely display.
 
@@ -264,7 +266,7 @@ Property controls: `name`, `creator`, `license`, `active`, `total`,
 `indexLabel`, `indexValue`, `secondaryBenchmarks` (array of
 `{label, value}`), `paretoFooter` (string, e.g. "Pareto (active)" /
 "Pareto (total)" / "Pareto (both)").
-````
+```
 
 ## Framer に頼らず手で詰める部分
 

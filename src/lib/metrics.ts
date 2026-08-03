@@ -14,17 +14,48 @@ export interface MetricInfo {
 // releases on them (0-4% coverage among 2026 open models); AA-LCR, IFBench,
 // τ²-Bench and Terminal-Bench Hard were added in their place.
 export const METRICS: MetricInfo[] = [
-  { id: "artificial_analysis_intelligence_index", label: "AA Intelligence Index", category: "AGGREGATE", maxValue: 100 },
-  { id: "artificial_analysis_coding_index", label: "AA Coding Index", category: "AGGREGATE", maxValue: 100 },
-  { id: "gpqa", label: "GPQA Diamond", category: "KNOWLEDGE & REASONING", maxValue: 1 },
+  {
+    id: "artificial_analysis_intelligence_index",
+    label: "AA Intelligence Index",
+    category: "AGGREGATE",
+    maxValue: 100,
+  },
+  {
+    id: "artificial_analysis_coding_index",
+    label: "AA Coding Index",
+    category: "AGGREGATE",
+    maxValue: 100,
+  },
+  {
+    id: "gpqa",
+    label: "GPQA Diamond",
+    category: "KNOWLEDGE & REASONING",
+    maxValue: 1,
+  },
   { id: "hle", label: "HLE", category: "KNOWLEDGE & REASONING", maxValue: 1 },
-  { id: "lcr", label: "AA-LCR", category: "KNOWLEDGE & REASONING", maxValue: 1 },
-  { id: "ifbench", label: "IFBench", category: "KNOWLEDGE & REASONING", maxValue: 1 },
+  {
+    id: "lcr",
+    label: "AA-LCR",
+    category: "KNOWLEDGE & REASONING",
+    maxValue: 1,
+  },
+  {
+    id: "ifbench",
+    label: "IFBench",
+    category: "KNOWLEDGE & REASONING",
+    maxValue: 1,
+  },
   { id: "scicode", label: "SciCode", category: "CODE", maxValue: 1 },
   { id: "tau2", label: "τ²-Bench", category: "AGENTIC", maxValue: 1 },
-  { id: "terminalbench_hard", label: "Terminal-Bench Hard", category: "AGENTIC", maxValue: 1 },
+  {
+    id: "terminalbench_hard",
+    label: "Terminal-Bench Hard",
+    category: "AGENTIC",
+    maxValue: 1,
+  },
 ];
 
-export const DEFAULT_METRIC: MetricId = "artificial_analysis_intelligence_index";
+export const DEFAULT_METRIC: MetricId =
+  "artificial_analysis_intelligence_index";
 
 export const METRICS_BY_ID = new Map(METRICS.map((m) => [m.id, m]));

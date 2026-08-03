@@ -16,7 +16,10 @@
 
   "qwq-32b": { "total": 32000000000, "active": 32000000000 },
   "qwen3-coder": { "total": 480000000000, "active": 35000000000 },
-  "qwen3-coder-30b-a3b-instruct": { "total": 30000000000, "active": 3000000000 },
+  "qwen3-coder-30b-a3b-instruct": {
+    "total": 30000000000,
+    "active": 3000000000
+  },
   "qwen3-next-80b-a3b-instruct": { "total": 80000000000, "active": 3000000000 },
   "qwen3-next-80b-a3b-thinking": { "total": 80000000000, "active": 3000000000 },
 

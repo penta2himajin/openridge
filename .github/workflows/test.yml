@@ -1,10 +1,16 @@
 name: Test
 
-# Run the unit + data-integrity test suite on every PR and on pushes to main.
+# Run formatting, type checks and the unit + data-integrity test suite on every
+# PR and on pushes to main.
 # The data-integrity tests assert that data/models.json stays internally
 # consistent — MoE models are not silently stored as dense, manual_params
 # overrides reach the snapshot, and the committed Pareto frontier matches a
 # fresh recomputation. Spec: docs/architecture.md §4.
+#
+# format:check only verifies — it never writes back. Auto-formatting in CI
+# would need `contents: write` on this job, and its push would race the daily
+# refresh.yml commit and re-trigger this workflow. Writing stays local
+# (`npm run format`, plus the git-hooks/pre-push hook); CI only gates.
 
 on:
   pull_request:
@@ -24,4 +30,8 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
+      # Cheapest checks first, so a stray formatting or type error surfaces in
+      # seconds instead of behind the full suite.
+      - run: npm run format:check
+      - run: npm run lint
       - run: npm test

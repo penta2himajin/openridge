@@ -204,6 +204,12 @@
     "repo": "bartowski/LiquidAI_LFM2-8B-A1B-GGUF",
     "fetchedAt": "2026-05-19T23:57:36.437Z"
   },
+  "ling-3-0-flash": {
+    "bytes": 78285287456,
+    "source": "hf",
+    "repo": "bloomer010/Ling-3.0-flash-GGUF",
+    "fetchedAt": "2026-08-06T06:39:11.265Z"
+  },
   "ling-mini-2-0": {
     "bytes": 9941894336,
     "source": "hf",

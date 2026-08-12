@@ -216,6 +216,7 @@
   "muse-spark-1-1": null,
   "muse-spark-1-2": null,
   "nanbeige4-1-3b": "Nanbeige/Nanbeige4.1-3B",
+  "nemotron-3-5-lightning": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-NVFP4",
   "nemotron-3-nano-omni-30b-a3b": "nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning",
   "nemotron-cascade-2-30b-a3b": "nvidia/Nemotron-Cascade-2-30B-A3B",
   "nex-n2-pro": null,

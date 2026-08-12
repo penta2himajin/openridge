@@ -313,6 +313,12 @@
     "repo": "mradermacher/Nanbeige4.1-3B-GGUF",
     "fetchedAt": "2026-05-19T23:57:40.776Z"
   },
+  "nemotron-3-5-lightning": {
+    "bytes": 25477403616,
+    "source": "hf",
+    "repo": "bartowski/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-GGUF",
+    "fetchedAt": "2026-08-12T05:43:16.349Z"
+  },
   "nemotron-cascade-2-30b-a3b": {
     "bytes": 24725740992,
     "source": "hf",

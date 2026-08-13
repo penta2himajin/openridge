@@ -27,6 +27,7 @@ import type { AppState } from "../lib/state";
 import { METRICS_BY_ID } from "../lib/metrics";
 import { formatParams } from "../lib/format";
 import { useIsMobile } from "../lib/breakpoint";
+import { baseModelKey, formatClosedLabel } from "../lib/model-names";
 import Tooltip from "./Tooltip";
 
 interface Props {
@@ -34,25 +35,7 @@ interface Props {
   state: AppState;
 }
 
-const CLOSED_FULL_TOP = 12;
-
-// Trailing parentheticals that denote an inference *mode* of one model (same
-// weights, same params) rather than a distinct model — reasoning on/off and
-// effort levels. Dates, "(Preview)", "(Vision)", "(32B)", "(V1)" etc. are NOT
-// modes and stay separate.
-const MODE_TOKEN =
-  /^(non[- ]?reasoning|reasoning|thinking|minimal|xhigh|(max|high|medium|low|minimal)(\s+effort)?)$/i;
-
-/** Group key that collapses reasoning/effort variants of the same model. */
-function baseModelKey(m: ModelRecord): string {
-  const paren = m.name.match(/^(.*?)\s*\(([^)]+)\)\s*$/);
-  let base = m.name;
-  if (paren) {
-    const tokens = paren[2].split(",").map((t) => t.trim());
-    if (tokens.every((t) => MODE_TOKEN.test(t))) base = paren[1];
-  }
-  return `${m.creatorSlug} ${base.trim()}`;
-}
+const CLOSED_FULL_TOP = 8;
 
 interface Pt {
   m: ModelRecord;
@@ -149,10 +132,23 @@ export default function Frontier(props: Props) {
 
   const closedAnchors = createMemo(() => {
     const metric = props.state.metric();
-    const items = props.snapshot.models
+    const scored = props.snapshot.models
       .filter((m) => m.isClosed && m.scores[metric] != null)
       .map((m) => ({ m, score: m.scores[metric] as number }))
       .sort((a, b) => b.score - a.score);
+    // One line per model, not per reasoning-effort tier. AA scores each tier
+    // as its own entry, so a flagship with four of them (Claude Opus 5) used
+    // to fill most of the roster on its own — 12 lines covering 6 models,
+    // clustered inside a 7-point band. Keeping each model's best tier makes
+    // the same 12 lines describe 12 different models over a wider spread.
+    const items: typeof scored = [];
+    const claimed = new Set<string>();
+    for (const it of scored) {
+      const id = baseModelKey(it.m);
+      if (claimed.has(id)) continue;
+      claimed.add(id);
+      items.push(it);
+    }
     if (items.length === 0) return [];
     if (props.state.showAllClosed()) return items.slice(0, CLOSED_FULL_TOP);
 
@@ -494,20 +490,6 @@ interface OverlayContext {
   onSelectedPos: (cx: number, cy: number) => void;
 }
 
-/**
- * Truncate "GPT-5.5 (xhigh)" → keep mode suffix on desktop; "Claude Opus 4.7
- * (Adaptive Reasoning, Max Effort)" → drop long parentheticals. On mobile,
- * strip all parentheticals.
- */
-function formatClosedLabel(name: string, mobile: boolean): string {
-  const m = name.match(/^(.+?)\s*\(([^)]+)\)\s*$/);
-  if (!m) return name;
-  const base = m[1];
-  const paren = m[2];
-  if (mobile) return base;
-  return paren.length <= 12 ? `${base} (${paren})` : base;
-}
-
 function drawOverlay(ctx: OverlayContext) {
   const {
     svg,
@@ -549,23 +531,49 @@ function drawOverlay(ctx: OverlayContext) {
   // Validate.
   const valid = closed.filter(({ score }) => Number.isFinite(yScale(score)));
 
-  // Sort by score DESC.
-  const sortedDesc = [...valid].sort((a, b) => b.score - a.score);
+  // Sort by score DESC, then cap to what the plot can actually label. Closed
+  // flagships sit within a few index points of each other, so the label stack
+  // needs far more height than the anchors themselves span and the surplus has
+  // to go somewhere. Dropping the lowest-scoring anchors keeps the reference
+  // lines that matter — the ceiling, and the ones nearest the open frontier —
+  // rather than silently unlabelling the top of the chart.
+  const sortedAll = [...valid].sort((a, b) => b.score - a.score);
+  const room = yScale(sortedAll[0]?.score ?? 0) - (chartTop + 10) - labelLift;
+  const maxLabels = Math.max(1, Math.floor(room / minGap) + 1);
+  const sortedDesc = sortedAll.slice(0, maxLabels);
   const labels = sortedDesc.map(({ m }) => formatClosedLabel(m.name, mobile));
 
   // Anchor every label at the right end above its own line; the vertical
   // stagger below lifts any that would collide. The default two-line set
   // (top closed + nearest-to-top-open) is far enough apart that neither is
   // lifted, so both sit flush right — clean and easy to pair with their line.
-  const markerX = lineRightX - 8;
+  // Marker/leader X is staggered per anchor. With every marker pinned to the
+  // same X — as it was — all the leader arms sat on one vertical line and
+  // overlapped exactly, so a lifted label gave no clue which dash it belonged
+  // to. Walking the markers left as the score falls fans the arms into a
+  // staircase, and the total spread is capped at 45% of the plot so the
+  // bottom anchor's arm never wanders into the data.
+  const stagger = Math.min(
+    mobile ? 12 : 22,
+    ((lineRightX - lineLeftX) * 0.45) / Math.max(1, sortedDesc.length),
+  );
+  // Emphasis ramp. A creator palette is out (CLAUDE.md), so rank is carried by
+  // depth within the single --closed hue: the top anchor reads strongest and
+  // each one below is slightly fainter, which also ties a line to its own arm
+  // and label. Labels fade far less than the lines — they carry the reading.
+  const fade = (i: number, floor: number) =>
+    sortedDesc.length < 2 ? 1 : 1 - (1 - floor) * (i / (sortedDesc.length - 1));
   const placements = sortedDesc.map(({ m, score }, i) => ({
     m,
     score,
     text: labels[i],
     lineY: yScale(score),
     labelY: yScale(score) - labelLift,
-    markerX,
-    labelRightX: markerX,
+    markerX: lineRightX - 8 - i * stagger,
+    labelRightX: lineRightX - 8 - i * stagger,
+    lineOpacity: fade(i, 0.42),
+    labelOpacity: fade(i, 0.72),
+    showLabel: true,
   }));
 
   // Vertical stagger — iterate ASC by score (bottom → top of chart) and
@@ -578,9 +586,30 @@ function drawOverlay(ctx: OverlayContext) {
       curr.labelY = prev.labelY - minGap;
     }
   }
-  for (const p of placements) {
-    if (p.labelY < chartTop + 10) p.labelY = chartTop + 10;
+
+  // Keeping labels clear of each other is not enough: the stagger only knows
+  // about other labels, so a label nudged upward lands on a neighbouring
+  // model's dashed line and both become unreadable. Closed flagships cluster
+  // inside a few index points, so that is the normal case rather than the
+  // exception. When it happens, lift the whole stack clear of the topmost
+  // anchor — every label then sits in empty space and reaches its own line
+  // down its own staggered arm.
+  const lineYs = placements.map((p) => p.lineY);
+  const topLineY = Math.min(...lineYs);
+  const overlapsAnotherLine = placements.some((p) =>
+    lineYs.some(
+      (ly) => ly !== p.lineY && ly > p.labelY - 14 && ly < p.labelY + 2,
+    ),
+  );
+  if (overlapsAnotherLine) {
+    const n = placements.length;
+    placements.forEach((p, i) => {
+      p.labelY = topLineY - labelLift - (n - 1 - i) * minGap;
+    });
   }
+  // A label with no room left above the plot is dropped rather than clamped
+  // onto its neighbour — the dashed line stays, and hovering still names it.
+  for (const p of placements) p.showLabel = p.labelY >= chartTop + 10;
 
   // Render each callout.
   for (const p of placements) {
@@ -590,28 +619,33 @@ function drawOverlay(ctx: OverlayContext) {
       .attr("x1", lineLeftX)
       .attr("x2", lineRightX)
       .attr("y1", p.lineY)
-      .attr("y2", p.lineY);
+      .attr("y2", p.lineY)
+      .attr("opacity", p.lineOpacity);
     closedLayer
       .append("circle")
       .attr("class", "ridge-closed-marker")
       .attr("cx", p.markerX)
       .attr("cy", p.lineY)
-      .attr("r", 2.5);
-    if (Math.abs(p.lineY - p.labelY) >= 1) {
+      .attr("r", 2.5)
+      .attr("opacity", p.lineOpacity);
+    if (p.showLabel && Math.abs(p.lineY - p.labelY) >= 1) {
       closedLayer
         .append("line")
         .attr("class", "ridge-closed-leader")
         .attr("x1", p.markerX)
         .attr("x2", p.markerX)
         .attr("y1", p.lineY)
-        .attr("y2", p.labelY);
+        .attr("y2", p.labelY)
+        .attr("opacity", p.lineOpacity);
     }
+    if (!p.showLabel) continue;
     closedLayer
       .append("text")
       .attr("class", "ridge-closed-label")
       .attr("x", p.labelRightX - 4)
       .attr("y", p.labelY - 4)
       .attr("text-anchor", "end")
+      .attr("opacity", p.labelOpacity)
       .text(p.text);
   }
 

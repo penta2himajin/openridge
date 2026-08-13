@@ -468,6 +468,66 @@ function stripTrailingQualifier(name: string): string | null {
  * zero results against repos that only ever spell it "-it" — a second query
  * with that trailing word stripped is tried when the first comes up empty.
  */
+/**
+ * How long after release an unresolved slug is still worth re-searching. Labs
+ * routinely ship weights days-to-weeks after AA starts scoring an endpoint, so
+ * the retry has to outlive that gap; past it, a model that still has no public
+ * repo almost certainly never will (API-only tiers like Qwen Plus, GLM Turbo,
+ * Solar Pro). Bounds the retry to a couple of dozen slugs per run.
+ */
+const RETRY_WINDOW_DAYS = 180;
+
+export function isRecentRelease(
+  m: Pick<AAEntry, "release_date">,
+  now = Date.now(),
+): boolean {
+  if (!m.release_date) return false;
+  const t = Date.parse(m.release_date);
+  if (Number.isNaN(t)) return false;
+  return now - t <= RETRY_WINDOW_DAYS * 86_400_000;
+}
+
+/**
+ * Trailing qualifiers AA appends for reasoning effort / mode. They pick a
+ * decoding setting, not a checkpoint, so slugs differing only by one of these
+ * are served by the same weights. Anything else — notably a date pin such as
+ * `-0424` — is left on the base and so never matches a differently-dated slug.
+ */
+const EFFORT_SUFFIXES = [
+  "-non-reasoning",
+  "-reasoning",
+  "-thinking",
+  "-medium",
+  "-xhigh",
+  "-high",
+  "-max",
+  "-low",
+];
+
+function effortBase(slug: string): string {
+  for (const s of EFFORT_SUFFIXES) {
+    if (slug.endsWith(s)) return slug.slice(0, -s.length);
+  }
+  return slug;
+}
+
+/**
+ * Repo of an already-resolved slug that differs only by reasoning effort.
+ * Returns null unless every such sibling agrees, so a family whose variants
+ * genuinely diverged is left for the alias map to state explicitly.
+ */
+export function siblingRepo(
+  slug: string,
+  aliases: Record<string, string | null>,
+): string | null {
+  const base = effortBase(slug);
+  const repos = new Set<string>();
+  for (const [k, v] of Object.entries(aliases)) {
+    if (k !== slug && v && effortBase(k) === base) repos.add(v);
+  }
+  return repos.size === 1 ? [...repos][0] : null;
+}
+
 async function resolveHfRepo(
   m: AAEntry,
   token?: string,
@@ -568,9 +628,26 @@ export async function resolveParams(
       // Resolve the official HF repo (cached) and read real params.
       if (m.slug in aliases) {
         hfRepo = aliases[m.slug];
+        // A cached null is an auto-search miss, never a hand-set "no repo":
+        // this branch only runs for open models, so a closed one never writes
+        // one. Left alone it is permanent — a slug whose search failed once
+        // stays off the scatter forever, even after the weights appear. Retry
+        // while the release is recent enough for that still to be pending.
+        if (hfRepo === null && isRecentRelease(m)) {
+          hfRepo = await resolveHfRepo(m, hfToken);
+          if (hfRepo) aliases[m.slug] = hfRepo;
+        }
       } else {
         hfRepo = await resolveHfRepo(m, hfToken);
         aliases[m.slug] = hfRepo; // cache hit or miss
+      }
+      // Reasoning-effort variants are the same checkpoint published once, so a
+      // variant AA scores separately can borrow whichever sibling resolved.
+      // Date-pinned slugs (`…-0424`) keep their own base and never inherit —
+      // those really are different checkpoints.
+      if (!hfRepo) {
+        hfRepo = siblingRepo(m.slug, aliases);
+        if (hfRepo) aliases[m.slug] = hfRepo;
       }
       if (hfRepo) {
         const total = await fetchHfTotal(hfRepo, hfToken);

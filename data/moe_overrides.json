@@ -8,6 +8,7 @@
   "Motif-Technologies/Motif-3": { "active": 13200000000 },
   "Motif-Technologies/Motif-3-Beta": { "active": 13000000000 },
   "google/gemma-3n-E2B-it": { "active": 2000000000 },
+  "inclusionAI/Ling-3.0-tiny": { "active": 1300000000 },
   "google/gemma-3n-E4B-it": { "active": 4000000000 },
   "google/gemma-3n-E4B-it-litert-preview": { "active": 4000000000 },
   "google/Gemma-4-26B-A4B": { "active": 3800000000 },

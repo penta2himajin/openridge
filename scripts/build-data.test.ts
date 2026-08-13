@@ -3,6 +3,8 @@ import assert from "node:assert/strict";
 import {
   resolveParams,
   computeActiveParams,
+  siblingRepo,
+  isRecentRelease,
   HF_ORGS_BY_CREATOR,
   type AAEntry,
 } from "./build-data";
@@ -519,4 +521,63 @@ test("resolveParams: an active estimate above total is rejected, never plotted",
     10 * B,
     "active must be clamped to total, not left above it",
   );
+});
+
+// ─── unresolved slugs must not stay unresolved forever ────────────────────
+//
+// Regression: `kimi-k3` — the highest-scoring open model in the dataset — was
+// absent from the scatter because one auto-search miss had been cached as
+// `null` in hf_aliases.json and nothing ever retried it, even though
+// `kimi-k3-low` (the same checkpoint at a lower reasoning effort) resolved
+// fine. Two independent guards now cover that: inherit from a sibling, and
+// re-search while the release is recent.
+
+test("siblingRepo: an effort variant inherits the sibling that resolved", () => {
+  const aliases = { "kimi-k3-low": "moonshotai/Kimi-K3", "kimi-k3": null };
+  assert.equal(siblingRepo("kimi-k3", aliases), "moonshotai/Kimi-K3");
+  // …and in the other direction, across every effort suffix AA uses.
+  assert.equal(
+    siblingRepo("glm-4-6", { "glm-4-6-reasoning": "zai-org/GLM-4.6" }),
+    "zai-org/GLM-4.6",
+  );
+  assert.equal(
+    siblingRepo("exaone-4-5-33b-non-reasoning", {
+      "exaone-4-5-33b": "LGAI-EXAONE/EXAONE-4.5-33B",
+    }),
+    "LGAI-EXAONE/EXAONE-4.5-33B",
+  );
+});
+
+test("siblingRepo: a date pin is part of the base, so checkpoints never mix", () => {
+  // The whole point of AA's `-0424` / `-0731` re-slugging is that these are
+  // different weights. `deepseek-v4-pro` (0813, unpublished) must NOT pick up
+  // the April repo just because `deepseek-v4-pro-0424` resolved.
+  const aliases = {
+    "deepseek-v4-pro-0424": "deepseek-ai/DeepSeek-V4-Pro",
+    "deepseek-v4-pro-0424-high": "deepseek-ai/DeepSeek-V4-Pro",
+  };
+  assert.equal(siblingRepo("deepseek-v4-pro", aliases), null);
+  // But an effort variant *of the dated slug* still inherits it.
+  assert.equal(
+    siblingRepo("deepseek-v4-pro-0424-non-reasoning", aliases),
+    "deepseek-ai/DeepSeek-V4-Pro",
+  );
+});
+
+test("siblingRepo: disagreeing siblings yield nothing rather than a guess", () => {
+  assert.equal(siblingRepo("m", { "m-high": "org/A", "m-low": "org/B" }), null);
+  assert.equal(siblingRepo("m", { "m-high": null }), null);
+  assert.equal(siblingRepo("lonely", {}), null);
+});
+
+test("isRecentRelease: bounds the retry to models that might still ship weights", () => {
+  const now = Date.parse("2026-08-13T00:00:00Z");
+  // DeepSeek V4 Pro 0813 — scored by AA the day it was announced, weights
+  // still pending. This is exactly the case the retry has to keep alive.
+  assert.equal(isRecentRelease({ release_date: "2026-08-13" }, now), true);
+  assert.equal(isRecentRelease({ release_date: "2026-03-15" }, now), true);
+  // Llama 65B (2023): never getting a new repo, so never worth re-searching.
+  assert.equal(isRecentRelease({ release_date: "2023-02-24" }, now), false);
+  assert.equal(isRecentRelease({ release_date: null }, now), false);
+  assert.equal(isRecentRelease({ release_date: "not-a-date" }, now), false);
 });

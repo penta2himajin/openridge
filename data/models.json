@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-13T06:30:11.565Z",
+  "generatedAt": "2026-08-13T08:34:54.723Z",
   "models": [
     {
       "id": "e3396f8f-7994-4df5-bdab-43745681ef0a",
@@ -3006,7 +3006,7 @@
       "creatorSlug": "deepseek",
       "isClosed": false,
       "params": {
-        "total": 290944616402,
+        "total": 304180418494,
         "active": 10990125056
       },
       "paramsUnknown": false,
@@ -3031,7 +3031,7 @@
         "tps": 120.23,
         "ttft": 0.986
       },
-      "hfId": "deepseek-ai/DeepSeek-V4-Flash",
+      "hfId": "deepseek-ai/DeepSeek-V4-Flash-0731",
       "mode": "Reasoning, Max Effort",
       "releaseDate": "2026-07-31"
     },
@@ -5115,8 +5115,8 @@
       "creatorSlug": "kimi",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 2779931837184,
+        "active": 104000000000
       },
       "paramsUnknown": false,
       "license": null,
@@ -5140,7 +5140,7 @@
         "tps": 38.647,
         "ttft": 2.614
       },
-      "hfId": null,
+      "hfId": "moonshotai/Kimi-K3",
       "mode": "max",
       "releaseDate": "2026-07-16"
     },
@@ -22397,7 +22397,8 @@
         "e33dc369-ae81-40e0-8c4e-28b002d02197",
         "4bbceacb-cf47-464b-b60f-e1d1fe016d67",
         "fe4c0848-e284-4e52-a79d-cdc28392f1a9",
-        "f7a4ea75-e548-4069-80d4-9be8bc7c009b"
+        "f7a4ea75-e548-4069-80d4-9be8bc7c009b",
+        "f7d2fc3e-1f7b-405f-818c-07952a4af78f"
       ],
       "total": [
         "04781a0e-40f0-4e2a-a4e5-18e389364a79",
@@ -22411,8 +22412,11 @@
         "8c29d66d-bf98-4ea3-8572-5409353ecc66",
         "e33dc369-ae81-40e0-8c4e-28b002d02197",
         "4bbceacb-cf47-464b-b60f-e1d1fe016d67",
+        "d8ddb241-b3e4-4c25-a6a3-72eb1b30c541",
+        "b23e6c69-96e5-44c9-8f58-4b42e0c399d5",
         "fe4c0848-e284-4e52-a79d-cdc28392f1a9",
-        "f7a4ea75-e548-4069-80d4-9be8bc7c009b"
+        "f7a4ea75-e548-4069-80d4-9be8bc7c009b",
+        "f7d2fc3e-1f7b-405f-818c-07952a4af78f"
       ]
     },
     "artificial_analysis_coding_index": {
@@ -22424,7 +22428,7 @@
         "e33dc369-ae81-40e0-8c4e-28b002d02197",
         "4bbceacb-cf47-464b-b60f-e1d1fe016d67",
         "fe4c0848-e284-4e52-a79d-cdc28392f1a9",
-        "512d17ef-13d2-4f65-bf9b-154b0dec7e8d"
+        "f7d2fc3e-1f7b-405f-818c-07952a4af78f"
       ],
       "total": [
         "405e2235-0925-4634-a3c7-fbd5f6394bc0",
@@ -22437,8 +22441,10 @@
         "feb02d3b-ff8d-4ed4-b165-13f8d4a7192c",
         "6e1b44ff-c227-496b-aef4-19b70cd18c76",
         "8c29d66d-bf98-4ea3-8572-5409353ecc66",
+        "d8ddb241-b3e4-4c25-a6a3-72eb1b30c541",
+        "b23e6c69-96e5-44c9-8f58-4b42e0c399d5",
         "fe4c0848-e284-4e52-a79d-cdc28392f1a9",
-        "512d17ef-13d2-4f65-bf9b-154b0dec7e8d"
+        "f7d2fc3e-1f7b-405f-818c-07952a4af78f"
       ]
     },
     "gpqa": {
@@ -22454,7 +22460,8 @@
         "2236df45-0699-40d1-b5cc-69ee345d2257",
         "4bbceacb-cf47-464b-b60f-e1d1fe016d67",
         "fe4c0848-e284-4e52-a79d-cdc28392f1a9",
-        "277f939a-985b-4b37-859d-b3eabc7c0b26"
+        "277f939a-985b-4b37-859d-b3eabc7c0b26",
+        "f7d2fc3e-1f7b-405f-818c-07952a4af78f"
       ],
       "total": [
         "04781a0e-40f0-4e2a-a4e5-18e389364a79",
@@ -22466,8 +22473,11 @@
         "7d73161f-002f-4c9c-b4f8-6c4d91f2ba8e",
         "169e47f5-3d4d-4ad4-8f8b-ab46f0c73f67",
         "4bbceacb-cf47-464b-b60f-e1d1fe016d67",
+        "d8ddb241-b3e4-4c25-a6a3-72eb1b30c541",
+        "b23e6c69-96e5-44c9-8f58-4b42e0c399d5",
         "fe4c0848-e284-4e52-a79d-cdc28392f1a9",
-        "277f939a-985b-4b37-859d-b3eabc7c0b26"
+        "277f939a-985b-4b37-859d-b3eabc7c0b26",
+        "f7d2fc3e-1f7b-405f-818c-07952a4af78f"
       ]
     },
     "hle": {
@@ -22483,7 +22493,8 @@
         "4bbceacb-cf47-464b-b60f-e1d1fe016d67",
         "fe4c0848-e284-4e52-a79d-cdc28392f1a9",
         "a3043d4f-9b92-4261-8ea2-a2d391b09cf4",
-        "f7a4ea75-e548-4069-80d4-9be8bc7c009b"
+        "f7a4ea75-e548-4069-80d4-9be8bc7c009b",
+        "f7d2fc3e-1f7b-405f-818c-07952a4af78f"
       ],
       "total": [
         "04781a0e-40f0-4e2a-a4e5-18e389364a79",
@@ -22498,9 +22509,11 @@
         "169e47f5-3d4d-4ad4-8f8b-ab46f0c73f67",
         "2236df45-0699-40d1-b5cc-69ee345d2257",
         "4bbceacb-cf47-464b-b60f-e1d1fe016d67",
+        "d8ddb241-b3e4-4c25-a6a3-72eb1b30c541",
         "fe4c0848-e284-4e52-a79d-cdc28392f1a9",
         "a3043d4f-9b92-4261-8ea2-a2d391b09cf4",
-        "f7a4ea75-e548-4069-80d4-9be8bc7c009b"
+        "f7a4ea75-e548-4069-80d4-9be8bc7c009b",
+        "f7d2fc3e-1f7b-405f-818c-07952a4af78f"
       ]
     },
     "lcr": {
@@ -22511,7 +22524,8 @@
         "46d8315e-1630-463f-ab62-84185fa0faab",
         "2236df45-0699-40d1-b5cc-69ee345d2257",
         "4bbceacb-cf47-464b-b60f-e1d1fe016d67",
-        "277f939a-985b-4b37-859d-b3eabc7c0b26"
+        "277f939a-985b-4b37-859d-b3eabc7c0b26",
+        "f7d2fc3e-1f7b-405f-818c-07952a4af78f"
       ],
       "total": [
         "04781a0e-40f0-4e2a-a4e5-18e389364a79",
@@ -22522,7 +22536,8 @@
         "2d28a13a-096e-475a-beb8-26bbd1c7d51c",
         "8c29d66d-bf98-4ea3-8572-5409353ecc66",
         "4bbceacb-cf47-464b-b60f-e1d1fe016d67",
-        "277f939a-985b-4b37-859d-b3eabc7c0b26"
+        "277f939a-985b-4b37-859d-b3eabc7c0b26",
+        "f7d2fc3e-1f7b-405f-818c-07952a4af78f"
       ]
     },
     "ifbench": {
@@ -22564,7 +22579,8 @@
         "4bbceacb-cf47-464b-b60f-e1d1fe016d67",
         "fe4c0848-e284-4e52-a79d-cdc28392f1a9",
         "00f1248e-78e3-4230-8dc8-5e13ba8645e2",
-        "0de67206-4d36-4d10-b8f6-cf37fa747a03"
+        "0de67206-4d36-4d10-b8f6-cf37fa747a03",
+        "f7d2fc3e-1f7b-405f-818c-07952a4af78f"
       ],
       "total": [
         "04781a0e-40f0-4e2a-a4e5-18e389364a79",
@@ -22581,9 +22597,11 @@
         "6e1b44ff-c227-496b-aef4-19b70cd18c76",
         "cd26a386-4873-46ff-b853-d239050025a2",
         "4bbceacb-cf47-464b-b60f-e1d1fe016d67",
+        "b23e6c69-96e5-44c9-8f58-4b42e0c399d5",
         "fe4c0848-e284-4e52-a79d-cdc28392f1a9",
         "f7a4ea75-e548-4069-80d4-9be8bc7c009b",
-        "0de67206-4d36-4d10-b8f6-cf37fa747a03"
+        "0de67206-4d36-4d10-b8f6-cf37fa747a03",
+        "f7d2fc3e-1f7b-405f-818c-07952a4af78f"
       ]
     },
     "tau2": {
@@ -22731,6 +22749,8 @@
     "qwen3-vl-30b-a3b-reasoning": 18632185056,
     "qwen3-vl-8b-reasoning": 5027785184,
     "step-3-vl-10b": 5027780256,
-    "tri-21b-think-preview": null
+    "tri-21b-think-preview": null,
+    "kimi-k3": null,
+    "deepseek-v4-flash-0420": null
   }
 }

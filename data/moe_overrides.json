@@ -4,6 +4,9 @@
     "deepseek-ai/DeepSeek-V3.1": { "active": 37000000000 },
     "Qwen/Qwen3-235B-A22B": { "active": 22000000000 }
   },
+  "LGAI-EXAONE/K-EXAONE-2.0-750B-A37B": { "active": 37000000000 },
+  "Motif-Technologies/Motif-3": { "active": 13200000000 },
+  "Motif-Technologies/Motif-3-Beta": { "active": 13000000000 },
   "google/gemma-3n-E2B-it": { "active": 2000000000 },
   "google/gemma-3n-E4B-it": { "active": 4000000000 },
   "google/gemma-3n-E4B-it-litert-preview": { "active": 4000000000 },
@@ -18,5 +21,11 @@
   "nvidia/Nemotron-Cascade-2-30B-A3B": { "active": 3000000000 },
   "nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16": { "active": 55000000000 },
   "nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning": { "active": 3000000000 },
-  "nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16": { "active": 3000000000 }
+  "nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16": {
+    "active": 3000000000
+  },
+  "skt/A.X-K2": { "active": 33000000000 },
+  "stepfun-ai/Step-3.5-Flash": { "active": 11000000000 },
+  "stepfun-ai/Step-3.7-Flash": { "active": 11000000000 },
+  "upstage/Solar-Open2-250B": { "active": 15000000000 }
 }

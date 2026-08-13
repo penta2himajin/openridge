@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-13T08:34:54.723Z",
+  "generatedAt": "2026-08-13T09:01:26.110Z",
   "models": [
     {
       "id": "e3396f8f-7994-4df5-bdab-43745681ef0a",
@@ -2969,8 +2969,8 @@
       "creatorSlug": "deepseek",
       "isClosed": false,
       "params": {
-        "total": 1598839674782,
-        "active": 41671196672
+        "total": 1600000000000,
+        "active": 49000000000
       },
       "paramsUnknown": false,
       "license": null,
@@ -2994,7 +2994,7 @@
         "tps": 63.061,
         "ttft": 1.24
       },
-      "hfId": "deepseek-ai/DeepSeek-V4-Pro",
+      "hfId": null,
       "mode": "Non-reasoning",
       "releaseDate": "2026-04-24"
     },
@@ -3006,8 +3006,8 @@
       "creatorSlug": "deepseek",
       "isClosed": false,
       "params": {
-        "total": 304180418494,
-        "active": 10990125056
+        "total": 284000000000,
+        "active": 13000000000
       },
       "paramsUnknown": false,
       "license": null,
@@ -3031,7 +3031,7 @@
         "tps": 120.23,
         "ttft": 0.986
       },
-      "hfId": "deepseek-ai/DeepSeek-V4-Flash-0731",
+      "hfId": null,
       "mode": "Reasoning, Max Effort",
       "releaseDate": "2026-07-31"
     },
@@ -3043,8 +3043,8 @@
       "creatorSlug": "deepseek",
       "isClosed": false,
       "params": {
-        "total": 1598839674782,
-        "active": 41671196672
+        "total": 1600000000000,
+        "active": 49000000000
       },
       "paramsUnknown": false,
       "license": null,
@@ -3068,7 +3068,7 @@
         "tps": 61.151,
         "ttft": 1.349
       },
-      "hfId": "deepseek-ai/DeepSeek-V4-Pro",
+      "hfId": null,
       "mode": "Reasoning, High Effort",
       "releaseDate": "2026-04-24"
     },
@@ -3080,8 +3080,8 @@
       "creatorSlug": "deepseek",
       "isClosed": false,
       "params": {
-        "total": 1598839674782,
-        "active": 41671196672
+        "total": 1600000000000,
+        "active": 49000000000
       },
       "paramsUnknown": false,
       "license": null,
@@ -3105,7 +3105,7 @@
         "tps": 60.57,
         "ttft": 1.37
       },
-      "hfId": "deepseek-ai/DeepSeek-V4-Pro",
+      "hfId": null,
       "mode": "Reasoning, Max Effort",
       "releaseDate": "2026-04-24"
     },
@@ -3117,8 +3117,8 @@
       "creatorSlug": "deepseek",
       "isClosed": false,
       "params": {
-        "total": 290944616402,
-        "active": 10990125056
+        "total": 284000000000,
+        "active": 13000000000
       },
       "paramsUnknown": false,
       "license": null,
@@ -3142,7 +3142,7 @@
         "tps": 0,
         "ttft": 0
       },
-      "hfId": "deepseek-ai/DeepSeek-V4-Flash",
+      "hfId": null,
       "mode": "Non-reasoning",
       "releaseDate": "2026-04-24"
     },
@@ -9785,7 +9785,7 @@
       "scores": {
         "artificial_analysis_intelligence_index": 17.2,
         "artificial_analysis_coding_index": 34,
-        "gpqa": null,
+        "gpqa": 0.765,
         "hle": null,
         "lcr": null,
         "ifbench": null,
@@ -16215,8 +16215,8 @@
       "creatorSlug": "deepseek",
       "isClosed": false,
       "params": {
-        "total": 290944616402,
-        "active": 10990125056
+        "total": 284000000000,
+        "active": 13000000000
       },
       "paramsUnknown": false,
       "license": null,
@@ -16240,7 +16240,7 @@
         "tps": 0,
         "ttft": 0
       },
-      "hfId": "deepseek-ai/DeepSeek-V4-Flash",
+      "hfId": null,
       "mode": "Reasoning, High Effort",
       "releaseDate": "2026-04-24"
     },
@@ -16511,8 +16511,8 @@
       "creatorSlug": "deepseek",
       "isClosed": false,
       "params": {
-        "total": 290944616402,
-        "active": 10990125056
+        "total": 284000000000,
+        "active": 13000000000
       },
       "paramsUnknown": false,
       "license": null,
@@ -16536,7 +16536,7 @@
         "tps": 0,
         "ttft": 0
       },
-      "hfId": "deepseek-ai/DeepSeek-V4-Flash",
+      "hfId": null,
       "mode": "Reasoning, Max Effort",
       "releaseDate": "2026-04-24"
     },
@@ -22412,8 +22412,6 @@
         "8c29d66d-bf98-4ea3-8572-5409353ecc66",
         "e33dc369-ae81-40e0-8c4e-28b002d02197",
         "4bbceacb-cf47-464b-b60f-e1d1fe016d67",
-        "d8ddb241-b3e4-4c25-a6a3-72eb1b30c541",
-        "b23e6c69-96e5-44c9-8f58-4b42e0c399d5",
         "fe4c0848-e284-4e52-a79d-cdc28392f1a9",
         "f7a4ea75-e548-4069-80d4-9be8bc7c009b",
         "f7d2fc3e-1f7b-405f-818c-07952a4af78f"
@@ -22441,8 +22439,6 @@
         "feb02d3b-ff8d-4ed4-b165-13f8d4a7192c",
         "6e1b44ff-c227-496b-aef4-19b70cd18c76",
         "8c29d66d-bf98-4ea3-8572-5409353ecc66",
-        "d8ddb241-b3e4-4c25-a6a3-72eb1b30c541",
-        "b23e6c69-96e5-44c9-8f58-4b42e0c399d5",
         "fe4c0848-e284-4e52-a79d-cdc28392f1a9",
         "f7d2fc3e-1f7b-405f-818c-07952a4af78f"
       ]
@@ -22473,8 +22469,6 @@
         "7d73161f-002f-4c9c-b4f8-6c4d91f2ba8e",
         "169e47f5-3d4d-4ad4-8f8b-ab46f0c73f67",
         "4bbceacb-cf47-464b-b60f-e1d1fe016d67",
-        "d8ddb241-b3e4-4c25-a6a3-72eb1b30c541",
-        "b23e6c69-96e5-44c9-8f58-4b42e0c399d5",
         "fe4c0848-e284-4e52-a79d-cdc28392f1a9",
         "277f939a-985b-4b37-859d-b3eabc7c0b26",
         "f7d2fc3e-1f7b-405f-818c-07952a4af78f"
@@ -22491,7 +22485,6 @@
         "e33dc369-ae81-40e0-8c4e-28b002d02197",
         "2236df45-0699-40d1-b5cc-69ee345d2257",
         "4bbceacb-cf47-464b-b60f-e1d1fe016d67",
-        "fe4c0848-e284-4e52-a79d-cdc28392f1a9",
         "a3043d4f-9b92-4261-8ea2-a2d391b09cf4",
         "f7a4ea75-e548-4069-80d4-9be8bc7c009b",
         "f7d2fc3e-1f7b-405f-818c-07952a4af78f"
@@ -22509,7 +22502,6 @@
         "169e47f5-3d4d-4ad4-8f8b-ab46f0c73f67",
         "2236df45-0699-40d1-b5cc-69ee345d2257",
         "4bbceacb-cf47-464b-b60f-e1d1fe016d67",
-        "d8ddb241-b3e4-4c25-a6a3-72eb1b30c541",
         "fe4c0848-e284-4e52-a79d-cdc28392f1a9",
         "a3043d4f-9b92-4261-8ea2-a2d391b09cf4",
         "f7a4ea75-e548-4069-80d4-9be8bc7c009b",
@@ -22597,7 +22589,6 @@
         "6e1b44ff-c227-496b-aef4-19b70cd18c76",
         "cd26a386-4873-46ff-b853-d239050025a2",
         "4bbceacb-cf47-464b-b60f-e1d1fe016d67",
-        "b23e6c69-96e5-44c9-8f58-4b42e0c399d5",
         "fe4c0848-e284-4e52-a79d-cdc28392f1a9",
         "f7a4ea75-e548-4069-80d4-9be8bc7c009b",
         "0de67206-4d36-4d10-b8f6-cf37fa747a03",
@@ -22664,6 +22655,7 @@
     "deepseek-r1-distill-qwen-1-5b": 1117320800,
     "deepseek-v3-2-speciale": null,
     "deepseek-v4-flash": null,
+    "deepseek-v4-flash-0420": null,
     "deepseek-v4-flash-0420-high": null,
     "deepseek-v4-flash-high": null,
     "deepseek-v4-pro": null,
@@ -22691,6 +22683,7 @@
     "kimi-k2-6": null,
     "kimi-k2-7-code": null,
     "kimi-k2-thinking": null,
+    "kimi-k3": null,
     "kimi-k3-low": null,
     "lfm2-5-1-2b-instruct": 730895712,
     "lfm2-5-1-2b-thinking": 730895584,
@@ -22749,8 +22742,6 @@
     "qwen3-vl-30b-a3b-reasoning": 18632185056,
     "qwen3-vl-8b-reasoning": 5027785184,
     "step-3-vl-10b": 5027780256,
-    "tri-21b-think-preview": null,
-    "kimi-k3": null,
-    "deepseek-v4-flash-0420": null
+    "tri-21b-think-preview": null
   }
 }

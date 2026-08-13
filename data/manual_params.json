@@ -11,6 +11,27 @@
   "deepseek-r1-0528": { "total": 671000000000, "active": 37000000000 },
   "deepseek-v3-0324": { "total": 671000000000, "active": 37000000000 },
 
+  "_comment_v4": "DeepSeek states 'DeepSeek-V4-Flash with 284B parameters (13B activated)' and 'DeepSeek-V4-Pro with 1.6T parameters (49B activated)'. safetensors.total runs higher because it counts the MTP speculative-decoding heads: the 0731 Flash checkpoint ships 3 of them (304.18B) against the April preview's 1 (290.94B), and the backbones are byte-identical at 284.3B once those are subtracted. Plotting the raw totals put the superseded preview on the total-axis frontier purely for shipping fewer draft heads.",
+  "deepseek-v4-flash": { "total": 284000000000, "active": 13000000000 },
+  "deepseek-v4-flash-0420": { "total": 284000000000, "active": 13000000000 },
+  "deepseek-v4-flash-0420-high": {
+    "total": 284000000000,
+    "active": 13000000000
+  },
+  "deepseek-v4-flash-non-reasoning": {
+    "total": 284000000000,
+    "active": 13000000000
+  },
+  "deepseek-v4-pro-0424": { "total": 1600000000000, "active": 49000000000 },
+  "deepseek-v4-pro-0424-high": {
+    "total": 1600000000000,
+    "active": 49000000000
+  },
+  "deepseek-v4-pro-0424-non-reasoning": {
+    "total": 1600000000000,
+    "active": 49000000000
+  },
+
   "llama-4-maverick": { "total": 400000000000, "active": 17000000000 },
   "llama-4-scout": { "total": 109000000000, "active": 17000000000 },
 

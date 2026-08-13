@@ -10,6 +10,7 @@ import { METRICS_BY_ID } from "../lib/metrics";
 import { formatBytes, formatParams, formatScore } from "../lib/format";
 import { estimateQ4KMBytes } from "../lib/quant";
 import { useIsMobile } from "../lib/breakpoint";
+import { formatClosedLabel } from "../lib/model-names";
 import {
   findClosedNeighbours,
   type Neighbours,
@@ -228,12 +229,12 @@ function NeighbourRow(props: {
   entry: NeighbourEntry;
   info: { maxValue: number };
 }) {
-  const display = () => {
-    // Strip the parenthetical mode if present to keep the row short.
-    return props.entry.model.name.replace(/\s*\([^)]+\)\s*$/, (paren) =>
-      paren.length <= 14 ? paren : "",
-    );
-  };
+  // Same rule as the anchor labels (docs/ui.md §4.4): keep the effort tier,
+  // drop the reasoning designator every flagship carries. Length-gating the
+  // whole parenthetical — as this row used to — throws away the tier for any
+  // vendor that spells it verbosely, so the closest-closed comparison read
+  // "Claude Opus 5" without saying which of its four scored efforts it meant.
+  const display = () => formatClosedLabel(props.entry.model.name, false);
   const fmt = (d: number) => {
     const v = props.info.maxValue <= 1 ? d * 100 : d;
     const sign = v > 0 ? "+" : v < 0 ? "" : "±";

@@ -37,6 +37,11 @@
     "source": "not-found",
     "fetchedAt": "2026-07-23T07:34:00.128Z"
   },
+  "deepseek-v4-pro": {
+    "bytes": null,
+    "source": "not-found",
+    "fetchedAt": "2026-08-13T05:45:50.163Z"
+  },
   "devstral-small-2": {
     "bytes": 14333916096,
     "source": "hf",

@@ -417,6 +417,69 @@ test("computeActiveParams: Kimi Linear's 'num_experts_per_token' spelling is MoE
   );
 });
 
+test("computeActiveParams: Motif's 'experts_top_k' spelling is MoE, not dense", () => {
+  // Motif-Technologies/Motif-3 (and Motif-3-Beta) — a fifth routing spelling,
+  // paired with `n_dense_first_layers` rather than `first_k_dense_replace`.
+  // Both misses together plotted a 314.8B-total model at 314.8B active.
+  const active = computeActiveParams({
+    hidden_size: 4096,
+    num_hidden_layers: 53,
+    intermediate_size: 12288,
+    moe_intermediate_size: 1280,
+    num_experts: 384,
+    experts_top_k: 8,
+    num_shared_experts: 1,
+    n_dense_first_layers: 2,
+    vocab_size: 220160,
+  });
+  assert.ok(active !== null, "must not read as dense");
+  assert.ok(
+    active! > 10 * B && active! < 14 * B,
+    `expected ~12B active against 314.8B total, got ${active}`,
+  );
+});
+
+test("computeActiveParams: StepFun's 'moe_top_k' + 'moe_layers_enum' is MoE, not dense", () => {
+  // stepfun-ai/Step-3.5-Flash — routing key `moe_top_k`, shared-expert width
+  // `share_expert_dim`, and the dense-layer count only derivable as the
+  // complement of the enumerated MoE layer indices (layers 3..44 of 45).
+  const active = computeActiveParams({
+    hidden_size: 4096,
+    num_hidden_layers: 45,
+    intermediate_size: 11264,
+    moe_intermediate_size: 1280,
+    share_expert_dim: 1280,
+    moe_num_experts: 288,
+    moe_top_k: 8,
+    moe_layers_enum: Array.from({ length: 42 }, (_, i) => i + 3).join(","),
+    vocab_size: 128896,
+  });
+  assert.ok(active !== null, "must not read as dense");
+  assert.ok(
+    active! > 8 * B && active! < 12 * B,
+    `expected ~10B active against 199.4B total, got ${active}`,
+  );
+});
+
+test("computeActiveParams: a malformed moe_layers_enum never inflates the estimate", () => {
+  // Guard on `denseLayerCount`: an enum longer than the layer count (or junk)
+  // must clamp rather than yield a negative dense count, which would otherwise
+  // add phantom layers to the MoE total.
+  const active = computeActiveParams({
+    hidden_size: 4096,
+    num_hidden_layers: 4,
+    intermediate_size: 11264,
+    moe_intermediate_size: 1280,
+    moe_top_k: 8,
+    moe_layers_enum: "0,1,2,3,4,5,6,7,8,9",
+    vocab_size: 128896,
+  });
+  assert.ok(active !== null);
+  // 4 layers, all MoE: embeddings + 4·(attn + routed FFN). Nowhere near the
+  // 10-layer reading the unclamped complement would have produced.
+  assert.ok(active! < 3 * B, `expected a 4-layer estimate, got ${active}`);
+});
+
 test("resolveParams: an active estimate above total is rejected, never plotted", async (t) => {
   // Regression: NVIDIA-Nemotron-3-Super-120B-A12B resolved to active 73.3B
   // against total 67.2B — impossible, and it dragged the point right of where

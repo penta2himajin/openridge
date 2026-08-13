@@ -243,25 +243,36 @@ interface HfConfig {
   num_hidden_layers?: number;
   // Experts-routed-per-token. Every vendor spells this differently:
   // `num_experts_per_tok` (DeepSeek/Qwen/Nemotron), `num_experts_per_token`
-  // (Kimi Linear), `top_k_experts` (Gemma 4 / DiffusionGemma).
+  // (Kimi Linear), `top_k_experts` (Gemma 4 / DiffusionGemma),
+  // `experts_top_k` (Motif), `moe_top_k` (StepFun).
   num_experts_per_tok?: number;
   num_experts_per_token?: number;
   top_k_experts?: number;
+  experts_top_k?: number;
+  moe_top_k?: number;
   // Size of the routed-expert *pool*, not the per-token count. Declared only
   // so the two aren't confused: reading `num_experts` as the per-token figure
   // inflates the estimate by the sparsity factor (128 vs 8 for Gemma 4).
   num_experts?: number;
+  moe_num_experts?: number;
   n_routed_experts?: number;
   n_shared_experts?: number;
   num_shared_experts?: number;
   moe_intermediate_size?: number;
   shared_intermediate_size?: number;
   // Aggregate FFN width of the always-on shared expert(s), when sized
-  // independently of a routed expert (Nemotron-H, Qwen3-Omni).
+  // independently of a routed expert (Nemotron-H, Qwen3-Omni, StepFun).
   moe_shared_expert_intermediate_size?: number;
   shared_expert_intermediate_size?: number;
+  share_expert_dim?: number;
   intermediate_size?: number;
+  // Leading dense (non-MoE) layers, spelled `first_k_dense_replace`
+  // (DeepSeek/Qwen) or `n_dense_first_layers` (Motif). StepFun instead lists
+  // the MoE layer *indices* in `moe_layers_enum`, so the dense count is
+  // whatever that list leaves out — see `denseLayerCount`.
   first_k_dense_replace?: number;
+  n_dense_first_layers?: number;
+  moe_layers_enum?: string | number[];
   vocab_size?: number;
   // Gemma 4 marker: every layer carries its dense `mlp` *and* routed experts,
   // so `intermediate_size` is an always-on shared expert, not a dense-layer
@@ -277,9 +288,38 @@ const LLM_CONFIG_KEYS = [
   "language_model",
 ] as const;
 
-/** Routed-experts-per-token, across the three spellings in the wild. */
+/** Routed-experts-per-token, across the five spellings in the wild. */
 function expertsPerTok(c: HfConfig): number | undefined {
-  return c.num_experts_per_tok ?? c.num_experts_per_token ?? c.top_k_experts;
+  return (
+    c.num_experts_per_tok ??
+    c.num_experts_per_token ??
+    c.top_k_experts ??
+    c.experts_top_k ??
+    c.moe_top_k
+  );
+}
+
+/**
+ * Count of leading dense layers, i.e. layers whose FFN is a plain MLP rather
+ * than a routed-expert block. Most vendors give it directly; StepFun instead
+ * enumerates the MoE layer indices, so the dense count is the complement.
+ * Clamped to [0, L] because a malformed enum must never produce a negative
+ * MoE-layer count (which would silently understate active params).
+ */
+function denseLayerCount(c: HfConfig, L: number): number {
+  const enumerated = c.moe_layers_enum;
+  if (enumerated !== undefined) {
+    const idx =
+      typeof enumerated === "string"
+        ? enumerated
+            .split(",")
+            .map((s) => Number(s.trim()))
+            .filter((n) => Number.isFinite(n))
+        : enumerated;
+    return Math.min(L, Math.max(0, L - new Set(idx).size));
+  }
+  const declared = c.first_k_dense_replace ?? c.n_dense_first_layers ?? 0;
+  return Math.min(L, Math.max(0, declared));
 }
 
 /** Routed-expert FFN width, across its two spellings. */
@@ -336,12 +376,13 @@ export function computeActiveParams(cfg: HfConfig | null): number | null {
   const sharedInt =
     t.moe_shared_expert_intermediate_size ??
     t.shared_expert_intermediate_size ??
+    t.share_expert_dim ??
     // Gemma 4 routes experts *next to* a per-layer dense MLP rather than
     // replacing it, and names no shared-expert count — `intermediate_size` is
     // that always-on width.
     (t.enable_moe_block ? t.intermediate_size : undefined);
   const denseInt = t.intermediate_size ?? moeInt;
-  const denseLayers = Math.min(L, t.first_k_dense_replace ?? 0);
+  const denseLayers = denseLayerCount(t, L);
   const moeLayers = Math.max(0, L - denseLayers);
   const emb = t.vocab_size ? t.vocab_size * H : 0;
   const attn = L * 4 * H * H;

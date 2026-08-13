@@ -114,13 +114,16 @@ GET https://huggingface.co/api/models/<owner>/<repo>
    - 厳密ではないが ±10% 程度に収まれば散布図用途には十分
 
    **キー名と入れ子に注意**（MoE を dense と誤読する主因。推定が null を返すと呼び出し側は `total` にフォールバックし、それがそのまま dense 表示になる）:
-   - per-token のルーティング数は3通りの綴りがある: `num_experts_per_tok` (DeepSeek / Qwen / Nemotron) / `num_experts_per_token` (Kimi Linear) / `top_k_experts` (Gemma 4 / DiffusionGemma)
-   - **`num_experts` / `n_routed_experts` は expert プールの総数**であって per-token 数ではない。取り違えると sparsity 分だけ過大評価する（Gemma 4 なら 128 vs 8）
-   - マルチモーダルモデルは LLM config を wrapper の下に埋める: `text_config` (Gemma 4) / `llm_config` (Nemotron Omni) / `thinker_config.text_config` (Qwen3-Omni)。トップレベルだけ読むと routing が見つからず dense 判定になる
-   - shared expert は routed expert と幅が違うことがある。`moe_shared_expert_intermediate_size` (Nemotron-H) / `shared_expert_intermediate_size` (Qwen3-Omni) があればそちら（全 shared expert の合計幅）を優先する
+   - per-token のルーティング数は5通りの綴りがある: `num_experts_per_tok` (DeepSeek / Qwen / Nemotron) / `num_experts_per_token` (Kimi Linear) / `top_k_experts` (Gemma 4 / DiffusionGemma) / `experts_top_k` (Motif) / `moe_top_k` (StepFun)
+   - **`num_experts` / `n_routed_experts` / `moe_num_experts` は expert プールの総数**であって per-token 数ではない。取り違えると sparsity 分だけ過大評価する（Gemma 4 なら 128 vs 8）
+   - マルチモーダルモデルは LLM config を wrapper の下に埋める: `text_config` (Gemma 4 / Step 3.7) / `llm_config` (Nemotron Omni) / `thinker_config.text_config` (Qwen3-Omni)。トップレベルだけ読むと routing が見つからず dense 判定になる
+   - shared expert は routed expert と幅が違うことがある。`moe_shared_expert_intermediate_size` (Nemotron-H) / `shared_expert_intermediate_size` (Qwen3-Omni) / `share_expert_dim` (StepFun) があればそちら（全 shared expert の合計幅）を優先する
+   - **先頭 dense 層数の綴りも割れる**: `first_k_dense_replace` (DeepSeek / Qwen) / `n_dense_first_layers` (Motif)。StepFun は逆に **MoE 層の index を `moe_layers_enum` に列挙**するので、dense 層数はその補集合として求める（列挙が壊れていても負にならないよう `[0, L]` にクランプする）
    - Gemma 4 は experts が dense MLP を**置き換えず併走**する（`enable_moe_block: true`、`model.safetensors.index.json` の weight map で確認済み）。この場合 `intermediate_size` は dense 層の幅ではなく常時オンの shared expert 幅
 
    **推定が効かない構造**: Nemotron-H 系の Mamba-2 / MoE ハイブリッドは大半の層が Mamba で、`num_hidden_layers` から attention / MoE 層数を導けない。この系統は推定を諦めて `moe_overrides.json` に実測値を置く。
+
+   **attention 項の誤差**: 推定は attention を一律 `4·H²` で置く。MLA（`kv_lora_rank` / `q_lora_rank` を持つ DeepSeek 系・A.X-K2）では**過大**、linear-attention ハイブリッド（Solar Open2 の `linear_attn_config`）では **過小**に出る。総パラメータの再構成が `safetensors.total` とよく一致するのに active だけ公称値から 20% 以上ずれる場合はここが原因なので、モデルカードの公称 active を `moe_overrides.json` に入れる。
 
    **不変条件**: `active > total` は物理的にありえない（チェックポイントに無い重みは活性化できない）。推定がこれを踏んだ場合は警告を出して `total` にフォールバックする。alias が量子化・部分アップロードの repo を指してしまった場合にも効く（`safetensors.total` が過小になるため）。
 

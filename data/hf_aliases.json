@@ -1,5 +1,5 @@
 {
-  "_comment": "AA slug → HF repo id. null = no HF lookup: either a closed model, or an open-weight release whose weights are not published yet (e.g. deepseek-v4-pro = V4 Pro 0813, scored by AA before the checkpoint shipped). null is a cached negative and is never re-resolved, so when weights do appear the entry must be repointed by hand. See docs/data-sources.md §2.",
+  "_comment": "AA slug → HF repo id. null = the auto-search found no public repo: either an API-only tier, or an open-weight release whose weights are not out yet (e.g. deepseek-v4-pro = V4 Pro 0813, scored by AA before the checkpoint shipped). null is re-searched on every run for the first 180 days after release, and effort variants inherit a resolved sibling, so a missing repo recovers on its own once it appears. Past that window an entry only changes by hand. See docs/data-sources.md §2.",
   "_examples": {
     "deepseek-v3-1": "deepseek-ai/DeepSeek-V3.1",
     "qwen3-235b-a22b": "Qwen/Qwen3-235B-A22B",
@@ -148,7 +148,7 @@
   "ling-2-6-1t": "inclusionAI/Ling-2.6-1T",
   "ling-2-6-flash": "inclusionAI/Ling-2.6-Flash",
   "ling-3-0-flash": "inclusionAI/Ling-3.0-flash",
-  "ling-3-0-tiny": null,
+  "ling-3-0-tiny": "inclusionAI/Ling-3.0-tiny",
   "ling-3-0-tiny-rc2": null,
   "ling-flash-2-0": "inclusionAI/Ling-flash-2.0",
   "ling-mini-2-0": "inclusionAI/Ling-mini-2.0",

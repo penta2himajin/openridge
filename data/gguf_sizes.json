@@ -496,6 +496,11 @@
     "repo": "bartowski/Qwen_Qwen3.6-35B-A3B-GGUF",
     "fetchedAt": "2026-05-19T23:57:44.593Z"
   },
+  "qwen3-8-2-4t-a95b": {
+    "bytes": null,
+    "source": "not-found",
+    "fetchedAt": "2026-08-14T05:42:53.674Z"
+  },
   "qwen3-8b-instruct-reasoning": {
     "bytes": 5027784224,
     "source": "hf",

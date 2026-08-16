@@ -88,18 +88,22 @@ function readUrl(): {
 }
 
 export function createAppState(): AppState {
-  const url = readUrl();
-  const [metric, setMetric] = createSignal<MetricId>(
-    url.metric ?? DEFAULT_METRIC,
-  );
-  const [xview, setXview] = createSignal<XView>(url.xview ?? "active");
+  // Signals start at the defaults even when the URL says otherwise, and the
+  // query string is applied in onMount below. The page is pre-rendered without
+  // a query string, so seeding these at creation time would make the first
+  // client render disagree with the SSR markup — and Solid skips text-node
+  // writes while hydrating, which leaves the header's `Index: <label>` and the
+  // X-axis legend stuck on the defaults while the chart plots the requested
+  // metric. Applying after hydration turns the difference into an ordinary
+  // signal update, which does patch the DOM. Same reason `useIsMobile` reads
+  // matchMedia in onMount rather than at creation.
+  const [metric, setMetric] = createSignal<MetricId>(DEFAULT_METRIC);
+  const [xview, setXview] = createSignal<XView>("active");
   const [selectedModelId, setSelectedModelId] = createSignal<string | null>(
     null,
   );
   const [showAllClosed, setShowAllClosed] = createSignal(false);
-  const [frontierOnly, setFrontierOnly] = createSignal(
-    url.frontierOnly ?? false,
-  );
+  const [frontierOnly, setFrontierOnly] = createSignal(false);
   const [sizeFilters, setSizeFilters] = createSignal<Set<SizeFilter>>(
     new Set(),
   );
@@ -109,8 +113,13 @@ export function createAppState(): AppState {
   const [closedVendors, setClosedVendors] =
     createSignal<Set<string>>(loadClosedVendors());
 
-  // URL sync (one-way: state → url).
+  // URL sync (one-way: state → url), after seeding from the URL once.
   onMount(() => {
+    const url = readUrl();
+    if (url.metric) setMetric(url.metric);
+    if (url.xview) setXview(url.xview);
+    if (url.frontierOnly !== undefined) setFrontierOnly(url.frontierOnly);
+
     createEffect(() => {
       const p = new URLSearchParams(window.location.search);
       const m = metric();

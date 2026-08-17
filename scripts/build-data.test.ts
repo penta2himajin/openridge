@@ -5,6 +5,7 @@ import {
   computeActiveParams,
   siblingRepo,
   isRecentRelease,
+  findGgufQ4KM,
   HF_ORGS_BY_CREATOR,
   type AAEntry,
 } from "./build-data";
@@ -64,8 +65,9 @@ function mockFetch(routes: Record<string, unknown | "miss">) {
 }
 
 test("HF_ORGS_BY_CREATOR covers every creator currently relying on name-parse", () => {
-  // These 12 creators ship open-weight models whose AA names were previously
-  // parsed by the now-removed name heuristic. Without a trusted org here,
+  // These creators ship open-weight models that reach the scatter only through
+  // a trusted org — most because their AA names were once parsed by the
+  // now-removed name heuristic. Without a trusted org here,
   // resolveHfRepo() returns null immediately (build-data.ts: `if (!orgs)
   // return null`) and every one of their models silently drops off the
   // scatter (params=null) once name-parsing is gone.
@@ -82,6 +84,10 @@ test("HF_ORGS_BY_CREATOR covers every creator currently relying on name-parse", 
     "swiss-ai-initiative": "swiss-ai",
     openbmb: "openbmb",
     servicenow: "ServiceNow-AI",
+    // Inkling / Inkling-Small: AA scored both as open weights while
+    // hf_aliases.json held a cached search miss, so they sat at params=null
+    // and never reached the scatter.
+    "thinking-machines": "thinkingmachines",
   };
   for (const [creatorSlug, org] of Object.entries(expected)) {
     assert.ok(
@@ -482,6 +488,76 @@ test("computeActiveParams: a malformed moe_layers_enum never inflates the estima
   assert.ok(active! < 3 * B, `expected a 4-layer estimate, got ${active}`);
 });
 
+test("computeActiveParams: Inkling's inverted intermediate_size naming is MoE, not dense", () => {
+  // thinkingmachines/Inkling — the routed expert's width is the plain
+  // `intermediate_size` and the dense layers get `dense_intermediate_size`,
+  // the reverse of every other vendor. With no `moe_intermediate_size` to
+  // find, the estimator read this 975B-A41B model as dense and the caller
+  // plotted it at its 952.4B `safetensors.total`. `dense_mlp_idx` is likewise
+  // this vendor's spelling of the leading-dense-layer count.
+  const active = computeActiveParams({
+    text_config: {
+      hidden_size: 6144,
+      num_hidden_layers: 66,
+      intermediate_size: 3072,
+      dense_intermediate_size: 24576,
+      dense_mlp_idx: 2,
+      n_routed_experts: 256,
+      num_experts_per_tok: 6,
+      n_shared_experts: 2,
+      vocab_size: 201024,
+    },
+  });
+  assert.ok(active !== null, "must not read as dense");
+  // Model card and thinkingmachines.ai both state 41B active, 975B total.
+  assert.ok(
+    active! > 37 * B && active! < 45 * B,
+    `expected ~41B active, got ${active}`,
+  );
+});
+
+test("computeActiveParams: Inkling-Small lands on its published 12B active", () => {
+  // thinkingmachines/Inkling-Small — same architecture, half the width. Pinned
+  // separately because the sibling above would still pass if the estimate
+  // tracked total rather than the routing.
+  const active = computeActiveParams({
+    text_config: {
+      hidden_size: 4096,
+      num_hidden_layers: 42,
+      intermediate_size: 2048,
+      dense_intermediate_size: 16384,
+      dense_mlp_idx: 2,
+      n_routed_experts: 256,
+      num_experts_per_tok: 6,
+      n_shared_experts: 2,
+      vocab_size: 201024,
+    },
+  });
+  assert.ok(active !== null, "must not read as dense");
+  // Model card states 12B active against 276B total.
+  assert.ok(
+    active! > 10 * B && active! < 14 * B,
+    `expected ~12B active, got ${active}`,
+  );
+});
+
+test("computeActiveParams: intermediate_size alone stays a dense width", () => {
+  // The `dense_intermediate_size` sibling is what promotes `intermediate_size`
+  // to the routed width. Without it, a config carrying only `intermediate_size`
+  // must keep reading as dense — otherwise every dense model in the dataset
+  // would start reporting a fabricated active count.
+  assert.equal(
+    computeActiveParams({
+      hidden_size: 4096,
+      num_hidden_layers: 42,
+      intermediate_size: 14336,
+      num_experts_per_tok: 6,
+      vocab_size: 128256,
+    }),
+    null,
+  );
+});
+
 test("resolveParams: an active estimate above total is rejected, never plotted", async (t) => {
   // Regression: NVIDIA-Nemotron-3-Super-120B-A12B resolved to active 73.3B
   // against total 67.2B — impossible, and it dragged the point right of where
@@ -531,6 +607,68 @@ test("resolveParams: an active estimate above total is rejected, never plotted",
 // `kimi-k3-low` (the same checkpoint at a lower reasoning effort) resolved
 // fine. Two independent guards now cover that: inherit from a sibling, and
 // re-search while the release is recent.
+
+test("findGgufQ4KM: a quant-per-directory repo is read, not skipped for the next candidate", async (t) => {
+  // Regression: uploaders of large MoEs give each quant its own directory
+  // (unsloth ships `UD-Q4_K_M/…-00001-of-00005.gguf`). A non-recursive tree
+  // listing sees only directory entries, matches no Q4_K_M, and moves on — so
+  // Inkling-Small's size came from an expert-pruned 137B derivative at half
+  // the real footprint, which still slipped through the ratio guard.
+  t.after(() => mock.restoreAll());
+  const treeUrls: string[] = [];
+  mock.method(globalThis, "fetch", async (url: string | URL) => {
+    const u = String(url);
+    const json = (b: unknown) =>
+      new Response(JSON.stringify(b), { status: 200 });
+    if (u.includes("api/models?search=")) {
+      return json([
+        {
+          modelId: "miweru/Inkling-Small-REAP-137B-A12B-de-GGUF",
+          downloads: 7,
+        },
+        { modelId: "unsloth/Inkling-Small-GGUF", downloads: 422532 },
+      ]);
+    }
+    if (u.includes("/tree/main")) {
+      treeUrls.push(u);
+      if (u.includes("unsloth/Inkling-Small-GGUF")) {
+        // Only the recursive listing reaches inside the quant directory.
+        return u.includes("recursive=true")
+          ? json([
+              { path: "UD-Q4_K_M", type: "directory" },
+              {
+                path: "UD-Q4_K_M/Inkling-Small-UD-Q4_K_M-00001-of-00002.gguf",
+                type: "file",
+                size: 80_000_000_000,
+              },
+              {
+                path: "UD-Q4_K_M/Inkling-Small-UD-Q4_K_M-00002-of-00002.gguf",
+                type: "file",
+                size: 82_500_000_000,
+              },
+            ])
+          : json([{ path: "UD-Q4_K_M", type: "directory" }]);
+      }
+      return json([
+        {
+          path: "Inkling-Small-REAP-137B-A12B-de-Q4_K_M.gguf",
+          type: "file",
+          size: 81_522_916_640,
+        },
+      ]);
+    }
+    return new Response(null, { status: 404 });
+  });
+
+  // 266.0B total × 0.6 B/param, as build-data computes it.
+  const hit = await findGgufQ4KM("Inkling Small", 265956439090 * 0.6);
+  assert.ok(
+    treeUrls.every((u) => u.includes("recursive=true")),
+    `tree listings must be recursive, got ${JSON.stringify(treeUrls)}`,
+  );
+  assert.equal(hit?.repo, "unsloth/Inkling-Small-GGUF");
+  assert.equal(hit?.bytes, 162_500_000_000);
+});
 
 test("siblingRepo: an effort variant inherits the sibling that resolved", () => {
   const aliases = { "kimi-k3-low": "moonshotai/Kimi-K3", "kimi-k3": null };

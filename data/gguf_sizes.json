@@ -171,6 +171,12 @@
     "repo": "satgeze/Hy3-1M-GGUF",
     "fetchedAt": "2026-07-14T06:19:23.605Z"
   },
+  "inkling-small": {
+    "bytes": 162537607392,
+    "source": "hf",
+    "repo": "unsloth/Inkling-Small-GGUF",
+    "fetchedAt": "2026-08-17T14:48:03.754Z"
+  },
   "kimi-k2-6": {
     "bytes": null,
     "source": "not-found",

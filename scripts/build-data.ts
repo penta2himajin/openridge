@@ -215,6 +215,7 @@ export const HF_ORGS_BY_CREATOR: Record<string, string[]> = {
   "swiss-ai-initiative": ["swiss-ai"],
   openbmb: ["openbmb"],
   servicenow: ["ServiceNow-AI"],
+  "thinking-machines": ["thinkingmachines"],
 };
 
 /** Proprietary, API-only families whose parameter counts are never published —
@@ -260,6 +261,11 @@ interface HfConfig {
   num_shared_experts?: number;
   moe_intermediate_size?: number;
   shared_intermediate_size?: number;
+  // Thinking Machines inverts the usual convention: the routed expert's width
+  // is the plain `intermediate_size` and the *dense* layers get their own key.
+  // Its presence is what tells `moeIntermediate` to read `intermediate_size`
+  // as the routed width instead of a dense-layer width.
+  dense_intermediate_size?: number;
   // Aggregate FFN width of the always-on shared expert(s), when sized
   // independently of a routed expert (Nemotron-H, Qwen3-Omni, StepFun).
   moe_shared_expert_intermediate_size?: number;
@@ -267,11 +273,13 @@ interface HfConfig {
   share_expert_dim?: number;
   intermediate_size?: number;
   // Leading dense (non-MoE) layers, spelled `first_k_dense_replace`
-  // (DeepSeek/Qwen) or `n_dense_first_layers` (Motif). StepFun instead lists
-  // the MoE layer *indices* in `moe_layers_enum`, so the dense count is
-  // whatever that list leaves out — see `denseLayerCount`.
+  // (DeepSeek/Qwen), `n_dense_first_layers` (Motif) or `dense_mlp_idx`
+  // (Thinking Machines). StepFun instead lists the MoE layer *indices* in
+  // `moe_layers_enum`, so the dense count is whatever that list leaves out —
+  // see `denseLayerCount`.
   first_k_dense_replace?: number;
   n_dense_first_layers?: number;
+  dense_mlp_idx?: number;
   moe_layers_enum?: string | number[];
   vocab_size?: number;
   // Gemma 4 marker: every layer carries its dense `mlp` *and* routed experts,
@@ -318,13 +326,26 @@ function denseLayerCount(c: HfConfig, L: number): number {
         : enumerated;
     return Math.min(L, Math.max(0, L - new Set(idx).size));
   }
-  const declared = c.first_k_dense_replace ?? c.n_dense_first_layers ?? 0;
+  const declared =
+    c.first_k_dense_replace ?? c.n_dense_first_layers ?? c.dense_mlp_idx ?? 0;
   return Math.min(L, Math.max(0, declared));
 }
 
-/** Routed-expert FFN width, across its two spellings. */
+/**
+ * Routed-expert FFN width. Usually a dedicated key, but Thinking Machines
+ * inverts the convention — the routed width is the plain `intermediate_size`
+ * and the dense layers carry `dense_intermediate_size`. Keying off that
+ * sibling rather than off `intermediate_size` alone keeps every other vendor's
+ * config reading exactly as before: without it Inkling has no recognised
+ * routed width at all, `findMoeConfig` calls a 975B-A41B MoE dense, and the
+ * caller plots it at `total`.
+ */
 function moeIntermediate(c: HfConfig): number | undefined {
-  return c.moe_intermediate_size ?? c.shared_intermediate_size;
+  return (
+    c.moe_intermediate_size ??
+    c.shared_intermediate_size ??
+    (c.dense_intermediate_size !== undefined ? c.intermediate_size : undefined)
+  );
 }
 
 /**
@@ -381,7 +402,10 @@ export function computeActiveParams(cfg: HfConfig | null): number | null {
     // replacing it, and names no shared-expert count — `intermediate_size` is
     // that always-on width.
     (t.enable_moe_block ? t.intermediate_size : undefined);
-  const denseInt = t.intermediate_size ?? moeInt;
+  // Where a vendor names the dense-layer width separately (Thinking Machines'
+  // `dense_intermediate_size`), `intermediate_size` is the routed width and
+  // would understate the leading dense layers by ~8x.
+  const denseInt = t.dense_intermediate_size ?? t.intermediate_size ?? moeInt;
   const denseLayers = denseLayerCount(t, L);
   const moeLayers = Math.max(0, L - denseLayers);
   const emb = t.vocab_size ? t.vocab_size * H : 0;
@@ -720,7 +744,7 @@ async function fetchWithTimeout(
  *
  * Returns the summed shard size and the matched repo on success, null on miss.
  */
-async function findGgufQ4KM(
+export async function findGgufQ4KM(
   modelName: string,
   expectedBytes: number | null,
 ): Promise<{ bytes: number; repo: string } | null> {
@@ -746,8 +770,13 @@ async function findGgufQ4KM(
   });
 
   for (const r of ranked.slice(0, 6)) {
+    // `recursive=true` is required, not an optimisation: uploaders of large
+    // MoEs put each quant in its own directory (unsloth's `UD-Q4_K_M/…`), so a
+    // flat listing shows only directory entries, finds no Q4_K_M, and falls
+    // through to the next candidate — which is how Inkling-Small's size came
+    // from an expert-pruned 137B derivative at half the real footprint.
     const treeRes = await fetchWithTimeout(
-      `https://huggingface.co/api/models/${r.modelId}/tree/main`,
+      `https://huggingface.co/api/models/${r.modelId}/tree/main?recursive=true`,
     );
     if (!treeRes || !treeRes.ok) continue;
     const files = (await treeRes.json()) as {

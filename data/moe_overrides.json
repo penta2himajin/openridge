@@ -20,6 +20,7 @@
   "moonshotai/Kimi-K3": { "active": 104000000000 },
   "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16": { "active": 12000000000 },
   "nvidia/Nemotron-Cascade-2-30B-A3B": { "active": 3000000000 },
+  "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16": { "active": 3000000000 },
   "nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16": { "active": 55000000000 },
   "nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning": { "active": 3000000000 },
   "nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16": {

@@ -4,6 +4,11 @@
     "deepseek-v3-1": { "total": 684000000000, "active": 37000000000 }
   },
 
+  "_comment_no_safetensors_index": "These three have public, downloadable weights but HuggingFace never populates safetensors.total for them, so the normal HF path yields nothing however the repo is found: Mistral ships consolidated-*.safetensors (its own layout, and there is no config.json either — the MoE config lives in params.json), and DeepSeek LLM 67B predates safetensors entirely, shipping pytorch_model-*.bin. Figures below are the labs' own. Not a licence to type in specs for models whose weights are unpublished — see CLAUDE.md prohibition 7.",
+  "mistral-large-3": { "total": 675000000000, "active": 41000000000 },
+  "pixtral-large-2411": { "total": 124000000000, "active": 124000000000 },
+  "deepseek-llm-67b-chat": { "total": 67000000000, "active": 67000000000 },
+
   "deepseek-v3-1": { "total": 684000000000, "active": 37000000000 },
   "deepseek-v3-1-terminus": { "total": 684000000000, "active": 37000000000 },
   "deepseek-v3-2-exp": { "total": 684000000000, "active": 37000000000 },

@@ -496,6 +496,11 @@
     "repo": "bartowski/Qwen_Qwen3.5-4B-GGUF",
     "fetchedAt": "2026-05-19T23:57:44.237Z"
   },
+  "qwen3-5-4b-non-reasoning": {
+    "bytes": null,
+    "source": "not-found",
+    "fetchedAt": "2026-08-18T07:15:56.673Z"
+  },
   "qwen3-5-9b": {
     "bytes": 5680522464,
     "source": "hf",
@@ -566,6 +571,12 @@
     "source": "hf",
     "repo": "bartowski/Qwen_Qwen3-VL-8B-Instruct-GGUF",
     "fetchedAt": "2026-05-19T23:57:50.216Z"
+  },
+  "step-3-7-flash": {
+    "bytes": 122090426976,
+    "source": "hf",
+    "repo": "unsloth/Step-3.7-Flash-GGUF",
+    "fetchedAt": "2026-08-18T07:15:56.399Z"
   },
   "step-3-vl-10b": {
     "bytes": 5027780256,

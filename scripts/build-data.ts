@@ -577,7 +577,8 @@ async function resolveHfRepo(
   // link out to from the tooltip. Rank these behind a plain-named repo when
   // neither is an exact match (confirmed against google/gemma-3-12b-it-qat-*,
   // which HF's search ranks ahead of the canonical google/gemma-3-12b-it).
-  const QUANT_MARKER = /gguf|awq|gptq|qat|exl2|mlx|-q\d|int4|int8|fp8|quant/i;
+  const QUANT_MARKER =
+    /gguf|awq|gptq|qat|exl2|mlx|-q\d|int4|int8|fp8|fp4|nvfp|mxfp|bnb|quant/i;
   const queries = [clean];
   const stripped = stripTrailingQualifier(clean);
   if (stripped) queries.push(stripped);

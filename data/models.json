@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-18T06:49:50.630Z",
+  "generatedAt": "2026-08-18T07:18:11.278Z",
   "models": [
     {
       "id": "16149b9c-a1e9-4669-a5cb-ff3c00d78f89",
@@ -2636,8 +2636,8 @@
       "creatorSlug": "mistral",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 24011361280,
+        "active": 24011361280
       },
       "paramsUnknown": false,
       "license": null,
@@ -2661,7 +2661,7 @@
         "tps": 145.116,
         "ttft": 0.685
       },
-      "hfId": null,
+      "hfId": "mistralai/Magistral-Small-2509",
       "mode": null,
       "releaseDate": "2025-09-17"
     },
@@ -2673,8 +2673,8 @@
       "creatorSlug": "mistral",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 675000000000,
+        "active": 41000000000
       },
       "paramsUnknown": false,
       "license": null,
@@ -4116,8 +4116,8 @@
       "creatorSlug": "alibaba",
       "isClosed": false,
       "params": {
-        "total": 14168796160,
-        "active": 14168796160
+        "total": 14167290880,
+        "active": 14167290880
       },
       "paramsUnknown": false,
       "license": null,
@@ -4141,7 +4141,7 @@
         "tps": 0,
         "ttft": 0
       },
-      "hfId": "Qwen/Qwen-14B-Chat-Int4",
+      "hfId": "Qwen/Qwen-14B-Chat",
       "mode": null,
       "releaseDate": "2023-09-25"
     },
@@ -4634,8 +4634,8 @@
       "creatorSlug": "nvidia",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 49867145216,
+        "active": 49867145216
       },
       "paramsUnknown": false,
       "license": null,
@@ -4659,7 +4659,7 @@
         "tps": 142.806,
         "ttft": 3.248
       },
-      "hfId": null,
+      "hfId": "nvidia/Llama-3_3-Nemotron-Super-49B-v1_5",
       "mode": "Reasoning",
       "releaseDate": "2025-07-25"
     },
@@ -4745,8 +4745,8 @@
       "creatorSlug": "nvidia",
       "isClosed": false,
       "params": {
-        "total": 17820210764,
-        "active": 8081375232
+        "total": 31577937344,
+        "active": 3000000000
       },
       "paramsUnknown": false,
       "license": null,
@@ -4770,7 +4770,7 @@
         "tps": 291.101,
         "ttft": 0.736
       },
-      "hfId": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-NVFP4",
+      "hfId": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16",
       "mode": null,
       "releaseDate": "2026-08-11"
     },
@@ -4782,8 +4782,8 @@
       "creatorSlug": "nvidia",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 49867145216,
+        "active": 49867145216
       },
       "paramsUnknown": false,
       "license": null,
@@ -4807,7 +4807,7 @@
         "tps": 122.034,
         "ttft": 3.697
       },
-      "hfId": null,
+      "hfId": "nvidia/Llama-3_3-Nemotron-Super-49B-v1_5",
       "mode": "Non-reasoning",
       "releaseDate": "2025-07-25"
     },
@@ -5152,8 +5152,8 @@
       "creatorSlug": "nvidia",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 253401268224,
+        "active": 253401268224
       },
       "paramsUnknown": false,
       "license": null,
@@ -5177,7 +5177,7 @@
         "tps": 53.027,
         "ttft": 0.687
       },
-      "hfId": null,
+      "hfId": "nvidia/Llama-3_1-Nemotron-Ultra-253B-v1",
       "mode": "Reasoning",
       "releaseDate": "2025-04-07"
     },
@@ -6040,8 +6040,8 @@
       "creatorSlug": "nous-research",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 70553706496,
+        "active": 70553706496
       },
       "paramsUnknown": false,
       "license": null,
@@ -6065,7 +6065,7 @@
         "tps": 87.207,
         "ttft": 1.879
       },
-      "hfId": null,
+      "hfId": "NousResearch/Hermes-4-70B",
       "mode": "Non-reasoning",
       "releaseDate": "2025-08-27"
     },
@@ -6077,8 +6077,8 @@
       "creatorSlug": "nous-research",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 8030261248,
+        "active": 8030261248
       },
       "paramsUnknown": false,
       "license": null,
@@ -6102,7 +6102,7 @@
         "tps": 0,
         "ttft": 0
       },
-      "hfId": null,
+      "hfId": "NousResearch/DeepHermes-3-Llama-3-8B-Preview",
       "mode": "Non-reasoning",
       "releaseDate": "2025-02-13"
     },
@@ -6151,8 +6151,8 @@
       "creatorSlug": "nous-research",
       "isClosed": false,
       "params": {
-        "total": 405873258496,
-        "active": 405873258496
+        "total": 405853388800,
+        "active": 405853388800
       },
       "paramsUnknown": false,
       "license": null,
@@ -6176,7 +6176,7 @@
         "tps": 34.114,
         "ttft": 2.563
       },
-      "hfId": "NousResearch/Hermes-3-Llama-3.1-405B-FP8",
+      "hfId": "NousResearch/Hermes-4-405B",
       "mode": "Reasoning",
       "releaseDate": "2025-08-27"
     },
@@ -6188,8 +6188,8 @@
       "creatorSlug": "nous-research",
       "isClosed": false,
       "params": {
-        "total": 405873258496,
-        "active": 405873258496
+        "total": 405853388800,
+        "active": 405853388800
       },
       "paramsUnknown": false,
       "license": null,
@@ -6213,7 +6213,7 @@
         "tps": 32.423,
         "ttft": 0.777
       },
-      "hfId": "NousResearch/Hermes-3-Llama-3.1-405B-FP8",
+      "hfId": "NousResearch/Hermes-4-405B",
       "mode": "Non-reasoning",
       "releaseDate": "2025-08-27"
     },
@@ -6225,8 +6225,8 @@
       "creatorSlug": "nous-research",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 70553706496,
+        "active": 70553706496
       },
       "paramsUnknown": false,
       "license": null,
@@ -6250,7 +6250,7 @@
         "tps": 75.891,
         "ttft": 1.246
       },
-      "hfId": null,
+      "hfId": "NousResearch/Hermes-4-70B",
       "mode": "Reasoning",
       "releaseDate": "2025-08-27"
     },
@@ -8445,8 +8445,8 @@
       "creatorSlug": "servicenow",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 14863859712,
+        "active": 14863859712
       },
       "paramsUnknown": false,
       "license": null,
@@ -8470,7 +8470,7 @@
         "tps": 0,
         "ttft": 0
       },
-      "hfId": null,
+      "hfId": "ServiceNow-AI/Apriel-1.6-15b-Thinker",
       "mode": null,
       "releaseDate": "2025-11-25"
     },
@@ -15142,8 +15142,8 @@
       "creatorSlug": "mistral",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 124000000000,
+        "active": 124000000000
       },
       "paramsUnknown": false,
       "license": null,
@@ -16104,8 +16104,8 @@
       "creatorSlug": "deepseek",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 67000000000,
+        "active": 67000000000
       },
       "paramsUnknown": false,
       "license": null,
@@ -18768,8 +18768,8 @@
       "creatorSlug": "ai2",
       "isClosed": false,
       "params": {
-        "total": 8293557248,
-        "active": 8293557248
+        "total": 7298617344,
+        "active": 7298617344
       },
       "paramsUnknown": false,
       "license": null,
@@ -18793,7 +18793,7 @@
         "tps": 0,
         "ttft": 0
       },
-      "hfId": "allenai/olmOCR-2-7B-1025-FP8",
+      "hfId": "allenai/OLMo-2-1124-7B",
       "mode": null,
       "releaseDate": "2024-11-26"
     },
@@ -20026,8 +20026,8 @@
       "creatorSlug": "servicenow",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 14863859712,
+        "active": 14863859712
       },
       "paramsUnknown": false,
       "license": null,
@@ -20051,7 +20051,7 @@
         "tps": 0,
         "ttft": 0
       },
-      "hfId": null,
+      "hfId": "ServiceNow-AI/Apriel-1.5-15b-Thinker",
       "mode": null,
       "releaseDate": "2025-09-30"
     },
@@ -22894,6 +22894,7 @@
     "qwen3-5-35b-a3b": 22285080384,
     "qwen3-5-397b-a17b": 240590681792,
     "qwen3-5-4b": 3013027808,
+    "qwen3-5-4b-non-reasoning": null,
     "qwen3-5-9b": 5680522464,
     "qwen3-5-9b-non-reasoning": 5680522464,
     "qwen3-6-27b": 17533552192,
@@ -22906,6 +22907,7 @@
     "qwen3-next-80b-a3b-reasoning": 48727678848,
     "qwen3-vl-30b-a3b-reasoning": 18632185056,
     "qwen3-vl-8b-reasoning": 5027785184,
+    "step-3-7-flash": 122090426976,
     "step-3-vl-10b": 5027780256,
     "tri-21b-think-preview": null
   }

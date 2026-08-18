@@ -282,6 +282,39 @@ test("resolveParams: Mixtral 'NxM' models use HF total + moe_overrides active, n
   assert.equal(result.resolved?.active, 12900000000);
 });
 
+test("resolveParams: an NVFP4 re-upload loses to the plain repo it was packed from", async (t) => {
+  // Regression: hf_aliases.json had accumulated four entries pointing at
+  // quantized re-uploads, and a packed checkpoint does not report the model's
+  // real parameter count — NVIDIA-Nemotron-3.5-Lightning-30B-A3B-NVFP4 says
+  // 17.8B where the BF16 checkpoint says 31.6B, so the point landed at half
+  // its true size. QUANT_MARKER only knew `fp8`, so NVFP4/MXFP4/bnb names
+  // ranked as ordinary candidates.
+  t.after(() => mock.restoreAll());
+  mockFetch({
+    "api/models/nvidia/Nemotron-3.5-Lightning": "miss",
+    "api/models/nvidia/Nemotron35Lightning": "miss",
+    "search=Nemotron%203.5%20Lightning": [
+      { modelId: "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-NVFP4" },
+      { modelId: "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16" },
+    ],
+    "Lightning-30B-A3B-BF16": { safetensors: { total: 31577937344 } },
+    "Lightning-30B-A3B-NVFP4": { safetensors: { total: 17820210764 } },
+  });
+
+  const m = mkEntry({
+    name: "Nemotron 3.5 Lightning",
+    slug: "nemotron-3-5-lightning",
+    creatorSlug: "nvidia",
+  });
+  const result = await resolveParams(m, false, {}, new Map(), {}, {});
+  assert.equal(
+    result.hfRepo,
+    "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16",
+    "the quantized re-upload must rank behind the plain checkpoint",
+  );
+  assert.equal(result.resolved?.total, 31577937344);
+});
+
 test("resolveParams: creator with no trusted HF org never calls fetch and yields no params", async (t) => {
   t.after(() => mock.restoreAll());
   const fetchMock = mockFetch({}); // any call is a bug — no route matches, would 404
@@ -299,6 +332,41 @@ test("resolveParams: creator with no trusted HF org never calls fetch and yields
     0,
     "resolveHfRepo must short-circuit before ever calling fetch",
   );
+});
+
+test("resolveParams: a repo HF never indexes yields nothing, so manual_params is the only route", async (t) => {
+  // Mistral shards as `consolidated-*.safetensors` and ships no config.json
+  // (its MoE settings live in params.json), so HuggingFace leaves
+  // `safetensors.total` unset however the repo is reached. Confirmed live
+  // against mistralai/Mistral-Large-3-675B-Instruct-2512 and its BF16/NVFP4
+  // siblings; deepseek-llm-67b-chat is the same story via pytorch_model-*.bin.
+  // Finding the right repo is therefore not enough for these — the params have
+  // to come from data/manual_params.json.
+  t.after(() => mock.restoreAll());
+  mockFetch({
+    "api/models/mistralai/Mistral-Large-3": { siblings: [] }, // no safetensors key
+  });
+
+  const m = mkEntry({
+    name: "Mistral Large 3",
+    slug: "mistral-large-3",
+    creatorSlug: "mistral",
+  });
+  const result = await resolveParams(m, false, {}, new Map(), {}, {});
+  assert.equal(result.resolved, null);
+  assert.equal(result.viaHf, false);
+
+  // Same entry, with the hand-curated override in place.
+  const withManual = await resolveParams(
+    m,
+    false,
+    { "mistral-large-3": { total: 675e9, active: 41e9 } },
+    new Map(),
+    {},
+    {},
+  );
+  assert.equal(withManual.resolved?.total, 675e9);
+  assert.equal(withManual.resolved?.active, 41e9);
 });
 
 test("resolveParams: manual_params.json still wins over everything, including HF", async (t) => {

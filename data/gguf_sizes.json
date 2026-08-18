@@ -208,6 +208,12 @@
     "source": "not-found",
     "fetchedAt": "2026-07-31T06:51:25.553Z"
   },
+  "kimi-linear-48b-a3b-instruct": {
+    "bytes": 30061058720,
+    "source": "hf",
+    "repo": "bartowski/moonshotai_Kimi-Linear-48B-A3B-Instruct-GGUF",
+    "fetchedAt": "2026-08-18T07:46:31.212Z"
+  },
   "lfm2-5-1-2b-instruct": {
     "bytes": 730895712,
     "source": "hf",

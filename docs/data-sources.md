@@ -124,7 +124,15 @@ GET https://huggingface.co/api/models/<owner>/<repo>
 
    **推定が効かない構造**: Nemotron-H 系の Mamba-2 / MoE ハイブリッドは大半の層が Mamba で、`num_hidden_layers` から attention / MoE 層数を導けない。この系統は推定を諦めて `moe_overrides.json` に実測値を置く。
 
-   **attention 項の誤差**: 推定は attention を一律 `4·H²` で置く。MLA（`kv_lora_rank` / `q_lora_rank` を持つ DeepSeek 系・A.X-K2）では**過大**、linear-attention ハイブリッド（Solar Open2 の `linear_attn_config`）では **過小**に出る。総パラメータの再構成が `safetensors.total` とよく一致するのに active だけ公称値から 20% 以上ずれる場合はここが原因なので、モデルカードの公称 active を `moe_overrides.json` に入れる。
+   **attention 項の誤差**: 推定は attention を一律 `4·H²` で置く。MLA（`kv_lora_rank` / `q_lora_rank` を持つ DeepSeek 系・A.X-K2）では**過大**、linear-attention ハイブリッド（Solar Open2 の `linear_attn_config`、Qwen3.5 以降の `full_attention_interval`）では **過小**に出る。加えて `tie_word_embeddings: false` のモデルでは **lm_head を数えていない**（embed のみ計上）。総パラメータの再構成が `safetensors.total` とよく一致するのに active だけ公称値からずれる場合はここが原因なので、実測値を `moe_overrides.json` に入れる。
+
+   **実測値の求め方**: モデルカードの `A<N>B` は丸め値で、実測との差は無視できない（Qwen3.5-35B-A3B は実測 3.455B で公称 +15%、LFM2-8B-A1B は実測 1.558B で公称 +56%）。正確に出すには **safetensors のシャードヘッダから全テンソル形状を読む**のが確実:
+   1. `model.safetensors.index.json` で shard 一覧を取る
+   2. 各 shard の先頭 8 バイト（little-endian の header 長）と、続く JSON ヘッダを Range リクエストで取得する。ヘッダに `{name: {dtype, shape, data_offsets}}` が入っている
+   3. 全 shape の積を合計し、`safetensors.total` と**一致することを確認**する（一致しなければ数え漏らしがある）
+   4. `active = 非 expert 重み + routed experts × experts_per_tok / num_experts + embed + lm_head`
+
+   vision tower と MTP ヘッドは除く。この定義で Qwen の公称 `A<N>B` が再現できる（397B-A17B → 17.349B、2.4T-A95B → 95.288B）。
 
    **不変条件**: `active > total` は物理的にありえない（チェックポイントに無い重みは活性化できない）。推定がこれを踏んだ場合は警告を出して `total` にフォールバックする。alias が量子化・部分アップロードの repo を指してしまった場合にも効く（`safetensors.total` が過小になるため）。
 

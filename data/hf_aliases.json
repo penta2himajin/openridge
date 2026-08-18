@@ -70,7 +70,7 @@
   "gemma-3-4b": "google/gemma-3-4b-it",
   "gemma-3n-e2b": "google/gemma-3n-E2B-it",
   "gemma-3n-e4b": "google/gemma-3n-E4B-it",
-  "gemma-3n-e4b-preview-0520": "google/gemma-3n-E4B-it-litert-preview",
+  "gemma-3n-e4b-preview-0520": null,
   "gemma-4-12b": "google/Gemma-4-12B",
   "gemma-4-12b-non-reasoning": "google/Gemma-4-12B",
   "gemma-4-26b-a4b": "google/Gemma-4-26B-A4B",

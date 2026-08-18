@@ -1,0 +1,5 @@
+{
+  "_comment": "AA slug → reason, for entries dropped from models.json entirely. Reserved for models whose weights are NOT obtainable from any official source — not for API-only tiers, which stay in the snapshot with params=null so the alias map keeps recording that they were considered (see docs/data-sources.md §2 掲載方針). Use this only when an entry would otherwise read as an open model whose resolution merely failed. Keep the reason specific enough to re-verify.",
+  "dbrx": "Released March 2024 under an open licence, but the databricks HF org no longer exists — dbrx-instruct and dbrx-base both 404 and an author=databricks listing comes back empty (checked 2026-08-18). Only community re-uploads remain, so there is no official checkpoint to point at.",
+  "llama-65b": "LLaMA 1, distributed under a research licence via request form; Meta never published it on the Hub, and meta-llama/llama-65b 404s (checked 2026-08-18). The upstage/llama-65b-instruct that turns up in search is a third-party fine-tune, not Meta's base weights."
+}

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-18T07:46:31.415Z",
+  "generatedAt": "2026-08-18T08:58:47.212Z",
   "models": [
     {
       "id": "16149b9c-a1e9-4669-a5cb-ff3c00d78f89",
@@ -3256,43 +3256,6 @@
       "hfId": null,
       "mode": "Non-reasoning",
       "releaseDate": "2026-04-24"
-    },
-    {
-      "id": "fe11ab6c-a4dd-4c28-9fef-07da76d5ed14",
-      "slug": "llama-65b",
-      "name": "Llama 65B",
-      "creator": "Meta",
-      "creatorSlug": "meta",
-      "isClosed": false,
-      "params": {
-        "total": null,
-        "active": null
-      },
-      "paramsUnknown": false,
-      "license": null,
-      "scores": {
-        "artificial_analysis_intelligence_index": 1.7,
-        "artificial_analysis_coding_index": null,
-        "gpqa": null,
-        "hle": null,
-        "lcr": null,
-        "ifbench": null,
-        "scicode": null,
-        "tau2": null,
-        "terminalbench_hard": null
-      },
-      "pricing": {
-        "price_1m_blended_3_to_1": 0,
-        "price_1m_input_tokens": 0,
-        "price_1m_output_tokens": 0
-      },
-      "speed": {
-        "tps": 0,
-        "ttft": 0
-      },
-      "hfId": null,
-      "mode": null,
-      "releaseDate": "2023-02-24"
     },
     {
       "id": "98e3230e-cee1-4c19-b9f8-b6b6a826ca93",
@@ -13946,7 +13909,7 @@
         "tps": 0,
         "ttft": 0
       },
-      "hfId": "google/gemma-3n-E4B-it-litert-preview",
+      "hfId": null,
       "mode": "May '25",
       "releaseDate": "2025-05-20"
     },
@@ -18019,43 +17982,6 @@
       "hfId": null,
       "mode": "Reasoning",
       "releaseDate": "2025-07-09"
-    },
-    {
-      "id": "1cb96708-f6c1-4668-9804-5db6ecac01ed",
-      "slug": "dbrx",
-      "name": "DBRX Instruct",
-      "creator": "Databricks",
-      "creatorSlug": "databricks",
-      "isClosed": false,
-      "params": {
-        "total": null,
-        "active": null
-      },
-      "paramsUnknown": false,
-      "license": null,
-      "scores": {
-        "artificial_analysis_intelligence_index": 2.6,
-        "artificial_analysis_coding_index": null,
-        "gpqa": 0.331,
-        "hle": 0.029,
-        "lcr": null,
-        "ifbench": null,
-        "scicode": 0.118,
-        "tau2": null,
-        "terminalbench_hard": null
-      },
-      "pricing": {
-        "price_1m_blended_3_to_1": 0,
-        "price_1m_input_tokens": 0,
-        "price_1m_output_tokens": 0
-      },
-      "speed": {
-        "tps": 0,
-        "ttft": 0
-      },
-      "hfId": null,
-      "mode": null,
-      "releaseDate": "2024-03-27"
     },
     {
       "id": "f74ea286-cd29-4eb4-af14-1389b19c21e5",
@@ -22850,6 +22776,7 @@
     "kimi-k2-thinking": null,
     "kimi-k3": null,
     "kimi-k3-low": null,
+    "kimi-linear-48b-a3b-instruct": 30061058720,
     "lfm2-5-1-2b-instruct": 730895712,
     "lfm2-5-1-2b-thinking": 730895584,
     "lfm2-5-8b-a1b": null,
@@ -22914,7 +22841,6 @@
     "qwen3-vl-8b-reasoning": 5027785184,
     "step-3-7-flash": 122090426976,
     "step-3-vl-10b": 5027780256,
-    "tri-21b-think-preview": null,
-    "kimi-linear-48b-a3b-instruct": 30061058720
+    "tri-21b-think-preview": null
   }
 }

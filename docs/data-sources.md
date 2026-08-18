@@ -158,6 +158,21 @@ AA API が HF id を返さないため手動 alias map が **唯一の同定経�
 
 **日付ピン付き slug（`-0424` / `-0731`）は継承しない**。これらは別チェックポイントであり、AA が日付で slug を分けている意図そのものが「別物」だから。`deepseek-v4-pro`（0813、重み未公開）が 4 月版の repo を拾わないのはこの規則による。
 
+### `safetensors.total` が読めない repo
+
+重みは公開されているのに HF が `safetensors.total` を埋めないケースがある。`fetchHfTotal` はこの値だけを見るので、alias が正しくても params が取れない。実例:
+
+- **Mistral**: `consolidated-*.safetensors` という独自レイアウトで shard する（`Mistral-Large-3-675B-Instruct-2512`、`Pixtral-Large-Instruct-2411`）。`config.json` も無く、MoE 設定は `params.json` に入るので active 推定も効かない。BF16 / NVFP4 の派生 repo も同じレイアウトなので乗り換え先が無い
+- **safetensors 以前のモデル**: `deepseek-llm-67b-chat` は `pytorch_model-*.bin` のみ
+
+この3件は `manual_params.json` に公称値を置いて解決している（Mistral Large 3 は公式カードの 675B / 41B active、Pixtral Large は 124B、DeepSeek LLM 67B は 67B）。**重みが公開されているからこそ許される手当**であり、未公開モデルに公称値を入れる口実にはならない（下記「掲載方針」）。
+
+なお `manual_params.json` が効くと HF 解決自体がスキップされるので、これらは `hfId` が null のままになりツールチップの HF リンクが出ない。既存69件の手動エントリと同じ挙動。
+
+### 量子化のみが公開されている場合
+
+`gemma-3n-e4b-preview-0520`（AA 名 `Gemma 3n E4B Instruct Preview (May '25)`）は、公開されているのが `google/gemma-3n-E4B-it-litert-preview` の **int4 LiteRT `.task` バンドル1個だけ**で、BF16 チェックポイントが無い。`docs/ui.md` の「quantization 違いは扱わない・FP16/BF16 ベースラインのみ」に従い載せない。6月正式版の `gemma-3n-e4b` は別 AA エントリとして解決済みなので、この系統が散布図から消えるわけではない。
+
 ### 掲載方針: 公開重みが無いモデルは載せない
 
 **AA が open-weights に分類していても、実際にダウンロードできる重みが無いモデルは散布図に載せない。** params を推測して点を打つことも、公称値だけを手で `manual_params.json` に入れることもしない。本サイトは「self-host できるモデル」の Pareto フロンティアであり、動かせないモデルが frontier を占めると指標そのものが嘘になる。

@@ -301,6 +301,41 @@ test("resolveParams: creator with no trusted HF org never calls fetch and yields
   );
 });
 
+test("resolveParams: a repo HF never indexes yields nothing, so manual_params is the only route", async (t) => {
+  // Mistral shards as `consolidated-*.safetensors` and ships no config.json
+  // (its MoE settings live in params.json), so HuggingFace leaves
+  // `safetensors.total` unset however the repo is reached. Confirmed live
+  // against mistralai/Mistral-Large-3-675B-Instruct-2512 and its BF16/NVFP4
+  // siblings; deepseek-llm-67b-chat is the same story via pytorch_model-*.bin.
+  // Finding the right repo is therefore not enough for these — the params have
+  // to come from data/manual_params.json.
+  t.after(() => mock.restoreAll());
+  mockFetch({
+    "api/models/mistralai/Mistral-Large-3": { siblings: [] }, // no safetensors key
+  });
+
+  const m = mkEntry({
+    name: "Mistral Large 3",
+    slug: "mistral-large-3",
+    creatorSlug: "mistral",
+  });
+  const result = await resolveParams(m, false, {}, new Map(), {}, {});
+  assert.equal(result.resolved, null);
+  assert.equal(result.viaHf, false);
+
+  // Same entry, with the hand-curated override in place.
+  const withManual = await resolveParams(
+    m,
+    false,
+    { "mistral-large-3": { total: 675e9, active: 41e9 } },
+    new Map(),
+    {},
+    {},
+  );
+  assert.equal(withManual.resolved?.total, 675e9);
+  assert.equal(withManual.resolved?.active, 41e9);
+});
+
 test("resolveParams: manual_params.json still wins over everything, including HF", async (t) => {
   t.after(() => mock.restoreAll());
   const fetchMock = mockFetch({

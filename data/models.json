@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-18T06:49:50.630Z",
+  "generatedAt": "2026-08-18T07:02:25.880Z",
   "models": [
     {
       "id": "16149b9c-a1e9-4669-a5cb-ff3c00d78f89",
@@ -2636,8 +2636,8 @@
       "creatorSlug": "mistral",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 24011361280,
+        "active": 24011361280
       },
       "paramsUnknown": false,
       "license": null,
@@ -2661,7 +2661,7 @@
         "tps": 145.116,
         "ttft": 0.685
       },
-      "hfId": null,
+      "hfId": "mistralai/Magistral-Small-2509",
       "mode": null,
       "releaseDate": "2025-09-17"
     },
@@ -2673,8 +2673,8 @@
       "creatorSlug": "mistral",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 675000000000,
+        "active": 41000000000
       },
       "paramsUnknown": false,
       "license": null,
@@ -4634,8 +4634,8 @@
       "creatorSlug": "nvidia",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 49867145216,
+        "active": 49867145216
       },
       "paramsUnknown": false,
       "license": null,
@@ -4659,7 +4659,7 @@
         "tps": 142.806,
         "ttft": 3.248
       },
-      "hfId": null,
+      "hfId": "nvidia/Llama-3_3-Nemotron-Super-49B-v1_5",
       "mode": "Reasoning",
       "releaseDate": "2025-07-25"
     },
@@ -4782,8 +4782,8 @@
       "creatorSlug": "nvidia",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 49867145216,
+        "active": 49867145216
       },
       "paramsUnknown": false,
       "license": null,
@@ -4807,7 +4807,7 @@
         "tps": 122.034,
         "ttft": 3.697
       },
-      "hfId": null,
+      "hfId": "nvidia/Llama-3_3-Nemotron-Super-49B-v1_5",
       "mode": "Non-reasoning",
       "releaseDate": "2025-07-25"
     },
@@ -5152,8 +5152,8 @@
       "creatorSlug": "nvidia",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 253401268224,
+        "active": 253401268224
       },
       "paramsUnknown": false,
       "license": null,
@@ -5177,7 +5177,7 @@
         "tps": 53.027,
         "ttft": 0.687
       },
-      "hfId": null,
+      "hfId": "nvidia/Llama-3_1-Nemotron-Ultra-253B-v1",
       "mode": "Reasoning",
       "releaseDate": "2025-04-07"
     },
@@ -6040,8 +6040,8 @@
       "creatorSlug": "nous-research",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 70553706496,
+        "active": 70553706496
       },
       "paramsUnknown": false,
       "license": null,
@@ -6065,7 +6065,7 @@
         "tps": 87.207,
         "ttft": 1.879
       },
-      "hfId": null,
+      "hfId": "NousResearch/Hermes-4-Llama-3.1-70B",
       "mode": "Non-reasoning",
       "releaseDate": "2025-08-27"
     },
@@ -6077,8 +6077,8 @@
       "creatorSlug": "nous-research",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 8030261248,
+        "active": 8030261248
       },
       "paramsUnknown": false,
       "license": null,
@@ -6102,7 +6102,7 @@
         "tps": 0,
         "ttft": 0
       },
-      "hfId": null,
+      "hfId": "NousResearch/DeepHermes-3-Llama-3-8B-Preview",
       "mode": "Non-reasoning",
       "releaseDate": "2025-02-13"
     },
@@ -6225,8 +6225,8 @@
       "creatorSlug": "nous-research",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 70553706496,
+        "active": 70553706496
       },
       "paramsUnknown": false,
       "license": null,
@@ -6250,7 +6250,7 @@
         "tps": 75.891,
         "ttft": 1.246
       },
-      "hfId": null,
+      "hfId": "NousResearch/Hermes-4-Llama-3.1-70B",
       "mode": "Reasoning",
       "releaseDate": "2025-08-27"
     },
@@ -8445,8 +8445,8 @@
       "creatorSlug": "servicenow",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 14863859712,
+        "active": 14863859712
       },
       "paramsUnknown": false,
       "license": null,
@@ -8470,7 +8470,7 @@
         "tps": 0,
         "ttft": 0
       },
-      "hfId": null,
+      "hfId": "ServiceNow-AI/Apriel-1.6-15b-Thinker",
       "mode": null,
       "releaseDate": "2025-11-25"
     },
@@ -15142,8 +15142,8 @@
       "creatorSlug": "mistral",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 124000000000,
+        "active": 124000000000
       },
       "paramsUnknown": false,
       "license": null,
@@ -16104,8 +16104,8 @@
       "creatorSlug": "deepseek",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 67000000000,
+        "active": 67000000000
       },
       "paramsUnknown": false,
       "license": null,
@@ -20026,8 +20026,8 @@
       "creatorSlug": "servicenow",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 14863859712,
+        "active": 14863859712
       },
       "paramsUnknown": false,
       "license": null,
@@ -20051,7 +20051,7 @@
         "tps": 0,
         "ttft": 0
       },
-      "hfId": null,
+      "hfId": "ServiceNow-AI/Apriel-1.5-15b-Thinker",
       "mode": null,
       "releaseDate": "2025-09-30"
     },

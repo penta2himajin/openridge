@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-18T04:43:36.964Z",
+  "generatedAt": "2026-08-18T06:49:50.630Z",
   "models": [
     {
       "id": "16149b9c-a1e9-4669-a5cb-ff3c00d78f89",
@@ -1230,8 +1230,8 @@
       "creatorSlug": "meta",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 29776626688,
+        "active": 29776626688
       },
       "paramsUnknown": false,
       "license": null,
@@ -1255,7 +1255,7 @@
         "tps": 111.528,
         "ttft": 0.382
       },
-      "hfId": null,
+      "hfId": "meta-models/Muse-Glimmer-30B",
       "mode": "high",
       "releaseDate": "2026-08-10"
     },
@@ -7039,8 +7039,8 @@
       "creatorSlug": "deepcogito",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 671019752960,
+        "active": 37638185984
       },
       "paramsUnknown": false,
       "license": null,
@@ -7064,7 +7064,7 @@
         "tps": 0,
         "ttft": 0
       },
-      "hfId": null,
+      "hfId": "deepcogito/cogito-671b-v2.1",
       "mode": "Reasoning",
       "releaseDate": "2025-11-18"
     },
@@ -7779,8 +7779,8 @@
       "creatorSlug": "openbmb",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 1300428016,
+        "active": 1300428016
       },
       "paramsUnknown": false,
       "license": null,
@@ -7804,7 +7804,7 @@
         "tps": 0,
         "ttft": 0
       },
-      "hfId": null,
+      "hfId": "openbmb/MiniCPM-V-4.6",
       "mode": null,
       "releaseDate": "2026-05-11"
     },
@@ -8038,8 +8038,8 @@
       "creatorSlug": "nex",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 396802360816,
+        "active": 13348372480
       },
       "paramsUnknown": false,
       "license": null,
@@ -8063,7 +8063,7 @@
         "tps": 142.58,
         "ttft": 0.912
       },
-      "hfId": null,
+      "hfId": "nex-agi/Nex-N2-Pro",
       "mode": null,
       "releaseDate": "2026-06-02"
     },
@@ -8149,8 +8149,8 @@
       "creatorSlug": "ai9star",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 2988656640,
+        "active": 2988656640
       },
       "paramsUnknown": false,
       "license": null,
@@ -8174,7 +8174,7 @@
         "tps": 0,
         "ttft": 0
       },
-      "hfId": null,
+      "hfId": "ai9stars/G9v3-3B",
       "mode": null,
       "releaseDate": "2026-07-23"
     },
@@ -8186,8 +8186,8 @@
       "creatorSlug": "ai9star",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 38967481920,
+        "active": 4796186624
       },
       "paramsUnknown": false,
       "license": null,
@@ -8211,7 +8211,7 @@
         "tps": 0,
         "ttft": 0
       },
-      "hfId": null,
+      "hfId": "ai9stars/G9v3-39A5B",
       "mode": null,
       "releaseDate": "2026-08-03"
     },
@@ -22557,6 +22557,7 @@
         "04781a0e-40f0-4e2a-a4e5-18e389364a79",
         "a6ea7ec0-0aca-4442-98fb-4296c6d18b31",
         "77f5ff8b-1536-474a-a337-e1bfd138d343",
+        "2ffa7571-fa78-453a-b589-9aa3fac702d2",
         "651ef7ae-9a8f-477e-9c8e-460aa156ba02",
         "7eaf926c-5f39-4e58-ae50-c38b5fc630fc",
         "6e1b44ff-c227-496b-aef4-19b70cd18c76",
@@ -22582,9 +22583,7 @@
       "total": [
         "405e2235-0925-4634-a3c7-fbd5f6394bc0",
         "5d4acc80-7a88-4e84-bfe7-99071b84e6a4",
-        "91e3b45f-3f52-4511-8c15-8948854bebc5",
-        "66f4ce73-9a9b-4b49-9c6e-bedb9bfdc720",
-        "7d73161f-002f-4c9c-b4f8-6c4d91f2ba8e",
+        "2ffa7571-fa78-453a-b589-9aa3fac702d2",
         "651ef7ae-9a8f-477e-9c8e-460aa156ba02",
         "7eaf926c-5f39-4e58-ae50-c38b5fc630fc",
         "2d28a13a-096e-475a-beb8-26bbd1c7d51c",
@@ -22671,6 +22670,7 @@
         "46d8315e-1630-463f-ab62-84185fa0faab",
         "2236df45-0699-40d1-b5cc-69ee345d2257",
         "4bbceacb-cf47-464b-b60f-e1d1fe016d67",
+        "3b5ba264-ad25-429b-a460-4d8698205f0d",
         "277f939a-985b-4b37-859d-b3eabc7c0b26",
         "f7d2fc3e-1f7b-405f-818c-07952a4af78f"
       ],
@@ -22678,10 +22678,11 @@
         "04781a0e-40f0-4e2a-a4e5-18e389364a79",
         "a6ea7ec0-0aca-4442-98fb-4296c6d18b31",
         "5d4acc80-7a88-4e84-bfe7-99071b84e6a4",
-        "2aacdc07-5f4e-4ab9-8ea5-5f7ab93f9eeb",
+        "2ffa7571-fa78-453a-b589-9aa3fac702d2",
         "651ef7ae-9a8f-477e-9c8e-460aa156ba02",
         "2d28a13a-096e-475a-beb8-26bbd1c7d51c",
         "b01dee41-c62b-48ed-8d16-984adc405e5c",
+        "583f98fb-c4b8-4df3-8d40-60ac0ed69882",
         "277f939a-985b-4b37-859d-b3eabc7c0b26",
         "f7d2fc3e-1f7b-405f-818c-07952a4af78f"
       ]
@@ -22735,8 +22736,7 @@
         "0e5f6140-1154-4583-a3e0-8c032a338892",
         "77f5ff8b-1536-474a-a337-e1bfd138d343",
         "d734e2ce-5cf8-467f-8148-586d02671333",
-        "91e3b45f-3f52-4511-8c15-8948854bebc5",
-        "66f4ce73-9a9b-4b49-9c6e-bedb9bfdc720",
+        "2ffa7571-fa78-453a-b589-9aa3fac702d2",
         "7d73161f-002f-4c9c-b4f8-6c4d91f2ba8e",
         "20da3b31-fc0a-4359-abec-d59367bf1d9f",
         "acad0665-9457-4531-abd5-b59efd7a89ea",
@@ -22758,6 +22758,7 @@
         "4ae6c88d-9e4a-4850-89fe-18a1c04a66cc",
         "405e2235-0925-4634-a3c7-fbd5f6394bc0",
         "d306cccd-0085-4b2f-8aa0-ffcdbb434695",
+        "433e410e-5170-4f03-b92f-7927c220b2fe",
         "8665ca00-c687-44c7-875c-22618cb31c4f",
         "2c4394a2-b443-470a-908e-5c4a271b780c",
         "f7a4ea75-e548-4069-80d4-9be8bc7c009b"
@@ -22768,6 +22769,7 @@
         "4ae6c88d-9e4a-4850-89fe-18a1c04a66cc",
         "405e2235-0925-4634-a3c7-fbd5f6394bc0",
         "d306cccd-0085-4b2f-8aa0-ffcdbb434695",
+        "433e410e-5170-4f03-b92f-7927c220b2fe",
         "651ef7ae-9a8f-477e-9c8e-460aa156ba02",
         "60cff809-05fb-4439-afe7-8b1476439f49",
         "8c29d66d-bf98-4ea3-8572-5409353ecc66",
@@ -22819,6 +22821,7 @@
     "exaone-4-0-1-2b-reasoning": 812438304,
     "exaone-4-0-32b-reasoning": 19343827232,
     "falcon-h1r-7b": 4598344288,
+    "g9v3-3b": 1902590528,
     "gemma-3-270m": 253115168,
     "gemma-4-12b": 7662531872,
     "gemma-4-26b-a4b": 17035038112,
@@ -22865,9 +22868,11 @@
     "ministral-3-3b": 2146497824,
     "motif-0714": 61326693568,
     "motif-2-12-7b": null,
+    "muse-glimmer": 17306324000,
     "nanbeige4-1-3b": 2443113024,
     "nemotron-3-5-lightning": 25477403616,
     "nemotron-cascade-2-30b-a3b": 24725740992,
+    "nex-n2-pro": 241805932352,
     "nvidia-nemotron-3-nano-30b-a3b-reasoning": 24655899872,
     "nvidia-nemotron-3-nano-4b": 2978372672,
     "nvidia-nemotron-3-ultra-550b-a55b": 345131239808,
@@ -22894,6 +22899,7 @@
     "qwen3-6-27b": 17533552192,
     "qwen3-6-35b-a3b": 21391448384,
     "qwen3-8-2-4t-a95b": null,
+    "qwen3-8-27b": 17772537440,
     "qwen3-8b-instruct-reasoning": 5027784224,
     "qwen3-coder-next": 48556632000,
     "qwen3-next-80b-a3b-instruct": 48727677408,
@@ -22901,7 +22907,6 @@
     "qwen3-vl-30b-a3b-reasoning": 18632185056,
     "qwen3-vl-8b-reasoning": 5027785184,
     "step-3-vl-10b": 5027780256,
-    "tri-21b-think-preview": null,
-    "qwen3-8-27b": 17772537440
+    "tri-21b-think-preview": null
   }
 }

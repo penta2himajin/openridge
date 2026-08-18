@@ -194,7 +194,9 @@ export const HF_ORGS_BY_CREATOR: Record<string, string[]> = {
   ibm: ["ibm-granite"],
   lg: ["LGAI-EXAONE"],
   tencent: ["tencent"],
-  meta: ["meta-llama"],
+  // Meta splits its releases across two orgs: the Llama line under
+  // `meta-llama`, the Muse line under `meta-models`.
+  meta: ["meta-llama", "meta-models"],
   "prime-intellect": ["PrimeIntellect"],
   arcee: ["arcee-ai"],
   bytedance_seed: ["ByteDance-Seed"],
@@ -216,6 +218,9 @@ export const HF_ORGS_BY_CREATOR: Record<string, string[]> = {
   openbmb: ["openbmb"],
   servicenow: ["ServiceNow-AI"],
   "thinking-machines": ["thinkingmachines"],
+  nex: ["nex-agi"],
+  ai9star: ["ai9stars"],
+  deepcogito: ["deepcogito"],
 };
 
 /** Proprietary, API-only families whose parameter counts are never published —

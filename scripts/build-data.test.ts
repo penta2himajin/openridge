@@ -88,6 +88,12 @@ test("HF_ORGS_BY_CREATOR covers every creator currently relying on name-parse", 
     // hf_aliases.json held a cached search miss, so they sat at params=null
     // and never reached the scatter.
     "thinking-machines": "thinkingmachines",
+    nex: "nex-agi",
+    ai9star: "ai9stars",
+    deepcogito: "deepcogito",
+    // Meta ships the Muse line from a second org; `meta-llama` alone leaves
+    // Muse Glimmer unresolvable.
+    meta: "meta-models",
   };
   for (const [creatorSlug, org] of Object.entries(expected)) {
     assert.ok(
@@ -95,6 +101,9 @@ test("HF_ORGS_BY_CREATOR covers every creator currently relying on name-parse", 
       `expected HF_ORGS_BY_CREATOR["${creatorSlug}"] to include "${org}", got ${JSON.stringify(HF_ORGS_BY_CREATOR[creatorSlug])}`,
     );
   }
+  // Meta keeps both orgs: dropping `meta-llama` for `meta-models` would take
+  // the entire Llama line off the scatter to fix one Muse model.
+  assert.deepEqual(HF_ORGS_BY_CREATOR.meta, ["meta-llama", "meta-models"]);
 });
 
 test("resolveParams: LFM2.5-8B-A1B resolves via real HF data, not the AA name", async (t) => {

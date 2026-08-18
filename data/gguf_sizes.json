@@ -71,6 +71,12 @@
     "repo": "unsloth/Falcon-H1R-7B-GGUF",
     "fetchedAt": "2026-05-19T23:57:36.044Z"
   },
+  "g9v3-3b": {
+    "bytes": 1902590528,
+    "source": "hf",
+    "repo": "bartowski/ai9stars_G9v3-3B-GGUF",
+    "fetchedAt": "2026-08-18T06:48:37.255Z"
+  },
   "gemma-3-270m": {
     "bytes": 253115168,
     "source": "hf",
@@ -334,6 +340,12 @@
     "source": "not-found",
     "fetchedAt": "2026-05-19T23:57:40.346Z"
   },
+  "muse-glimmer": {
+    "bytes": 17306324000,
+    "source": "hf",
+    "repo": "bartowski/Muse-Glimmer-30B-GGUF",
+    "fetchedAt": "2026-08-18T06:48:36.553Z"
+  },
   "nanbeige4-1-3b": {
     "bytes": 2443113024,
     "source": "hf",
@@ -351,6 +363,12 @@
     "source": "hf",
     "repo": "bartowski/nvidia_Nemotron-Cascade-2-30B-A3B-GGUF",
     "fetchedAt": "2026-07-23T07:34:00.502Z"
+  },
+  "nex-n2-pro": {
+    "bytes": 241805932352,
+    "source": "hf",
+    "repo": "bartowski/nex-agi_Nex-N2-Pro-GGUF",
+    "fetchedAt": "2026-08-18T06:48:36.920Z"
   },
   "nvidia-nemotron-3-nano-30b-a3b-reasoning": {
     "bytes": 24655899872,

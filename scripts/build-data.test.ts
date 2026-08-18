@@ -282,6 +282,39 @@ test("resolveParams: Mixtral 'NxM' models use HF total + moe_overrides active, n
   assert.equal(result.resolved?.active, 12900000000);
 });
 
+test("resolveParams: an NVFP4 re-upload loses to the plain repo it was packed from", async (t) => {
+  // Regression: hf_aliases.json had accumulated four entries pointing at
+  // quantized re-uploads, and a packed checkpoint does not report the model's
+  // real parameter count — NVIDIA-Nemotron-3.5-Lightning-30B-A3B-NVFP4 says
+  // 17.8B where the BF16 checkpoint says 31.6B, so the point landed at half
+  // its true size. QUANT_MARKER only knew `fp8`, so NVFP4/MXFP4/bnb names
+  // ranked as ordinary candidates.
+  t.after(() => mock.restoreAll());
+  mockFetch({
+    "api/models/nvidia/Nemotron-3.5-Lightning": "miss",
+    "api/models/nvidia/Nemotron35Lightning": "miss",
+    "search=Nemotron%203.5%20Lightning": [
+      { modelId: "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-NVFP4" },
+      { modelId: "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16" },
+    ],
+    "Lightning-30B-A3B-BF16": { safetensors: { total: 31577937344 } },
+    "Lightning-30B-A3B-NVFP4": { safetensors: { total: 17820210764 } },
+  });
+
+  const m = mkEntry({
+    name: "Nemotron 3.5 Lightning",
+    slug: "nemotron-3-5-lightning",
+    creatorSlug: "nvidia",
+  });
+  const result = await resolveParams(m, false, {}, new Map(), {}, {});
+  assert.equal(
+    result.hfRepo,
+    "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16",
+    "the quantized re-upload must rank behind the plain checkpoint",
+  );
+  assert.equal(result.resolved?.total, 31577937344);
+});
+
 test("resolveParams: creator with no trusted HF org never calls fetch and yields no params", async (t) => {
   t.after(() => mock.restoreAll());
   const fetchMock = mockFetch({}); // any call is a bug — no route matches, would 404

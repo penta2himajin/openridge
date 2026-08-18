@@ -7,7 +7,8 @@
  *
  * Param-resolution strategy (resolveParams, see docs/data-sources.md §2):
  *   1) Hand-curated overrides in data/manual_params.json (AA slug → params).
- *   2) Real AA parameters from the language/models endpoint.
+ *   2) Real AA parameters from the language/models endpoint — Pro-only, so
+ *      inert on the free tier this project runs on (see fetchAAParameters).
  *   3) HuggingFace safetensors.total + config.json (data/hf_aliases.json for
  *      the repo, data/moe_overrides.json for active when the config-based
  *      MoE estimate can't be computed).
@@ -107,17 +108,25 @@ async function fetchAA(apiKey: string): Promise<AAResponse> {
 /**
  * Fetch real total/active parameter counts from AA's Data API
  * (`/api/v2/language/models`). This is a *different* endpoint from the
- * benchmark feed above: it carries "model identity" (params, context, license)
- * and, per AA's tier table, that identity data is available on the free tier.
- * The benchmark endpoint we rely on for scores/pricing does not expose params,
- * which is why flagship MoE models whose names omit the size (GLM 5.2,
- * MiniMax-M3, DeepSeek V4 Pro, …) otherwise fall off the scatter entirely.
+ * benchmark feed above: it carries "model identity" (params, context, license),
+ * which the benchmark endpoint does not expose — the reason flagship MoE models
+ * whose names omit the size (GLM 5.2, MiniMax-M3, DeepSeek V4 Pro, …) have to
+ * be resolved through HuggingFace instead.
  *
- * Best-effort: any failure (endpoint gated, renamed, offline) returns an empty
- * map and the caller falls back to name-parse / manual overrides, so the daily
- * refresh never breaks on it. Keyed by AA `slug` to join with the benchmark
- * feed. Values are normalised to absolute counts (AA may report either
- * billions like `22` or absolute like `22000000000`).
+ * **Pro-only.** A free-tier key is rejected with
+ * `403 {"error":"Language models list requires a Pro subscription"}` — verified
+ * against a known-good key that returns 609 entries from the benchmark endpoint
+ * in the same breath. So on the free tier this call never contributes anything
+ * and every parameter on the chart comes from HuggingFace or the hand-curated
+ * files; that is the expected steady state, not a lapsed entitlement. (An
+ * earlier version of this comment claimed the tier table put identity data on
+ * the free tier. It does not.)
+ *
+ * Best-effort regardless: any failure returns an empty map and the caller falls
+ * back to manual overrides, so the daily refresh never breaks on it. Keyed by
+ * AA `slug` to join with the benchmark feed. Values are normalised to absolute
+ * counts (AA may report either billions like `22` or absolute like
+ * `22000000000`).
  */
 async function fetchAAParameters(
   apiKey: string,
@@ -140,8 +149,13 @@ async function fetchAAParameters(
       },
     );
     if (!res.ok) {
+      // 403 is the free tier's normal answer here, so don't dress it up as a
+      // fault: it fires on every single run and would otherwise read as
+      // something to go and fix.
       console.error(
-        `[params] language/models ${res.status} ${res.statusText} — falling back to name/manual`,
+        res.status === 403
+          ? `[params] language/models ${res.status} — Pro-only endpoint, expected on the free tier; params come from HF + manual files`
+          : `[params] language/models ${res.status} ${res.statusText} — unexpected; falling back to HF + manual files`,
       );
       return map;
     }

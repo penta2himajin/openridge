@@ -292,6 +292,7 @@
   "qwen3-6-plus": null,
   "qwen3-7-plus": null,
   "qwen3-8-2-4t-a95b": "Qwen/Qwen3.8-2.4T-A95B",
+  "qwen3-8-27b": "Qwen/Qwen3.8-27B",
   "qwen3-8b-instruct": "Qwen/Qwen3-8B",
   "qwen3-8b-instruct-reasoning": "Qwen/Qwen3-8B",
   "qwen3-coder-480b-a35b-instruct": "Qwen/Qwen3-Coder-480B-A35B-Instruct",

@@ -87,6 +87,7 @@ CI verification commands live in `.github/workflows/`. Tests are not yet wired; 
 4. Do not hand-edit `data/models.json`. Run `npm run refresh` or edit upstream JSON (`hf_aliases.json` / `moe_overrides.json`).
 5. Do not commit secrets. `.env` and `.dev.vars` are gitignored; verify before staging.
 6. Do not add features outside the "1 chart, params vs intelligence" core without updating `docs/ui.md` first and confirming with the user.
+7. Do not plot a model whose weights are not publicly downloadable, even when AA classifies it as open. No guessed params, no published-spec figures typed into `manual_params.json`, no aliasing a different checkpoint's repo. API-only tiers (Qwen Plus, GLM Turbo, Solar Pro, Mistral Medium/Large), unreleased flagships (Meta's Muse Spark line) and AA entries whose checkpoint was never uploaded (`Step 3.5 Flash 2603`) stay at `params=null` and off the scatter — that is the correct outcome, not a bug. See `docs/data-sources.md` §2 "掲載方針". A model that _does_ have a public repo but fails to resolve (missing org, name mismatch, expired retry window) is a bug and should be fixed.
 
 ## Git Conventions
 

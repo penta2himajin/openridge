@@ -158,6 +158,18 @@ AA API が HF id を返さないため手動 alias map が **唯一の同定経�
 
 **日付ピン付き slug（`-0424` / `-0731`）は継承しない**。これらは別チェックポイントであり、AA が日付で slug を分けている意図そのものが「別物」だから。`deepseek-v4-pro`（0813、重み未公開）が 4 月版の repo を拾わないのはこの規則による。
 
+### 掲載方針: 公開重みが無いモデルは載せない
+
+**AA が open-weights に分類していても、実際にダウンロードできる重みが無いモデルは散布図に載せない。** params を推測して点を打つことも、公称値だけを手で `manual_params.json` に入れることもしない。本サイトは「self-host できるモデル」の Pareto フロンティアであり、動かせないモデルが frontier を占めると指標そのものが嘘になる。
+
+該当するのは主に3類型:
+
+- **API 専用ティア**: Qwen Plus / Omni、GLM Turbo、Solar Pro、Mistral Medium / Large、Doubao など。AA は API 経由で採点できるので open 側に並ぶが、重みは配布されていない
+- **未公開のフラッグシップ**: Meta の Muse Spark 系（1.2 / 1.1 / 無印）は AA 上 II 56.8 / 53.2 / 44.3 だが、`meta-models` org には Muse Glimmer しか無く HF 全体を検索しても repo が無い
+- **同一 repo を上書きされた別チェックポイント**: `Step 3.5 Flash 2603`（AA slug `step-3-5-flash`、2026-04-02）は、`stepfun-ai/Step-3.5-Flash` の commit 履歴上 2026-02 以降 重みの更新が無く（3月の commit は config と eval 結果のみ）、公開されているのは 0202 版。スコアも 0202 entry と実際に食い違う（HLE 0.211 vs 0.245、AA-LCR 0.48 vs 0.603）ので、2603 の repo として 0202 の repo を alias するのは誤り
+
+これらは alias を `null` のまま放置するのが正しい状態であり、`params=null` で散布図から外れる挙動は**バグではなく仕様**。逆に「repo は実在するのに解決できていない」ケース（org 未登録・名前不一致・180日窓切れ）は直す対象で、両者を混同しないこと。
+
 ## 3. クローズドモデル（アンカー線）
 
 - AA API はクローズドも返すので、それを横線データとして抽出

@@ -10,7 +10,6 @@
   "google/gemma-3n-E2B-it": { "active": 2000000000 },
   "inclusionAI/Ling-3.0-tiny": { "active": 1300000000 },
   "google/gemma-3n-E4B-it": { "active": 4000000000 },
-  "google/gemma-3n-E4B-it-litert-preview": { "active": 4000000000 },
   "google/Gemma-4-26B-A4B": { "active": 3800000000 },
   "google/diffusiongemma-26B-A4B-it": { "active": 3800000000 },
   "google/gemma-4-E2B": { "active": 2300000000 },

@@ -185,13 +185,46 @@ AA API が HF id を返さないため手動 alias map が **唯一の同定経�
 
 **AA が open-weights に分類していても、実際にダウンロードできる重みが無いモデルは散布図に載せない。** params を推測して点を打つことも、公称値だけを手で `manual_params.json` に入れることもしない。本サイトは「self-host できるモデル」の Pareto フロンティアであり、動かせないモデルが frontier を占めると指標そのものが嘘になる。
 
-該当するのは主に3類型:
+2026-08-18 に非表示だった28件を全数監査した結果、次の5類型に整理できた。**類型ごとに取るべき対応が違う**ので、ひとまとめに「重みが無い」と記録しないこと。
 
-- **API 専用ティア**: Qwen Plus / Omni、GLM Turbo、Solar Pro、Mistral Medium / Large、Doubao など。AA は API 経由で採点できるので open 側に並ぶが、重みは配布されていない
-- **未公開のフラッグシップ**: Meta の Muse Spark 系（1.2 / 1.1 / 無印）は AA 上 II 56.8 / 53.2 / 44.3 だが、`meta-models` org には Muse Glimmer しか無く HF 全体を検索しても repo が無い
-- **同一 repo を上書きされた別チェックポイント**: `Step 3.5 Flash 2603`（AA slug `step-3-5-flash`、2026-04-02）は、`stepfun-ai/Step-3.5-Flash` の commit 履歴上 2026-02 以降 重みの更新が無く（3月の commit は config と eval 結果のみ）、公開されているのは 0202 版。スコアも 0202 entry と実際に食い違う（HLE 0.211 vs 0.245、AA-LCR 0.48 vs 0.603）ので、2603 の repo として 0202 の repo を alias するのは誤り
+#### 1. API 専用ティア — 恒久的に出ない
 
-これらは alias を `null` のまま放置するのが正しい状態であり、`params=null` で散布図から外れる挙動は**バグではなく仕様**。逆に「repo は実在するのに解決できていない」ケース（org 未登録・名前不一致・180日窓切れ）は直す対象で、両者を混同しないこと。
+Qwen Plus / Omni、GLM Turbo、Solar Pro / Mini、Mistral Medium / Saba / Devstral Medium、Doubao Seed Code、MiMo-V2-Omni、Agnes 2.5 Pro Alpha (Sapiens AI)、Celeris-1、LFM 40B。AA は API 経由で採点できるので open 側に並ぶが、ベンダーが重みを配布していない。
+
+Upstage が分かりやすい証拠を出している: `upstage/solar-pro3-tokenizer` / `solar-pro2-tokenizer` / `solar-1-mini-tokenizer` と、**トークナイザだけ**を公開している。重みを出す気が無いモデルに対する典型的な運用。LFM 40B も同種で、LiquidAI が重みを公開し始めたのは LFM2 世代から（`LiquidAI/LFM-40B` は 404、org には LFM2 系のみ）。
+
+alias を `null` のまま放置するのが正しい状態。再試行しても意味が無い。
+
+#### 2. 公開予告済み・未公開 — 窓が効くので放置しない
+
+Meta の Muse Spark 系（1.2 / 1.1 / 無印、AA 上 II 56.8 / 53.2 / 44.3）。**上の API 専用ティアと混同しないこと。**
+
+Meta は 2026-04 に Llama を退役させて Muse をプロプライエタリで出したが、2026-08-10 に Muse Glimmer 30B を Apache 2.0 で公開すると同時に、**Muse Spark 1.2 の重みも「数週間以内」に公開すると発表した**（最終日程・ライセンスとも未定）。AA 側は現時点で "proprietary. The model weights are not publicly available." のまま。
+
+つまりこれは §「`null` の意味と自動回復」の 180 日再試行窓がまさに想定しているケース。`meta-models` は org 登録済みなので、Meta が publish すれば追加作業なしで解決する。ただし**無印 Muse Spark（2026-04-08）は 2026-10 上旬に窓を抜ける**ので、それ以降に公開された場合は手で alias を入れる必要がある。
+
+#### 3. 同一 repo を上書きされた別チェックポイント
+
+`Step 3.5 Flash 2603`（AA slug `step-3-5-flash`、2026-04-02）。`stepfun-ai/Step-3.5-Flash` の commit 履歴上 2026-02 以降 重みの更新が無く（3月の commit は config と eval 結果のみ）、公開されているのは 0202 版。スコアも 0202 entry と実際に食い違う（HLE 0.211 vs 0.245、AA-LCR 0.48 vs 0.603）ので、2603 の repo として 0202 の repo を alias するのは誤り。**0202 版のみを掲載する**のが正しい状態。
+
+#### 4. 量子化のみが公開されている
+
+`gemma-3n-e4b-preview-0520`（AA 名 `Gemma 3n E4B Instruct Preview (May '25)`）は、公開されているのが `google/gemma-3n-E4B-it-litert-preview` の **int4 LiteRT `.task` バンドル1個だけ**で、BF16 チェックポイントが無い。`docs/ui.md` の「quantization 違いは扱わない・FP16/BF16 ベースラインのみ」に従い載せない。
+
+**6月正式版の repo に alias してはいけない。** 両者は別々に採点されており、スコアが実際に違う（II 4.2 vs 1、GPQA 0.278 vs 0.296、さらに正式版だけが Coding Index / AA-LCR / IFBench / τ² / TB-Hard を持つ）。alias すると preview のスコアを正式版の重みに紐づけることになり、しかも preview の方が II が高いので実在しない点を描く。類型3と同じ誤りである。正式版 `gemma-3n-e4b` は別 AA エントリとして解決済みなので、この系統が散布図から消えるわけではない。
+
+#### 5. 公式配布が終了した／Hub に存在しない旧モデル — `excluded.json` で除外
+
+上の4類型は `params=null` で snapshot に残すが、この類型だけは **`data/excluded.json` に入れて models.json から落とす**。理由は、残すと「オープンなのに解決に失敗している」ように読めてしまい、直す対象と見分けがつかなくなるため。
+
+- `dbrx`: 2024-03 にオープンライセンスで公開されたが、`databricks` org ごと HF から消滅（`dbrx-instruct` / `dbrx-base` とも 404、org 一覧も空）
+- `llama-65b`: LLaMA 1。研究ライセンスの申請配布で、Hub に Meta 公式 repo が存在したことがない（検索に出る `upstage/llama-65b-instruct` は他社 fine-tune）
+
+`excluded.json` はこの用途に限る。API 専用ティアをここに入れてはいけない — あちらは `null` という記録自体が「検討した上で載せない」ことの証跡になっている。
+
+---
+
+類型1〜4は alias を `null` のまま放置するのが正しい状態であり、`params=null` で散布図から外れる挙動は**バグではなく仕様**。逆に「repo は実在するのに解決できていない」ケース（org 未登録・名前不一致・180日窓切れ）は直す対象で、両者を混同しないこと。
 
 ## 3. クローズドモデル（アンカー線）
 

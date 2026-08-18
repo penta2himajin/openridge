@@ -24,6 +24,9 @@ const manual = JSON.parse(
 const moeOverrides = JSON.parse(
   readFileSync(DATA("moe_overrides.json"), "utf8"),
 ) as Record<string, { active: number } | unknown>;
+const excluded = JSON.parse(
+  readFileSync(DATA("excluded.json"), "utf8"),
+) as Record<string, unknown>;
 
 const models = snapshot.models;
 const bySlug = new Map(models.map((m) => [m.slug, m]));
@@ -87,6 +90,32 @@ test("every manual_params override is honored in models.json", () => {
     [],
     `manual_params not reflected in models.json:\n  ${mismatches.join("\n  ")}`,
   );
+});
+
+test("excluded.json entries are absent from models.json, and carry a reason", () => {
+  // excluded.json is the one file that removes an AA entry outright, so it has
+  // to stay narrow: it is for models with no official checkpoint anywhere
+  // (databricks pulled its org; Meta never put LLaMA 1 on the Hub), not for
+  // API-only tiers, which stay in the snapshot at params=null because there
+  // the null is the record. See docs/data-sources.md §2 掲載方針.
+  const slugs = Object.keys(excluded).filter((k) => !k.startsWith("_"));
+  assert.ok(slugs.length > 0, "expected at least one excluded slug");
+  for (const slug of slugs) {
+    assert.equal(
+      typeof excluded[slug],
+      "string",
+      `${slug}: reason must be a string explaining why no official repo exists`,
+    );
+    assert.ok(
+      (excluded[slug] as string).length > 40,
+      `${slug}: reason is too short to re-verify later`,
+    );
+    assert.equal(
+      bySlug.get(slug),
+      undefined,
+      `${slug} is in excluded.json but still present in models.json`,
+    );
+  }
 });
 
 test("every moe_overrides entry is honored in models.json", () => {

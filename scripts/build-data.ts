@@ -893,11 +893,30 @@ async function main(): Promise<void> {
     }
   }
 
+  // Entries dropped from the snapshot outright, because no official checkpoint
+  // exists to point at any more (data/excluded.json). Deliberately narrow: an
+  // API-only tier stays in the snapshot at params=null, because there the null
+  // *is* the record. This is for the handful whose weights were once
+  // obtainable and now aren't from anywhere official, where leaving them in
+  // reads as a resolution failure waiting to be fixed.
+  const excludedRaw = readJson<Record<string, unknown>>(DATA("excluded.json"));
+  const excluded = new Map<string, string>();
+  for (const [k, v] of Object.entries(excludedRaw)) {
+    if (k.startsWith("_")) continue;
+    if (typeof v === "string") excluded.set(k, v);
+  }
+
   const models: ModelRecord[] = [];
   const missing: string[] = [];
+  const dropped: string[] = [];
   let hfHits = 0;
 
   for (const m of aa.data) {
+    const reason = excluded.get(m.slug);
+    if (reason !== undefined) {
+      dropped.push(`${m.slug} — ${reason}`);
+      continue;
+    }
     const closed = isClosed(m);
     const { resolved, hfRepo, paramsUnknown, viaHf } = await resolveParams(
       m,
@@ -1077,6 +1096,12 @@ async function main(): Promise<void> {
 
   writeFileSync(DATA("models.json"), JSON.stringify(out, null, 2) + "\n");
   console.error(`Wrote ${models.length} models to data/models.json`);
+  if (dropped.length > 0) {
+    console.error(
+      `  ${dropped.length} AA entries excluded (no official checkpoint exists):`,
+    );
+    for (const d of dropped) console.error(`    - ${d}`);
+  }
   console.error(
     `  open w/ active: ${openActive.length}, open w/ total: ${openTotal.length}, closed: ${models.filter((m) => m.isClosed).length}`,
   );

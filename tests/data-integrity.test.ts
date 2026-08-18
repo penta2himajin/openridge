@@ -21,6 +21,9 @@ const snapshot = JSON.parse(
 const manual = JSON.parse(
   readFileSync(DATA("manual_params.json"), "utf8"),
 ) as Record<string, { total: number; active: number } | unknown>;
+const moeOverrides = JSON.parse(
+  readFileSync(DATA("moe_overrides.json"), "utf8"),
+) as Record<string, { active: number } | unknown>;
 
 const models = snapshot.models;
 const bySlug = new Map(models.map((m) => [m.slug, m]));
@@ -83,6 +86,38 @@ test("every manual_params override is honored in models.json", () => {
     mismatches,
     [],
     `manual_params not reflected in models.json:\n  ${mismatches.join("\n  ")}`,
+  );
+});
+
+test("every moe_overrides entry is honored in models.json", () => {
+  // Symmetric to the manual_params guard above, and it exists because the
+  // whole Qwen3.5/3.6/3.8 hybrid family needed overrides at once: those
+  // interleave linear and full attention, which the config-based estimator
+  // reads 18-33% low. An override that silently stops applying puts those
+  // points back where they were, and two of them sit on a frontier.
+  const mismatches: string[] = [];
+  for (const [repo, v] of Object.entries(moeOverrides)) {
+    if (repo.startsWith("_")) continue;
+    if (!v || typeof v !== "object" || !("active" in v)) continue;
+    const want = (v as { active: number }).active;
+    for (const m of models) {
+      if (m.hfId !== repo) continue;
+      // manual_params wins over the HF path entirely, so a slug carrying one
+      // is legitimately free to disagree.
+      if (Object.prototype.hasOwnProperty.call(manual, m.slug)) continue;
+      // An estimate above total is clamped back to total by design.
+      if (want > (m.params.total ?? 0)) continue;
+      if (m.params.active !== want) {
+        mismatches.push(
+          `${m.slug} (${repo}): override ${want} vs stored ${m.params.active}`,
+        );
+      }
+    }
+  }
+  assert.deepEqual(
+    mismatches,
+    [],
+    `moe_overrides not reflected in models.json:\n  ${mismatches.join("\n  ")}`,
   );
 });
 

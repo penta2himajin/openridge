@@ -226,6 +226,12 @@
     "repo": "unsloth/LFM2.5-1.2B-Thinking-GGUF",
     "fetchedAt": "2026-07-23T06:36:24.428Z"
   },
+  "lfm2-5-2-6b": {
+    "bytes": 1684023584,
+    "source": "hf",
+    "repo": "bartowski/LiquidAI_LFM2.5-2.6B-GGUF",
+    "fetchedAt": "2026-08-24T04:54:51.368Z"
+  },
   "lfm2-5-8b-a1b": {
     "bytes": null,
     "source": "not-found",

@@ -1,6 +1,43 @@
 {
-  "generatedAt": "2026-08-26T04:49:38.165Z",
+  "generatedAt": "2026-08-27T15:08:29.236Z",
   "models": [
+    {
+      "id": "19496b81-9f41-4214-a77a-1df803b3c5ae",
+      "slug": "glm-5-3-flash",
+      "name": "GLM-5.3-Flash",
+      "creator": "Z AI",
+      "creatorSlug": "zai",
+      "isClosed": false,
+      "params": {
+        "total": 321323031390,
+        "active": 13619953664
+      },
+      "paramsUnknown": false,
+      "license": null,
+      "scores": {
+        "artificial_analysis_intelligence_index": 57.5,
+        "artificial_analysis_coding_index": 71.5,
+        "gpqa": 0.912,
+        "hle": 0.399,
+        "lcr": 0.78,
+        "ifbench": null,
+        "scicode": 0.461,
+        "tau2": null,
+        "terminalbench_hard": null
+      },
+      "pricing": {
+        "price_1m_blended_3_to_1": 0.237,
+        "price_1m_input_tokens": 0.15,
+        "price_1m_output_tokens": 0.5
+      },
+      "speed": {
+        "tps": 41.75,
+        "ttft": 1.158
+      },
+      "hfId": "zai-org/GLM-5.3-Flash",
+      "mode": null,
+      "releaseDate": "2026-08-26"
+    },
     {
       "id": "36f73aaf-d38a-4b56-a2b3-d04d17186910",
       "slug": "gpt-oss-20b",
@@ -31,8 +68,8 @@
         "price_1m_output_tokens": 0.19
       },
       "speed": {
-        "tps": 120.964,
-        "ttft": 0.676
+        "tps": 126.809,
+        "ttft": 0.668
       },
       "hfId": "openai/gpt-oss-20b",
       "mode": "high",
@@ -68,8 +105,8 @@
         "price_1m_output_tokens": 0.2
       },
       "speed": {
-        "tps": 159.01,
-        "ttft": 0.769
+        "tps": 154.832,
+        "ttft": 0.772
       },
       "hfId": "openai/gpt-oss-20b",
       "mode": "low",
@@ -105,8 +142,8 @@
         "price_1m_output_tokens": 12
       },
       "speed": {
-        "tps": 95.98,
-        "ttft": 1.665
+        "tps": 97.933,
+        "ttft": 1.785
       },
       "hfId": null,
       "mode": "medium",
@@ -142,8 +179,8 @@
         "price_1m_output_tokens": 0.6
       },
       "speed": {
-        "tps": 180.639,
-        "ttft": 0.503
+        "tps": 167.732,
+        "ttft": 0.505
       },
       "hfId": null,
       "mode": "high",
@@ -179,8 +216,8 @@
         "price_1m_output_tokens": 8
       },
       "speed": {
-        "tps": 138.829,
-        "ttft": 4.788
+        "tps": 136.571,
+        "ttft": 6.668
       },
       "hfId": null,
       "mode": null,
@@ -216,8 +253,8 @@
         "price_1m_output_tokens": 20
       },
       "speed": {
-        "tps": 63.794,
-        "ttft": 2.956
+        "tps": 68.962,
+        "ttft": 2.755
       },
       "hfId": null,
       "mode": "low",
@@ -253,8 +290,8 @@
         "price_1m_output_tokens": 1.2
       },
       "speed": {
-        "tps": 118.098,
-        "ttft": 1.582
+        "tps": 116.498,
+        "ttft": 1.518
       },
       "hfId": null,
       "mode": "low",
@@ -290,8 +327,8 @@
         "price_1m_output_tokens": 0.59
       },
       "speed": {
-        "tps": 185.836,
-        "ttft": 0.536
+        "tps": 168.763,
+        "ttft": 0.545
       },
       "hfId": null,
       "mode": "low",
@@ -327,8 +364,8 @@
         "price_1m_output_tokens": 12
       },
       "speed": {
-        "tps": 108.967,
-        "ttft": 63.79
+        "tps": 112.8,
+        "ttft": 116.213
       },
       "hfId": null,
       "mode": "max",
@@ -402,7 +439,7 @@
       },
       "speed": {
         "tps": 69.592,
-        "ttft": 61.46
+        "ttft": 66.606
       },
       "hfId": null,
       "mode": "max",
@@ -438,8 +475,8 @@
         "price_1m_output_tokens": 1.2
       },
       "speed": {
-        "tps": 129.623,
-        "ttft": 74.223
+        "tps": 124.139,
+        "ttft": 78.31
       },
       "hfId": null,
       "mode": "max",
@@ -475,8 +512,8 @@
         "price_1m_output_tokens": 20
       },
       "speed": {
-        "tps": 65.118,
-        "ttft": 1.33
+        "tps": 69.243,
+        "ttft": 1.299
       },
       "hfId": null,
       "mode": "Non-reasoning",
@@ -512,7 +549,7 @@
         "price_1m_output_tokens": 12
       },
       "speed": {
-        "tps": 96.021,
+        "tps": 96.555,
         "ttft": 0.76
       },
       "hfId": null,
@@ -549,8 +586,8 @@
         "price_1m_output_tokens": 1.2
       },
       "speed": {
-        "tps": 122.395,
-        "ttft": 0.771
+        "tps": 116.735,
+        "ttft": 0.766
       },
       "hfId": null,
       "mode": "Non-reasoning",
@@ -586,7 +623,7 @@
         "price_1m_output_tokens": 20
       },
       "speed": {
-        "tps": 64.928,
+        "tps": 66.813,
         "ttft": 4.087
       },
       "hfId": null,
@@ -660,7 +697,7 @@
         "price_1m_output_tokens": 20
       },
       "speed": {
-        "tps": 66.838,
+        "tps": 67.858,
         "ttft": 25.577
       },
       "hfId": null,
@@ -697,8 +734,8 @@
         "price_1m_output_tokens": 12
       },
       "speed": {
-        "tps": 100.381,
-        "ttft": 1.467
+        "tps": 98.982,
+        "ttft": 1.495
       },
       "hfId": null,
       "mode": "low",
@@ -734,8 +771,8 @@
         "price_1m_output_tokens": 30
       },
       "speed": {
-        "tps": 144.515,
-        "ttft": 0.873
+        "tps": 145.076,
+        "ttft": 0.916
       },
       "hfId": null,
       "mode": "June 2026",
@@ -771,8 +808,8 @@
         "price_1m_output_tokens": 1.2
       },
       "speed": {
-        "tps": 118.17,
-        "ttft": 7.517
+        "tps": 119.246,
+        "ttft": 8.768
       },
       "hfId": null,
       "mode": "high",
@@ -808,8 +845,8 @@
         "price_1m_output_tokens": 12
       },
       "speed": {
-        "tps": 102.263,
-        "ttft": 5.882
+        "tps": 104.182,
+        "ttft": 5.717
       },
       "hfId": null,
       "mode": "xhigh",
@@ -845,8 +882,8 @@
         "price_1m_output_tokens": 20
       },
       "speed": {
-        "tps": 65.37,
-        "ttft": 8.076
+        "tps": 78.292,
+        "ttft": 10.154
       },
       "hfId": null,
       "mode": "high",
@@ -882,8 +919,8 @@
         "price_1m_output_tokens": 1.2
       },
       "speed": {
-        "tps": 122.231,
-        "ttft": 22.393
+        "tps": 128.628,
+        "ttft": 26.765
       },
       "hfId": null,
       "mode": "xhigh",
@@ -919,8 +956,8 @@
         "price_1m_output_tokens": 12
       },
       "speed": {
-        "tps": 98.779,
-        "ttft": 2.156
+        "tps": 98.111,
+        "ttft": 2.261
       },
       "hfId": null,
       "mode": "high",
@@ -957,7 +994,7 @@
       },
       "speed": {
         "tps": 121.405,
-        "ttft": 31.856
+        "ttft": 37.56
       },
       "hfId": null,
       "mode": "xhigh",
@@ -993,8 +1030,8 @@
         "price_1m_output_tokens": 1.2
       },
       "speed": {
-        "tps": 114.481,
-        "ttft": 2.073
+        "tps": 115.319,
+        "ttft": 2.175
       },
       "hfId": null,
       "mode": "medium",
@@ -1030,7 +1067,7 @@
         "price_1m_output_tokens": 0.72
       },
       "speed": {
-        "tps": 89.703,
+        "tps": 86.255,
         "ttft": 0.626
       },
       "hfId": "meta-llama/Llama-3.3-70B-Instruct",
@@ -1141,8 +1178,8 @@
         "price_1m_output_tokens": 0.345
       },
       "speed": {
-        "tps": 56.856,
-        "ttft": 0.385
+        "tps": 55.489,
+        "ttft": 0.393
       },
       "hfId": "meta-llama/Llama-3.2-11B-Vision-Instruct",
       "mode": "Vision",
@@ -1215,8 +1252,8 @@
         "price_1m_output_tokens": 0.66
       },
       "speed": {
-        "tps": 137.166,
-        "ttft": 0.519
+        "tps": 135.39,
+        "ttft": 0.54
       },
       "hfId": null,
       "mode": null,
@@ -1252,8 +1289,8 @@
         "price_1m_output_tokens": 0.91
       },
       "speed": {
-        "tps": 101.344,
-        "ttft": 0.585
+        "tps": 101.711,
+        "ttft": 0.587
       },
       "hfId": null,
       "mode": null,
@@ -1289,8 +1326,8 @@
         "price_1m_output_tokens": 1.35
       },
       "speed": {
-        "tps": 109.419,
-        "ttft": 0.353
+        "tps": 114.026,
+        "ttft": 0.314
       },
       "hfId": "meta-models/Muse-Glimmer-30B",
       "mode": "high",
@@ -1363,8 +1400,8 @@
         "price_1m_output_tokens": 0.3
       },
       "speed": {
-        "tps": 141.203,
-        "ttft": 1.229
+        "tps": 136.231,
+        "ttft": 1.238
       },
       "hfId": "google/Gemma-4-12B",
       "mode": "Reasoning",
@@ -1400,8 +1437,8 @@
         "price_1m_output_tokens": 0
       },
       "speed": {
-        "tps": 35.529,
-        "ttft": 0.981
+        "tps": 35.581,
+        "ttft": 0.961
       },
       "hfId": "google/Gemma-4-31B",
       "mode": "Reasoning",
@@ -1437,8 +1474,8 @@
         "price_1m_output_tokens": 9
       },
       "speed": {
-        "tps": 251.759,
-        "ttft": 8.702
+        "tps": 266.489,
+        "ttft": 10.668
       },
       "hfId": null,
       "mode": "medium",
@@ -1474,8 +1511,8 @@
         "price_1m_output_tokens": 0.4
       },
       "speed": {
-        "tps": 98.141,
-        "ttft": 0.581
+        "tps": 84.166,
+        "ttft": 0.683
       },
       "hfId": "google/Gemma-4-26B-A4B",
       "mode": "Non-reasoning",
@@ -1548,8 +1585,8 @@
         "price_1m_output_tokens": 0.4
       },
       "speed": {
-        "tps": 94.648,
-        "ttft": 0.644
+        "tps": 96.657,
+        "ttft": 0.691
       },
       "hfId": "google/Gemma-4-31B",
       "mode": "Non-reasoning",
@@ -1585,8 +1622,8 @@
         "price_1m_output_tokens": 3.75
       },
       "speed": {
-        "tps": 195.446,
-        "ttft": 11.652
+        "tps": 197.312,
+        "ttft": 13.466
       },
       "hfId": null,
       "mode": "high",
@@ -1622,8 +1659,8 @@
         "price_1m_output_tokens": 0.1
       },
       "speed": {
-        "tps": 52.119,
-        "ttft": 0.261
+        "tps": 58.564,
+        "ttft": 0.258
       },
       "hfId": "google/gemma-4-E4B",
       "mode": "Non-reasoning",
@@ -1659,8 +1696,8 @@
         "price_1m_output_tokens": 0.1
       },
       "speed": {
-        "tps": 56.102,
-        "ttft": 0.353
+        "tps": 57.121,
+        "ttft": 0.342
       },
       "hfId": "google/gemma-4-E4B",
       "mode": "Reasoning",
@@ -1696,8 +1733,8 @@
         "price_1m_output_tokens": 2.5
       },
       "speed": {
-        "tps": 355.981,
-        "ttft": 7.4
+        "tps": 368.751,
+        "ttft": 8.02
       },
       "hfId": null,
       "mode": null,
@@ -1770,8 +1807,8 @@
         "price_1m_output_tokens": 0.3
       },
       "speed": {
-        "tps": 139.746,
-        "ttft": 1.264
+        "tps": 139.112,
+        "ttft": 1.341
       },
       "hfId": "google/Gemma-4-12B",
       "mode": "Non-reasoning",
@@ -1881,8 +1918,8 @@
         "price_1m_output_tokens": 3.75
       },
       "speed": {
-        "tps": 345.156,
-        "ttft": 7.679
+        "tps": 365.907,
+        "ttft": 9.084
       },
       "hfId": null,
       "mode": "high",
@@ -1918,8 +1955,8 @@
         "price_1m_output_tokens": 12
       },
       "speed": {
-        "tps": 122.634,
-        "ttft": 22.849
+        "tps": 125.219,
+        "ttft": 28.117
       },
       "hfId": null,
       "mode": null,
@@ -1955,8 +1992,8 @@
         "price_1m_output_tokens": 3.75
       },
       "speed": {
-        "tps": 293.433,
-        "ttft": 0.924
+        "tps": 300.463,
+        "ttft": 1.904
       },
       "hfId": null,
       "mode": "low",
@@ -1992,8 +2029,8 @@
         "price_1m_output_tokens": 3.75
       },
       "speed": {
-        "tps": 290.052,
-        "ttft": 5.684
+        "tps": 287.21,
+        "ttft": 6.316
       },
       "hfId": null,
       "mode": "medium",
@@ -2066,8 +2103,8 @@
         "price_1m_output_tokens": 9
       },
       "speed": {
-        "tps": 241.825,
-        "ttft": 0.754
+        "tps": 227.909,
+        "ttft": 0.771
       },
       "hfId": null,
       "mode": "minimal",
@@ -2103,8 +2140,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 83.382,
-        "ttft": 111.965
+        "tps": 89.599,
+        "ttft": 104.926
       },
       "hfId": null,
       "mode": "Adaptive Reasoning, Max Effort",
@@ -2140,8 +2177,8 @@
         "price_1m_output_tokens": 5
       },
       "speed": {
-        "tps": 158.329,
-        "ttft": 12.072
+        "tps": 194.949,
+        "ttft": 16.202
       },
       "hfId": null,
       "mode": "Reasoning",
@@ -2177,8 +2214,8 @@
         "price_1m_output_tokens": 25
       },
       "speed": {
-        "tps": 54.845,
-        "ttft": 31.628
+        "tps": 55.452,
+        "ttft": 29.157
       },
       "hfId": null,
       "mode": "Adaptive Reasoning, Max Effort",
@@ -2214,8 +2251,8 @@
         "price_1m_output_tokens": 50
       },
       "speed": {
-        "tps": 64.14,
-        "ttft": 54.812
+        "tps": 67.782,
+        "ttft": 58.548
       },
       "hfId": null,
       "mode": "Adaptive Reasoning, Max Effort, Opus 4.8 Fallback",
@@ -2251,8 +2288,8 @@
         "price_1m_output_tokens": 25
       },
       "speed": {
-        "tps": 53.047,
-        "ttft": 22.719
+        "tps": 51.767,
+        "ttft": 22.338
       },
       "hfId": null,
       "mode": "Adaptive Reasoning, Xhigh Effort",
@@ -2289,7 +2326,7 @@
       },
       "speed": {
         "tps": 53.341,
-        "ttft": 3.829
+        "ttft": 3.768
       },
       "hfId": null,
       "mode": "Adaptive Reasoning, Low Effort",
@@ -2325,8 +2362,8 @@
         "price_1m_output_tokens": 25
       },
       "speed": {
-        "tps": 54.359,
-        "ttft": 11.102
+        "tps": 52.261,
+        "ttft": 11.011
       },
       "hfId": null,
       "mode": "Adaptive Reasoning, High Effort",
@@ -2362,8 +2399,8 @@
         "price_1m_output_tokens": 5
       },
       "speed": {
-        "tps": 99.854,
-        "ttft": 0.608
+        "tps": 103.879,
+        "ttft": 0.607
       },
       "hfId": null,
       "mode": "Non-reasoning",
@@ -2400,7 +2437,7 @@
       },
       "speed": {
         "tps": 66.933,
-        "ttft": 1.326
+        "ttft": 1.469
       },
       "hfId": null,
       "mode": "Non-reasoning, High Effort",
@@ -2436,8 +2473,8 @@
         "price_1m_output_tokens": 25
       },
       "speed": {
-        "tps": 52.367,
-        "ttft": 6.387
+        "tps": 52.18,
+        "ttft": 6.798
       },
       "hfId": null,
       "mode": "Adaptive Reasoning, Medium Effort",
@@ -2474,7 +2511,7 @@
       },
       "speed": {
         "tps": 65.61,
-        "ttft": 2.196
+        "ttft": 2.079
       },
       "hfId": null,
       "mode": "Adaptive Reasoning, Medium Effort",
@@ -2511,7 +2548,7 @@
       },
       "speed": {
         "tps": 69.456,
-        "ttft": 3.162
+        "ttft": 3.456
       },
       "hfId": null,
       "mode": "Adaptive Reasoning, High Effort",
@@ -2547,8 +2584,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 71.896,
-        "ttft": 16.162
+        "tps": 76.136,
+        "ttft": 16.463
       },
       "hfId": null,
       "mode": "Adaptive Reasoning, Xhigh Effort",
@@ -2584,8 +2621,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 65.889,
-        "ttft": 1.784
+        "tps": 65.748,
+        "ttft": 1.925
       },
       "hfId": null,
       "mode": "Adaptive Reasoning, Low Effort",
@@ -2622,7 +2659,7 @@
       },
       "speed": {
         "tps": 50.671,
-        "ttft": 1.133
+        "ttft": 1.17
       },
       "hfId": null,
       "mode": "Non-reasoning, Low Effort",
@@ -2658,8 +2695,8 @@
         "price_1m_output_tokens": 0.2
       },
       "speed": {
-        "tps": 98.748,
-        "ttft": 0.436
+        "tps": 98.727,
+        "ttft": 0.439
       },
       "hfId": "mistralai/Ministral-3-14B-Instruct-2512",
       "mode": null,
@@ -2732,8 +2769,8 @@
         "price_1m_output_tokens": 0.15
       },
       "speed": {
-        "tps": 123.133,
-        "ttft": 0.493
+        "tps": 127.56,
+        "ttft": 0.521
       },
       "hfId": "mistralai/Ministral-3-8B-Instruct-2512",
       "mode": null,
@@ -2769,8 +2806,8 @@
         "price_1m_output_tokens": 0.1
       },
       "speed": {
-        "tps": 201.006,
-        "ttft": 0.488
+        "tps": 212.881,
+        "ttft": 0.456
       },
       "hfId": "mistralai/Ministral-3-3B-Instruct-2512",
       "mode": null,
@@ -2806,8 +2843,8 @@
         "price_1m_output_tokens": 1.5
       },
       "speed": {
-        "tps": 59.136,
-        "ttft": 0.688
+        "tps": 58.063,
+        "ttft": 1.06
       },
       "hfId": null,
       "mode": null,
@@ -2881,7 +2918,7 @@
       },
       "speed": {
         "tps": 141.464,
-        "ttft": 0.635
+        "ttft": 0.629
       },
       "hfId": "mistralai/Devstral-Small-2-24B-Instruct-2512",
       "mode": null,
@@ -2917,8 +2954,8 @@
         "price_1m_output_tokens": 7.5
       },
       "speed": {
-        "tps": 130.329,
-        "ttft": 0.74
+        "tps": 127.55,
+        "ttft": 0.752
       },
       "hfId": "mistralai/Mistral-Medium-3.5-128B",
       "mode": null,
@@ -2954,8 +2991,8 @@
         "price_1m_output_tokens": 0.6
       },
       "speed": {
-        "tps": 158.649,
-        "ttft": 0.611
+        "tps": 162.627,
+        "ttft": 0.628
       },
       "hfId": "mistralai/Mistral-Small-4-119B-2603",
       "mode": "Reasoning",
@@ -2991,8 +3028,8 @@
         "price_1m_output_tokens": 0
       },
       "speed": {
-        "tps": 37.414,
-        "ttft": 0.779
+        "tps": 40.841,
+        "ttft": 0.709
       },
       "hfId": "mistralai/Devstral-2-123B-Instruct-2512",
       "mode": null,
@@ -3028,8 +3065,8 @@
         "price_1m_output_tokens": 0.6
       },
       "speed": {
-        "tps": 154.354,
-        "ttft": 0.585
+        "tps": 150.745,
+        "ttft": 0.607
       },
       "hfId": "mistralai/Mistral-Small-4-119B-2603",
       "mode": "Non-reasoning",
@@ -3066,7 +3103,7 @@
       },
       "speed": {
         "tps": 61.017,
-        "ttft": 1.093
+        "ttft": 1.041
       },
       "hfId": "deepseek-ai/DeepSeek-V4-Pro-0813",
       "mode": "Reasoning, Max Effort",
@@ -3102,8 +3139,8 @@
         "price_1m_output_tokens": 1.32
       },
       "speed": {
-        "tps": 122.193,
-        "ttft": 0.889
+        "tps": 128.984,
+        "ttft": 0.955
       },
       "hfId": null,
       "mode": "Reasoning, Max Effort",
@@ -3139,8 +3176,8 @@
         "price_1m_output_tokens": 0.87
       },
       "speed": {
-        "tps": 61.32,
-        "ttft": 1.118
+        "tps": 61.58,
+        "ttft": 0.996
       },
       "hfId": null,
       "mode": "Reasoning, Max Effort",
@@ -3213,8 +3250,8 @@
         "price_1m_output_tokens": 0.87
       },
       "speed": {
-        "tps": 61.592,
-        "ttft": 1.046
+        "tps": 64.331,
+        "ttft": 1.024
       },
       "hfId": null,
       "mode": "Non-reasoning",
@@ -3250,8 +3287,8 @@
         "price_1m_output_tokens": 0.87
       },
       "speed": {
-        "tps": 60.171,
-        "ttft": 1.067
+        "tps": 62.964,
+        "ttft": 1.114
       },
       "hfId": null,
       "mode": "Reasoning, High Effort",
@@ -3287,8 +3324,8 @@
         "price_1m_output_tokens": 1.32
       },
       "speed": {
-        "tps": 120.357,
-        "ttft": 0.712
+        "tps": 119.534,
+        "ttft": 0.656
       },
       "hfId": null,
       "mode": "Reasoning, Max Effort",
@@ -3398,8 +3435,8 @@
         "price_1m_output_tokens": 2.5
       },
       "speed": {
-        "tps": 122.421,
-        "ttft": 16.029
+        "tps": 119.856,
+        "ttft": 20.656
       },
       "hfId": null,
       "mode": "medium",
@@ -3435,8 +3472,8 @@
         "price_1m_output_tokens": 2.5
       },
       "speed": {
-        "tps": 106.504,
-        "ttft": 0.678
+        "tps": 102.362,
+        "ttft": 0.612
       },
       "hfId": null,
       "mode": "Non-reasoning",
@@ -3472,8 +3509,8 @@
         "price_1m_output_tokens": 2.5
       },
       "speed": {
-        "tps": 113.235,
-        "ttft": 7.036
+        "tps": 110.188,
+        "ttft": 7.289
       },
       "hfId": null,
       "mode": "low",
@@ -3509,8 +3546,8 @@
         "price_1m_output_tokens": 6
       },
       "speed": {
-        "tps": 51.933,
-        "ttft": 30.441
+        "tps": 56.549,
+        "ttft": 33.5
       },
       "hfId": null,
       "mode": "xhigh",
@@ -3546,8 +3583,8 @@
         "price_1m_output_tokens": 6
       },
       "speed": {
-        "tps": 56.649,
-        "ttft": 30.652
+        "tps": 60.751,
+        "ttft": 32.289
       },
       "hfId": null,
       "mode": "high",
@@ -3583,8 +3620,8 @@
         "price_1m_output_tokens": 6
       },
       "speed": {
-        "tps": 53.569,
-        "ttft": 4.554
+        "tps": 54.895,
+        "ttft": 4.517
       },
       "hfId": null,
       "mode": "low",
@@ -3620,8 +3657,8 @@
         "price_1m_output_tokens": 6
       },
       "speed": {
-        "tps": 46.377,
-        "ttft": 10.595
+        "tps": 48.708,
+        "ttft": 10.795
       },
       "hfId": null,
       "mode": "high",
@@ -3657,8 +3694,8 @@
         "price_1m_output_tokens": 6
       },
       "speed": {
-        "tps": 57.233,
-        "ttft": 19.145
+        "tps": 61.192,
+        "ttft": 27.156
       },
       "hfId": null,
       "mode": "medium",
@@ -3694,8 +3731,8 @@
         "price_1m_output_tokens": 0.14
       },
       "speed": {
-        "tps": 286.196,
-        "ttft": 0.624
+        "tps": 281.469,
+        "ttft": 0.611
       },
       "hfId": null,
       "mode": null,
@@ -3768,8 +3805,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 135.096,
-        "ttft": 17.158
+        "tps": 125.972,
+        "ttft": 18.975
       },
       "hfId": null,
       "mode": "medium",
@@ -3879,7 +3916,7 @@
         "price_1m_output_tokens": 2.5
       },
       "speed": {
-        "tps": 199.476,
+        "tps": 193.444,
         "ttft": 15.6
       },
       "hfId": null,
@@ -3916,8 +3953,8 @@
         "price_1m_output_tokens": 2.5
       },
       "speed": {
-        "tps": 193.625,
-        "ttft": 5.267
+        "tps": 193.034,
+        "ttft": 5.443
       },
       "hfId": null,
       "mode": "low",
@@ -3953,8 +3990,8 @@
         "price_1m_output_tokens": 2.5
       },
       "speed": {
-        "tps": 221.001,
-        "ttft": 0.805
+        "tps": 214.873,
+        "ttft": 0.764
       },
       "hfId": null,
       "mode": "Non-reasoning",
@@ -3990,8 +4027,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 135.425,
-        "ttft": 0.665
+        "tps": 134.607,
+        "ttft": 0.692
       },
       "hfId": null,
       "mode": "Non-reasoning",
@@ -4064,8 +4101,8 @@
         "price_1m_output_tokens": 12.5
       },
       "speed": {
-        "tps": 59.215,
-        "ttft": 1.154
+        "tps": 58.586,
+        "ttft": 1.224
       },
       "hfId": null,
       "mode": null,
@@ -4101,8 +4138,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 135.71,
-        "ttft": 5.579
+        "tps": 131.974,
+        "ttft": 7.444
       },
       "hfId": null,
       "mode": "low",
@@ -4138,8 +4175,8 @@
         "price_1m_output_tokens": 2.5
       },
       "speed": {
-        "tps": 208.14,
-        "ttft": 13.296
+        "tps": 192.384,
+        "ttft": 12.972
       },
       "hfId": null,
       "mode": "medium",
@@ -4175,8 +4212,8 @@
         "price_1m_output_tokens": 0.5
       },
       "speed": {
-        "tps": 45.506,
-        "ttft": 0.957
+        "tps": 44.645,
+        "ttft": 0.941
       },
       "hfId": null,
       "mode": null,
@@ -4212,8 +4249,8 @@
         "price_1m_output_tokens": 0
       },
       "speed": {
-        "tps": 17.589,
-        "ttft": 0.395
+        "tps": 17.535,
+        "ttft": 0.439
       },
       "hfId": null,
       "mode": null,
@@ -4249,8 +4286,8 @@
         "price_1m_output_tokens": 0
       },
       "speed": {
-        "tps": 44.675,
-        "ttft": 0.342
+        "tps": 44.89,
+        "ttft": 0.345
       },
       "hfId": null,
       "mode": null,
@@ -4323,8 +4360,8 @@
         "price_1m_output_tokens": 0
       },
       "speed": {
-        "tps": 344.788,
-        "ttft": 1.172
+        "tps": 344.254,
+        "ttft": 1.233
       },
       "hfId": "LiquidAI/LFM2.5-8B-A1B",
       "mode": null,
@@ -4471,8 +4508,8 @@
         "price_1m_output_tokens": 0
       },
       "speed": {
-        "tps": 376.288,
-        "ttft": 0.903
+        "tps": 382.959,
+        "ttft": 1.011
       },
       "hfId": "LiquidAI/LFM2.5-VL-1.6B",
       "mode": null,
@@ -4656,8 +4693,8 @@
         "price_1m_output_tokens": 0.6
       },
       "speed": {
-        "tps": 160.392,
-        "ttft": 1.182
+        "tps": 160.032,
+        "ttft": 1.166
       },
       "hfId": null,
       "mode": null,
@@ -4730,8 +4767,8 @@
         "price_1m_output_tokens": 1.2
       },
       "speed": {
-        "tps": 139.341,
-        "ttft": 0.909
+        "tps": 111.28,
+        "ttft": 1.002
       },
       "hfId": "MiniMaxAI/MiniMax-M3",
       "mode": null,
@@ -4767,8 +4804,8 @@
         "price_1m_output_tokens": 1.2
       },
       "speed": {
-        "tps": 102.345,
-        "ttft": 3.175
+        "tps": 91.478,
+        "ttft": 3.319
       },
       "hfId": "nvidia/Llama-3.1-Nemotron-70B-Instruct-HF",
       "mode": null,
@@ -4804,8 +4841,8 @@
         "price_1m_output_tokens": 0.195
       },
       "speed": {
-        "tps": 172.279,
-        "ttft": 1.133
+        "tps": 172.169,
+        "ttft": 1.371
       },
       "hfId": "nvidia/NVIDIA-Nemotron-Nano-9B-V2",
       "mode": "Non-reasoning",
@@ -4841,8 +4878,8 @@
         "price_1m_output_tokens": 2.75
       },
       "speed": {
-        "tps": 172.8,
-        "ttft": 1.012
+        "tps": 174.229,
+        "ttft": 1.201
       },
       "hfId": "nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16",
       "mode": "Reasoning",
@@ -4878,8 +4915,8 @@
         "price_1m_output_tokens": 0.2
       },
       "speed": {
-        "tps": 266.52,
-        "ttft": 0.674
+        "tps": 240.705,
+        "ttft": 0.659
       },
       "hfId": "nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16",
       "mode": "Reasoning",
@@ -4915,8 +4952,8 @@
         "price_1m_output_tokens": 0.3
       },
       "speed": {
-        "tps": 330.997,
-        "ttft": 0.573
+        "tps": 334.158,
+        "ttft": 0.565
       },
       "hfId": "nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning",
       "mode": null,
@@ -4952,8 +4989,8 @@
         "price_1m_output_tokens": 0.6
       },
       "speed": {
-        "tps": 157.481,
-        "ttft": 1.22
+        "tps": 160.253,
+        "ttft": 1.378
       },
       "hfId": "nvidia/NVIDIA-Nemotron-Nano-12B-v2-VL-BF16",
       "mode": "Non-reasoning",
@@ -4989,8 +5026,8 @@
         "price_1m_output_tokens": 1.8
       },
       "speed": {
-        "tps": 52.921,
-        "ttft": 0.668
+        "tps": 52.938,
+        "ttft": 0.656
       },
       "hfId": "nvidia/Llama-3_1-Nemotron-Ultra-253B-v1",
       "mode": "Reasoning",
@@ -5026,8 +5063,8 @@
         "price_1m_output_tokens": 0.22
       },
       "speed": {
-        "tps": 305.597,
-        "ttft": 0.949
+        "tps": 305.493,
+        "ttft": 0.904
       },
       "hfId": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16",
       "mode": null,
@@ -5063,8 +5100,8 @@
         "price_1m_output_tokens": 0.16
       },
       "speed": {
-        "tps": 244.731,
-        "ttft": 2.22
+        "tps": 265.096,
+        "ttft": 2.981
       },
       "hfId": "nvidia/NVIDIA-Nemotron-Nano-9B-V2",
       "mode": "Reasoning",
@@ -5100,8 +5137,8 @@
         "price_1m_output_tokens": 0.6
       },
       "speed": {
-        "tps": 106.754,
-        "ttft": 4.772
+        "tps": 111.393,
+        "ttft": 3.59
       },
       "hfId": "nvidia/NVIDIA-Nemotron-Nano-12B-v2-VL-BF16",
       "mode": "Reasoning",
@@ -5137,8 +5174,8 @@
         "price_1m_output_tokens": 0.8
       },
       "speed": {
-        "tps": 142.903,
-        "ttft": 1.096
+        "tps": 144.783,
+        "ttft": 1.095
       },
       "hfId": "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16",
       "mode": "Reasoning",
@@ -5174,8 +5211,8 @@
         "price_1m_output_tokens": 0.4
       },
       "speed": {
-        "tps": 116.927,
-        "ttft": 4.106
+        "tps": 117.936,
+        "ttft": 4.006
       },
       "hfId": "nvidia/Llama-3_3-Nemotron-Super-49B-v1_5",
       "mode": "Non-reasoning",
@@ -5211,8 +5248,8 @@
         "price_1m_output_tokens": 0.4
       },
       "speed": {
-        "tps": 121.663,
-        "ttft": 4.687
+        "tps": 98.107,
+        "ttft": 4.037
       },
       "hfId": "nvidia/Llama-3_3-Nemotron-Super-49B-v1_5",
       "mode": "Reasoning",
@@ -5249,7 +5286,7 @@
       },
       "speed": {
         "tps": 228.233,
-        "ttft": 0.374
+        "ttft": 0.361
       },
       "hfId": "nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16",
       "mode": "Non-reasoning",
@@ -5359,8 +5396,8 @@
         "price_1m_output_tokens": 4
       },
       "speed": {
-        "tps": 40.805,
-        "ttft": 1.107
+        "tps": 39.458,
+        "ttft": 1.146
       },
       "hfId": "moonshotai/Kimi-K2.7-Code",
       "mode": null,
@@ -5396,8 +5433,8 @@
         "price_1m_output_tokens": 15
       },
       "speed": {
-        "tps": 37.973,
-        "ttft": 4.647
+        "tps": 38.419,
+        "ttft": 5.089
       },
       "hfId": "moonshotai/Kimi-K3",
       "mode": "max",
@@ -5470,8 +5507,8 @@
         "price_1m_output_tokens": 15
       },
       "speed": {
-        "tps": 35.103,
-        "ttft": 3.836
+        "tps": 36.443,
+        "ttft": 3.712
       },
       "hfId": "moonshotai/Kimi-K3",
       "mode": "low",
@@ -5507,8 +5544,8 @@
         "price_1m_output_tokens": 1.15
       },
       "speed": {
-        "tps": 108.989,
-        "ttft": 1.671
+        "tps": 94.057,
+        "ttft": 1.677
       },
       "hfId": "stepfun-ai/Step-3.7-Flash",
       "mode": null,
@@ -5848,6 +5885,43 @@
       "releaseDate": "2025-10-28"
     },
     {
+      "id": "0c64b008-20c3-408d-bd68-15136df8cd2c",
+      "slug": "granite-4-2-3b",
+      "name": "Granite 4.2 3B",
+      "creator": "IBM",
+      "creatorSlug": "ibm",
+      "isClosed": false,
+      "params": {
+        "total": 3659737600,
+        "active": 3659737600
+      },
+      "paramsUnknown": false,
+      "license": null,
+      "scores": {
+        "artificial_analysis_intelligence_index": 14.3,
+        "artificial_analysis_coding_index": 17.5,
+        "gpqa": 0.559,
+        "hle": 0.066,
+        "lcr": 0.243333333333333,
+        "ifbench": null,
+        "scicode": 0.249,
+        "tau2": null,
+        "terminalbench_hard": null
+      },
+      "pricing": {
+        "price_1m_blended_3_to_1": 0.052,
+        "price_1m_input_tokens": 0.03,
+        "price_1m_output_tokens": 0.12
+      },
+      "speed": {
+        "tps": 117.258,
+        "ttft": 0.269
+      },
+      "hfId": "ibm-granite/Granite-4.2-3B",
+      "mode": null,
+      "releaseDate": "2026-08-25"
+    },
+    {
       "id": "5dba8d07-9992-483c-81db-dac97cb15ba8",
       "slug": "granite-4-0-h-small",
       "name": "Granite 4.0 H Small",
@@ -5877,8 +5951,8 @@
         "price_1m_output_tokens": 0.25
       },
       "speed": {
-        "tps": 19.475,
-        "ttft": 21.823
+        "tps": 38.081,
+        "ttft": 15.383
       },
       "hfId": "ibm-granite/Granite-4.0-H-Small",
       "mode": null,
@@ -5914,8 +5988,8 @@
         "price_1m_output_tokens": 0.1
       },
       "speed": {
-        "tps": 133.986,
-        "ttft": 0.445
+        "tps": 129,
+        "ttft": 0.441
       },
       "hfId": "ibm-granite/Granite-4.1-8B",
       "mode": null,
@@ -5994,6 +6068,43 @@
       "hfId": "ibm-granite/Granite-4.1-30B",
       "mode": null,
       "releaseDate": "2026-04-29"
+    },
+    {
+      "id": "adfae555-f489-4f3e-9064-c6b7fcdd0783",
+      "slug": "granite-4-2-8b",
+      "name": "Granite 4.2 8B",
+      "creator": "IBM",
+      "creatorSlug": "ibm",
+      "isClosed": false,
+      "params": {
+        "total": 8791592960,
+        "active": 8791592960
+      },
+      "paramsUnknown": false,
+      "license": null,
+      "scores": {
+        "artificial_analysis_intelligence_index": 19.6,
+        "artificial_analysis_coding_index": 22.4,
+        "gpqa": 0.631,
+        "hle": 0.097,
+        "lcr": 0.433333333333333,
+        "ifbench": null,
+        "scicode": 0.304,
+        "tau2": null,
+        "terminalbench_hard": null
+      },
+      "pricing": {
+        "price_1m_blended_3_to_1": 0.107,
+        "price_1m_input_tokens": 0.06,
+        "price_1m_output_tokens": 0.25
+      },
+      "speed": {
+        "tps": 104.966,
+        "ttft": 0.236
+      },
+      "hfId": "ibm-granite/Granite-4.2-8B",
+      "mode": null,
+      "releaseDate": "2026-08-25"
     },
     {
       "id": "a68afa0b-7fe2-4e9d-bf3e-741cce3c6aeb",
@@ -6136,8 +6247,8 @@
         "price_1m_output_tokens": 0.75
       },
       "speed": {
-        "tps": 1113.608,
-        "ttft": 4.132
+        "tps": 1125.68,
+        "ttft": 4.364
       },
       "hfId": null,
       "mode": null,
@@ -6173,8 +6284,8 @@
         "price_1m_output_tokens": 0.8
       },
       "speed": {
-        "tps": 88.942,
-        "ttft": 1.169
+        "tps": 88.221,
+        "ttft": 1.326
       },
       "hfId": null,
       "mode": null,
@@ -6210,8 +6321,8 @@
         "price_1m_output_tokens": 0.4
       },
       "speed": {
-        "tps": 92.261,
-        "ttft": 0.567
+        "tps": 90.106,
+        "ttft": 0.575
       },
       "hfId": "NousResearch/Hermes-4-70B",
       "mode": "Non-reasoning",
@@ -6321,8 +6432,8 @@
         "price_1m_output_tokens": 3
       },
       "speed": {
-        "tps": 37.946,
-        "ttft": 0.763
+        "tps": 36.404,
+        "ttft": 0.799
       },
       "hfId": "NousResearch/Hermes-4-405B",
       "mode": "Non-reasoning",
@@ -6358,7 +6469,7 @@
         "price_1m_output_tokens": 0.4
       },
       "speed": {
-        "tps": 88.861,
+        "tps": 88.193,
         "ttft": 0.596
       },
       "hfId": "NousResearch/Hermes-4-70B",
@@ -6395,8 +6506,8 @@
         "price_1m_output_tokens": 3
       },
       "speed": {
-        "tps": 38.809,
-        "ttft": 0.858
+        "tps": 36.649,
+        "ttft": 0.867
       },
       "hfId": "NousResearch/Hermes-4-405B",
       "mode": "Reasoning",
@@ -6765,8 +6876,8 @@
         "price_1m_output_tokens": 0.87
       },
       "speed": {
-        "tps": 36.365,
-        "ttft": 4.626
+        "tps": 36.914,
+        "ttft": 5.297
       },
       "hfId": "XiaomiMiMo/MiMo-V2.5-Pro",
       "mode": "Non-reasoning",
@@ -6840,7 +6951,7 @@
       },
       "speed": {
         "tps": 64.089,
-        "ttft": 3.034
+        "ttft": 2.504
       },
       "hfId": "XiaomiMiMo/MiMo-V2.5",
       "mode": null,
@@ -6876,8 +6987,8 @@
         "price_1m_output_tokens": 0.87
       },
       "speed": {
-        "tps": 45.83,
-        "ttft": 3.096
+        "tps": 43.146,
+        "ttft": 3.97
       },
       "hfId": "XiaomiMiMo/MiMo-V2.5-Pro",
       "mode": null,
@@ -7172,8 +7283,8 @@
         "price_1m_output_tokens": 0.14
       },
       "speed": {
-        "tps": 366.171,
-        "ttft": 0.659
+        "tps": 367.106,
+        "ttft": 0.633
       },
       "hfId": "MultiverseComputingCAI/HyperNova-60B-2605",
       "mode": null,
@@ -7246,8 +7357,8 @@
         "price_1m_output_tokens": 0.554
       },
       "speed": {
-        "tps": 75.82,
-        "ttft": 1.805
+        "tps": 69.1,
+        "ttft": 1.813
       },
       "hfId": "tencent/Hy3-preview",
       "mode": null,
@@ -7283,8 +7394,8 @@
         "price_1m_output_tokens": 1.2
       },
       "speed": {
-        "tps": 106.475,
-        "ttft": 1.132
+        "tps": 104.459,
+        "ttft": 1.127
       },
       "hfId": null,
       "mode": null,
@@ -7690,7 +7801,7 @@
         "price_1m_output_tokens": 2.95
       },
       "speed": {
-        "tps": 43.505,
+        "tps": 42.275,
         "ttft": 2.078
       },
       "hfId": null,
@@ -8023,8 +8134,8 @@
         "price_1m_output_tokens": 0.875
       },
       "speed": {
-        "tps": 179.448,
-        "ttft": 0.672
+        "tps": 173.627,
+        "ttft": 0.596
       },
       "hfId": "arcee-ai/Trinity-Large-Thinking",
       "mode": null,
@@ -8208,8 +8319,8 @@
         "price_1m_output_tokens": 2.5
       },
       "speed": {
-        "tps": 133.088,
-        "ttft": 0.857
+        "tps": 142.268,
+        "ttft": 0.84
       },
       "hfId": "nex-agi/Nex-N2-Pro",
       "mode": null,
@@ -8245,8 +8356,8 @@
         "price_1m_output_tokens": 4.05
       },
       "speed": {
-        "tps": 48.273,
-        "ttft": 2.561
+        "tps": 50.619,
+        "ttft": 2.57
       },
       "hfId": "thinkingmachines/Inkling",
       "mode": "xhigh",
@@ -8282,8 +8393,8 @@
         "price_1m_output_tokens": 1.2
       },
       "speed": {
-        "tps": 131.249,
-        "ttft": 1.753
+        "tps": 115.492,
+        "ttft": 1.873
       },
       "hfId": "thinkingmachines/Inkling-Small",
       "mode": null,
@@ -8393,8 +8504,8 @@
         "price_1m_output_tokens": 4.4
       },
       "speed": {
-        "tps": 71.665,
-        "ttft": 1.054
+        "tps": 68.945,
+        "ttft": 1.075
       },
       "hfId": "zai-org/GLM-5.2",
       "mode": "max",
@@ -8430,8 +8541,8 @@
         "price_1m_output_tokens": 4.4
       },
       "speed": {
-        "tps": 120.008,
-        "ttft": 1.416
+        "tps": 114.151,
+        "ttft": 1.47
       },
       "hfId": "zai-org/GLM-5.2",
       "mode": "Non-reasoning",
@@ -8445,8 +8556,8 @@
       "creatorSlug": "zai",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 321323031390,
+        "active": 13619953664
       },
       "paramsUnknown": false,
       "license": null,
@@ -8467,10 +8578,10 @@
         "price_1m_output_tokens": 4.4
       },
       "speed": {
-        "tps": 79.936,
-        "ttft": 1.511
+        "tps": 80.649,
+        "ttft": 2.157
       },
-      "hfId": null,
+      "hfId": "zai-org/GLM-5.3-Flash",
       "mode": "max",
       "releaseDate": "2026-08-18"
     },
@@ -8504,8 +8615,8 @@
         "price_1m_output_tokens": 0
       },
       "speed": {
-        "tps": 27.763,
-        "ttft": 0.394
+        "tps": 29.234,
+        "ttft": 0.328
       },
       "hfId": null,
       "mode": null,
@@ -8541,8 +8652,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 70.721,
-        "ttft": 0.336
+        "tps": 72.055,
+        "ttft": 0.281
       },
       "hfId": null,
       "mode": null,
@@ -8578,8 +8689,8 @@
         "price_1m_output_tokens": 0
       },
       "speed": {
-        "tps": 245.953,
-        "ttft": 0.126
+        "tps": 244.356,
+        "ttft": 0.137
       },
       "hfId": null,
       "mode": null,
@@ -8615,8 +8726,8 @@
         "price_1m_output_tokens": 0
       },
       "speed": {
-        "tps": 131.689,
-        "ttft": 0.316
+        "tps": 131.419,
+        "ttft": 0.29
       },
       "hfId": null,
       "mode": null,
@@ -8800,8 +8911,8 @@
         "price_1m_output_tokens": 4.8
       },
       "speed": {
-        "tps": 97.905,
-        "ttft": 1.188
+        "tps": 118.481,
+        "ttft": 1.153
       },
       "hfId": null,
       "mode": null,
@@ -8837,8 +8948,8 @@
         "price_1m_output_tokens": 3.6
       },
       "speed": {
-        "tps": 56.006,
-        "ttft": 1.465
+        "tps": 54.508,
+        "ttft": 1.526
       },
       "hfId": "Qwen/Qwen3.6-27B",
       "mode": "Non-reasoning",
@@ -8874,8 +8985,8 @@
         "price_1m_output_tokens": 2.25
       },
       "speed": {
-        "tps": 143.609,
-        "ttft": 1.03
+        "tps": 149.98,
+        "ttft": 1.092
       },
       "hfId": "Qwen/Qwen3.6-35B-A3B",
       "mode": "Non-reasoning",
@@ -8911,8 +9022,8 @@
         "price_1m_output_tokens": 3
       },
       "speed": {
-        "tps": 58.222,
-        "ttft": 1.109
+        "tps": 56.66,
+        "ttft": 1.123
       },
       "hfId": "Qwen/Qwen3.8-27B",
       "mode": "low",
@@ -8948,8 +9059,8 @@
         "price_1m_output_tokens": 2.25
       },
       "speed": {
-        "tps": 137.137,
-        "ttft": 1.032
+        "tps": 137.613,
+        "ttft": 1.017
       },
       "hfId": "Qwen/Qwen3.6-35B-A3B",
       "mode": "Reasoning",
@@ -8986,7 +9097,7 @@
       },
       "speed": {
         "tps": 55.233,
-        "ttft": 1.37
+        "ttft": 1.466
       },
       "hfId": "Qwen/Qwen3.6-27B",
       "mode": "Reasoning",
@@ -9022,8 +9133,8 @@
         "price_1m_output_tokens": 1.2
       },
       "speed": {
-        "tps": 188.08,
-        "ttft": 1.006
+        "tps": 180.586,
+        "ttft": 1.005
       },
       "hfId": null,
       "mode": null,
@@ -9059,7 +9170,7 @@
         "price_1m_output_tokens": 3.2
       },
       "speed": {
-        "tps": 136.666,
+        "tps": 138.298,
         "ttft": 1.004
       },
       "hfId": "Qwen/Qwen3.5-122B-A10B",
@@ -9096,8 +9207,8 @@
         "price_1m_output_tokens": 3.6
       },
       "speed": {
-        "tps": 75.973,
-        "ttft": 1.416
+        "tps": 81.729,
+        "ttft": 1.732
       },
       "hfId": "Qwen/Qwen3.5-397B-A17B",
       "mode": "Reasoning",
@@ -9170,8 +9281,8 @@
         "price_1m_output_tokens": 1.2
       },
       "speed": {
-        "tps": 128.567,
-        "ttft": 0.853
+        "tps": 123.575,
+        "ttft": 0.86
       },
       "hfId": "Qwen/Qwen3-Coder-Next",
       "mode": null,
@@ -9207,8 +9318,8 @@
         "price_1m_output_tokens": 1.2
       },
       "speed": {
-        "tps": 202.782,
-        "ttft": 1.137
+        "tps": 192.422,
+        "ttft": 1.107
       },
       "hfId": "Qwen/Qwen3-Next-80B-A3B-Instruct",
       "mode": "Reasoning",
@@ -9245,7 +9356,7 @@
       },
       "speed": {
         "tps": 84.214,
-        "ttft": 1.166
+        "ttft": 1.179
       },
       "hfId": "Qwen/Qwen3.5-9B",
       "mode": "Reasoning",
@@ -9281,7 +9392,7 @@
         "price_1m_output_tokens": 6
       },
       "speed": {
-        "tps": 23.643,
+        "tps": 23.769,
         "ttft": 1.709
       },
       "hfId": "Qwen/Qwen3.8-2.4T-A95B",
@@ -9318,7 +9429,7 @@
         "price_1m_output_tokens": 3.6
       },
       "speed": {
-        "tps": 69.557,
+        "tps": 77.369,
         "ttft": 1.486
       },
       "hfId": "Qwen/Qwen3.5-397B-A17B",
@@ -9355,8 +9466,8 @@
         "price_1m_output_tokens": 1.6
       },
       "speed": {
-        "tps": 55.395,
-        "ttft": 1.385
+        "tps": 55.483,
+        "ttft": 1.25
       },
       "hfId": null,
       "mode": null,
@@ -9392,8 +9503,8 @@
         "price_1m_output_tokens": 3
       },
       "speed": {
-        "tps": 51.591,
-        "ttft": 1.267
+        "tps": 50.456,
+        "ttft": 1.261
       },
       "hfId": "Qwen/Qwen3.8-27B",
       "mode": "xhigh",
@@ -9429,8 +9540,8 @@
         "price_1m_output_tokens": 0.97
       },
       "speed": {
-        "tps": 109.584,
-        "ttft": 0.902
+        "tps": 109.424,
+        "ttft": 0.903
       },
       "hfId": "Qwen/Qwen3-Omni-30B-A3B-Instruct",
       "mode": "Reasoning",
@@ -9466,7 +9577,7 @@
         "price_1m_output_tokens": 2
       },
       "speed": {
-        "tps": 177.776,
+        "tps": 170.643,
         "ttft": 1.191
       },
       "hfId": "Qwen/Qwen3.5-35B-A3B",
@@ -9503,8 +9614,8 @@
         "price_1m_output_tokens": 3.2
       },
       "speed": {
-        "tps": 146.831,
-        "ttft": 0.99
+        "tps": 149.313,
+        "ttft": 0.987
       },
       "hfId": "Qwen/Qwen3.5-122B-A10B",
       "mode": "Non-reasoning",
@@ -9540,8 +9651,8 @@
         "price_1m_output_tokens": 0.97
       },
       "speed": {
-        "tps": 109.162,
-        "ttft": 0.872
+        "tps": 108.72,
+        "ttft": 0.904
       },
       "hfId": "Qwen/Qwen3-Omni-30B-A3B-Instruct",
       "mode": null,
@@ -9577,8 +9688,8 @@
         "price_1m_output_tokens": 0.15
       },
       "speed": {
-        "tps": 23.6,
-        "ttft": 0.582
+        "tps": 30.728,
+        "ttft": 0.422
       },
       "hfId": "Qwen/Qwen3.5-4B",
       "mode": "Reasoning",
@@ -9614,8 +9725,8 @@
         "price_1m_output_tokens": 3
       },
       "speed": {
-        "tps": 57.448,
-        "ttft": 1.247
+        "tps": 54.389,
+        "ttft": 1.23
       },
       "hfId": "Qwen/Qwen3.8-27B",
       "mode": "Non-reasoning",
@@ -9651,8 +9762,8 @@
         "price_1m_output_tokens": 0.25
       },
       "speed": {
-        "tps": 92.28,
-        "ttft": 0.484
+        "tps": 96.828,
+        "ttft": 0.438
       },
       "hfId": "Qwen/Qwen3.5-9B",
       "mode": "Non-reasoning",
@@ -9762,8 +9873,8 @@
         "price_1m_output_tokens": 0.15
       },
       "speed": {
-        "tps": 23.578,
-        "ttft": 0.508
+        "tps": 34.208,
+        "ttft": 0.429
       },
       "hfId": "Qwen/Qwen3.5-4B",
       "mode": "Non-reasoning",
@@ -9799,8 +9910,8 @@
         "price_1m_output_tokens": 6
       },
       "speed": {
-        "tps": 24.237,
-        "ttft": 1.751
+        "tps": 23.635,
+        "ttft": 1.752
       },
       "hfId": null,
       "mode": null,
@@ -9836,8 +9947,8 @@
         "price_1m_output_tokens": 3
       },
       "speed": {
-        "tps": 58.604,
-        "ttft": 1.246
+        "tps": 54.107,
+        "ttft": 1.189
       },
       "hfId": "Qwen/Qwen3.8-27B",
       "mode": "medium",
@@ -9910,8 +10021,8 @@
         "price_1m_output_tokens": 0.8
       },
       "speed": {
-        "tps": 231.541,
-        "ttft": 0.927
+        "tps": 234.348,
+        "ttft": 1.066
       },
       "hfId": null,
       "mode": null,
@@ -9984,8 +10095,8 @@
         "price_1m_output_tokens": 0.22
       },
       "speed": {
-        "tps": 404.067,
-        "ttft": 1.724
+        "tps": 408.376,
+        "ttft": 1.832
       },
       "hfId": "inclusionAI/Ling-3.0-flash",
       "mode": null,
@@ -10021,8 +10132,8 @@
         "price_1m_output_tokens": 0
       },
       "speed": {
-        "tps": 205.121,
-        "ttft": 1.915
+        "tps": 201.396,
+        "ttft": 1.91
       },
       "hfId": "inclusionAI/Ling-3.0-tiny",
       "mode": null,
@@ -10058,8 +10169,8 @@
         "price_1m_output_tokens": 2.5
       },
       "speed": {
-        "tps": 129.677,
-        "ttft": 2.009
+        "tps": 128.936,
+        "ttft": 2.136
       },
       "hfId": "inclusionAI/Ring-2.6-1T",
       "mode": null,
@@ -10132,8 +10243,8 @@
         "price_1m_output_tokens": 0.9
       },
       "speed": {
-        "tps": 134.327,
-        "ttft": 1.667
+        "tps": 133.922,
+        "ttft": 1.733
       },
       "hfId": null,
       "mode": null,
@@ -10170,7 +10281,7 @@
       },
       "speed": {
         "tps": 1980.482,
-        "ttft": 0.489
+        "ttft": 0.49
       },
       "hfId": null,
       "mode": null,
@@ -22806,10 +22917,7 @@
         "4bbceacb-cf47-464b-b60f-e1d1fe016d67",
         "7261504e-503c-4a66-a9d3-a3272cdf9ad6",
         "fe4c0848-e284-4e52-a79d-cdc28392f1a9",
-        "b01dee41-c62b-48ed-8d16-984adc405e5c",
-        "f7a4ea75-e548-4069-80d4-9be8bc7c009b",
-        "83173329-c09a-41f1-a028-a282a5f908d7",
-        "8df710d3-9dae-4498-9b4e-9818238e6f31",
+        "cd684ea4-b475-4269-b001-d469d06d8a7a",
         "f7d2fc3e-1f7b-405f-818c-07952a4af78f"
       ],
       "total": [
@@ -22821,9 +22929,7 @@
         "7eaf926c-5f39-4e58-ae50-c38b5fc630fc",
         "6e1b44ff-c227-496b-aef4-19b70cd18c76",
         "b01dee41-c62b-48ed-8d16-984adc405e5c",
-        "f7a4ea75-e548-4069-80d4-9be8bc7c009b",
-        "83173329-c09a-41f1-a028-a282a5f908d7",
-        "8df710d3-9dae-4498-9b4e-9818238e6f31",
+        "cd684ea4-b475-4269-b001-d469d06d8a7a",
         "f7d2fc3e-1f7b-405f-818c-07952a4af78f"
       ]
     },
@@ -22837,7 +22943,7 @@
         "4bbceacb-cf47-464b-b60f-e1d1fe016d67",
         "7261504e-503c-4a66-a9d3-a3272cdf9ad6",
         "fe4c0848-e284-4e52-a79d-cdc28392f1a9",
-        "8df710d3-9dae-4498-9b4e-9818238e6f31",
+        "cd684ea4-b475-4269-b001-d469d06d8a7a",
         "f7d2fc3e-1f7b-405f-818c-07952a4af78f"
       ],
       "total": [
@@ -22845,6 +22951,7 @@
         "5d4acc80-7a88-4e84-bfe7-99071b84e6a4",
         "e1bfc488-5f48-4d42-abf6-7f3c53d79f9c",
         "2ffa7571-fa78-453a-b589-9aa3fac702d2",
+        "0c64b008-20c3-408d-bd68-15136df8cd2c",
         "651ef7ae-9a8f-477e-9c8e-460aa156ba02",
         "7eaf926c-5f39-4e58-ae50-c38b5fc630fc",
         "2d28a13a-096e-475a-beb8-26bbd1c7d51c",
@@ -22852,7 +22959,7 @@
         "6e1b44ff-c227-496b-aef4-19b70cd18c76",
         "b01dee41-c62b-48ed-8d16-984adc405e5c",
         "fe4c0848-e284-4e52-a79d-cdc28392f1a9",
-        "8df710d3-9dae-4498-9b4e-9818238e6f31",
+        "cd684ea4-b475-4269-b001-d469d06d8a7a",
         "f7d2fc3e-1f7b-405f-818c-07952a4af78f"
       ]
     },
@@ -22872,6 +22979,7 @@
         "4bbceacb-cf47-464b-b60f-e1d1fe016d67",
         "7261504e-503c-4a66-a9d3-a3272cdf9ad6",
         "fe4c0848-e284-4e52-a79d-cdc28392f1a9",
+        "cd684ea4-b475-4269-b001-d469d06d8a7a",
         "277f939a-985b-4b37-859d-b3eabc7c0b26",
         "8df710d3-9dae-4498-9b4e-9818238e6f31"
       ],
@@ -22883,9 +22991,11 @@
         "5a088cde-18e2-4dfa-98dd-d283e1c19654",
         "d734e2ce-5cf8-467f-8148-586d02671333",
         "e1bfc488-5f48-4d42-abf6-7f3c53d79f9c",
+        "0c64b008-20c3-408d-bd68-15136df8cd2c",
         "7d73161f-002f-4c9c-b4f8-6c4d91f2ba8e",
         "b01dee41-c62b-48ed-8d16-984adc405e5c",
         "fe4c0848-e284-4e52-a79d-cdc28392f1a9",
+        "cd684ea4-b475-4269-b001-d469d06d8a7a",
         "277f939a-985b-4b37-859d-b3eabc7c0b26",
         "8df710d3-9dae-4498-9b4e-9818238e6f31"
       ]
@@ -22904,7 +23014,7 @@
         "4bbceacb-cf47-464b-b60f-e1d1fe016d67",
         "7261504e-503c-4a66-a9d3-a3272cdf9ad6",
         "a3043d4f-9b92-4261-8ea2-a2d391b09cf4",
-        "f7a4ea75-e548-4069-80d4-9be8bc7c009b",
+        "cd684ea4-b475-4269-b001-d469d06d8a7a",
         "8df710d3-9dae-4498-9b4e-9818238e6f31",
         "f7d2fc3e-1f7b-405f-818c-07952a4af78f"
       ],
@@ -22921,7 +23031,7 @@
         "b01dee41-c62b-48ed-8d16-984adc405e5c",
         "fe4c0848-e284-4e52-a79d-cdc28392f1a9",
         "a3043d4f-9b92-4261-8ea2-a2d391b09cf4",
-        "f7a4ea75-e548-4069-80d4-9be8bc7c009b",
+        "cd684ea4-b475-4269-b001-d469d06d8a7a",
         "8df710d3-9dae-4498-9b4e-9818238e6f31",
         "f7d2fc3e-1f7b-405f-818c-07952a4af78f"
       ]
@@ -22935,7 +23045,7 @@
         "46d8315e-1630-463f-ab62-84185fa0faab",
         "2236df45-0699-40d1-b5cc-69ee345d2257",
         "4bbceacb-cf47-464b-b60f-e1d1fe016d67",
-        "3b5ba264-ad25-429b-a460-4d8698205f0d",
+        "19496b81-9f41-4214-a77a-1df803b3c5ae",
         "277f939a-985b-4b37-859d-b3eabc7c0b26",
         "f7d2fc3e-1f7b-405f-818c-07952a4af78f"
       ],
@@ -22990,8 +23100,7 @@
         "4bbceacb-cf47-464b-b60f-e1d1fe016d67",
         "7261504e-503c-4a66-a9d3-a3272cdf9ad6",
         "fe4c0848-e284-4e52-a79d-cdc28392f1a9",
-        "00f1248e-78e3-4230-8dc8-5e13ba8645e2",
-        "0de67206-4d36-4d10-b8f6-cf37fa747a03",
+        "cd684ea4-b475-4269-b001-d469d06d8a7a",
         "f7d2fc3e-1f7b-405f-818c-07952a4af78f"
       ],
       "total": [
@@ -23002,8 +23111,9 @@
         "d734e2ce-5cf8-467f-8148-586d02671333",
         "e1bfc488-5f48-4d42-abf6-7f3c53d79f9c",
         "2ffa7571-fa78-453a-b589-9aa3fac702d2",
+        "0c64b008-20c3-408d-bd68-15136df8cd2c",
         "7d73161f-002f-4c9c-b4f8-6c4d91f2ba8e",
-        "20da3b31-fc0a-4359-abec-d59367bf1d9f",
+        "adfae555-f489-4f3e-9064-c6b7fcdd0783",
         "acad0665-9457-4531-abd5-b59efd7a89ea",
         "feb02d3b-ff8d-4ed4-b165-13f8d4a7192c",
         "6e1b44ff-c227-496b-aef4-19b70cd18c76",
@@ -23011,8 +23121,7 @@
         "4bbceacb-cf47-464b-b60f-e1d1fe016d67",
         "7261504e-503c-4a66-a9d3-a3272cdf9ad6",
         "fe4c0848-e284-4e52-a79d-cdc28392f1a9",
-        "f7a4ea75-e548-4069-80d4-9be8bc7c009b",
-        "0de67206-4d36-4d10-b8f6-cf37fa747a03",
+        "cd684ea4-b475-4269-b001-d469d06d8a7a",
         "f7d2fc3e-1f7b-405f-818c-07952a4af78f"
       ]
     },
@@ -23178,6 +23287,10 @@
     "qwen3-vl-8b-reasoning": 5027785184,
     "step-3-7-flash": 122090426976,
     "step-3-vl-10b": 5027780256,
-    "tri-21b-think-preview": null
+    "tri-21b-think-preview": null,
+    "glm-5-3-flash": 188673828288,
+    "granite-4-2-3b": 2317126048,
+    "granite-4-2-8b": 5539283360,
+    "glm-5-3": 188673828288
   }
 }

@@ -572,6 +572,12 @@
     "repo": "bartowski/Qwen3.8-27B-GGUF",
     "fetchedAt": "2026-08-18T04:43:36.763Z"
   },
+  "qwen3-8-flash-next": {
+    "bytes": 119150722944,
+    "source": "hf",
+    "repo": "orcarouter/Qwen3.8-Flash-Next-Uncensored-GGUF",
+    "fetchedAt": "2026-08-28T16:32:19.754Z"
+  },
   "qwen3-8b-instruct-reasoning": {
     "bytes": 5027784224,
     "source": "hf",

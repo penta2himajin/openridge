@@ -42,6 +42,11 @@
     "source": "not-found",
     "fetchedAt": "2026-07-23T07:34:00.128Z"
   },
+  "deepseek-v4-flash-vision": {
+    "bytes": null,
+    "source": "not-found",
+    "fetchedAt": "2026-09-01T09:20:25.366Z"
+  },
   "deepseek-v4-pro": {
     "bytes": null,
     "source": "not-found",

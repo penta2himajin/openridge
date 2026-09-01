@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-30T09:53:46.676Z",
+  "generatedAt": "2026-09-01T09:20:25.567Z",
   "models": [
     {
       "id": "19496b81-9f41-4214-a77a-1df803b3c5ae",
@@ -3339,8 +3339,8 @@
       "creatorSlug": "deepseek",
       "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 304646824126,
+        "active": 10990125056
       },
       "paramsUnknown": false,
       "license": null,
@@ -3364,7 +3364,7 @@
         "tps": 114.639,
         "ttft": 0.968
       },
-      "hfId": null,
+      "hfId": "deepseek-ai/DeepSeek-V4-Flash-Vision-Exp",
       "mode": "Reasoning, Max Effort",
       "releaseDate": "2026-08-21"
     },
@@ -23146,7 +23146,7 @@
         "c8a79180-7d16-4474-8701-9a77c0baa56a",
         "46d8315e-1630-463f-ab62-84185fa0faab",
         "9ac3908c-9eb2-44db-8c01-3ec7da6fc2ae",
-        "19496b81-9f41-4214-a77a-1df803b3c5ae",
+        "7707a46f-895f-4247-b7a8-ddab87c9a11d",
         "277f939a-985b-4b37-859d-b3eabc7c0b26",
         "f7d2fc3e-1f7b-405f-818c-07952a4af78f"
       ],
@@ -23394,6 +23394,7 @@
     "qwen3-vl-8b-reasoning": 5027785184,
     "step-3-7-flash": 122090426976,
     "step-3-vl-10b": 5027780256,
-    "tri-21b-think-preview": null
+    "tri-21b-think-preview": null,
+    "deepseek-v4-flash-vision": null
   }
 }

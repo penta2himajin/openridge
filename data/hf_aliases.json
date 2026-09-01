@@ -44,7 +44,7 @@
   "deepseek-v4-flash-0420": "deepseek-ai/DeepSeek-V4-Flash",
   "deepseek-v4-flash-0420-high": "deepseek-ai/DeepSeek-V4-Flash",
   "deepseek-v4-flash-non-reasoning": "deepseek-ai/DeepSeek-V4-Flash",
-  "deepseek-v4-flash-vision": null,
+  "deepseek-v4-flash-vision": "deepseek-ai/DeepSeek-V4-Flash-Vision-Exp",
   "deepseek-v4-pro": "deepseek-ai/DeepSeek-V4-Pro-0813",
   "deepseek-v4-pro-0424": "deepseek-ai/DeepSeek-V4-Pro",
   "deepseek-v4-pro-0424-high": "deepseek-ai/DeepSeek-V4-Pro",

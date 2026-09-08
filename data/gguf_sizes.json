@@ -340,6 +340,12 @@
     "repo": "mradermacher/Huihui-MiniCPM5-1B-abliterated-i1-GGUF",
     "fetchedAt": "2026-07-23T07:34:01.532Z"
   },
+  "minicpm5-2b": {
+    "bytes": 1561318368,
+    "source": "hf",
+    "repo": "openbmb/MiniCPM5-2B-GGUF",
+    "fetchedAt": "2026-09-08T08:48:59.898Z"
+  },
   "minimax-m2": {
     "bytes": 138342384096,
     "source": "hf",

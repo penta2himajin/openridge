@@ -196,6 +196,7 @@
   "minicpm-v4-6-1-3b": "openbmb/MiniCPM-V-4.6",
   "minicpm5-1b": "openbmb/MiniCPM5-1B",
   "minicpm5-1b-non-reasoning": "openbmb/MiniCPM5-1B",
+  "minicpm5-2b": "openbmb/MiniCPM5-2B",
   "minimax-m1-40k": "MiniMaxAI/MiniMax-M1-40k",
   "minimax-m1-80k": "MiniMaxAI/MiniMax-M1-80k",
   "minimax-m2-1": "MiniMaxAI/MiniMax-M2.1",

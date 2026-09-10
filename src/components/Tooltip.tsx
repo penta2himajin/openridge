@@ -6,11 +6,11 @@
 import { createMemo, Show } from "solid-js";
 import type { AppState } from "../lib/state";
 import type { ModelsSnapshot } from "../lib/models";
-import { METRICS_BY_ID } from "../lib/metrics";
 import { formatBytes, formatParams, formatScore } from "../lib/format";
 import { estimateQ4KMBytes } from "../lib/quant";
 import { useIsMobile } from "../lib/breakpoint";
 import { formatClosedLabel } from "../lib/model-names";
+import { createSelectedMetricView } from "../lib/tooltip-model";
 import {
   findClosedNeighbours,
   type Neighbours,
@@ -66,6 +66,10 @@ export default function Tooltip(props: Props) {
     if (measured != null) return { bytes: measured, estimate: null };
     return { bytes: null, estimate: estimateQ4KMBytes(mod.params.total) };
   });
+
+  // createMemo, not a plain const inside the <Show> render-prop below: that
+  // shape is what caused the bug this guards against (see tooltip-model.ts).
+  const scoreView = createSelectedMetricView(model, props.state.metric);
 
   const neighbours = createMemo<Neighbours | null>(() => {
     const m = model();
@@ -129,9 +133,6 @@ export default function Tooltip(props: Props) {
   return (
     <Show when={model()}>
       {(m) => {
-        const metric = props.state.metric();
-        const info = METRICS_BY_ID.get(metric)!;
-        const primary = m().scores[metric];
         return (
           <div
             class="z-30 rounded-lg border border-fg-subtle bg-bg-elevated/95 backdrop-blur-md p-3 pointer-events-none shadow-lg"
@@ -183,10 +184,13 @@ export default function Tooltip(props: Props) {
 
             <div class="grid grid-cols-2 gap-y-1 text-xs">
               <span class="font-mono uppercase tracking-wide text-fg-muted truncate">
-                {info.label}
+                {scoreView()?.info.label}
               </span>
               <span class="font-mono text-fg-default text-right">
-                {formatScore(primary, info.maxValue)}
+                {formatScore(
+                  scoreView()?.primary,
+                  scoreView()?.info.maxValue ?? 100,
+                )}
               </span>
             </div>
 
@@ -198,13 +202,31 @@ export default function Tooltip(props: Props) {
                     Closest closed
                   </div>
                   <Show when={n().tie}>
-                    {(t) => <NeighbourRow label="≈" entry={t()} info={info} />}
+                    {(t) => (
+                      <NeighbourRow
+                        label="≈"
+                        entry={t()}
+                        info={scoreView()!.info}
+                      />
+                    )}
                   </Show>
                   <Show when={!n().tie && n().above}>
-                    {(a) => <NeighbourRow label="↑" entry={a()} info={info} />}
+                    {(a) => (
+                      <NeighbourRow
+                        label="↑"
+                        entry={a()}
+                        info={scoreView()!.info}
+                      />
+                    )}
                   </Show>
                   <Show when={!n().tie && n().below}>
-                    {(b) => <NeighbourRow label="↓" entry={b()} info={info} />}
+                    {(b) => (
+                      <NeighbourRow
+                        label="↓"
+                        entry={b()}
+                        info={scoreView()!.info}
+                      />
+                    )}
                   </Show>
                 </>
               )}

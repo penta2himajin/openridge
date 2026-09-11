@@ -23,37 +23,39 @@ Headers: x-api-key: <KEY>
 | 作成者   | `model_creator.{id, name, slug}`                                                   | モデル族でグルーピング    |
 | ベンチ   | `evaluations.artificial_analysis_intelligence_index`                               | **Y軸デフォルト**         |
 | ベンチ   | `evaluations.artificial_analysis_coding_index`                                     | Y軸切替                   |
-| 個別     | `evaluations.{gpqa, hle, lcr, ifbench, scicode, tau2, terminalbench_hard}`         | Y軸切替                   |
+| 個別     | `evaluations.{gpqa, hle, lcr, scicode, tau_banking, terminalbench_v2_1}`           | Y軸切替                   |
 | 速度     | `median_output_tokens_per_second` / `median_time_to_first_token_seconds`           | 将来拡張用に保持          |
 | 価格     | `pricing.{price_1m_blended_3_to_1, price_1m_input_tokens, price_1m_output_tokens}` | 将来拡張用に保持          |
 
-### Tracked evaluations（2026-07-23 監査）
+### Tracked evaluations（2026-09-11 再監査、初回監査 2026-07-23）
 
-`evaluations` オブジェクトには実際には17キーが存在するが（`aime`, `aime_25`, `artificial_analysis_math_index`, `mmlu_pro`, `livecodebench`, `math_500`, `tau_banking`, `terminalbench_v2_1` を含む）、AA本体の Intelligence Index v4.1 移行に伴い一部が新モデルへの採点対象から外れている。`AA_API_KEY` で全579件（オープン339件）を取得し、2026年以降リリースのオープンモデル113件におけるカバレッジを確認した結果:
+`evaluations` オブジェクトのキー構成自体は初回監査から変わっていない（17キー）。一方でAAサイトの表示上は Intelligence Index が **v4.3** に上がり、構成ベンチマークも総入れ替えされている（Agents 30%: AA-Briefcase 15% / GDPval-AA v2 10% / AutomationBench-AA 5%、Coding 20%: Terminal-Bench v4.0 10% / SciCode 10%、General 30%: AA-Omniscience 15% / GDP.pdf 10% / AA-LCR v1.1 5%、Scientific Reasoning 20%: HLE 10% / CritPt 10% の4カテゴリ加重平均。[methodology](https://artificialanalysis.ai/methodology/intelligence-benchmarking)参照）。**この新構成のサブ指標はこの API エンドポイントには一切露出していない** — 646件全件の `evaluations` を走査したが AA-Briefcase・GDPval-AA v2・AutomationBench-AA・AA-Omniscience・GDP.pdf・CritPt はいずれも0件だった。Free ティアで拾えるのは相変わらず旧来の17キーのみで、Pro限定の可能性が高い（未確認）。サイトの見た目とAPIの実データにこの乖離があることを踏まえて読むこと。
 
-| キー                                     | オープン全体  | 2026年以降リリース | 判定                                                                        |
-| ---------------------------------------- | ------------- | ------------------ | --------------------------------------------------------------------------- |
-| `artificial_analysis_intelligence_index` | 337/339 (99%) | 112/113 (99%)      | 採用                                                                        |
-| `artificial_analysis_coding_index`       | 102/339 (30%) | 64/113 (57%)       | 採用                                                                        |
-| `gpqa`                                   | 328/339 (97%) | 112/113 (99%)      | 採用                                                                        |
-| `hle`                                    | 327/339 (96%) | 112/113 (99%)      | 採用                                                                        |
-| `scicode`                                | 326/339 (96%) | 112/113 (99%)      | 採用                                                                        |
-| `lcr` (AA-LCR)                           | 298/339 (88%) | 112/113 (99%)      | 採用                                                                        |
-| `ifbench` (IFBench)                      | 292/339 (86%) | 107/113 (95%)      | 採用                                                                        |
-| `tau2` (τ²-Bench)                        | 284/339 (84%) | 106/113 (94%)      | 採用                                                                        |
-| `terminalbench_hard`                     | 277/339 (82%) | 105/113 (93%)      | 採用                                                                        |
-| `tau_banking` (τ³-Banking)               | 102/339 (30%) | 64/113 (57%)       | 見送り（`tau2`/`coding_index`と同一サブセットで動いておりカバレッジが弱い） |
-| `terminalbench_v2_1`                     | 102/339 (30%) | 64/113 (57%)       | 見送り（同上）                                                              |
-| `mmlu_pro`                               | 210/339 (62%) | 1/113 (1%)         | **不採用（停止）** — 最新採点 2026-01-04                                    |
-| `livecodebench`                          | 208/339 (61%) | 1/113 (1%)         | **不採用（停止）** — 最新採点 2026-01-04                                    |
-| `artificial_analysis_math_index`         | 177/339 (52%) | 1/113 (1%)         | **不採用（停止）** — 最新採点 2026-01-04                                    |
-| `aime_25`                                | 177/339 (52%) | 1/113 (1%)         | **不採用（停止）** — 最新採点 2026-01-04                                    |
-| `math_500`                               | 120/339 (35%) | 4/113 (4%)         | **不採用（停止・小型モデル偏重）**                                          |
-| `aime`                                   | 108/339 (32%) | 0/113 (0%)         | **不採用（完全停止）** — 最新採点 2025-07-31（1年以上前）                   |
+`AA_API_KEY` で全646件（オープン379件）を取得し、直近90日にリリースされたオープンモデル47件（「2026年以降リリース」という区切りは今や年の大半を含んでしまうため、直近90日に区切り直した）におけるカバレッジを確認した結果:
 
-AA公式([methodology](https://artificialanalysis.ai/methodology/intelligence-benchmarking))によると、現行 Intelligence Index v4.1 は GDPval-AA v2 / τ³-Banking / Terminal-Bench v2.1 / SciCode / AA-LCR / AA-Omniscience / HLE / GPQA Diamond / CritPt で構成される。MMLU-Pro・LiveCodeBench・AIME・Math-500・AA Math Index は index から外れ新規モデルの採点も停止済み。IFBench はv4.1で index からは外れたが新モデルへの採点は継続中（AA公式リーダーボードページに明記）。
+| キー                                     | オープン全体  | 直近90日リリース | 判定                                                                             |
+| ---------------------------------------- | ------------- | ---------------- | -------------------------------------------------------------------------------- |
+| `artificial_analysis_intelligence_index` | 377/379 (99%) | 47/47 (100%)     | 採用                                                                             |
+| `artificial_analysis_coding_index`       | 144/379 (38%) | 46/47 (98%)      | 採用                                                                             |
+| `gpqa`                                   | 368/379 (97%) | 46/47 (98%)      | 採用                                                                             |
+| `hle`                                    | 366/379 (97%) | 47/47 (100%)     | 採用                                                                             |
+| `lcr` (AA-LCR)                           | 321/379 (85%) | 47/47 (100%)     | 採用                                                                             |
+| `scicode`                                | 96/379 (25%)  | 44/47 (94%)      | 採用（全体%の低下は分母膨張による見かけ上のもの。直近カバレッジは健在）          |
+| `tau_banking` (τ³-Banking)               | 118/379 (31%) | 44/47 (94%)      | **採用へ切替**（前回監査では見送り。直近90日で優勢に転じた）                     |
+| `terminalbench_v2_1`                     | 144/379 (38%) | 46/47 (98%)      | **採用へ切替**（サイト表示は「Terminal-Bench v4.0」。APIキー名は据え置き）       |
+| `ifbench` (IFBench)                      | 292/379 (77%) | 1/47 (2%)        | **不採用へ切替（新規停止）** — 前回監査時95%から急落、後継キーなし               |
+| `tau2` (τ²-Bench)                        | 284/379 (75%) | 1/47 (2%)        | **不採用へ切替（新規停止）** — 前回監査時94%から急落。`tau_banking`が後継        |
+| `terminalbench_hard`                     | 277/379 (73%) | 1/47 (2%)        | **不採用へ切替（新規停止）** — 前回監査時93%から急落。`terminalbench_v2_1`が後継 |
+| `mmlu_pro`                               | 212/379 (56%) | 1/47 (2%)        | 不採用（停止・継続）                                                             |
+| `livecodebench`                          | 208/379 (55%) | 0/47 (0%)        | 不採用（停止・継続）                                                             |
+| `artificial_analysis_math_index`         | 177/379 (47%) | 0/47 (0%)        | 不採用（停止・継続）                                                             |
+| `aime_25`                                | 177/379 (47%) | 0/47 (0%)        | 不採用（停止・継続）                                                             |
+| `math_500`                               | 111/379 (29%) | 0/47 (0%)        | 不採用（停止・継続）                                                             |
+| `aime`                                   | 108/379 (28%) | 0/47 (0%)        | 不採用（完全停止・継続）                                                         |
 
-**MATHカテゴリは廃止**。AAが現在アクティブに更新している純粋な数学ベンチマークが存在しないため（`docs/ui.md` §3 参照）。次回 AA が新しい数学評価を追加・復活させた場合はこの監査を更新して再検討する。
+**AGENTICカテゴリの中身が入れ替わった**: `tau2` → `tau_banking`、`terminalbench_hard` → `terminalbench_v2_1`。後者はAAサイト上「Terminal-Bench v4.0」と表示が変わっているが、APIの JSON キー名 `terminalbench_v2_1` 自体はリネームされていない（ベンチのバージョンだけが上がった）ので、表示ラベルとキー名の対応がずれている点に注意。`ifbench` は後継キーが見当たらず、そのまま不採用（KNOWLEDGE & REASONING カテゴリから除外）。
+
+**MATHカテゴリは廃止のまま**。AAが現在アクティブに更新している純粋な数学ベンチマークは今回の再監査でも見つからなかった。次回 AA が新しい数学評価を追加・復活させた場合はこの監査を更新して再検討する。
 
 ### 取得できないフィールド（要補完）
 

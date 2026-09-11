@@ -91,18 +91,17 @@ Index: [AA Intelligence Index ▾]
 │     GPQA Diamond                       │
 │     HLE                                │
 │     AA-LCR                             │
-│     IFBench                            │
 ├────────────────────────────────────────┤
 │  CODE                                  │
 │     SciCode                            │
 ├────────────────────────────────────────┤
 │  AGENTIC                               │
-│     τ²-Bench                           │
-│     Terminal-Bench Hard                │
+│     τ³-Banking                         │
+│     Terminal-Bench v4.0                │
 └────────────────────────────────────────┘
 ```
 
-Metric roster audited 2026-07-23 (see [data-sources.md §1](./data-sources.md#1-artificial-analysis-api) "Tracked evaluations"): AA Math Index / MMLU-Pro / LiveCodeBench / AIME / Math-500 were dropped after AA stopped scoring new open-weight releases on them; AA-LCR, IFBench, τ²-Bench and Terminal-Bench Hard replace them. The MATH category is retired — AA currently has no actively-maintained pure-math evaluation for open models. `AGENTIC` is new, covering multi-step tool-use / terminal-operation evaluations.
+Metric roster re-audited 2026-09-11 (initial audit 2026-07-23; see [data-sources.md §1](./data-sources.md#1-artificial-analysis-api) "Tracked evaluations"): AA Math Index / MMLU-Pro / LiveCodeBench / AIME / Math-500 remain dropped — no live open-model scoring since the last audit. IFBench, τ²-Bench and Terminal-Bench Hard — all part of the prior roster — collapsed from ~95% to ~2% coverage among open models released in the last 90 days and are dropped in turn. τ²-Bench and Terminal-Bench Hard are replaced by their apparent successors τ³-Banking and Terminal-Bench v4.0 (same `terminalbench_v2_1` API key as before — AA bumped the benchmark version without renaming the field), both now at 95%+ recent coverage. IFBench has no clear successor field and is dropped outright with nothing to replace it. The MATH category is retired — AA currently has no actively-maintained pure-math evaluation for open models. `AGENTIC` covers τ³-Banking and Terminal-Bench v4.0.
 
 ### 3.1 サイズ
 
@@ -124,7 +123,7 @@ transition: 80ms ease on background-color。
 ### 3.3 検索挙動
 
 - 入力中は **カテゴリヘッダを非表示** にしてフラット結果
-- Fuzzy match on `name + category`（"bench" で AA-LCR / IFBench / τ²-Bench / Terminal-Bench Hard が複数ヒット）
+- Fuzzy match on `name + category`（"bench" で Terminal-Bench v4.0 がヒット、"banking" で τ³-Banking がヒット）
 - ヒット数 0 の場合: "No benchmarks match." を `--fg-muted` で中央表示
 
 ### 3.4 キーボード

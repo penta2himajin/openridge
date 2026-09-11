@@ -64,10 +64,9 @@ const VALID_METRICS: MetricId[] = [
   "gpqa",
   "hle",
   "lcr",
-  "ifbench",
   "scicode",
-  "tau2",
-  "terminalbench_hard",
+  "tau_banking",
+  "terminalbench_v2_1",
 ];
 const VALID_VIEWS: XView[] = ["active", "total", "compare"];
 

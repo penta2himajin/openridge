@@ -26,7 +26,7 @@
     "bytes": 444736936512,
     "source": "hf",
     "repo": "vcruz305/DeepSeek-V4.1-Flash-GGUF",
-    "fetchedAt": "2026-09-11T08:45:23.845Z"
+    "fetchedAt": "2026-09-11T08:50:17.176Z"
   },
   "deepseek-v4-flash": {
     "bytes": null,
@@ -288,7 +288,7 @@
     "bytes": 79296042624,
     "source": "hf",
     "repo": "AtomicChat/Ling-3.0-flash-VL-GGUF",
-    "fetchedAt": "2026-09-11T08:45:24.192Z"
+    "fetchedAt": "2026-09-11T08:50:17.543Z"
   },
   "ling-3-0-tiny": {
     "bytes": 4823894880,

@@ -22,6 +22,12 @@
     "source": "not-found",
     "fetchedAt": "2026-07-04T02:29:52.277Z"
   },
+  "deepseek-v4-1-flash": {
+    "bytes": 444736936512,
+    "source": "hf",
+    "repo": "vcruz305/DeepSeek-V4.1-Flash-GGUF",
+    "fetchedAt": "2026-09-11T08:45:23.845Z"
+  },
   "deepseek-v4-flash": {
     "bytes": null,
     "source": "not-found",
@@ -277,6 +283,12 @@
     "source": "hf",
     "repo": "bloomer010/Ling-3.0-flash-GGUF",
     "fetchedAt": "2026-08-06T06:39:11.265Z"
+  },
+  "ling-3-0-flash-vl": {
+    "bytes": 79296042624,
+    "source": "hf",
+    "repo": "AtomicChat/Ling-3.0-flash-VL-GGUF",
+    "fetchedAt": "2026-09-11T08:45:24.192Z"
   },
   "ling-3-0-tiny": {
     "bytes": 4823894880,

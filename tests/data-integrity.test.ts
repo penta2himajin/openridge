@@ -205,6 +205,11 @@ test("known-MoE-shaped families are stored with active < total", () => {
     "qwen3-omni-30b-a3b-instruct",
     "qwen3-omni-30b-a3b-reasoning",
     "kimi-linear-48b-a3b-instruct",
+    // k2_horizon custom arch: a second MoE layer inside attention
+    // (self_attn.v_experts) that the config estimator has no model for at
+    // all — rides entirely on data/moe_overrides.json.
+    "k2-horizon-375b-a23b",
+    "k2-mova-36b-mid5",
   ];
   const offenders: string[] = [];
   for (const slug of KNOWN_MOE_SLUGS) {

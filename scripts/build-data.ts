@@ -64,7 +64,6 @@ const CLOSED_CREATORS = new Set([
   "ai21-labs",
   "cohere",
   "perplexity",
-  "mbzuai",
   "inception",
   "baidu",
   "sarvam",

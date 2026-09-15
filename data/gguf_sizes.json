@@ -218,6 +218,24 @@
     "repo": "unsloth/Inkling-Small-GGUF",
     "fetchedAt": "2026-08-17T14:48:03.754Z"
   },
+  "k2-1b-final": {
+    "bytes": 666184352,
+    "source": "hf",
+    "repo": "NANI-Nithin/K2-Horizon-0.9B-GGUF",
+    "fetchedAt": "2026-09-15T06:32:59.611Z"
+  },
+  "k2-4b-ph1": {
+    "bytes": 3156598464,
+    "source": "hf",
+    "repo": "NANI-Nithin/K2-Horizon-3.7B-GGUF",
+    "fetchedAt": "2026-09-15T06:32:59.200Z"
+  },
+  "k2-7b-ph2": {
+    "bytes": 5592218304,
+    "source": "hf",
+    "repo": "NANI-Nithin/K2-Horizon-7B-GGUF",
+    "fetchedAt": "2026-09-15T06:32:58.860Z"
+  },
   "kimi-k2-6": {
     "bytes": null,
     "source": "not-found",

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-15T06:32:59.812Z",
+  "generatedAt": "2026-09-15T10:52:57.872Z",
   "models": [
     {
       "id": "3e87c73e-a257-495e-9730-367a66229811",
@@ -23581,6 +23581,9 @@
     "granite-4-2-8b": 5539283360,
     "hy3": 182560831008,
     "inkling-small": 162537607392,
+    "k2-1b-final": 666184352,
+    "k2-4b-ph1": 3156598464,
+    "k2-7b-ph2": 5592218304,
     "kimi-k2-6": null,
     "kimi-k2-7-code": null,
     "kimi-k2-thinking": null,
@@ -23655,9 +23658,6 @@
     "qwen3-vl-8b-reasoning": 5027785184,
     "step-3-7-flash": 122090426976,
     "step-3-vl-10b": 5027780256,
-    "tri-21b-think-preview": null,
-    "k2-7b-ph2": 5592218304,
-    "k2-4b-ph1": 3156598464,
-    "k2-1b-final": 666184352
+    "tri-21b-think-preview": null
   }
 }

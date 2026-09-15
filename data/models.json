@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-15T09:21:44.241Z",
+  "generatedAt": "2026-09-15T10:52:57.872Z",
   "models": [
     {
       "id": "3e87c73e-a257-495e-9730-367a66229811",
@@ -2707,10 +2707,10 @@
       "name": "K2 Horizon 375B A23B",
       "creator": "MBZUAI Institute of Foundation Models",
       "creatorSlug": "mbzuai",
-      "isClosed": true,
+      "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 379167159168,
+        "active": 26669462400
       },
       "paramsUnknown": false,
       "license": null,
@@ -2733,7 +2733,7 @@
         "tps": 0,
         "ttft": 0
       },
-      "hfId": null,
+      "hfId": "IFM/K2-Horizon-375B-A23B",
       "mode": null,
       "releaseDate": "2026-09-03"
     },
@@ -4255,10 +4255,10 @@
       "name": "K2 Horizon MoVA 36B A4B",
       "creator": "MBZUAI Institute of Foundation Models",
       "creatorSlug": "mbzuai",
-      "isClosed": true,
+      "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 37444792020,
+        "active": 5948190420
       },
       "paramsUnknown": false,
       "license": null,
@@ -4281,7 +4281,7 @@
         "tps": 0,
         "ttft": 0
       },
-      "hfId": null,
+      "hfId": "IFM/K2-Horizon-MoVA-36B-A4B",
       "mode": null,
       "releaseDate": "2026-09-03"
     },
@@ -6379,10 +6379,10 @@
       "name": "K2 Horizon 7B",
       "creator": "MBZUAI Institute of Foundation Models",
       "creatorSlug": "mbzuai",
-      "isClosed": true,
+      "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 8999178240,
+        "active": 8999178240
       },
       "paramsUnknown": false,
       "license": null,
@@ -6405,7 +6405,7 @@
         "tps": 0,
         "ttft": 0
       },
-      "hfId": null,
+      "hfId": "IFM/K2-Horizon-7B",
       "mode": null,
       "releaseDate": "2026-09-03"
     },
@@ -8431,10 +8431,10 @@
       "name": "K2 Horizon 3.7B",
       "creator": "MBZUAI Institute of Foundation Models",
       "creatorSlug": "mbzuai",
-      "isClosed": true,
+      "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 5058255360,
+        "active": 5058255360
       },
       "paramsUnknown": false,
       "license": null,
@@ -8457,7 +8457,7 @@
         "tps": 0,
         "ttft": 0
       },
-      "hfId": null,
+      "hfId": "IFM/K2-Horizon-3.7B",
       "mode": null,
       "releaseDate": "2026-09-03"
     },
@@ -11455,10 +11455,10 @@
       "name": "K2 Think V2",
       "creator": "MBZUAI Institute of Foundation Models",
       "creatorSlug": "mbzuai",
-      "isClosed": true,
+      "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 72550195200,
+        "active": 72550195200
       },
       "paramsUnknown": false,
       "license": null,
@@ -11481,7 +11481,7 @@
         "tps": 0,
         "ttft": 0
       },
-      "hfId": null,
+      "hfId": "IFM/K2-Think-V2",
       "mode": null,
       "releaseDate": "2025-12-15"
     },
@@ -12787,10 +12787,10 @@
       "name": "K2-V2 (high)",
       "creator": "MBZUAI Institute of Foundation Models",
       "creatorSlug": "mbzuai",
-      "isClosed": true,
+      "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 72550195200,
+        "active": 72550195200
       },
       "paramsUnknown": false,
       "license": null,
@@ -13795,10 +13795,10 @@
       "name": "K2-V2 (medium)",
       "creator": "MBZUAI Institute of Foundation Models",
       "creatorSlug": "mbzuai",
-      "isClosed": true,
+      "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 72550195200,
+        "active": 72550195200
       },
       "paramsUnknown": false,
       "license": null,
@@ -16675,10 +16675,10 @@
       "name": "K2-V2 (low)",
       "creator": "MBZUAI Institute of Foundation Models",
       "creatorSlug": "mbzuai",
-      "isClosed": true,
+      "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 72550195200,
+        "active": 72550195200
       },
       "paramsUnknown": false,
       "license": null,
@@ -22975,10 +22975,10 @@
       "name": "K2 Horizon 0.9B",
       "creator": "MBZUAI Institute of Foundation Models",
       "creatorSlug": "mbzuai",
-      "isClosed": true,
+      "isClosed": false,
       "params": {
-        "total": null,
-        "active": null
+        "total": 1078285824,
+        "active": 1078285824
       },
       "paramsUnknown": false,
       "license": null,
@@ -23001,7 +23001,7 @@
         "tps": 0,
         "ttft": 0
       },
-      "hfId": null,
+      "hfId": "IFM/K2-Horizon-0.9B",
       "mode": null,
       "releaseDate": "2026-09-03"
     },
@@ -23350,9 +23350,8 @@
         "a6ea7ec0-0aca-4442-98fb-4296c6d18b31",
         "77f5ff8b-1536-474a-a337-e1bfd138d343",
         "641a073a-41c9-4773-9b02-d965c16607c5",
-        "2d28a13a-096e-475a-beb8-26bbd1c7d51c",
-        "feb02d3b-ff8d-4ed4-b165-13f8d4a7192c",
-        "6e1b44ff-c227-496b-aef4-19b70cd18c76",
+        "31da3a71-0773-47d9-8560-9f19f069926b",
+        "122a1fa1-976a-4089-87a2-5a0a13e2a52c",
         "b01dee41-c62b-48ed-8d16-984adc405e5c",
         "9ac3908c-9eb2-44db-8c01-3ec7da6fc2ae",
         "cd684ea4-b475-4269-b001-d469d06d8a7a"
@@ -23361,6 +23360,7 @@
     "artificial_analysis_coding_index": {
       "active": [
         "405e2235-0925-4634-a3c7-fbd5f6394bc0",
+        "9e9fb958-87f5-4835-a761-26102ef25898",
         "7eaf926c-5f39-4e58-ae50-c38b5fc630fc",
         "fc92f822-04b7-420d-9c07-a21af5e9aac7",
         "8665ca00-c687-44c7-875c-22618cb31c4f",
@@ -23371,13 +23371,13 @@
       ],
       "total": [
         "405e2235-0925-4634-a3c7-fbd5f6394bc0",
-        "5d4acc80-7a88-4e84-bfe7-99071b84e6a4",
+        "9e9fb958-87f5-4835-a761-26102ef25898",
         "641a073a-41c9-4773-9b02-d965c16607c5",
         "0c64b008-20c3-408d-bd68-15136df8cd2c",
         "651ef7ae-9a8f-477e-9c8e-460aa156ba02",
+        "31da3a71-0773-47d9-8560-9f19f069926b",
         "7eaf926c-5f39-4e58-ae50-c38b5fc630fc",
-        "2d28a13a-096e-475a-beb8-26bbd1c7d51c",
-        "feb02d3b-ff8d-4ed4-b165-13f8d4a7192c",
+        "122a1fa1-976a-4089-87a2-5a0a13e2a52c",
         "6e1b44ff-c227-496b-aef4-19b70cd18c76",
         "b01dee41-c62b-48ed-8d16-984adc405e5c",
         "9ac3908c-9eb2-44db-8c01-3ec7da6fc2ae",
@@ -23390,7 +23390,7 @@
         "04781a0e-40f0-4e2a-a4e5-18e389364a79",
         "a68afa0b-7fe2-4e9d-bf3e-741cce3c6aeb",
         "54c7f3fc-7078-442a-b472-e8691257a88c",
-        "77f5ff8b-1536-474a-a337-e1bfd138d343",
+        "9e9fb958-87f5-4835-a761-26102ef25898",
         "5a088cde-18e2-4dfa-98dd-d283e1c19654",
         "3d64bf83-232e-427e-8590-26b478bae4a8",
         "7eaf926c-5f39-4e58-ae50-c38b5fc630fc",
@@ -23405,7 +23405,7 @@
         "04781a0e-40f0-4e2a-a4e5-18e389364a79",
         "a68afa0b-7fe2-4e9d-bf3e-741cce3c6aeb",
         "54c7f3fc-7078-442a-b472-e8691257a88c",
-        "77f5ff8b-1536-474a-a337-e1bfd138d343",
+        "9e9fb958-87f5-4835-a761-26102ef25898",
         "5a088cde-18e2-4dfa-98dd-d283e1c19654",
         "d734e2ce-5cf8-467f-8148-586d02671333",
         "641a073a-41c9-4773-9b02-d965c16607c5",
@@ -23439,9 +23439,8 @@
         "48194e0f-8226-4c57-8cb2-2a0fb68a84c9",
         "641a073a-41c9-4773-9b02-d965c16607c5",
         "7d73161f-002f-4c9c-b4f8-6c4d91f2ba8e",
-        "c76e0ae8-0fd2-45c0-a39d-d398fce9b128",
-        "2d28a13a-096e-475a-beb8-26bbd1c7d51c",
-        "feb02d3b-ff8d-4ed4-b165-13f8d4a7192c",
+        "31da3a71-0773-47d9-8560-9f19f069926b",
+        "122a1fa1-976a-4089-87a2-5a0a13e2a52c",
         "6e1b44ff-c227-496b-aef4-19b70cd18c76",
         "b01dee41-c62b-48ed-8d16-984adc405e5c",
         "9ac3908c-9eb2-44db-8c01-3ec7da6fc2ae",
@@ -23471,6 +23470,7 @@
         "5d4acc80-7a88-4e84-bfe7-99071b84e6a4",
         "641a073a-41c9-4773-9b02-d965c16607c5",
         "651ef7ae-9a8f-477e-9c8e-460aa156ba02",
+        "122a1fa1-976a-4089-87a2-5a0a13e2a52c",
         "2d28a13a-096e-475a-beb8-26bbd1c7d51c",
         "b01dee41-c62b-48ed-8d16-984adc405e5c",
         "583f98fb-c4b8-4df3-8d40-60ac0ed69882",
@@ -23480,6 +23480,7 @@
     },
     "scicode": {
       "active": [
+        "9e9fb958-87f5-4835-a761-26102ef25898",
         "7eaf926c-5f39-4e58-ae50-c38b5fc630fc",
         "641a073a-41c9-4773-9b02-d965c16607c5",
         "fc92f822-04b7-420d-9c07-a21af5e9aac7",
@@ -23490,6 +23491,7 @@
         "f7d2fc3e-1f7b-405f-818c-07952a4af78f"
       ],
       "total": [
+        "9e9fb958-87f5-4835-a761-26102ef25898",
         "641a073a-41c9-4773-9b02-d965c16607c5",
         "9dba61f5-78ee-4190-8d1d-8e7063ffd386",
         "adfae555-f489-4f3e-9064-c6b7fcdd0783",
@@ -23502,13 +23504,16 @@
     },
     "tau_banking": {
       "active": [
+        "9e9fb958-87f5-4835-a761-26102ef25898",
         "7eaf926c-5f39-4e58-ae50-c38b5fc630fc",
         "433d5c5d-3092-4026-9727-1587ca07915d",
         "9ac3908c-9eb2-44db-8c01-3ec7da6fc2ae",
         "cd684ea4-b475-4269-b001-d469d06d8a7a"
       ],
       "total": [
+        "9e9fb958-87f5-4835-a761-26102ef25898",
         "641a073a-41c9-4773-9b02-d965c16607c5",
+        "122a1fa1-976a-4089-87a2-5a0a13e2a52c",
         "b01dee41-c62b-48ed-8d16-984adc405e5c",
         "cd684ea4-b475-4269-b001-d469d06d8a7a"
       ]
@@ -23516,6 +23521,7 @@
     "terminalbench_v2_1": {
       "active": [
         "405e2235-0925-4634-a3c7-fbd5f6394bc0",
+        "9e9fb958-87f5-4835-a761-26102ef25898",
         "7eaf926c-5f39-4e58-ae50-c38b5fc630fc",
         "fc92f822-04b7-420d-9c07-a21af5e9aac7",
         "8665ca00-c687-44c7-875c-22618cb31c4f",
@@ -23524,14 +23530,13 @@
       ],
       "total": [
         "405e2235-0925-4634-a3c7-fbd5f6394bc0",
+        "9e9fb958-87f5-4835-a761-26102ef25898",
         "5d4acc80-7a88-4e84-bfe7-99071b84e6a4",
         "641a073a-41c9-4773-9b02-d965c16607c5",
         "0c64b008-20c3-408d-bd68-15136df8cd2c",
         "651ef7ae-9a8f-477e-9c8e-460aa156ba02",
-        "7eaf926c-5f39-4e58-ae50-c38b5fc630fc",
-        "2d28a13a-096e-475a-beb8-26bbd1c7d51c",
-        "ce819310-af7c-49d3-9a02-6845111e1788",
-        "6e1b44ff-c227-496b-aef4-19b70cd18c76",
+        "31da3a71-0773-47d9-8560-9f19f069926b",
+        "122a1fa1-976a-4089-87a2-5a0a13e2a52c",
         "b01dee41-c62b-48ed-8d16-984adc405e5c",
         "9ac3908c-9eb2-44db-8c01-3ec7da6fc2ae"
       ]
@@ -23576,6 +23581,9 @@
     "granite-4-2-8b": 5539283360,
     "hy3": 182560831008,
     "inkling-small": 162537607392,
+    "k2-1b-final": 666184352,
+    "k2-4b-ph1": 3156598464,
+    "k2-7b-ph2": 5592218304,
     "kimi-k2-6": null,
     "kimi-k2-7-code": null,
     "kimi-k2-thinking": null,

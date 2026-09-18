@@ -234,6 +234,7 @@ export const HF_ORGS_BY_CREATOR: Record<string, string[]> = {
   nex: ["nex-agi"],
   ai9star: ["ai9stars"],
   deepcogito: ["deepcogito"],
+  mbzuai: ["IFM"],
 };
 
 /** Proprietary, API-only families whose parameter counts are never published —

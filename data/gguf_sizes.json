@@ -236,6 +236,24 @@
     "repo": "NANI-Nithin/K2-Horizon-7B-GGUF",
     "fetchedAt": "2026-09-15T06:32:58.860Z"
   },
+  "k2-horizon-0-9b": {
+    "bytes": 666184352,
+    "source": "hf",
+    "repo": "NANI-Nithin/K2-Horizon-0.9B-GGUF",
+    "fetchedAt": "2026-09-18T14:22:49.230Z"
+  },
+  "k2-horizon-3-7b": {
+    "bytes": 3156598464,
+    "source": "hf",
+    "repo": "NANI-Nithin/K2-Horizon-3.7B-GGUF",
+    "fetchedAt": "2026-09-18T14:22:48.871Z"
+  },
+  "k2-horizon-7b": {
+    "bytes": 5592218304,
+    "source": "hf",
+    "repo": "NANI-Nithin/K2-Horizon-7B-GGUF",
+    "fetchedAt": "2026-09-18T14:22:48.571Z"
+  },
   "kimi-k2-6": {
     "bytes": null,
     "source": "not-found",

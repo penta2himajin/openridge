@@ -360,6 +360,7 @@
   "step-3-5-flash-0202": "stepfun-ai/Step-3.5-Flash",
   "step-3-7-flash": "stepfun-ai/Step-3.7-Flash",
   "step-3-vl-10b": "stepfun-ai/Step3-VL-10B",
+  "step-5": null,
   "tri-21b-think-preview": "trillionlabs/Tri-21B-think-Preview",
   "tri-21b-think-v0-5": "trillionlabs/Tri-21B-Think",
   "trinity-large-thinking": "arcee-ai/Trinity-Large-Thinking",

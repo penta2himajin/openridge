@@ -371,6 +371,11 @@
     "source": "not-found",
     "fetchedAt": "2026-07-04T02:29:50.534Z"
   },
+  "mimo-v2-6-pro": {
+    "bytes": null,
+    "source": "not-found",
+    "fetchedAt": "2026-09-22T09:14:31.543Z"
+  },
   "mimo-v2-flash-reasoning": {
     "bytes": 186798293088,
     "source": "hf",

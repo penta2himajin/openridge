@@ -2,14 +2,21 @@
  * Compute the closest closed-model neighbours (one above, one below) for a
  * selected open model. Used by the tooltip to show "you're between X and Y".
  *
- * Tie handling: when a closed model's score is within TIE_EPS of the open
- * model's score, return a single `tie` entry instead of above/below.
+ * Effort tiers are collapsed first: AA scores each reasoning/effort setting as
+ * its own entry, but the comparison uses only the highest-scoring tier per
+ * model — the same rule as the chart's closed-anchor lines (docs/ui.md §4.4).
+ * That keeps "Closest closed" reading as a flagship-to-flagship gap rather
+ * than landing on a medium/low tier that happens to sit nearer in score space.
+ *
+ * Tie handling: when a closed model's (best-tier) score is within TIE_EPS of
+ * the open model's score, return a single `tie` entry instead of above/below.
  *
  * The "score" axis is the metric currently displayed on Y (passed in as the
  * `metric` arg). Vendor filter restricts candidates to the configured
  * vendors (see state.closedVendors).
  */
 import type { MetricId, ModelRecord } from "./models";
+import { baseModelKey } from "./model-names";
 
 const TIE_EPS = 0.5;
 
@@ -27,6 +34,32 @@ export interface Neighbours {
   below?: NeighbourEntry;
 }
 
+/**
+ * Keep one closed entry per model identity: the highest score on `metric`.
+ * Distinct models/versions (Preview, date pins, Fallback) stay separate via
+ * `baseModelKey`.
+ */
+function bestTierClosed(
+  candidates: readonly ModelRecord[],
+  metric: MetricId,
+  vendors: ReadonlySet<string>,
+): NeighbourEntry[] {
+  const best = new Map<string, NeighbourEntry>();
+  for (const c of candidates) {
+    if (!c.isClosed) continue;
+    if (!vendors.has(c.creatorSlug)) continue;
+    const s = c.scores[metric];
+    if (typeof s !== "number") continue;
+    const key = baseModelKey(c);
+    const prev = best.get(key);
+    if (!prev || s > prev.score) {
+      // delta filled in once we know the open score
+      best.set(key, { model: c, score: s, delta: 0 });
+    }
+  }
+  return [...best.values()];
+}
+
 export function findClosedNeighbours(
   open: ModelRecord,
   candidates: readonly ModelRecord[],
@@ -37,14 +70,10 @@ export function findClosedNeighbours(
   const openScore = open.scores[metric];
   if (typeof openScore !== "number") return null;
 
-  const pool: NeighbourEntry[] = [];
-  for (const c of candidates) {
-    if (!c.isClosed) continue;
-    if (!vendors.has(c.creatorSlug)) continue;
-    const s = c.scores[metric];
-    if (typeof s !== "number") continue;
-    pool.push({ model: c, score: s, delta: s - openScore });
-  }
+  const pool = bestTierClosed(candidates, metric, vendors).map((e) => ({
+    ...e,
+    delta: e.score - openScore,
+  }));
   if (pool.length === 0) return null;
 
   // Tie first — closest absolute delta.

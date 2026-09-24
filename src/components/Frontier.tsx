@@ -137,10 +137,10 @@ export default function Frontier(props: Props) {
       .map((m) => ({ m, score: m.scores[metric] as number }))
       .sort((a, b) => b.score - a.score);
     // One line per model, not per reasoning-effort tier. AA scores each tier
-    // as its own entry, so a flagship with four of them (Claude Opus 5) used
-    // to fill most of the roster on its own — 12 lines covering 6 models,
-    // clustered inside a 7-point band. Keeping each model's best tier makes
-    // the same 12 lines describe 12 different models over a wider spread.
+    // as its own entry — and often packs the tier into a parenthetical that
+    // also names a Fallback target. baseModelKey strips mode tokens while
+    // keeping that identity, so "Show all closed" yields 8 distinct models
+    // instead of four Opus 5.5 effort lines + four Fable lines.
     const items: typeof scored = [];
     const claimed = new Set<string>();
     for (const it of scored) {

@@ -10,7 +10,11 @@
  *   - a different model or routing target ("Solar Pro 2 (Preview)", "Grok 2
  *     (Dec '24)", "Claude Fable 5 (…, Opus 4.8 Fallback)").
  *
- * Only the first kind may be collapsed. Pure — no DOM, no I/O.
+ * Mode tokens may share a parenthetical with an identity qualifier
+ * ("… Max Effort, Default Fallback"). Collapse keys strip the mode tokens and
+ * keep the qualifier so effort variants of one routing target group together.
+ *
+ * Pure — no DOM, no I/O.
  */
 
 /** Parenthetical tokens that denote an inference mode rather than a model. */
@@ -23,11 +27,16 @@ const TIER_TOKEN = /^(max|high|medium|low|minimal|xhigh)(\s+effort)?$/i;
 /** A reasoning designator carries no tier — every flagship has one. */
 const REASONING_TOKEN = /^(adaptive[- ]?reasoning|reasoning)$/i;
 
+/** Trailing AA date pin, e.g. "(Oct '24)", "(June '24)", "(2024-10-22)". */
+const DATE_PAREN =
+  /\s*\(((?:January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+'?\d{2}|\d{4}-\d{2}-\d{2})\)\s*$/i;
+
 /**
  * Split a name into its base and mode tokens, but only when *every* token in
  * the parenthetical is a mode. A single non-mode token (a date, "Preview", a
  * fallback target) means the parenthetical names a distinct model, so it stays
- * part of the base.
+ * part of the base — use {@link identityBase} when you need effort collapse
+ * across mixed mode+identity parentheticals.
  */
 export function splitMode(name: string): {
   base: string;
@@ -41,13 +50,31 @@ export function splitMode(name: string): {
   return { base: paren[1].trim(), mode: tokens };
 }
 
-/** Trailing AA date pin, e.g. "(Oct '24)", "(June '24)", "(2024-10-22)". */
-const DATE_PAREN =
-  /\s*\(((?:January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+'?\d{2}|\d{4}-\d{2}-\d{2})\)\s*$/i;
+/**
+ * Model identity with inference-mode noise removed.
+ *
+ * - Pure mode `(max)` / `(Adaptive Reasoning, Max Effort)` → bare name
+ * - Mixed `(… Max Effort, Default Fallback)` → `Name (Default Fallback)`
+ * - Pure identity `(Oct '24)` / `(Preview)` → unchanged (still distinct)
+ *
+ * Chart anchors and Closest-closed both need this so a flagship with four
+ * scored efforts + a Fallback qualifier does not eat four roster slots.
+ */
+export function identityBase(name: string): string {
+  const paren = name.match(/^(.*?)\s*\(([^)]+)\)\s*$/);
+  if (!paren) return name.trim();
+  const head = paren[1].trim();
+  const tokens = paren[2].split(",").map((t) => t.trim());
+  const mode = tokens.filter((t) => MODE_TOKEN.test(t));
+  const identity = tokens.filter((t) => !MODE_TOKEN.test(t));
+  if (mode.length === 0) return name.trim();
+  if (identity.length === 0) return head;
+  return `${head} (${identity.join(", ")})`;
+}
 
 /** Group key that collapses reasoning/effort variants of one model. */
 export function baseModelKey(m: { name: string; creatorSlug: string }): string {
-  return `${m.creatorSlug} ${splitMode(m.name).base}`;
+  return `${m.creatorSlug} ${identityBase(m.name)}`;
 }
 
 /**
@@ -61,7 +88,7 @@ export function lineageModelKey(m: {
   name: string;
   creatorSlug: string;
 }): string {
-  const base = splitMode(m.name).base.replace(DATE_PAREN, "").trim();
+  const base = identityBase(m.name).replace(DATE_PAREN, "").trim();
   return `${m.creatorSlug} ${base}`;
 }
 

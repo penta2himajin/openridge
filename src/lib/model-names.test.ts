@@ -1,6 +1,11 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { splitMode, baseModelKey, formatClosedLabel } from "./model-names";
+import {
+  splitMode,
+  baseModelKey,
+  lineageModelKey,
+  formatClosedLabel,
+} from "./model-names";
 
 // Regression: the closed-anchor roster rendered four lines labelled exactly
 // "Claude Opus 5". AA scores each reasoning-effort tier as its own entry, and
@@ -114,4 +119,32 @@ test("splitMode: reports the tokens only when all of them are modes", () => {
     mode: null,
   });
   assert.deepEqual(splitMode("Kimi K3"), { base: "Kimi K3", mode: null });
+});
+
+test("lineageModelKey: date pins collapse; Preview/Fallback do not", () => {
+  const key = (name: string, creatorSlug = "anthropic") =>
+    lineageModelKey({ name, creatorSlug });
+
+  assert.equal(
+    key("Claude 3.5 Sonnet (Oct '24)"),
+    key("Claude 3.5 Sonnet (June '24)"),
+  );
+  assert.equal(
+    key("GPT-4o (Nov '24)", "openai"),
+    key("GPT-4o (May '24)", "openai"),
+  );
+  // Date under a mode parenthetical still collapses to the undated line.
+  assert.equal(
+    key("Gemini 2.5 Flash Preview (Sep '25) (Reasoning)", "google"),
+    key("Gemini 2.5 Flash Preview (Reasoning)", "google"),
+  );
+
+  assert.notEqual(
+    key("Solar Pro 2 (Preview)", "upstage"),
+    key("Solar Pro 2", "upstage"),
+  );
+  assert.notEqual(
+    key("Claude Fable 5 (Adaptive Reasoning, Max Effort, Opus 5 Fallback)"),
+    key("Claude Fable 5 (Adaptive Reasoning, Max Effort, Opus 4.8 Fallback)"),
+  );
 });

@@ -161,6 +161,71 @@ test("findClosedNeighbours: distinct models (Fallback) are not collapsed togethe
   assert.equal(n!.above?.model.id, "fable-fb");
 });
 
+test("findClosedNeighbours: date pins of one product line collapse to best score", () => {
+  const open = model({
+    id: "open-dated",
+    name: "Open Small",
+    creatorSlug: "qwen",
+    isClosed: false,
+    score: 7.5,
+  });
+  const closed = [
+    model({
+      id: "sonnet-oct",
+      name: "Claude 3.5 Sonnet (Oct '24)",
+      creatorSlug: "anthropic",
+      isClosed: true,
+      score: 7.9,
+    }),
+    model({
+      id: "sonnet-june",
+      name: "Claude 3.5 Sonnet (June '24)",
+      creatorSlug: "anthropic",
+      isClosed: true,
+      score: 7.2,
+    }),
+  ];
+
+  const n = findClosedNeighbours(open, closed, METRIC, VENDORS);
+  assert.ok(n);
+  // June is closer in raw score (7.2 vs 7.5) but must not win: lineage
+  // collapses to the best Index score, which is Oct (and lands as a tie
+  // within TIE_EPS of 7.5).
+  assert.equal(n!.tie?.model.id, "sonnet-oct");
+  assert.equal(n!.above, undefined);
+  assert.equal(n!.below, undefined);
+});
+
+test("findClosedNeighbours: mid effort can represent a model when it scores highest", () => {
+  // Real AA pattern (Gemini 3.7 Flash on Intelligence Index): medium > high.
+  const open = model({
+    id: "open-gem",
+    name: "Open",
+    creatorSlug: "qwen",
+    isClosed: false,
+    score: 39.5,
+  });
+  const closed = [
+    model({
+      id: "flash-high",
+      name: "Gemini 3.7 Flash (high)",
+      creatorSlug: "google",
+      isClosed: true,
+      score: 39.1,
+    }),
+    model({
+      id: "flash-med",
+      name: "Gemini 3.7 Flash (medium)",
+      creatorSlug: "google",
+      isClosed: true,
+      score: 39.6,
+    }),
+  ];
+
+  const n = findClosedNeighbours(open, closed, METRIC, new Set(["google"]));
+  assert.ok(n);
+  assert.equal(n!.tie?.model.id ?? n!.above?.model.id, "flash-med");
+});
 test("findClosedNeighbours: respects vendor filter", () => {
   const open = model({
     id: "open-4",

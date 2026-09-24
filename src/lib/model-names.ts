@@ -41,9 +41,28 @@ export function splitMode(name: string): {
   return { base: paren[1].trim(), mode: tokens };
 }
 
+/** Trailing AA date pin, e.g. "(Oct '24)", "(June '24)", "(2024-10-22)". */
+const DATE_PAREN =
+  /\s*\(((?:January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+'?\d{2}|\d{4}-\d{2}-\d{2})\)\s*$/i;
+
 /** Group key that collapses reasoning/effort variants of one model. */
 export function baseModelKey(m: { name: string; creatorSlug: string }): string {
   return `${m.creatorSlug} ${splitMode(m.name).base}`;
+}
+
+/**
+ * Group key for Closest-closed comparisons: effort tiers *and* date pins of
+ * the same product line collapse together (Claude 3.5 Sonnet Oct/June → one).
+ *
+ * Chart anchors still use {@link baseModelKey} and keep date pins separate
+ * (docs/ui.md §4.4). Preview / Fallback / ChatGPT qualifiers stay distinct.
+ */
+export function lineageModelKey(m: {
+  name: string;
+  creatorSlug: string;
+}): string {
+  const base = splitMode(m.name).base.replace(DATE_PAREN, "").trim();
+  return `${m.creatorSlug} ${base}`;
 }
 
 /**

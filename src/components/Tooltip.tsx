@@ -252,10 +252,10 @@ function NeighbourRow(props: {
   info: { maxValue: number };
 }) {
   // Same rule as the anchor labels (docs/ui.md §4.4): keep the effort tier,
-  // drop the reasoning designator every flagship carries. Length-gating the
-  // whole parenthetical — as this row used to — throws away the tier for any
-  // vendor that spells it verbosely, so the closest-closed comparison read
-  // "Claude Opus 5" without saying which of its four scored efforts it meant.
+  // drop the reasoning designator every flagship carries. Neighbours are
+  // already collapsed to each model's best-scoring tier, so the label's tier
+  // word is usually "max" / "xhigh" — still worth showing so the comparison
+  // names the AA entry it used.
   const display = () => formatClosedLabel(props.entry.model.name, false);
   const fmt = (d: number) => {
     const v = props.info.maxValue <= 1 ? d * 100 : d;

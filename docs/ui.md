@@ -235,6 +235,7 @@ AA は推論エフォート階層ごとに別エントリとして採点する�
 - 位置: カーソル追従ではなく **点の右上に固定**（jitter 防止）
 - フッタ "Pareto (active)" / "Pareto (total)" / "Pareto (both)" は segment 状態で出し分け
 - クリックで HF リポにジャンプ
+- **Closest closed**: 選択ベンダー（デフォルト OpenAI / Anthropic / Google）のクローズドから、現在メトリクス上ですぐ上／下（またはほぼ同点）を出す。候補は **product lineage ごとに1本**（effort 階層 + 日付ピンを畳み、選択中 Index の最高スコアを代表にする）。`(Preview)` / Fallback は別物のまま。チャート横線は日付ピンを分離したまま（§4.4）
 
 ## 5. フィルタ（チップ式）
 

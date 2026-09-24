@@ -90,6 +90,20 @@ test("baseModelKey: effort tiers collapse, distinct models do not", () => {
   ].map((n) => key(n));
   assert.equal(new Set(opus5).size, 1);
 
+  // Mixed mode + Fallback: efforts of one routing target must collapse too.
+  // Without this, "Show all closed" filled with Opus 5.5 max/xhigh/high/medium.
+  const opus55fb = [
+    "Claude Opus 5.5 (Adaptive Reasoning, Max Effort, Default Fallback)",
+    "Claude Opus 5.5 (Adaptive Reasoning, Xhigh Effort, Default Fallback)",
+    "Claude Opus 5.5 (Adaptive Reasoning, High Effort, Default Fallback)",
+    "Claude Opus 5.5 (Adaptive Reasoning, Medium Effort, Default Fallback)",
+  ].map((n) => key(n));
+  assert.equal(new Set(opus55fb).size, 1);
+  assert.equal(
+    key("Claude Opus 5.5 (Adaptive Reasoning, Max Effort, Default Fallback)"),
+    "anthropic Claude Opus 5.5 (Default Fallback)",
+  );
+
   // Versions, dates, previews and fallback targets stay apart.
   assert.notEqual(key("Claude Opus 5 (max)"), key("Claude Opus 4.8 (max)"));
   assert.notEqual(
@@ -137,6 +151,14 @@ test("lineageModelKey: date pins collapse; Preview/Fallback do not", () => {
   assert.equal(
     key("Gemini 2.5 Flash Preview (Sep '25) (Reasoning)", "google"),
     key("Gemini 2.5 Flash Preview (Reasoning)", "google"),
+  );
+
+  // Effort + Default Fallback collapses for Closest closed too.
+  assert.equal(
+    key("Claude Opus 5.5 (Adaptive Reasoning, Max Effort, Default Fallback)"),
+    key(
+      "Claude Opus 5.5 (Adaptive Reasoning, Medium Effort, Default Fallback)",
+    ),
   );
 
   assert.notEqual(

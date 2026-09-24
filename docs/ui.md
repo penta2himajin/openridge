@@ -181,8 +181,9 @@ dropdown を開いた直後の focused は **selected と同じ位置**。
 ### 4.4 クローズドモデル横線
 
 - 水平点線 + 右端にラベル
-- **1モデル1本**。mode（reasoning / effort 階層）別には分けず、最高スコアの階層を代表として描く。ラベルには階層を残す（`Claude Opus 5 (max)`）
-- デフォルト表示は 2本（最上位クローズド + オープン frontier 頂点に最も近いクローズド）。"Show all closed" トグルで上位 8 本まで
+- **1モデル1本**。mode（reasoning / effort 階層）別には分けず、最高スコアの階層を代表として描く。ラベルには階層を残す（`Claude Opus 5 (max)`）。括弧に Fallback 等の identity が混ざっていても mode トークンだけ落として畳む（`Default Fallback` 付き Opus 5.5 の max/xhigh/high が別線にならない）
+- デフォルト表示は 2本（最上位クローズド＝ceiling + オープン frontier 頂点に最も近いクローズド＝open-touch）。"Show all closed" トグルで **その2本のスコア帯に挟まれたモデル**も出す（帯の下には伸びない）。ラベルが入り切らなければ ceiling と open-touch を残し、中間から間引く
+- ラベルが他モデルの点線に重なる箇所は、ラベル背後に `--bg-base` の矩形を置いて点線だけを抜く（文字は読める／線はラベル外で続く）
 - 1px 点線、`--closed` 色
 - ラベル: Geist Mono 12px、右端 padding 8px、`--closed` 色
 
@@ -335,7 +336,7 @@ WCAG 2.5.5 (AAA) は 44×44 CSS px、Apple HIG が 44pt、Material が 48dp を�
   - デスクトップ: `GPT-5.5 (xhigh)` フル表記
   - モバイル: `GPT-5.5` のみ。mode は省略し、タップで tooltip 展開
   - 字サイズ: デスクトップ 12px / モバイル 10px
-- 線が密集して読みにくいとき: default は frontier-touching Top 3 のみ、"Show all closed" トグルで全展開（§4.4 既定）。モバイルではこの絞り込みをより強く（Top 3 固定、トグルで Top 8）
+- 線が密集して読みにくいとき: default は ceiling + open-touch の 2本、"Show all closed" でそのスコア帯を埋める（§4.4）。ラベル部屋が足りなければ帯の端（ceiling / open-touch）を残して中間を間引く
 
 ### 7.6 ツールチップ
 

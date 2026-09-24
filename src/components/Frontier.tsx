@@ -28,14 +28,17 @@ import { METRICS_BY_ID } from "../lib/metrics";
 import { formatParams } from "../lib/format";
 import { useIsMobile } from "../lib/breakpoint";
 import { baseModelKey, formatClosedLabel } from "../lib/model-names";
+import {
+  collapseClosedByModel,
+  selectClosedAnchors,
+  capClosedAnchorsForLabels,
+} from "../lib/closed-anchors";
 import Tooltip from "./Tooltip";
 
 interface Props {
   snapshot: ModelsSnapshot;
   state: AppState;
 }
-
-const CLOSED_FULL_TOP = 8;
 
 interface Pt {
   m: ModelRecord;
@@ -132,51 +135,19 @@ export default function Frontier(props: Props) {
 
   const closedAnchors = createMemo(() => {
     const metric = props.state.metric();
-    const scored = props.snapshot.models
-      .filter((m) => m.isClosed && m.scores[metric] != null)
-      .map((m) => ({ m, score: m.scores[metric] as number }))
-      .sort((a, b) => b.score - a.score);
-    // One line per model, not per reasoning-effort tier. AA scores each tier
-    // as its own entry, so a flagship with four of them (Claude Opus 5) used
-    // to fill most of the roster on its own — 12 lines covering 6 models,
-    // clustered inside a 7-point band. Keeping each model's best tier makes
-    // the same 12 lines describe 12 different models over a wider spread.
-    const items: typeof scored = [];
-    const claimed = new Set<string>();
-    for (const it of scored) {
-      const id = baseModelKey(it.m);
-      if (claimed.has(id)) continue;
-      claimed.add(id);
-      items.push(it);
-    }
-    if (items.length === 0) return [];
-    if (props.state.showAllClosed()) return items.slice(0, CLOSED_FULL_TOP);
-
-    // Default: two reference lines only (docs/ui.md §4.4) —
-    //   1) the single top closed model, and
-    //   2) the closed model whose score is nearest the top plotted open model
-    //      (the peak of the open Pareto frontier), giving a like-for-like
-    //      marker right beside the best open weight.
-    const top = items[0];
+    // One line per model (effort + mixed Fallback parentheticals collapsed via
+    // baseModelKey). Default: ceiling + nearest to the open frontier peak.
+    // Show-all: those two plus every model between them in score — fill the
+    // ladder the eye is already looking at, not an arbitrary Top-N.
+    const items = collapseClosedByModel(props.snapshot.models, metric);
     const openScores = props.snapshot.models
       .filter(
         (m) =>
           !m.isClosed && m.params.active != null && m.scores[metric] != null,
       )
       .map((m) => m.scores[metric] as number);
-    if (openScores.length === 0) return [top];
-    const topOpen = Math.max(...openScores);
-    let nearest: (typeof items)[number] | null = null;
-    let bestDelta = Infinity;
-    for (const it of items) {
-      if (it === top) continue;
-      const d = Math.abs(it.score - topOpen);
-      if (d < bestDelta) {
-        bestDelta = d;
-        nearest = it;
-      }
-    }
-    return nearest ? [top, nearest] : [top];
+    const topOpen = openScores.length > 0 ? Math.max(...openScores) : null;
+    return selectClosedAnchors(items, topOpen, props.state.showAllClosed());
   });
 
   const paretoIds = createMemo(() => {
@@ -531,16 +502,14 @@ function drawOverlay(ctx: OverlayContext) {
   // Validate.
   const valid = closed.filter(({ score }) => Number.isFinite(yScale(score)));
 
-  // Sort by score DESC, then cap to what the plot can actually label. Closed
-  // flagships sit within a few index points of each other, so the label stack
-  // needs far more height than the anchors themselves span and the surplus has
-  // to go somewhere. Dropping the lowest-scoring anchors keeps the reference
-  // lines that matter — the ceiling, and the ones nearest the open frontier —
-  // rather than silently unlabelling the top of the chart.
+  // Sort by score DESC, then cap to what the plot can actually label. Prefer
+  // keeping the ceiling and the open-touch line (band endpoints) over a naive
+  // top-N slice — the bottom of the expanded band is the open-touch anchor,
+  // and dropping it would undo the reason Show-all exists.
   const sortedAll = [...valid].sort((a, b) => b.score - a.score);
   const room = yScale(sortedAll[0]?.score ?? 0) - (chartTop + 10) - labelLift;
   const maxLabels = Math.max(1, Math.floor(room / minGap) + 1);
-  const sortedDesc = sortedAll.slice(0, maxLabels);
+  const sortedDesc = capClosedAnchorsForLabels(sortedAll, maxLabels);
   const labels = sortedDesc.map(({ m }) => formatClosedLabel(m.name, mobile));
 
   // Anchor every label at the right end above its own line; the vertical
@@ -611,7 +580,11 @@ function drawOverlay(ctx: OverlayContext) {
   // onto its neighbour — the dashed line stays, and hovering still names it.
   for (const p of placements) p.showLabel = p.labelY >= chartTop + 10;
 
-  // Render each callout.
+  // Two passes so dashed lines never paint over labels. Each flagship's line
+  // spans the full X range; when labels stack into that band a later model's
+  // stroke would otherwise cover an earlier label. Draw every line/marker/
+  // leader first, then punch a --bg-base rect behind each label (glyph-halo
+  // alone is not enough — dashes read through letter gaps) and the text.
   for (const p of placements) {
     closedLayer
       .append("line")
@@ -638,8 +611,15 @@ function drawOverlay(ctx: OverlayContext) {
         .attr("y2", p.labelY)
         .attr("opacity", p.lineOpacity);
     }
+  }
+
+  const labelPadX = 3;
+  const labelPadY = 1;
+  for (const p of placements) {
     if (!p.showLabel) continue;
-    closedLayer
+    const g = closedLayer.append("g").attr("class", "ridge-closed-label-group");
+    const bg = g.append("rect").attr("class", "ridge-closed-label-bg");
+    const text = g
       .append("text")
       .attr("class", "ridge-closed-label")
       .attr("x", p.labelRightX - 4)
@@ -647,6 +627,15 @@ function drawOverlay(ctx: OverlayContext) {
       .attr("text-anchor", "end")
       .attr("opacity", p.labelOpacity)
       .text(p.text);
+    const node = text.node();
+    if (!node) continue;
+    const bbox = node.getBBox();
+    bg.attr("x", bbox.x - labelPadX)
+      .attr("y", bbox.y - labelPadY)
+      .attr("width", bbox.width + labelPadX * 2)
+      .attr("height", bbox.height + labelPadY * 2)
+      .attr("rx", 2)
+      .attr("ry", 2);
   }
 
   // Compare-mode overlays (docs/ui.md §4.2): barbells + total-axis frontier.

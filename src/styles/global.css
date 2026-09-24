@@ -122,13 +122,20 @@ body {
   pointer-events: none;
 }
 
+.ridge-closed-label-bg {
+  fill: var(--bg-base);
+  pointer-events: none;
+}
+
 .ridge-closed-label {
   fill: var(--closed);
   font-family: theme("fontFamily.mono");
   font-size: 12px;
+  /* Glyph-edge halo as a second line of defence when a dash clips the
+     padding box; the opaque label-bg rect does the real knockout. */
   paint-order: stroke;
   stroke: var(--bg-base);
-  stroke-width: 3;
+  stroke-width: 2;
   pointer-events: none;
 }
 @media (max-width: 639px) {

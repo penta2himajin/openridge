@@ -183,6 +183,7 @@ dropdown を開いた直後の focused は **selected と同じ位置**。
 - 水平点線 + 右端にラベル
 - **1モデル1本**。mode（reasoning / effort 階層）別には分けず、最高スコアの階層を代表として描く。ラベルには階層を残す（`Claude Opus 5 (max)`）。括弧に Fallback 等の identity が混ざっていても mode トークンだけ落として畳む（`Default Fallback` 付き Opus 5.5 の max/xhigh/high が別線にならない）
 - デフォルト表示は 2本（最上位クローズド＝ceiling + オープン frontier 頂点に最も近いクローズド＝open-touch）。"Show all closed" トグルで **その2本のスコア帯に挟まれたモデル**も出す（帯の下には伸びない）。ラベルが入り切らなければ ceiling と open-touch を残し、中間から間引く
+- ラベルが他モデルの点線に重なる箇所は、ラベル背後に `--bg-base` の矩形を置いて点線だけを抜く（文字は読める／線はラベル外で続く）
 - 1px 点線、`--closed` 色
 - ラベル: Geist Mono 12px、右端 padding 8px、`--closed` 色
 

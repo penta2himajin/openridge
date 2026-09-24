@@ -580,7 +580,11 @@ function drawOverlay(ctx: OverlayContext) {
   // onto its neighbour — the dashed line stays, and hovering still names it.
   for (const p of placements) p.showLabel = p.labelY >= chartTop + 10;
 
-  // Render each callout.
+  // Two passes so dashed lines never paint over labels. Each flagship's line
+  // spans the full X range; when labels stack into that band a later model's
+  // stroke would otherwise cover an earlier label. Draw every line/marker/
+  // leader first, then punch a --bg-base rect behind each label (glyph-halo
+  // alone is not enough — dashes read through letter gaps) and the text.
   for (const p of placements) {
     closedLayer
       .append("line")
@@ -607,8 +611,15 @@ function drawOverlay(ctx: OverlayContext) {
         .attr("y2", p.labelY)
         .attr("opacity", p.lineOpacity);
     }
+  }
+
+  const labelPadX = 3;
+  const labelPadY = 1;
+  for (const p of placements) {
     if (!p.showLabel) continue;
-    closedLayer
+    const g = closedLayer.append("g").attr("class", "ridge-closed-label-group");
+    const bg = g.append("rect").attr("class", "ridge-closed-label-bg");
+    const text = g
       .append("text")
       .attr("class", "ridge-closed-label")
       .attr("x", p.labelRightX - 4)
@@ -616,6 +627,15 @@ function drawOverlay(ctx: OverlayContext) {
       .attr("text-anchor", "end")
       .attr("opacity", p.labelOpacity)
       .text(p.text);
+    const node = text.node();
+    if (!node) continue;
+    const bbox = node.getBBox();
+    bg.attr("x", bbox.x - labelPadX)
+      .attr("y", bbox.y - labelPadY)
+      .attr("width", bbox.width + labelPadX * 2)
+      .attr("height", bbox.height + labelPadY * 2)
+      .attr("rx", 2)
+      .attr("ry", 2);
   }
 
   // Compare-mode overlays (docs/ui.md §4.2): barbells + total-axis frontier.

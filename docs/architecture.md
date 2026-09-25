@@ -226,6 +226,7 @@ jobs:
 
 - **公開ドメイン**: [`openridge.dev`](https://openridge.dev)
 - **CNAME**: `public/CNAME` に `openridge.dev` を入れる（Astro が `public/` を `dist/` ルートにコピーするので、Pages がカスタムドメインとして拾う）
+- **OG 画像**: `public/og.png`（1200×630）。`npm run build:og` が最新の `data/models.json` を Compare モードで描画 → ブラー → OpenRidge ワードマーク＋稜線オーバーレイ。リンク埋め込み（`og:image` / `twitter:card`）用。データ刷新後に見た目を更新したいときだけ再実行してコミットする
 - **DNS** (apex `openridge.dev`): A レコード4本を GitHub Pages の IP に向ける
   - `185.199.108.153`
   - `185.199.109.153`

@@ -47,6 +47,17 @@ jobs:
           SITE_BASE: /
           SITE_URL: https://openridge.dev
 
+      # Regenerate the Open Graph card from this build's Compare view so
+      # https://openridge.dev/og.png tracks the same models.json that just
+      # shipped (daily refresh → push → this workflow, or the 05:00 UTC
+      # schedule). Chromium is only needed here; the static site itself
+      # does not depend on Playwright at runtime.
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Build Open Graph image
+        run: npm run og
+
       # Publish dist to the gh-pages branch root. `clean` removes stale files
       # but `clean-exclude` preserves the pr-preview/ umbrella so a production
       # deploy never wipes an in-flight PR preview. CNAME ships inside dist

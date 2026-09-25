@@ -8,6 +8,9 @@
  *
  * Usage: npm run build && npm run og
  * (or: npx tsx scripts/build-og.ts — expects dist/ already built)
+ *
+ * CI: deploy.yml runs this after `astro build` so openridge.dev/og.png always
+ * matches the models.json that just shipped (including daily refresh deploys).
  */
 import { createServer } from "node:http";
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";

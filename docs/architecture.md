@@ -226,6 +226,7 @@ jobs:
 
 - **公開ドメイン**: [`openridge.dev`](https://openridge.dev)
 - **CNAME**: `public/CNAME` に `openridge.dev` を入れる（Astro が `public/` を `dist/` ルートにコピーするので、Pages がカスタムドメインとして拾う）
+- **OG 画像**: `public/og.png`（1200×630）がリポジトリ上のシード。本番の `https://openridge.dev/og.png` は **`deploy.yml` が毎回ビルド直後に再生成**する（Compare モードのスクショ → ブラー → ワードマーク＋稜線）。daily refresh が `models.json` を push → deploy が走ると OG もそのデータに追従する。ローカル再生成は `npm run build:og`
 - **DNS** (apex `openridge.dev`): A レコード4本を GitHub Pages の IP に向ける
   - `185.199.108.153`
   - `185.199.109.153`

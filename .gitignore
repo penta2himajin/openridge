@@ -26,3 +26,6 @@ yarn-error.log*
 .vscode/*
 !.vscode/settings.json
 !.vscode/extensions.json
+
+# OG build intermediates (public/og.png is the committed artifact)
+scripts/.og-cache/

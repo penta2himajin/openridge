@@ -54,6 +54,7 @@
   "deepseek-v4-pro-0424": "deepseek-ai/DeepSeek-V4-Pro",
   "deepseek-v4-pro-0424-high": "deepseek-ai/DeepSeek-V4-Pro",
   "deepseek-v4-pro-0424-non-reasoning": "deepseek-ai/DeepSeek-V4-Pro",
+  "deepseek-v4-pro-non-reasoning": "deepseek-ai/DeepSeek-V4-Pro-0813",
   "devstral-2": "mistralai/Devstral-2-123B-Instruct-2512",
   "devstral-medium": null,
   "devstral-small": "mistralai/Devstral-Small-2-24B-Instruct-2512",

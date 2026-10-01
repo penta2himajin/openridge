@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-30T10:25:13.309Z",
+  "generatedAt": "2026-10-01T10:52:26.948Z",
   "models": [
     {
       "id": "2f3c4dc9-a450-4303-8697-0237257cf08f",
@@ -30,8 +30,8 @@
         "price_1m_output_tokens": 20
       },
       "speed": {
-        "tps": 95.755,
-        "ttft": 477.23
+        "tps": 96.066,
+        "ttft": 479.922
       },
       "hfId": null,
       "mode": "Adaptive Reasoning, Max Effort, Default Fallback",
@@ -66,8 +66,8 @@
         "price_1m_output_tokens": 20
       },
       "speed": {
-        "tps": 80.803,
-        "ttft": 53.971
+        "tps": 80.594,
+        "ttft": 41.547
       },
       "hfId": null,
       "mode": "Adaptive Reasoning, Xhigh Effort, Default Fallback",
@@ -102,8 +102,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 145.279,
-        "ttft": 308.288
+        "tps": 145.124,
+        "ttft": 259.692
       },
       "hfId": null,
       "mode": "Adaptive Reasoning, Max Effort, Default Fallback",
@@ -138,8 +138,8 @@
         "price_1m_output_tokens": 20
       },
       "speed": {
-        "tps": 73.482,
-        "ttft": 17.342
+        "tps": 78.925,
+        "ttft": 16.404
       },
       "hfId": null,
       "mode": "Adaptive Reasoning, High Effort, Default Fallback",
@@ -174,8 +174,8 @@
         "price_1m_output_tokens": 50
       },
       "speed": {
-        "tps": 68.862,
-        "ttft": 114.389
+        "tps": 70.155,
+        "ttft": 115.077
       },
       "hfId": null,
       "mode": "Adaptive Reasoning, Max Effort, Default Fallback",
@@ -210,8 +210,8 @@
         "price_1m_output_tokens": 50
       },
       "speed": {
-        "tps": 57.223,
-        "ttft": 34.296
+        "tps": 62.658,
+        "ttft": 37.367
       },
       "hfId": null,
       "mode": "Adaptive Reasoning, Xhigh Effort, Default Fallback",
@@ -220,7 +220,7 @@
     {
       "id": "2f339a97-9a0d-499a-9cb5-e0db665bfa25",
       "slug": "gpt-6-astra",
-      "name": "GPT-6 Astra (max)",
+      "name": "GPT-6 Astra (Max)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -246,17 +246,53 @@
         "price_1m_output_tokens": 50
       },
       "speed": {
-        "tps": 55.199,
-        "ttft": 188.863
+        "tps": 55.544,
+        "ttft": 192.922
       },
       "hfId": null,
-      "mode": "max",
+      "mode": "Max",
       "releaseDate": "2026-09-03"
+    },
+    {
+      "id": "d366dfa1-d940-4788-aa73-d298c45699b3",
+      "slug": "gemini-4-argon",
+      "name": "Gemini 4 Argon (High)",
+      "creator": "Google",
+      "creatorSlug": "google",
+      "isClosed": true,
+      "params": {
+        "total": null,
+        "active": null
+      },
+      "paramsUnknown": false,
+      "license": null,
+      "scores": {
+        "artificial_analysis_intelligence_index": 52.6,
+        "artificial_analysis_coding_index": null,
+        "gpqa": null,
+        "hle": 0.571,
+        "lcr": 0.796666666666667,
+        "scicode": 0.618,
+        "tau_banking": null,
+        "terminalbench_v2_1": null
+      },
+      "pricing": {
+        "price_1m_blended_3_to_1": 4,
+        "price_1m_input_tokens": 2,
+        "price_1m_output_tokens": 10
+      },
+      "speed": {
+        "tps": 0,
+        "ttft": 0
+      },
+      "hfId": null,
+      "mode": "High",
+      "releaseDate": "2026-09-30"
     },
     {
       "id": "1f541ef3-913f-4eb2-9d07-0e93c7a9a5e3",
       "slug": "gpt-6-astra-xhigh",
-      "name": "GPT-6 Astra (xhigh)",
+      "name": "GPT-6 Astra (Xhigh)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -282,11 +318,11 @@
         "price_1m_output_tokens": 50
       },
       "speed": {
-        "tps": 52.725,
-        "ttft": 75.87
+        "tps": 51.622,
+        "ttft": 72.702
       },
       "hfId": null,
-      "mode": "xhigh",
+      "mode": "Xhigh",
       "releaseDate": "2026-09-03"
     },
     {
@@ -318,8 +354,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 108.626,
-        "ttft": 15.042
+        "tps": 112.379,
+        "ttft": 14.559
       },
       "hfId": null,
       "mode": "Adaptive Reasoning, Xhigh Effort, Default Fallback",
@@ -328,7 +364,7 @@
     {
       "id": "b25ac058-1e33-4c31-bbc9-a20c3ad0717a",
       "slug": "gpt-6-1-sol",
-      "name": "GPT-6.1 Sol (max)",
+      "name": "GPT-6.1 Sol (Max)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -354,11 +390,11 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 80.013,
-        "ttft": 120.551
+        "tps": 68.576,
+        "ttft": 128.044
       },
       "hfId": null,
-      "mode": "max",
+      "mode": "Max",
       "releaseDate": "2026-09-29"
     },
     {
@@ -390,8 +426,8 @@
         "price_1m_output_tokens": 20
       },
       "speed": {
-        "tps": 73.504,
-        "ttft": 12.608
+        "tps": 74.631,
+        "ttft": 12.746
       },
       "hfId": null,
       "mode": "Adaptive Reasoning, Medium Effort, Default Fallback",
@@ -426,8 +462,8 @@
         "price_1m_output_tokens": 50
       },
       "speed": {
-        "tps": 50.841,
-        "ttft": 6.231
+        "tps": 52.756,
+        "ttft": 6.529
       },
       "hfId": null,
       "mode": "Adaptive Reasoning, High Effort, Default Fallback",
@@ -436,7 +472,7 @@
     {
       "id": "092a3b0e-c5c8-45dc-bf1b-53673c8ff352",
       "slug": "gpt-6-1-sol-xhigh",
-      "name": "GPT-6.1 Sol (xhigh)",
+      "name": "GPT-6.1 Sol (Xhigh)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -462,17 +498,17 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 72.374,
-        "ttft": 40.315
+        "tps": 65.263,
+        "ttft": 48.155
       },
       "hfId": null,
-      "mode": "xhigh",
+      "mode": "Xhigh",
       "releaseDate": "2026-09-29"
     },
     {
       "id": "e05a4828-0536-4876-870d-a235023f992b",
       "slug": "gpt-6-astra-high",
-      "name": "GPT-6 Astra (high)",
+      "name": "GPT-6 Astra (High)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -498,11 +534,11 @@
         "price_1m_output_tokens": 50
       },
       "speed": {
-        "tps": 49.969,
-        "ttft": 32.127
+        "tps": 49.272,
+        "ttft": 29.075
       },
       "hfId": null,
-      "mode": "high",
+      "mode": "High",
       "releaseDate": "2026-09-03"
     },
     {
@@ -544,7 +580,7 @@
     {
       "id": "3b84fee3-b70a-41bc-819e-5fbdef9a0042",
       "slug": "gpt-6-1-sol-high",
-      "name": "GPT-6.1 Sol (high)",
+      "name": "GPT-6.1 Sol (High)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -570,11 +606,11 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 67.632,
-        "ttft": 20.905
+        "tps": 62.811,
+        "ttft": 19.593
       },
       "hfId": null,
-      "mode": "high",
+      "mode": "High",
       "releaseDate": "2026-09-29"
     },
     {
@@ -652,7 +688,7 @@
     {
       "id": "e97a4ef5-e817-480e-9595-12f81dc4974f",
       "slug": "gpt-6-astra-medium",
-      "name": "GPT-6 Astra (medium)",
+      "name": "GPT-6 Astra (Medium)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -678,11 +714,11 @@
         "price_1m_output_tokens": 50
       },
       "speed": {
-        "tps": 49.184,
-        "ttft": 3.732
+        "tps": 50.692,
+        "ttft": 4.249
       },
       "hfId": null,
-      "mode": "medium",
+      "mode": "Medium",
       "releaseDate": "2026-09-03"
     },
     {
@@ -714,8 +750,8 @@
         "price_1m_output_tokens": 50
       },
       "speed": {
-        "tps": 49.475,
-        "ttft": 4.802
+        "tps": 48.817,
+        "ttft": 5.42
       },
       "hfId": null,
       "mode": "Adaptive Reasoning, Medium Effort, Default Fallback",
@@ -760,7 +796,7 @@
     {
       "id": "9999672c-b687-4026-9c15-5cef02ff53bb",
       "slug": "muse-spark-1-3",
-      "name": "Muse Spark 1.3 (max)",
+      "name": "Muse Spark 1.3 (Max)",
       "creator": "Meta",
       "creatorSlug": "meta",
       "isClosed": false,
@@ -786,17 +822,17 @@
         "price_1m_output_tokens": 4.25
       },
       "speed": {
-        "tps": 189.456,
-        "ttft": 20.92
+        "tps": 176.661,
+        "ttft": 35.106
       },
       "hfId": null,
-      "mode": "max",
+      "mode": "Max",
       "releaseDate": "2026-09-02"
     },
     {
       "id": "a2e51d62-ea4e-4f15-8be0-be9dc1fb489d",
       "slug": "gpt-6-1-sol-medium",
-      "name": "GPT-6.1 Sol (medium)",
+      "name": "GPT-6.1 Sol (Medium)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -822,17 +858,17 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 69.944,
-        "ttft": 4.128
+        "tps": 64.364,
+        "ttft": 3.627
       },
       "hfId": null,
-      "mode": "medium",
+      "mode": "Medium",
       "releaseDate": "2026-09-29"
     },
     {
       "id": "c50ea08c-88c0-4eb7-85b8-27f2bbf6d527",
       "slug": "gpt-6-sol",
-      "name": "GPT-6 Sol (max)",
+      "name": "GPT-6 Sol (Max)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -843,7 +879,7 @@
       "paramsUnknown": false,
       "license": null,
       "scores": {
-        "artificial_analysis_intelligence_index": 47.5,
+        "artificial_analysis_intelligence_index": 47.6,
         "artificial_analysis_coding_index": null,
         "gpqa": null,
         "hle": 0.479,
@@ -858,17 +894,17 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 79.832,
-        "ttft": 111.271
+        "tps": 83.804,
+        "ttft": 113.231
       },
       "hfId": null,
-      "mode": "max",
+      "mode": "Max",
       "releaseDate": "2026-09-22"
     },
     {
       "id": "d93edfe8-bf35-49ad-b56e-b18116142a1c",
       "slug": "gpt-5-6-sol",
-      "name": "GPT-5.6 Sol (max)",
+      "name": "GPT-5.6 Sol (Max)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -898,7 +934,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "max",
+      "mode": "Max",
       "releaseDate": "2026-07-09"
     },
     {
@@ -966,7 +1002,7 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 103.982,
+        "tps": 106.339,
         "ttft": 7.074
       },
       "hfId": null,
@@ -976,7 +1012,7 @@
     {
       "id": "59627802-1546-422c-9a65-65b61c022d36",
       "slug": "grok-4-7",
-      "name": "Grok 4.7 (xhigh)",
+      "name": "Grok 4.7 (Xhigh)",
       "creator": "SpaceXAI",
       "creatorSlug": "xai",
       "isClosed": true,
@@ -1002,17 +1038,17 @@
         "price_1m_output_tokens": 6
       },
       "speed": {
-        "tps": 82.607,
-        "ttft": 22.566
+        "tps": 83.076,
+        "ttft": 19.787
       },
       "hfId": null,
-      "mode": "xhigh",
+      "mode": "Xhigh",
       "releaseDate": "2026-09-21"
     },
     {
       "id": "272f5f03-aea9-4675-a244-2b753b618cdf",
       "slug": "grok-4-7-high",
-      "name": "Grok 4.7 (high)",
+      "name": "Grok 4.7 (High)",
       "creator": "SpaceXAI",
       "creatorSlug": "xai",
       "isClosed": true,
@@ -1038,11 +1074,11 @@
         "price_1m_output_tokens": 6
       },
       "speed": {
-        "tps": 74.109,
-        "ttft": 17.899
+        "tps": 83.388,
+        "ttft": 13.682
       },
       "hfId": null,
-      "mode": "high",
+      "mode": "High",
       "releaseDate": "2026-09-21"
     },
     {
@@ -1074,8 +1110,8 @@
         "price_1m_output_tokens": 0.87
       },
       "speed": {
-        "tps": 44.303,
-        "ttft": 3.251
+        "tps": 47.877,
+        "ttft": 3.417
       },
       "hfId": "XiaomiMiMo/MiMo-V2.6-Pro-RL",
       "mode": null,
@@ -1084,7 +1120,7 @@
     {
       "id": "a3f8100d-e38f-408b-b0fa-0085dae18dc1",
       "slug": "gpt-6-astra-low",
-      "name": "GPT-6 Astra (low)",
+      "name": "GPT-6 Astra (Low)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -1110,11 +1146,11 @@
         "price_1m_output_tokens": 50
       },
       "speed": {
-        "tps": 47.823,
-        "ttft": 1.903
+        "tps": 45.873,
+        "ttft": 1.726
       },
       "hfId": null,
-      "mode": "low",
+      "mode": "Low",
       "releaseDate": "2026-09-03"
     },
     {
@@ -1146,8 +1182,8 @@
         "price_1m_output_tokens": 6
       },
       "speed": {
-        "tps": 39.267,
-        "ttft": 1.807
+        "tps": 39.824,
+        "ttft": 1.821
       },
       "hfId": null,
       "mode": "0902",
@@ -1156,7 +1192,7 @@
     {
       "id": "d5170215-69be-4129-849b-26d8d8825bfc",
       "slug": "muse-spark-1-3-xhigh",
-      "name": "Muse Spark 1.3 (xhigh)",
+      "name": "Muse Spark 1.3 (Xhigh)",
       "creator": "Meta",
       "creatorSlug": "meta",
       "isClosed": false,
@@ -1182,11 +1218,11 @@
         "price_1m_output_tokens": 4.25
       },
       "speed": {
-        "tps": 153.49,
-        "ttft": 40.355
+        "tps": 249.709,
+        "ttft": 30.774
       },
       "hfId": null,
-      "mode": "xhigh",
+      "mode": "Xhigh",
       "releaseDate": "2026-09-02"
     },
     {
@@ -1228,7 +1264,7 @@
     {
       "id": "cd684ea4-b475-4269-b001-d469d06d8a7a",
       "slug": "glm-5-3",
-      "name": "GLM-5.3 (max)",
+      "name": "GLM-5.3 (Max)",
       "creator": "Z AI",
       "creatorSlug": "zai",
       "isClosed": false,
@@ -1254,17 +1290,17 @@
         "price_1m_output_tokens": 4.4
       },
       "speed": {
-        "tps": 70.434,
-        "ttft": 2.816
+        "tps": 69.619,
+        "ttft": 3.012
       },
       "hfId": "zai-org/GLM-5.3-Flash",
-      "mode": "max",
+      "mode": "Max",
       "releaseDate": "2026-08-18"
     },
     {
       "id": "c8adc5cf-fd5a-407b-af51-dc3bede3e49c",
       "slug": "grok-4-6",
-      "name": "Grok 4.6 (high)",
+      "name": "Grok 4.6 (High)",
       "creator": "SpaceXAI",
       "creatorSlug": "xai",
       "isClosed": true,
@@ -1291,16 +1327,52 @@
       },
       "speed": {
         "tps": 62.616,
-        "ttft": 25.549
+        "ttft": 34.674
       },
       "hfId": null,
-      "mode": "high",
+      "mode": "High",
       "releaseDate": "2026-08-12"
+    },
+    {
+      "id": "da2642fe-9f73-4788-b5af-24edcd55b37e",
+      "slug": "gpt-6-sol-xhigh",
+      "name": "GPT-6 Sol (Xhigh)",
+      "creator": "OpenAI",
+      "creatorSlug": "openai",
+      "isClosed": true,
+      "params": {
+        "total": null,
+        "active": null
+      },
+      "paramsUnknown": false,
+      "license": null,
+      "scores": {
+        "artificial_analysis_intelligence_index": 44.2,
+        "artificial_analysis_coding_index": null,
+        "gpqa": null,
+        "hle": 0.463,
+        "lcr": 0.813333333333333,
+        "scicode": 0.551,
+        "tau_banking": null,
+        "terminalbench_v2_1": null
+      },
+      "pricing": {
+        "price_1m_blended_3_to_1": 4,
+        "price_1m_input_tokens": 2,
+        "price_1m_output_tokens": 10
+      },
+      "speed": {
+        "tps": 73.18,
+        "ttft": 30.631
+      },
+      "hfId": null,
+      "mode": "Xhigh",
+      "releaseDate": "2026-09-22"
     },
     {
       "id": "d6f43d0a-e8c4-447c-9ff7-5cf0a9d59aa3",
       "slug": "grok-4-6-xhigh",
-      "name": "Grok 4.6 (xhigh)",
+      "name": "Grok 4.6 (Xhigh)",
       "creator": "SpaceXAI",
       "creatorSlug": "xai",
       "isClosed": true,
@@ -1326,53 +1398,17 @@
         "price_1m_output_tokens": 6
       },
       "speed": {
-        "tps": 60.758,
-        "ttft": 25.418
+        "tps": 69.211,
+        "ttft": 49.143
       },
       "hfId": null,
-      "mode": "xhigh",
+      "mode": "Xhigh",
       "releaseDate": "2026-08-12"
-    },
-    {
-      "id": "da2642fe-9f73-4788-b5af-24edcd55b37e",
-      "slug": "gpt-6-sol-xhigh",
-      "name": "GPT-6 Sol (xhigh)",
-      "creator": "OpenAI",
-      "creatorSlug": "openai",
-      "isClosed": true,
-      "params": {
-        "total": null,
-        "active": null
-      },
-      "paramsUnknown": false,
-      "license": null,
-      "scores": {
-        "artificial_analysis_intelligence_index": 44.1,
-        "artificial_analysis_coding_index": null,
-        "gpqa": null,
-        "hle": 0.463,
-        "lcr": 0.813333333333333,
-        "scicode": 0.551,
-        "tau_banking": null,
-        "terminalbench_v2_1": null
-      },
-      "pricing": {
-        "price_1m_blended_3_to_1": 4,
-        "price_1m_input_tokens": 2,
-        "price_1m_output_tokens": 10
-      },
-      "speed": {
-        "tps": 73.18,
-        "ttft": 35.669
-      },
-      "hfId": null,
-      "mode": "xhigh",
-      "releaseDate": "2026-09-22"
     },
     {
       "id": "d998db47-9b67-4727-a2bb-2e1261020ac0",
       "slug": "gpt-5-6-sol-xhigh",
-      "name": "GPT-5.6 Sol (xhigh)",
+      "name": "GPT-5.6 Sol (Xhigh)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -1402,7 +1438,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "xhigh",
+      "mode": "Xhigh",
       "releaseDate": "2026-07-09"
     },
     {
@@ -1434,8 +1470,8 @@
         "price_1m_output_tokens": 2.7
       },
       "speed": {
-        "tps": 86.247,
-        "ttft": 1.999
+        "tps": 87.402,
+        "ttft": 2.138
       },
       "hfId": null,
       "mode": null,
@@ -1444,7 +1480,7 @@
     {
       "id": "f7d2fc3e-1f7b-405f-818c-07952a4af78f",
       "slug": "kimi-k3",
-      "name": "Kimi K3 (max)",
+      "name": "Kimi K3 (Max)",
       "creator": "Kimi",
       "creatorSlug": "kimi",
       "isClosed": false,
@@ -1470,17 +1506,17 @@
         "price_1m_output_tokens": 15
       },
       "speed": {
-        "tps": 38.459,
-        "ttft": 3.121
+        "tps": 40.421,
+        "ttft": 2.906
       },
       "hfId": "moonshotai/Kimi-K3",
-      "mode": "max",
+      "mode": "Max",
       "releaseDate": "2026-07-16"
     },
     {
       "id": "26614164-6840-4e17-a65a-2deb2fe7e87b",
       "slug": "grok-4-6-medium",
-      "name": "Grok 4.6 (medium)",
+      "name": "Grok 4.6 (Medium)",
       "creator": "SpaceXAI",
       "creatorSlug": "xai",
       "isClosed": true,
@@ -1506,17 +1542,17 @@
         "price_1m_output_tokens": 6
       },
       "speed": {
-        "tps": 61.514,
+        "tps": 63.226,
         "ttft": 21.148
       },
       "hfId": null,
-      "mode": "medium",
+      "mode": "Medium",
       "releaseDate": "2026-08-12"
     },
     {
       "id": "52eebe3e-6ede-4e46-92db-c5dea49fc410",
       "slug": "gpt-6-sol-high",
-      "name": "GPT-6 Sol (high)",
+      "name": "GPT-6 Sol (High)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -1527,7 +1563,7 @@
       "paramsUnknown": false,
       "license": null,
       "scores": {
-        "artificial_analysis_intelligence_index": 42.8,
+        "artificial_analysis_intelligence_index": 42.4,
         "artificial_analysis_coding_index": null,
         "gpqa": null,
         "hle": 0.441,
@@ -1542,17 +1578,17 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 70.636,
-        "ttft": 16.074
+        "tps": 72.224,
+        "ttft": 13.201
       },
       "hfId": null,
-      "mode": "high",
+      "mode": "High",
       "releaseDate": "2026-09-22"
     },
     {
       "id": "8afc250d-b538-45a2-812a-4605f4ffd87e",
       "slug": "gpt-5-6-sol-high",
-      "name": "GPT-5.6 Sol (high)",
+      "name": "GPT-5.6 Sol (High)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -1582,7 +1618,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "high",
+      "mode": "High",
       "releaseDate": "2026-07-09"
     },
     {
@@ -1614,8 +1650,8 @@
         "price_1m_output_tokens": 20
       },
       "speed": {
-        "tps": 73.853,
-        "ttft": 5.086
+        "tps": 76.126,
+        "ttft": 5.327
       },
       "hfId": null,
       "mode": "Adaptive Reasoning, Low Effort, Default Fallback",
@@ -1624,7 +1660,7 @@
     {
       "id": "e76e0fe5-93ca-4272-9359-2eb1740467d1",
       "slug": "gpt-6-1-sol-low",
-      "name": "GPT-6.1 Sol (low)",
+      "name": "GPT-6.1 Sol (Low)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -1650,17 +1686,17 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 68.012,
-        "ttft": 1.333
+        "tps": 58.271,
+        "ttft": 1.954
       },
       "hfId": null,
-      "mode": "low",
+      "mode": "Low",
       "releaseDate": "2026-09-29"
     },
     {
       "id": "bcf8db0a-3bb6-4d82-9516-0f57370c85a6",
       "slug": "gpt-5-6-terra",
-      "name": "GPT-5.6 Terra (max)",
+      "name": "GPT-5.6 Terra (Max)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -1686,11 +1722,11 @@
         "price_1m_output_tokens": 12
       },
       "speed": {
-        "tps": 107.685,
-        "ttft": 101.636
+        "tps": 106.365,
+        "ttft": 92.404
       },
       "hfId": null,
-      "mode": "max",
+      "mode": "Max",
       "releaseDate": "2026-07-09"
     },
     {
@@ -1722,8 +1758,8 @@
         "price_1m_output_tokens": 0.5
       },
       "speed": {
-        "tps": 46.936,
-        "ttft": 3.195
+        "tps": 48.708,
+        "ttft": 3.256
       },
       "hfId": "zai-org/GLM-5.3-Flash",
       "mode": null,
@@ -1768,7 +1804,7 @@
     {
       "id": "8a999846-4c1d-4ce7-a8b7-1310a7166fd7",
       "slug": "gemini-3-8-flash",
-      "name": "Gemini 3.8 Flash (high)",
+      "name": "Gemini 3.8 Flash (High)",
       "creator": "Google",
       "creatorSlug": "google",
       "isClosed": true,
@@ -1794,11 +1830,11 @@
         "price_1m_output_tokens": 3.75
       },
       "speed": {
-        "tps": 222.13,
-        "ttft": 12.574
+        "tps": 237.734,
+        "ttft": 13.377
       },
       "hfId": null,
-      "mode": "high",
+      "mode": "High",
       "releaseDate": "2026-09-02"
     },
     {
@@ -1830,8 +1866,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 88.169,
-        "ttft": 0.749
+        "tps": 103.84,
+        "ttft": 0.904
       },
       "hfId": null,
       "mode": "Adaptive Reasoning, Medium Effort, Default Fallback",
@@ -1938,8 +1974,8 @@
         "price_1m_output_tokens": 6
       },
       "speed": {
-        "tps": 39.342,
-        "ttft": 2.035
+        "tps": 41.395,
+        "ttft": 1.945
       },
       "hfId": "Qwen/Qwen3.8-2.4T-A95B",
       "mode": null,
@@ -1974,8 +2010,8 @@
         "price_1m_output_tokens": 0.47
       },
       "speed": {
-        "tps": 52.938,
-        "ttft": 1.502
+        "tps": 52.897,
+        "ttft": 1.45
       },
       "hfId": "Qwen/Qwen3.8-Flash-Next",
       "mode": null,
@@ -1984,7 +2020,7 @@
     {
       "id": "780a4a85-17ff-4175-a8dd-ebca4823e61b",
       "slug": "gpt-6-sol-medium",
-      "name": "GPT-6 Sol (medium)",
+      "name": "GPT-6 Sol (Medium)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -2014,13 +2050,13 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "medium",
+      "mode": "Medium",
       "releaseDate": "2026-09-22"
     },
     {
       "id": "744fa3c1-42a7-4995-b138-fb6be11f463c",
       "slug": "gemini-3-8-flash-medium",
-      "name": "Gemini 3.8 Flash (medium)",
+      "name": "Gemini 3.8 Flash (Medium)",
       "creator": "Google",
       "creatorSlug": "google",
       "isClosed": true,
@@ -2050,13 +2086,13 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "medium",
+      "mode": "Medium",
       "releaseDate": "2026-09-02"
     },
     {
       "id": "eb0d4272-7204-42b9-b875-8866fed58548",
       "slug": "gemini-3-7-flash-medium",
-      "name": "Gemini 3.7 Flash (medium)",
+      "name": "Gemini 3.7 Flash (Medium)",
       "creator": "Google",
       "creatorSlug": "google",
       "isClosed": true,
@@ -2086,13 +2122,13 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "medium",
+      "mode": "Medium",
       "releaseDate": "2026-08-13"
     },
     {
       "id": "04ee6719-0327-463b-a1a1-70a6a78254f9",
       "slug": "muse-spark-1-2",
-      "name": "Muse Spark 1.2 (xhigh)",
+      "name": "Muse Spark 1.2 (Xhigh)",
       "creator": "Meta",
       "creatorSlug": "meta",
       "isClosed": false,
@@ -2122,13 +2158,13 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "xhigh",
+      "mode": "Xhigh",
       "releaseDate": "2026-08-05"
     },
     {
       "id": "dbe7c625-3100-4463-b479-a228c41f75dd",
       "slug": "deepseek-v4-1-flash",
-      "name": "DeepSeek V4.1 Flash (Reasoning, Max Effort)",
+      "name": "DeepSeek V4.1 Flash (Max)",
       "creator": "DeepSeek",
       "creatorSlug": "deepseek",
       "isClosed": false,
@@ -2154,11 +2190,11 @@
         "price_1m_output_tokens": 1.2
       },
       "speed": {
-        "tps": 218.778,
-        "ttft": 0.821
+        "tps": 226.71,
+        "ttft": 0.836
       },
       "hfId": "deepseek-ai/DeepSeek-V4.1-Flash",
-      "mode": "Reasoning, Max Effort",
+      "mode": "Max",
       "releaseDate": "2026-09-10"
     },
     {
@@ -2200,7 +2236,7 @@
     {
       "id": "6f174934-5b7d-4333-86cb-f5ebf4a862e3",
       "slug": "gpt-5-6-sol-medium",
-      "name": "GPT-5.6 Sol (medium)",
+      "name": "GPT-5.6 Sol (Medium)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -2230,13 +2266,13 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "medium",
+      "mode": "Medium",
       "releaseDate": "2026-07-09"
     },
     {
       "id": "b2331108-72ed-415a-82d1-188633875bbc",
       "slug": "gemini-3-7-flash",
-      "name": "Gemini 3.7 Flash (high)",
+      "name": "Gemini 3.7 Flash (High)",
       "creator": "Google",
       "creatorSlug": "google",
       "isClosed": true,
@@ -2266,13 +2302,13 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "high",
+      "mode": "High",
       "releaseDate": "2026-08-13"
     },
     {
       "id": "a89c4b28-2d8c-456e-88ea-255fb51fd2b6",
       "slug": "gpt-5-4",
-      "name": "GPT-5.4 (xhigh)",
+      "name": "GPT-5.4 (Xhigh)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -2302,13 +2338,13 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "xhigh",
+      "mode": "Xhigh",
       "releaseDate": "2026-03-05"
     },
     {
       "id": "794f69b5-cede-482b-b1cc-d769478497cd",
       "slug": "grok-4-5",
-      "name": "Grok 4.5 (high)",
+      "name": "Grok 4.5 (High)",
       "creator": "SpaceXAI",
       "creatorSlug": "xai",
       "isClosed": true,
@@ -2338,13 +2374,13 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "high",
+      "mode": "High",
       "releaseDate": "2026-07-08"
     },
     {
       "id": "1f054429-397e-4fdb-9e71-67bc92c1735e",
       "slug": "gpt-5-5",
-      "name": "GPT-5.5 (xhigh)",
+      "name": "GPT-5.5 (Xhigh)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -2374,7 +2410,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "xhigh",
+      "mode": "Xhigh",
       "releaseDate": "2026-04-23"
     },
     {
@@ -2406,17 +2442,53 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 89.987,
-        "ttft": 127.655
+        "tps": 94.143,
+        "ttft": 138
       },
       "hfId": null,
       "mode": "Adaptive Reasoning, Max Effort",
       "releaseDate": "2026-06-30"
     },
     {
+      "id": "6fb13851-40ce-4bda-ad3f-6b38e0c5daa7",
+      "slug": "gpt-6-luna",
+      "name": "GPT-6 Luna (Max)",
+      "creator": "OpenAI",
+      "creatorSlug": "openai",
+      "isClosed": true,
+      "params": {
+        "total": null,
+        "active": null
+      },
+      "paramsUnknown": false,
+      "license": null,
+      "scores": {
+        "artificial_analysis_intelligence_index": 38.1,
+        "artificial_analysis_coding_index": null,
+        "gpqa": null,
+        "hle": 0.385,
+        "lcr": 0.833333333333333,
+        "scicode": 0.546,
+        "tau_banking": null,
+        "terminalbench_v2_1": null
+      },
+      "pricing": {
+        "price_1m_blended_3_to_1": 0.2,
+        "price_1m_input_tokens": 0.1,
+        "price_1m_output_tokens": 0.5
+      },
+      "speed": {
+        "tps": 137.417,
+        "ttft": 83.996
+      },
+      "hfId": null,
+      "mode": "Max",
+      "releaseDate": "2026-09-22"
+    },
+    {
       "id": "9e30696f-16fa-4b4f-ba53-161895a85fed",
       "slug": "gpt-5-6-terra-xhigh",
-      "name": "GPT-5.6 Terra (xhigh)",
+      "name": "GPT-5.6 Terra (Xhigh)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -2443,10 +2515,10 @@
       },
       "speed": {
         "tps": 88.268,
-        "ttft": 9.848
+        "ttft": 8.911
       },
       "hfId": null,
-      "mode": "xhigh",
+      "mode": "Xhigh",
       "releaseDate": "2026-07-09"
     },
     {
@@ -2478,8 +2550,8 @@
         "price_1m_output_tokens": 0.28
       },
       "speed": {
-        "tps": 50.422,
-        "ttft": 3.89
+        "tps": 53.198,
+        "ttft": 3.654
       },
       "hfId": "XiaomiMiMo/MiMo-V2.6-Flash-RL",
       "mode": null,
@@ -2488,7 +2560,7 @@
     {
       "id": "426d24c8-49ae-482a-b4a8-20f1c53f21c1",
       "slug": "gpt-5-6-luna",
-      "name": "GPT-5.6 Luna (max)",
+      "name": "GPT-5.6 Luna (Max)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -2518,49 +2590,13 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "max",
+      "mode": "Max",
       "releaseDate": "2026-07-09"
-    },
-    {
-      "id": "6fb13851-40ce-4bda-ad3f-6b38e0c5daa7",
-      "slug": "gpt-6-luna",
-      "name": "GPT-6 Luna (max)",
-      "creator": "OpenAI",
-      "creatorSlug": "openai",
-      "isClosed": true,
-      "params": {
-        "total": null,
-        "active": null
-      },
-      "paramsUnknown": false,
-      "license": null,
-      "scores": {
-        "artificial_analysis_intelligence_index": 37.3,
-        "artificial_analysis_coding_index": null,
-        "gpqa": null,
-        "hle": 0.385,
-        "lcr": 0.833333333333333,
-        "scicode": 0.546,
-        "tau_banking": null,
-        "terminalbench_v2_1": null
-      },
-      "pricing": {
-        "price_1m_blended_3_to_1": 0.2,
-        "price_1m_input_tokens": 0.1,
-        "price_1m_output_tokens": 0.5
-      },
-      "speed": {
-        "tps": 134.492,
-        "ttft": 74.941
-      },
-      "hfId": null,
-      "mode": "max",
-      "releaseDate": "2026-09-22"
     },
     {
       "id": "b13c1257-d746-4027-8fc8-4892dc14701c",
       "slug": "gpt-5-5-high",
-      "name": "GPT-5.5 (high)",
+      "name": "GPT-5.5 (High)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -2590,13 +2626,13 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "high",
+      "mode": "High",
       "releaseDate": "2026-04-23"
     },
     {
       "id": "ddfdaf64-3f8e-40a6-a492-608ee83a1351",
       "slug": "gemini-3-7-flash-low",
-      "name": "Gemini 3.7 Flash (low)",
+      "name": "Gemini 3.7 Flash (Low)",
       "creator": "Google",
       "creatorSlug": "google",
       "isClosed": true,
@@ -2626,13 +2662,13 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "low",
+      "mode": "Low",
       "releaseDate": "2026-08-13"
     },
     {
       "id": "83173329-c09a-41f1-a028-a282a5f908d7",
       "slug": "deepseek-v4-pro",
-      "name": "DeepSeek V4 Pro 0813 (Reasoning, Max Effort)",
+      "name": "DeepSeek V4 Pro 0813 (Max)",
       "creator": "DeepSeek",
       "creatorSlug": "deepseek",
       "isClosed": false,
@@ -2658,17 +2694,17 @@
         "price_1m_output_tokens": 3.96
       },
       "speed": {
-        "tps": 80.035,
-        "ttft": 1.124
+        "tps": 87.145,
+        "ttft": 1.148
       },
       "hfId": "deepseek-ai/DeepSeek-V4-Pro-0813",
-      "mode": "Reasoning, Max Effort",
+      "mode": "Max",
       "releaseDate": "2026-08-13"
     },
     {
       "id": "c07e65e6-32fc-451e-938d-7477a1c3ffcc",
       "slug": "grok-4-6-low",
-      "name": "Grok 4.6 (low)",
+      "name": "Grok 4.6 (Low)",
       "creator": "SpaceXAI",
       "creatorSlug": "xai",
       "isClosed": true,
@@ -2694,17 +2730,17 @@
         "price_1m_output_tokens": 6
       },
       "speed": {
-        "tps": 61.893,
-        "ttft": 2.677
+        "tps": 60.889,
+        "ttft": 2.081
       },
       "hfId": null,
-      "mode": "low",
+      "mode": "Low",
       "releaseDate": "2026-08-12"
     },
     {
       "id": "7707a46f-895f-4247-b7a8-ddab87c9a11d",
       "slug": "deepseek-v4-flash-vision",
-      "name": "DeepSeek V4 Flash Vision (Reasoning, Max Effort)",
+      "name": "DeepSeek V4 Flash Vision (Max)",
       "creator": "DeepSeek",
       "creatorSlug": "deepseek",
       "isClosed": false,
@@ -2730,17 +2766,53 @@
         "price_1m_output_tokens": 1.32
       },
       "speed": {
-        "tps": 217.986,
-        "ttft": 0.77
+        "tps": 232.626,
+        "ttft": 0.868
       },
       "hfId": "deepseek-ai/DeepSeek-V4-Flash-Vision-Exp",
-      "mode": "Reasoning, Max Effort",
+      "mode": "Max",
       "releaseDate": "2026-08-21"
+    },
+    {
+      "id": "19813eb2-460a-475c-af65-810bb8660fec",
+      "slug": "gpt-6-luna-xhigh",
+      "name": "GPT-6 Luna (Xhigh)",
+      "creator": "OpenAI",
+      "creatorSlug": "openai",
+      "isClosed": true,
+      "params": {
+        "total": null,
+        "active": null
+      },
+      "paramsUnknown": false,
+      "license": null,
+      "scores": {
+        "artificial_analysis_intelligence_index": 34.6,
+        "artificial_analysis_coding_index": null,
+        "gpqa": null,
+        "hle": 0.343,
+        "lcr": 0.8,
+        "scicode": 0.517,
+        "tau_banking": null,
+        "terminalbench_v2_1": null
+      },
+      "pricing": {
+        "price_1m_blended_3_to_1": 0.2,
+        "price_1m_input_tokens": 0.1,
+        "price_1m_output_tokens": 0.5
+      },
+      "speed": {
+        "tps": 125.21,
+        "ttft": 17.054
+      },
+      "hfId": null,
+      "mode": "Xhigh",
+      "releaseDate": "2026-09-22"
     },
     {
       "id": "87110ff0-1f79-41b4-9976-eda250597317",
       "slug": "gpt-5-6-luna-xhigh",
-      "name": "GPT-5.6 Luna (xhigh)",
+      "name": "GPT-5.6 Luna (Xhigh)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -2770,7 +2842,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "xhigh",
+      "mode": "Xhigh",
       "releaseDate": "2026-07-09"
     },
     {
@@ -2802,8 +2874,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 74.116,
-        "ttft": 17.023
+        "tps": 78.766,
+        "ttft": 18.899
       },
       "hfId": null,
       "mode": "Adaptive Reasoning, Xhigh Effort",
@@ -2812,7 +2884,7 @@
     {
       "id": "fe4c0848-e284-4e52-a79d-cdc28392f1a9",
       "slug": "deepseek-v4-flash",
-      "name": "DeepSeek V4 Flash 0731 (Reasoning, Max Effort)",
+      "name": "DeepSeek V4 Flash 0731 (Max)",
       "creator": "DeepSeek",
       "creatorSlug": "deepseek",
       "isClosed": false,
@@ -2842,13 +2914,13 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "Reasoning, Max Effort",
+      "mode": "Max",
       "releaseDate": "2026-07-31"
     },
     {
       "id": "cc1e488b-8ba4-464d-875d-690166b15ad3",
       "slug": "glm-5-3-low",
-      "name": "GLM-5.3 (low)",
+      "name": "GLM-5.3 (Low)",
       "creator": "Z AI",
       "creatorSlug": "zai",
       "isClosed": false,
@@ -2874,17 +2946,17 @@
         "price_1m_output_tokens": 4.4
       },
       "speed": {
-        "tps": 73.604,
-        "ttft": 3.238
+        "tps": 67.63,
+        "ttft": 3.303
       },
       "hfId": "zai-org/GLM-5.3",
-      "mode": "low",
+      "mode": "Low",
       "releaseDate": "2026-08-18"
     },
     {
       "id": "81972fba-1219-477e-bbfb-18c656a63ff7",
       "slug": "gpt-5-6-terra-high",
-      "name": "GPT-5.6 Terra (high)",
+      "name": "GPT-5.6 Terra (High)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -2910,17 +2982,53 @@
         "price_1m_output_tokens": 12
       },
       "speed": {
-        "tps": 88.367,
-        "ttft": 2.549
+        "tps": 85.905,
+        "ttft": 2.334
       },
       "hfId": null,
-      "mode": "high",
+      "mode": "High",
       "releaseDate": "2026-07-09"
+    },
+    {
+      "id": "01459872-433a-4ab2-8e99-7083162172eb",
+      "slug": "gpt-6-sol-low",
+      "name": "GPT-6 Sol (Low)",
+      "creator": "OpenAI",
+      "creatorSlug": "openai",
+      "isClosed": true,
+      "params": {
+        "total": null,
+        "active": null
+      },
+      "paramsUnknown": false,
+      "license": null,
+      "scores": {
+        "artificial_analysis_intelligence_index": 34.2,
+        "artificial_analysis_coding_index": null,
+        "gpqa": null,
+        "hle": 0.349,
+        "lcr": 0.793333333333333,
+        "scicode": 0.502,
+        "tau_banking": null,
+        "terminalbench_v2_1": null
+      },
+      "pricing": {
+        "price_1m_blended_3_to_1": 4,
+        "price_1m_input_tokens": 2,
+        "price_1m_output_tokens": 10
+      },
+      "speed": {
+        "tps": 69.594,
+        "ttft": 1.81
+      },
+      "hfId": null,
+      "mode": "Low",
+      "releaseDate": "2026-09-22"
     },
     {
       "id": "78332c88-fe60-42c8-af9d-3617e44cf1f5",
       "slug": "gemini-3-6-flash",
-      "name": "Gemini 3.6 Flash (high)",
+      "name": "Gemini 3.6 Flash (High)",
       "creator": "Google",
       "creatorSlug": "google",
       "isClosed": true,
@@ -2950,13 +3058,13 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "high",
+      "mode": "High",
       "releaseDate": "2026-07-21"
     },
     {
       "id": "46f11cdf-1725-4abb-b39b-bd6bd948149c",
       "slug": "jt236b",
-      "name": "JT-4.1 Flash 236B A21B",
+      "name": "JT-4.1 Flash 236B A21B (Reasoning)",
       "creator": "China Mobile",
       "creatorSlug": "china-mobile",
       "isClosed": true,
@@ -2986,85 +3094,13 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": null,
+      "mode": "Reasoning",
       "releaseDate": "2026-07-09"
-    },
-    {
-      "id": "01459872-433a-4ab2-8e99-7083162172eb",
-      "slug": "gpt-6-sol-low",
-      "name": "GPT-6 Sol (low)",
-      "creator": "OpenAI",
-      "creatorSlug": "openai",
-      "isClosed": true,
-      "params": {
-        "total": null,
-        "active": null
-      },
-      "paramsUnknown": false,
-      "license": null,
-      "scores": {
-        "artificial_analysis_intelligence_index": 33.9,
-        "artificial_analysis_coding_index": null,
-        "gpqa": null,
-        "hle": 0.349,
-        "lcr": 0.793333333333333,
-        "scicode": 0.502,
-        "tau_banking": null,
-        "terminalbench_v2_1": null
-      },
-      "pricing": {
-        "price_1m_blended_3_to_1": 4,
-        "price_1m_input_tokens": 2,
-        "price_1m_output_tokens": 10
-      },
-      "speed": {
-        "tps": 67.577,
-        "ttft": 1.81
-      },
-      "hfId": null,
-      "mode": "low",
-      "releaseDate": "2026-09-22"
-    },
-    {
-      "id": "19813eb2-460a-475c-af65-810bb8660fec",
-      "slug": "gpt-6-luna-xhigh",
-      "name": "GPT-6 Luna (xhigh)",
-      "creator": "OpenAI",
-      "creatorSlug": "openai",
-      "isClosed": true,
-      "params": {
-        "total": null,
-        "active": null
-      },
-      "paramsUnknown": false,
-      "license": null,
-      "scores": {
-        "artificial_analysis_intelligence_index": 33.9,
-        "artificial_analysis_coding_index": null,
-        "gpqa": null,
-        "hle": 0.343,
-        "lcr": 0.8,
-        "scicode": 0.517,
-        "tau_banking": null,
-        "terminalbench_v2_1": null
-      },
-      "pricing": {
-        "price_1m_blended_3_to_1": 0.2,
-        "price_1m_input_tokens": 0.1,
-        "price_1m_output_tokens": 0.5
-      },
-      "speed": {
-        "tps": 136.891,
-        "ttft": 16.828
-      },
-      "hfId": null,
-      "mode": "xhigh",
-      "releaseDate": "2026-09-22"
     },
     {
       "id": "6b79f899-e3c0-45f6-923c-243faccdb2fc",
       "slug": "gpt-5-5-medium",
-      "name": "GPT-5.5 (medium)",
+      "name": "GPT-5.5 (Medium)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -3094,13 +3130,13 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "medium",
+      "mode": "Medium",
       "releaseDate": "2026-04-23"
     },
     {
       "id": "d61493e2-43ff-460c-9054-eaf6ba317360",
       "slug": "muse-spark-1-1",
-      "name": "Muse Spark 1.1 (xhigh)",
+      "name": "Muse Spark 1.1 (Xhigh)",
       "creator": "Meta",
       "creatorSlug": "meta",
       "isClosed": false,
@@ -3130,13 +3166,13 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "xhigh",
+      "mode": "Xhigh",
       "releaseDate": "2026-07-09"
     },
     {
       "id": "f7a4ea75-e548-4069-80d4-9be8bc7c009b",
       "slug": "glm-5-2",
-      "name": "GLM-5.2 (max)",
+      "name": "GLM-5.2 (Max)",
       "creator": "Z AI",
       "creatorSlug": "zai",
       "isClosed": false,
@@ -3166,13 +3202,13 @@
         "ttft": 0
       },
       "hfId": "zai-org/GLM-5.2",
-      "mode": "max",
+      "mode": "Max",
       "releaseDate": "2026-06-16"
     },
     {
       "id": "b01dee41-c62b-48ed-8d16-984adc405e5c",
       "slug": "qwen3-8-27b",
-      "name": "Qwen3.8 27B (xhigh)",
+      "name": "Qwen3.8 27B (Xhigh)",
       "creator": "Alibaba",
       "creatorSlug": "alibaba",
       "isClosed": false,
@@ -3198,17 +3234,17 @@
         "price_1m_output_tokens": 3
       },
       "speed": {
-        "tps": 45.503,
-        "ttft": 1.278
+        "tps": 45.158,
+        "ttft": 1.246
       },
       "hfId": "Qwen/Qwen3.8-27B",
-      "mode": "xhigh",
+      "mode": "Xhigh",
       "releaseDate": "2026-08-14"
     },
     {
       "id": "5016ea75-7b0e-4737-a7e6-1062c6d90fd4",
       "slug": "gemini-3-5-flash-medium",
-      "name": "Gemini 3.5 Flash (medium)",
+      "name": "Gemini 3.5 Flash (Medium)",
       "creator": "Google",
       "creatorSlug": "google",
       "isClosed": true,
@@ -3238,7 +3274,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "medium",
+      "mode": "Medium",
       "releaseDate": "2026-05-19"
     },
     {
@@ -3280,7 +3316,7 @@
     {
       "id": "0904b596-8932-43bd-9b21-324f128e1723",
       "slug": "gpt-5-6-sol-low",
-      "name": "GPT-5.6 Sol (low)",
+      "name": "GPT-5.6 Sol (Low)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -3310,13 +3346,13 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "low",
+      "mode": "Low",
       "releaseDate": "2026-07-09"
     },
     {
       "id": "f6db039b-0f3b-485c-9d7f-982988e44f26",
       "slug": "gemini-3-8-flash-low",
-      "name": "Gemini 3.8 Flash (low)",
+      "name": "Gemini 3.8 Flash (Low)",
       "creator": "Google",
       "creatorSlug": "google",
       "isClosed": true,
@@ -3346,13 +3382,49 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "low",
+      "mode": "Low",
       "releaseDate": "2026-09-02"
+    },
+    {
+      "id": "7d1229bc-deea-4717-ba5b-f59a35d991e3",
+      "slug": "gpt-6-luna-high",
+      "name": "GPT-6 Luna (High)",
+      "creator": "OpenAI",
+      "creatorSlug": "openai",
+      "isClosed": true,
+      "params": {
+        "total": null,
+        "active": null
+      },
+      "paramsUnknown": false,
+      "license": null,
+      "scores": {
+        "artificial_analysis_intelligence_index": 32.9,
+        "artificial_analysis_coding_index": null,
+        "gpqa": null,
+        "hle": 0.329,
+        "lcr": 0.793333333333333,
+        "scicode": 0.503,
+        "tau_banking": null,
+        "terminalbench_v2_1": null
+      },
+      "pricing": {
+        "price_1m_blended_3_to_1": 0.2,
+        "price_1m_input_tokens": 0.1,
+        "price_1m_output_tokens": 0.5
+      },
+      "speed": {
+        "tps": 131.134,
+        "ttft": 7.064
+      },
+      "hfId": null,
+      "mode": "High",
+      "releaseDate": "2026-09-22"
     },
     {
       "id": "0097ebf5-124f-42f6-9463-33b00e711f03",
       "slug": "gemini-3-5-flash",
-      "name": "Gemini 3.5 Flash (high)",
+      "name": "Gemini 3.5 Flash (High)",
       "creator": "Google",
       "creatorSlug": "google",
       "isClosed": true,
@@ -3382,13 +3454,13 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "high",
+      "mode": "High",
       "releaseDate": "2026-05-19"
     },
     {
       "id": "59b5b14b-5365-4ee7-824a-18a8e6309644",
       "slug": "gpt-5-3-codex",
-      "name": "GPT-5.3 Codex (xhigh)",
+      "name": "GPT-5.3 Codex (Xhigh)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -3414,11 +3486,11 @@
         "price_1m_output_tokens": 14
       },
       "speed": {
-        "tps": 97.734,
-        "ttft": 39.134
+        "tps": 96.414,
+        "ttft": 46.568
       },
       "hfId": null,
-      "mode": "xhigh",
+      "mode": "Xhigh",
       "releaseDate": "2026-02-05"
     },
     {
@@ -3458,45 +3530,9 @@
       "releaseDate": "2026-07-14"
     },
     {
-      "id": "7d1229bc-deea-4717-ba5b-f59a35d991e3",
-      "slug": "gpt-6-luna-high",
-      "name": "GPT-6 Luna (high)",
-      "creator": "OpenAI",
-      "creatorSlug": "openai",
-      "isClosed": true,
-      "params": {
-        "total": null,
-        "active": null
-      },
-      "paramsUnknown": false,
-      "license": null,
-      "scores": {
-        "artificial_analysis_intelligence_index": 32.1,
-        "artificial_analysis_coding_index": null,
-        "gpqa": null,
-        "hle": 0.329,
-        "lcr": 0.793333333333333,
-        "scicode": 0.503,
-        "tau_banking": null,
-        "terminalbench_v2_1": null
-      },
-      "pricing": {
-        "price_1m_blended_3_to_1": 0.2,
-        "price_1m_input_tokens": 0.1,
-        "price_1m_output_tokens": 0.5
-      },
-      "speed": {
-        "tps": 138.238,
-        "ttft": 7.593
-      },
-      "hfId": null,
-      "mode": "high",
-      "releaseDate": "2026-09-22"
-    },
-    {
       "id": "aa55297e-8fbf-4372-b4ab-9b068dc6396c",
       "slug": "gpt-5-6-luna-high",
-      "name": "GPT-5.6 Luna (high)",
+      "name": "GPT-5.6 Luna (High)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -3526,7 +3562,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "high",
+      "mode": "High",
       "releaseDate": "2026-07-09"
     },
     {
@@ -3676,7 +3712,7 @@
     {
       "id": "c77cfe51-f4a0-4692-9dee-5061ef667f23",
       "slug": "gpt-5-5-low",
-      "name": "GPT-5.5 (low)",
+      "name": "GPT-5.5 (Low)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -3706,7 +3742,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "low",
+      "mode": "Low",
       "releaseDate": "2026-04-23"
     },
     {
@@ -3748,7 +3784,7 @@
     {
       "id": "bf220674-68bd-43cc-a1b8-ce5ed4d2f18d",
       "slug": "deepseek-v4-pro-0424",
-      "name": "DeepSeek V4 Pro 0424 (Reasoning, Max Effort)",
+      "name": "DeepSeek V4 Pro 0424 (Max)",
       "creator": "DeepSeek",
       "creatorSlug": "deepseek",
       "isClosed": false,
@@ -3778,13 +3814,13 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "Reasoning, Max Effort",
+      "mode": "Max",
       "releaseDate": "2026-04-24"
     },
     {
       "id": "498862c3-f9ac-49d2-852f-16a02bb0c38f",
       "slug": "gpt-5-2",
-      "name": "GPT-5.2 (xhigh)",
+      "name": "GPT-5.2 (Xhigh)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -3814,13 +3850,13 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "xhigh",
+      "mode": "Xhigh",
       "releaseDate": "2025-12-11"
     },
     {
       "id": "5da3c0e2-65d2-4bff-a410-cb2132ddafb6",
       "slug": "deepseek-v4-pro-0424-high",
-      "name": "DeepSeek V4 Pro 0424 (Reasoning, High Effort)",
+      "name": "DeepSeek V4 Pro 0424 (High)",
       "creator": "DeepSeek",
       "creatorSlug": "deepseek",
       "isClosed": false,
@@ -3850,13 +3886,13 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "Reasoning, High Effort",
+      "mode": "High",
       "releaseDate": "2026-04-24"
     },
     {
       "id": "26e0f83a-ca98-4f34-94ac-7c5e251ee410",
       "slug": "gpt-5-6-terra-medium",
-      "name": "GPT-5.6 Terra (medium)",
+      "name": "GPT-5.6 Terra (Medium)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -3882,17 +3918,17 @@
         "price_1m_output_tokens": 12
       },
       "speed": {
-        "tps": 91.198,
-        "ttft": 1.827
+        "tps": 91.912,
+        "ttft": 1.859
       },
       "hfId": null,
-      "mode": "medium",
+      "mode": "Medium",
       "releaseDate": "2026-07-09"
     },
     {
       "id": "512d17ef-13d2-4f65-bf9b-154b0dec7e8d",
       "slug": "kimi-k3-low",
-      "name": "Kimi K3 (low)",
+      "name": "Kimi K3 (Low)",
       "creator": "Kimi",
       "creatorSlug": "kimi",
       "isClosed": false,
@@ -3918,11 +3954,11 @@
         "price_1m_output_tokens": 15
       },
       "speed": {
-        "tps": 35.685,
-        "ttft": 3.25
+        "tps": 38.718,
+        "ttft": 3.532
       },
       "hfId": "moonshotai/Kimi-K3",
-      "mode": "low",
+      "mode": "Low",
       "releaseDate": "2026-07-16"
     },
     {
@@ -3962,6 +3998,42 @@
       "releaseDate": "2026-02-17"
     },
     {
+      "id": "36667da0-9222-4967-adbb-f7efa15ad213",
+      "slug": "gpt-6-luna-medium",
+      "name": "GPT-6 Luna (Medium)",
+      "creator": "OpenAI",
+      "creatorSlug": "openai",
+      "isClosed": true,
+      "params": {
+        "total": null,
+        "active": null
+      },
+      "paramsUnknown": false,
+      "license": null,
+      "scores": {
+        "artificial_analysis_intelligence_index": 29.9,
+        "artificial_analysis_coding_index": null,
+        "gpqa": null,
+        "hle": 0.283,
+        "lcr": 0.783333333333333,
+        "scicode": 0.509,
+        "tau_banking": null,
+        "terminalbench_v2_1": null
+      },
+      "pricing": {
+        "price_1m_blended_3_to_1": 0.2,
+        "price_1m_input_tokens": 0.1,
+        "price_1m_output_tokens": 0.5
+      },
+      "speed": {
+        "tps": 0,
+        "ttft": 0
+      },
+      "hfId": null,
+      "mode": "Medium",
+      "releaseDate": "2026-09-22"
+    },
+    {
       "id": "bbd93ebe-80da-4594-bb19-61e69d0331df",
       "slug": "gemini-3-1-pro-preview",
       "name": "Gemini 3.1 Pro Preview",
@@ -3990,48 +4062,12 @@
         "price_1m_output_tokens": 12
       },
       "speed": {
-        "tps": 126.44,
-        "ttft": 24.435
+        "tps": 127.145,
+        "ttft": 25.822
       },
       "hfId": null,
       "mode": null,
       "releaseDate": "2026-02-19"
-    },
-    {
-      "id": "36667da0-9222-4967-adbb-f7efa15ad213",
-      "slug": "gpt-6-luna-medium",
-      "name": "GPT-6 Luna (medium)",
-      "creator": "OpenAI",
-      "creatorSlug": "openai",
-      "isClosed": true,
-      "params": {
-        "total": null,
-        "active": null
-      },
-      "paramsUnknown": false,
-      "license": null,
-      "scores": {
-        "artificial_analysis_intelligence_index": 29.5,
-        "artificial_analysis_coding_index": null,
-        "gpqa": null,
-        "hle": 0.283,
-        "lcr": 0.783333333333333,
-        "scicode": 0.509,
-        "tau_banking": null,
-        "terminalbench_v2_1": null
-      },
-      "pricing": {
-        "price_1m_blended_3_to_1": 0.2,
-        "price_1m_input_tokens": 0.1,
-        "price_1m_output_tokens": 0.5
-      },
-      "speed": {
-        "tps": 0,
-        "ttft": 0
-      },
-      "hfId": null,
-      "mode": "medium",
-      "releaseDate": "2026-09-22"
     },
     {
       "id": "69534bed-2ffd-4235-832b-e20a810333ab",
@@ -4098,8 +4134,8 @@
         "price_1m_output_tokens": 1.2
       },
       "speed": {
-        "tps": 125.499,
-        "ttft": 0.799
+        "tps": 94.698,
+        "ttft": 0.755
       },
       "hfId": "MiniMaxAI/MiniMax-M3",
       "mode": null,
@@ -4178,9 +4214,45 @@
       "releaseDate": "2026-03-18"
     },
     {
+      "id": "d3e20e76-9e1a-45b6-b809-ad6aa37430cf",
+      "slug": "gpt-6-sol-non-reasoning",
+      "name": "GPT-6 Sol (Non-reasoning)",
+      "creator": "OpenAI",
+      "creatorSlug": "openai",
+      "isClosed": true,
+      "params": {
+        "total": null,
+        "active": null
+      },
+      "paramsUnknown": false,
+      "license": null,
+      "scores": {
+        "artificial_analysis_intelligence_index": 28.5,
+        "artificial_analysis_coding_index": null,
+        "gpqa": null,
+        "hle": 0.184,
+        "lcr": 0.64,
+        "scicode": 0.473,
+        "tau_banking": null,
+        "terminalbench_v2_1": null
+      },
+      "pricing": {
+        "price_1m_blended_3_to_1": 4,
+        "price_1m_input_tokens": 2,
+        "price_1m_output_tokens": 10
+      },
+      "speed": {
+        "tps": 72.364,
+        "ttft": 1.172
+      },
+      "hfId": null,
+      "mode": "Non-reasoning",
+      "releaseDate": "2026-09-22"
+    },
+    {
       "id": "019e86f6-e66b-42d8-8a50-235a06b53003",
       "slug": "gpt-5-2-codex",
-      "name": "GPT-5.2 Codex (xhigh)",
+      "name": "GPT-5.2 Codex (Xhigh)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -4210,7 +4282,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "xhigh",
+      "mode": "Xhigh",
       "releaseDate": "2025-12-11"
     },
     {
@@ -4288,7 +4360,7 @@
     {
       "id": "3b5ba264-ad25-429b-a460-4d8698205f0d",
       "slug": "nex-n2-pro",
-      "name": "Nex-N2-Pro (based on Qwen3.5-397B-A17B)",
+      "name": "Nex-N2-Pro (Based on Qwen3.5-397B-A17B)",
       "creator": "Nex AGI",
       "creatorSlug": "nex",
       "isClosed": false,
@@ -4318,7 +4390,7 @@
         "ttft": 0
       },
       "hfId": "nex-agi/Nex-N2-Pro",
-      "mode": "based on Qwen3.5-397B-A17B",
+      "mode": "Based on Qwen3.5-397B-A17B",
       "releaseDate": "2026-06-02"
     },
     {
@@ -4350,48 +4422,12 @@
         "price_1m_output_tokens": 1.2
       },
       "speed": {
-        "tps": 89.988,
-        "ttft": 1.304
+        "tps": 82.6,
+        "ttft": 1.26
       },
       "hfId": null,
       "mode": null,
       "releaseDate": "2026-08-06"
-    },
-    {
-      "id": "d3e20e76-9e1a-45b6-b809-ad6aa37430cf",
-      "slug": "gpt-6-sol-non-reasoning",
-      "name": "GPT-6 Sol (Non-reasoning)",
-      "creator": "OpenAI",
-      "creatorSlug": "openai",
-      "isClosed": true,
-      "params": {
-        "total": null,
-        "active": null
-      },
-      "paramsUnknown": false,
-      "license": null,
-      "scores": {
-        "artificial_analysis_intelligence_index": 28.1,
-        "artificial_analysis_coding_index": null,
-        "gpqa": null,
-        "hle": 0.184,
-        "lcr": 0.64,
-        "scicode": 0.473,
-        "tau_banking": null,
-        "terminalbench_v2_1": null
-      },
-      "pricing": {
-        "price_1m_blended_3_to_1": 4,
-        "price_1m_input_tokens": 2,
-        "price_1m_output_tokens": 10
-      },
-      "speed": {
-        "tps": 73.24,
-        "ttft": 1.03
-      },
-      "hfId": null,
-      "mode": "Non-reasoning",
-      "releaseDate": "2026-09-22"
     },
     {
       "id": "effcd151-7c31-4437-af3d-e88daeae9385",
@@ -4422,8 +4458,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 59.9,
-        "ttft": 1.262
+        "tps": 56.752,
+        "ttft": 1.848
       },
       "hfId": null,
       "mode": "Adaptive Reasoning, Medium Effort",
@@ -4432,7 +4468,7 @@
     {
       "id": "d1122eff-ee85-4fdc-8a9f-23bee6590667",
       "slug": "gemini-3-pro",
-      "name": "Gemini 3 Pro Preview (high)",
+      "name": "Gemini 3 Pro Preview (High)",
       "creator": "Google",
       "creatorSlug": "google",
       "isClosed": true,
@@ -4462,7 +4498,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "high",
+      "mode": "High",
       "releaseDate": "2025-11-18"
     },
     {
@@ -4504,7 +4540,7 @@
     {
       "id": "538e945c-6c27-4fd3-995d-ded80a36cd10",
       "slug": "gpt-5-4-low",
-      "name": "GPT-5.4 (low)",
+      "name": "GPT-5.4 (Low)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -4534,13 +4570,13 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "low",
+      "mode": "Low",
       "releaseDate": "2026-03-05"
     },
     {
       "id": "6657d7de-a2a9-40bc-a32f-86e80ad63698",
       "slug": "qwen3-8-27b-medium",
-      "name": "Qwen3.8 27B (medium)",
+      "name": "Qwen3.8 27B (Medium)",
       "creator": "Alibaba",
       "creatorSlug": "alibaba",
       "isClosed": false,
@@ -4566,17 +4602,17 @@
         "price_1m_output_tokens": 3
       },
       "speed": {
-        "tps": 46.271,
-        "ttft": 1.217
+        "tps": 48.86,
+        "ttft": 1.209
       },
       "hfId": "Qwen/Qwen3.8-27B",
-      "mode": "medium",
+      "mode": "Medium",
       "releaseDate": "2026-08-14"
     },
     {
       "id": "cc4a20cd-09fe-4962-a430-119c815e85fa",
       "slug": "gpt-5-6-terra-low",
-      "name": "GPT-5.6 Terra (low)",
+      "name": "GPT-5.6 Terra (Low)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -4602,17 +4638,17 @@
         "price_1m_output_tokens": 12
       },
       "speed": {
-        "tps": 87.082,
+        "tps": 86.9,
         "ttft": 1.495
       },
       "hfId": null,
-      "mode": "low",
+      "mode": "Low",
       "releaseDate": "2026-07-09"
     },
     {
       "id": "901ec71b-51ec-4f53-b807-06ee17b890b4",
       "slug": "jt-4-1-flash-236b-a21b",
-      "name": "JT-4.1 Flash 236B A21B (non-reasoning)",
+      "name": "JT-4.1 Flash 236B A21B (Non-reasoning)",
       "creator": "China Mobile",
       "creatorSlug": "china-mobile",
       "isClosed": true,
@@ -4642,7 +4678,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "non-reasoning",
+      "mode": "Non-reasoning",
       "releaseDate": "2026-07-09"
     },
     {
@@ -4720,7 +4756,7 @@
     {
       "id": "0de67206-4d36-4d10-b8f6-cf37fa747a03",
       "slug": "kimi-k2-6",
-      "name": "Kimi K2.6",
+      "name": "Kimi K2.6 (Reasoning)",
       "creator": "Kimi",
       "creatorSlug": "kimi",
       "isClosed": false,
@@ -4750,13 +4786,13 @@
         "ttft": 0
       },
       "hfId": "moonshotai/Kimi-K2.6",
-      "mode": null,
+      "mode": "Reasoning",
       "releaseDate": "2026-04-20"
     },
     {
       "id": "f9739750-6d42-450f-ba1e-2f76c869b4fe",
       "slug": "quasar-438b",
-      "name": "Quasar 438B (max, based on GLM-5.2)",
+      "name": "Quasar 438B (Max, Based on GLM-5.2)",
       "creator": "Multiverse Computing",
       "creatorSlug": "multiversecomputing",
       "isClosed": false,
@@ -4782,11 +4818,11 @@
         "price_1m_output_tokens": 1.8
       },
       "speed": {
-        "tps": 150.56,
-        "ttft": 0.449
+        "tps": 148.548,
+        "ttft": 0.466
       },
       "hfId": null,
-      "mode": "max, based on GLM-5.2",
+      "mode": "Max, Based on GLM-5.2",
       "releaseDate": "2026-08-10"
     },
     {
@@ -4828,7 +4864,7 @@
     {
       "id": "84e3f11e-d659-4941-8988-1dbfabbaf538",
       "slug": "gpt-5-2-medium",
-      "name": "GPT-5.2 (medium)",
+      "name": "GPT-5.2 (Medium)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -4858,7 +4894,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "medium",
+      "mode": "Medium",
       "releaseDate": "2025-12-11"
     },
     {
@@ -4972,7 +5008,7 @@
     {
       "id": "7e30585f-fad7-40df-a8cb-03c1d96df38a",
       "slug": "qwen3-8-27b-low",
-      "name": "Qwen3.8 27B (low)",
+      "name": "Qwen3.8 27B (Low)",
       "creator": "Alibaba",
       "creatorSlug": "alibaba",
       "isClosed": false,
@@ -4998,11 +5034,11 @@
         "price_1m_output_tokens": 3
       },
       "speed": {
-        "tps": 48.419,
-        "ttft": 1.242
+        "tps": 48.358,
+        "ttft": 1.215
       },
       "hfId": "Qwen/Qwen3.8-27B",
-      "mode": "low",
+      "mode": "Low",
       "releaseDate": "2026-08-14"
     },
     {
@@ -5070,8 +5106,8 @@
         "price_1m_output_tokens": 30
       },
       "speed": {
-        "tps": 125.27,
-        "ttft": 0.839
+        "tps": 138.141,
+        "ttft": 0.866
       },
       "hfId": null,
       "mode": "June 2026",
@@ -5080,7 +5116,7 @@
     {
       "id": "00f1248e-78e3-4230-8dc8-5e13ba8645e2",
       "slug": "mimo-v2-5-pro",
-      "name": "MiMo-V2.5-Pro",
+      "name": "MiMo-V2.5-Pro (Reasoning)",
       "creator": "Xiaomi",
       "creatorSlug": "xiaomi",
       "isClosed": false,
@@ -5106,11 +5142,11 @@
         "price_1m_output_tokens": 0.87
       },
       "speed": {
-        "tps": 25.479,
-        "ttft": 1.916
+        "tps": 26.313,
+        "ttft": 1.36
       },
       "hfId": "XiaomiMiMo/MiMo-V2.5-Pro",
-      "mode": null,
+      "mode": "Reasoning",
       "releaseDate": "2026-04-22"
     },
     {
@@ -5142,8 +5178,8 @@
         "price_1m_output_tokens": 4
       },
       "speed": {
-        "tps": 51.327,
-        "ttft": 0.993
+        "tps": 63.579,
+        "ttft": 1.175
       },
       "hfId": "moonshotai/Kimi-K2.7-Code",
       "mode": null,
@@ -5178,8 +5214,8 @@
         "price_1m_output_tokens": 1.2
       },
       "speed": {
-        "tps": 212.921,
-        "ttft": 1.754
+        "tps": 188.85,
+        "ttft": 1.976
       },
       "hfId": "thinkingmachines/Inkling-Small",
       "mode": null,
@@ -5286,8 +5322,8 @@
         "price_1m_output_tokens": 0.555
       },
       "speed": {
-        "tps": 90.87,
-        "ttft": 2.015
+        "tps": 87.322,
+        "ttft": 2.068
       },
       "hfId": "tencent/Hy3-preview",
       "mode": null,
@@ -5359,7 +5395,7 @@
       },
       "speed": {
         "tps": 44.823,
-        "ttft": 2.184
+        "ttft": 1.875
       },
       "hfId": "XiaomiMiMo/MiMo-V2.5",
       "mode": null,
@@ -5394,8 +5430,8 @@
         "price_1m_output_tokens": 1.6
       },
       "speed": {
-        "tps": 56.445,
-        "ttft": 1.666
+        "tps": 56.321,
+        "ttft": 1.692
       },
       "hfId": null,
       "mode": null,
@@ -5440,7 +5476,7 @@
     {
       "id": "58b812bf-8498-46db-b834-f43ccc614b61",
       "slug": "gpt-5-6-luna-medium",
-      "name": "GPT-5.6 Luna (medium)",
+      "name": "GPT-5.6 Luna (Medium)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -5470,13 +5506,13 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "medium",
+      "mode": "Medium",
       "releaseDate": "2026-07-09"
     },
     {
       "id": "0de09623-2b1a-4c8d-86ef-7f5245d4e24b",
       "slug": "inkling",
-      "name": "Inkling (xhigh)",
+      "name": "Inkling (Xhigh)",
       "creator": "Thinking Machines",
       "creatorSlug": "thinking-machines",
       "isClosed": false,
@@ -5502,17 +5538,17 @@
         "price_1m_output_tokens": 4.05
       },
       "speed": {
-        "tps": 157.833,
-        "ttft": 2.315
+        "tps": 184.151,
+        "ttft": 2.233
       },
       "hfId": "thinkingmachines/Inkling",
-      "mode": "xhigh",
+      "mode": "Xhigh",
       "releaseDate": "2026-07-15"
     },
     {
       "id": "5d11e7a1-4f70-4e5a-9364-e193761d6757",
       "slug": "gpt-5-codex",
-      "name": "GPT-5 Codex (high)",
+      "name": "GPT-5 Codex (High)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -5542,13 +5578,13 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "high",
+      "mode": "High",
       "releaseDate": "2025-09-23"
     },
     {
       "id": "948892b5-db03-4118-a4a8-ccd51ed871ea",
       "slug": "grok-4-3",
-      "name": "Grok 4.3 (high)",
+      "name": "Grok 4.3 (High)",
       "creator": "SpaceXAI",
       "creatorSlug": "xai",
       "isClosed": true,
@@ -5578,13 +5614,13 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "high",
+      "mode": "High",
       "releaseDate": "2026-04-30"
     },
     {
       "id": "5e8b0d98-a3b4-42b5-93d8-ecb748788754",
       "slug": "grok-4-3-medium",
-      "name": "Grok 4.3 (medium)",
+      "name": "Grok 4.3 (Medium)",
       "creator": "SpaceXAI",
       "creatorSlug": "xai",
       "isClosed": true,
@@ -5614,7 +5650,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "medium",
+      "mode": "Medium",
       "releaseDate": "2026-04-30"
     },
     {
@@ -5656,7 +5692,7 @@
     {
       "id": "4dc12a38-b18f-4c43-8e1b-678f8434b5b1",
       "slug": "gpt-5-1",
-      "name": "GPT-5.1 (high)",
+      "name": "GPT-5.1 (High)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -5686,7 +5722,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "high",
+      "mode": "High",
       "releaseDate": "2025-11-13"
     },
     {
@@ -5728,7 +5764,7 @@
     {
       "id": "73c96f99-0de3-4668-a4bd-b106a0fe18f2",
       "slug": "deepseek-v4-1-flash-non-reasoning",
-      "name": "DeepSeek V4.1 Flash (Non-Reasoning)",
+      "name": "DeepSeek V4.1 Flash (Non-reasoning)",
       "creator": "DeepSeek",
       "creatorSlug": "deepseek",
       "isClosed": false,
@@ -5754,11 +5790,11 @@
         "price_1m_output_tokens": 1.2
       },
       "speed": {
-        "tps": 212.082,
-        "ttft": 0.861
+        "tps": 250.027,
+        "ttft": 0.831
       },
       "hfId": "deepseek-ai/DeepSeek-V4.1-Flash",
-      "mode": "Non-Reasoning",
+      "mode": "Non-reasoning",
       "releaseDate": "2026-09-10"
     },
     {
@@ -5790,8 +5826,8 @@
         "price_1m_output_tokens": 0.22
       },
       "speed": {
-        "tps": 150.215,
-        "ttft": 1.496
+        "tps": 152.255,
+        "ttft": 2.033
       },
       "hfId": "inclusionAI/Ling-3.0-flash-VL",
       "mode": null,
@@ -5800,7 +5836,7 @@
     {
       "id": "89a2c945-1fab-4ee4-9f45-83a9f46cb221",
       "slug": "deepseek-v4-flash-0420-high",
-      "name": "DeepSeek V4 Flash 0420 (Reasoning, High Effort)",
+      "name": "DeepSeek V4 Flash 0420 (High)",
       "creator": "DeepSeek",
       "creatorSlug": "deepseek",
       "isClosed": false,
@@ -5830,13 +5866,13 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "Reasoning, High Effort",
+      "mode": "High",
       "releaseDate": "2026-04-24"
     },
     {
       "id": "fe2c2289-d261-4433-8681-46448372c1f6",
       "slug": "grok-4-3-low",
-      "name": "Grok 4.3 (low)",
+      "name": "Grok 4.3 (Low)",
       "creator": "SpaceXAI",
       "creatorSlug": "xai",
       "isClosed": true,
@@ -5866,7 +5902,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "low",
+      "mode": "Low",
       "releaseDate": "2026-04-30"
     },
     {
@@ -5899,7 +5935,7 @@
       },
       "speed": {
         "tps": 59.692,
-        "ttft": 1.119
+        "ttft": 1.187
       },
       "hfId": null,
       "mode": "Adaptive Reasoning, Low Effort",
@@ -5944,7 +5980,7 @@
     {
       "id": "d8ddb241-b3e4-4c25-a6a3-72eb1b30c541",
       "slug": "deepseek-v4-flash-0420",
-      "name": "DeepSeek V4 Flash 0420 (Reasoning, Max Effort)",
+      "name": "DeepSeek V4 Flash 0420 (Max)",
       "creator": "DeepSeek",
       "creatorSlug": "deepseek",
       "isClosed": false,
@@ -5974,13 +6010,13 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "Reasoning, Max Effort",
+      "mode": "Max",
       "releaseDate": "2026-04-24"
     },
     {
       "id": "ba242e40-83b7-4cd3-a0e0-b56237984914",
       "slug": "gpt-5-4-mini",
-      "name": "GPT-5.4 mini (xhigh)",
+      "name": "GPT-5.4 mini (Xhigh)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -6010,8 +6046,44 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "xhigh",
+      "mode": "Xhigh",
       "releaseDate": "2026-03-17"
+    },
+    {
+      "id": "62ea3198-9866-4d9f-8406-a79ee78c7164",
+      "slug": "solar-mini4",
+      "name": "Solar Mini 4",
+      "creator": "Upstage",
+      "creatorSlug": "upstage",
+      "isClosed": false,
+      "params": {
+        "total": null,
+        "active": null
+      },
+      "paramsUnknown": false,
+      "license": null,
+      "scores": {
+        "artificial_analysis_intelligence_index": 24.1,
+        "artificial_analysis_coding_index": null,
+        "gpqa": null,
+        "hle": 0.258,
+        "lcr": 0.833333333333333,
+        "scicode": 0.476,
+        "tau_banking": null,
+        "terminalbench_v2_1": null
+      },
+      "pricing": {
+        "price_1m_blended_3_to_1": 0.175,
+        "price_1m_input_tokens": 0.1,
+        "price_1m_output_tokens": 0.4
+      },
+      "speed": {
+        "tps": 200.68,
+        "ttft": 1.075
+      },
+      "hfId": null,
+      "mode": null,
+      "releaseDate": "2026-09-22"
     },
     {
       "id": "94d09368-9035-47cf-963a-b4310b433a16",
@@ -6052,7 +6124,7 @@
     {
       "id": "033ade17-d9ec-44e0-b792-b5f1fcd5ab4c",
       "slug": "gemini-3-5-flash-minimal",
-      "name": "Gemini 3.5 Flash (minimal)",
+      "name": "Gemini 3.5 Flash (Minimal)",
       "creator": "Google",
       "creatorSlug": "google",
       "isClosed": true,
@@ -6082,13 +6154,13 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "minimal",
+      "mode": "Minimal",
       "releaseDate": "2026-05-19"
     },
     {
       "id": "04d023f3-025c-4d78-9571-53edda3eaf2a",
       "slug": "gpt-5-1-codex",
-      "name": "GPT-5.1 Codex (high)",
+      "name": "GPT-5.1 Codex (High)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -6118,7 +6190,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "high",
+      "mode": "High",
       "releaseDate": "2025-11-13"
     },
     {
@@ -6331,7 +6403,7 @@
       },
       "speed": {
         "tps": 58.42,
-        "ttft": 0.929
+        "ttft": 0.975
       },
       "hfId": null,
       "mode": "Non-reasoning, High Effort",
@@ -6376,7 +6448,7 @@
     {
       "id": "48e50f00-1fd1-4acc-b337-61078aa341e6",
       "slug": "gpt-5",
-      "name": "GPT-5 (high)",
+      "name": "GPT-5 (High)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -6406,7 +6478,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "high",
+      "mode": "High",
       "releaseDate": "2025-08-07"
     },
     {
@@ -6438,8 +6510,8 @@
         "price_1m_output_tokens": 2.5
       },
       "speed": {
-        "tps": 190.692,
-        "ttft": 0.818
+        "tps": 188.239,
+        "ttft": 0.794
       },
       "hfId": "nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16",
       "mode": "Reasoning",
@@ -6484,7 +6556,7 @@
     {
       "id": "5e965af0-ca5c-4f47-9ba9-06000508b84a",
       "slug": "gpt-5-medium",
-      "name": "GPT-5 (medium)",
+      "name": "GPT-5 (Medium)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -6514,7 +6586,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "medium",
+      "mode": "Medium",
       "releaseDate": "2025-08-07"
     },
     {
@@ -6762,8 +6834,8 @@
         "price_1m_output_tokens": 0.22
       },
       "speed": {
-        "tps": 260.83,
-        "ttft": 1.293
+        "tps": 316.216,
+        "ttft": 1.257
       },
       "hfId": "inclusionAI/Ling-3.0-flash-Fin",
       "mode": null,
@@ -6880,7 +6952,7 @@
     {
       "id": "b2f3191f-77d6-4155-8be6-330f0baa1ae5",
       "slug": "gemini-3-pro-low",
-      "name": "Gemini 3 Pro Preview (low)",
+      "name": "Gemini 3 Pro Preview (Low)",
       "creator": "Google",
       "creatorSlug": "google",
       "isClosed": true,
@@ -6910,7 +6982,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "low",
+      "mode": "Low",
       "releaseDate": "2025-11-18"
     },
     {
@@ -6978,8 +7050,8 @@
         "price_1m_output_tokens": 2.5
       },
       "speed": {
-        "tps": 320.037,
-        "ttft": 7.863
+        "tps": 334.567,
+        "ttft": 6.972
       },
       "hfId": null,
       "mode": null,
@@ -7166,6 +7238,42 @@
       "releaseDate": "2026-03-27"
     },
     {
+      "id": "bf9708d8-933d-44f6-affa-b696a7a650c9",
+      "slug": "gpt-6-luna-low",
+      "name": "GPT-6 Luna (Low)",
+      "creator": "OpenAI",
+      "creatorSlug": "openai",
+      "isClosed": true,
+      "params": {
+        "total": null,
+        "active": null
+      },
+      "paramsUnknown": false,
+      "license": null,
+      "scores": {
+        "artificial_analysis_intelligence_index": 21.5,
+        "artificial_analysis_coding_index": null,
+        "gpqa": null,
+        "hle": 0.203,
+        "lcr": 0.74,
+        "scicode": 0.469,
+        "tau_banking": null,
+        "terminalbench_v2_1": null
+      },
+      "pricing": {
+        "price_1m_blended_3_to_1": 0.2,
+        "price_1m_input_tokens": 0.1,
+        "price_1m_output_tokens": 0.5
+      },
+      "speed": {
+        "tps": 125.946,
+        "ttft": 1.976
+      },
+      "hfId": null,
+      "mode": "Low",
+      "releaseDate": "2026-09-22"
+    },
+    {
       "id": "d621247c-d47e-458c-82cb-a166bc3b37e5",
       "slug": "deepseek-v3-2-reasoning",
       "name": "DeepSeek V3.2 (Reasoning)",
@@ -7230,8 +7338,8 @@
         "price_1m_output_tokens": 3.6
       },
       "speed": {
-        "tps": 85.789,
-        "ttft": 1.687
+        "tps": 85.428,
+        "ttft": 1.593
       },
       "hfId": "Qwen/Qwen3.5-397B-A17B",
       "mode": "Non-reasoning",
@@ -7312,7 +7420,7 @@
     {
       "id": "050c61cd-cddc-463a-a30a-a82aaa37be59",
       "slug": "gpt-5-6-luna-low",
-      "name": "GPT-5.6 Luna (low)",
+      "name": "GPT-5.6 Luna (Low)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -7342,7 +7450,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "low",
+      "mode": "Low",
       "releaseDate": "2026-07-09"
     },
     {
@@ -7380,42 +7488,6 @@
       "hfId": null,
       "mode": null,
       "releaseDate": "2025-12-23"
-    },
-    {
-      "id": "bf9708d8-933d-44f6-affa-b696a7a650c9",
-      "slug": "gpt-6-luna-low",
-      "name": "GPT-6 Luna (low)",
-      "creator": "OpenAI",
-      "creatorSlug": "openai",
-      "isClosed": true,
-      "params": {
-        "total": null,
-        "active": null
-      },
-      "paramsUnknown": false,
-      "license": null,
-      "scores": {
-        "artificial_analysis_intelligence_index": 20.9,
-        "artificial_analysis_coding_index": null,
-        "gpqa": null,
-        "hle": 0.203,
-        "lcr": 0.74,
-        "scicode": 0.469,
-        "tau_banking": null,
-        "terminalbench_v2_1": null
-      },
-      "pricing": {
-        "price_1m_blended_3_to_1": 0.2,
-        "price_1m_input_tokens": 0.1,
-        "price_1m_output_tokens": 0.5
-      },
-      "speed": {
-        "tps": 132.16,
-        "ttft": 2.276
-      },
-      "hfId": null,
-      "mode": "low",
-      "releaseDate": "2026-09-22"
     },
     {
       "id": "6e2a2572-ed8d-4616-8d7d-68d125fc8ee7",
@@ -7492,7 +7564,7 @@
     {
       "id": "7f3c9423-3ee3-4369-a6d9-3f2a40aff00e",
       "slug": "gpt-5-low",
-      "name": "GPT-5 (low)",
+      "name": "GPT-5 (Low)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -7522,7 +7594,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "low",
+      "mode": "Low",
       "releaseDate": "2025-08-07"
     },
     {
@@ -7555,7 +7627,7 @@
       },
       "speed": {
         "tps": 81.676,
-        "ttft": 0.752
+        "ttft": 0.794
       },
       "hfId": null,
       "mode": "Non-reasoning",
@@ -7564,7 +7636,7 @@
     {
       "id": "d4fc3f33-f2b0-4da1-88ee-f1f82bd4de31",
       "slug": "gpt-5-4-nano",
-      "name": "GPT-5.4 nano (xhigh)",
+      "name": "GPT-5.4 nano (Xhigh)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -7594,7 +7666,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "xhigh",
+      "mode": "Xhigh",
       "releaseDate": "2026-03-17"
     },
     {
@@ -7672,7 +7744,7 @@
     {
       "id": "c3274a19-6d3c-4d01-ab9b-5055a0a40429",
       "slug": "gpt-5-mini-medium",
-      "name": "GPT-5 mini (medium)",
+      "name": "GPT-5 mini (Medium)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -7702,7 +7774,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "medium",
+      "mode": "Medium",
       "releaseDate": "2025-08-07"
     },
     {
@@ -7770,8 +7842,8 @@
         "price_1m_output_tokens": 4.8
       },
       "speed": {
-        "tps": 70.098,
-        "ttft": 1.217
+        "tps": 87.232,
+        "ttft": 1.246
       },
       "hfId": null,
       "mode": null,
@@ -7780,7 +7852,7 @@
     {
       "id": "fd4454ff-e703-46c0-a7f5-fa69af09486d",
       "slug": "gpt-5-1-codex-mini",
-      "name": "GPT-5.1 Codex mini (high)",
+      "name": "GPT-5.1 Codex mini (High)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -7810,7 +7882,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "high",
+      "mode": "High",
       "releaseDate": "2025-11-13"
     },
     {
@@ -7878,8 +7950,8 @@
         "price_1m_output_tokens": 3.96
       },
       "speed": {
-        "tps": 187.296,
-        "ttft": 0.944
+        "tps": 169.681,
+        "ttft": 0.97
       },
       "hfId": "deepseek-ai/DeepSeek-V4-Pro-0813",
       "mode": "Non-reasoning",
@@ -7914,8 +7986,8 @@
         "price_1m_output_tokens": 8
       },
       "speed": {
-        "tps": 146.321,
-        "ttft": 5.313
+        "tps": 117.213,
+        "ttft": 8.356
       },
       "hfId": null,
       "mode": null,
@@ -7950,7 +8022,7 @@
         "price_1m_output_tokens": 3
       },
       "speed": {
-        "tps": 50.708,
+        "tps": 50.999,
         "ttft": 1.2
       },
       "hfId": "Qwen/Qwen3.8-27B",
@@ -7986,8 +8058,8 @@
         "price_1m_output_tokens": 0.22
       },
       "speed": {
-        "tps": 330.306,
-        "ttft": 1.76
+        "tps": 323.923,
+        "ttft": 1.791
       },
       "hfId": "inclusionAI/Ling-3.0-flash",
       "mode": null,
@@ -7996,7 +8068,7 @@
     {
       "id": "8869f28a-a6ff-487f-8d32-93fe335fdda5",
       "slug": "gpt-5-4-nano-medium",
-      "name": "GPT-5.4 nano (medium)",
+      "name": "GPT-5.4 nano (Medium)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -8026,7 +8098,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "medium",
+      "mode": "Medium",
       "releaseDate": "2026-03-17"
     },
     {
@@ -8068,7 +8140,7 @@
     {
       "id": "392063ba-c3b5-47e8-ba67-a7b0b34f6824",
       "slug": "gpt-5-4-mini-medium",
-      "name": "GPT-5.4 mini (medium)",
+      "name": "GPT-5.4 mini (Medium)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -8098,7 +8170,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "medium",
+      "mode": "Medium",
       "releaseDate": "2026-03-17"
     },
     {
@@ -8166,8 +8238,8 @@
         "price_1m_output_tokens": 1.15
       },
       "speed": {
-        "tps": 200.021,
-        "ttft": 1.369
+        "tps": 190.703,
+        "ttft": 1.358
       },
       "hfId": "stepfun-ai/Step-3.7-Flash",
       "mode": null,
@@ -8606,6 +8678,42 @@
       "releaseDate": "2025-09-30"
     },
     {
+      "id": "63cb48ea-0b0c-4e07-8ded-6d28dec4fa28",
+      "slug": "gpt-6-luna-non-reasoning",
+      "name": "GPT-6 Luna (Non-reasoning)",
+      "creator": "OpenAI",
+      "creatorSlug": "openai",
+      "isClosed": true,
+      "params": {
+        "total": null,
+        "active": null
+      },
+      "paramsUnknown": false,
+      "license": null,
+      "scores": {
+        "artificial_analysis_intelligence_index": 18.5,
+        "artificial_analysis_coding_index": null,
+        "gpqa": null,
+        "hle": 0.086,
+        "lcr": 0.396666666666667,
+        "scicode": 0.431,
+        "tau_banking": null,
+        "terminalbench_v2_1": null
+      },
+      "pricing": {
+        "price_1m_blended_3_to_1": 0.2,
+        "price_1m_input_tokens": 0.1,
+        "price_1m_output_tokens": 0.5
+      },
+      "speed": {
+        "tps": 131.975,
+        "ttft": 0.851
+      },
+      "hfId": null,
+      "mode": "Non-reasoning",
+      "releaseDate": "2026-09-22"
+    },
+    {
       "id": "0e66bae9-41f1-42fc-9276-ce8cb6f72919",
       "slug": "qwen3-5-397b-a17b",
       "name": "Qwen3.5 397B A17B (Reasoning)",
@@ -8634,8 +8742,8 @@
         "price_1m_output_tokens": 3.6
       },
       "speed": {
-        "tps": 88.317,
-        "ttft": 1.689
+        "tps": 88.736,
+        "ttft": 1.723
       },
       "hfId": "Qwen/Qwen3.5-397B-A17B",
       "mode": "Reasoning",
@@ -8670,48 +8778,12 @@
         "price_1m_output_tokens": 0.87
       },
       "speed": {
-        "tps": 24.967,
-        "ttft": 1.335
+        "tps": 24.317,
+        "ttft": 1.254
       },
       "hfId": "XiaomiMiMo/MiMo-V2.5-Pro",
       "mode": "Non-reasoning",
       "releaseDate": "2026-04-22"
-    },
-    {
-      "id": "63cb48ea-0b0c-4e07-8ded-6d28dec4fa28",
-      "slug": "gpt-6-luna-non-reasoning",
-      "name": "GPT-6 Luna (Non-reasoning)",
-      "creator": "OpenAI",
-      "creatorSlug": "openai",
-      "isClosed": true,
-      "params": {
-        "total": null,
-        "active": null
-      },
-      "paramsUnknown": false,
-      "license": null,
-      "scores": {
-        "artificial_analysis_intelligence_index": 18.3,
-        "artificial_analysis_coding_index": null,
-        "gpqa": null,
-        "hle": 0.086,
-        "lcr": 0.396666666666667,
-        "scicode": 0.431,
-        "tau_banking": null,
-        "terminalbench_v2_1": null
-      },
-      "pricing": {
-        "price_1m_blended_3_to_1": 0.2,
-        "price_1m_input_tokens": 0.1,
-        "price_1m_output_tokens": 0.5
-      },
-      "speed": {
-        "tps": 128.366,
-        "ttft": 0.764
-      },
-      "hfId": null,
-      "mode": "Non-reasoning",
-      "releaseDate": "2026-09-22"
     },
     {
       "id": "8665ca00-c687-44c7-875c-22618cb31c4f",
@@ -8742,8 +8814,8 @@
         "price_1m_output_tokens": 2.25
       },
       "speed": {
-        "tps": 134.059,
-        "ttft": 1.182
+        "tps": 138.811,
+        "ttft": 1.144
       },
       "hfId": "Qwen/Qwen3.6-35B-A3B",
       "mode": "Reasoning",
@@ -8886,8 +8958,8 @@
         "price_1m_output_tokens": 3.2
       },
       "speed": {
-        "tps": 145.291,
-        "ttft": 1.008
+        "tps": 143.338,
+        "ttft": 1.011
       },
       "hfId": "Qwen/Qwen3.5-122B-A10B",
       "mode": "Non-reasoning",
@@ -8932,7 +9004,7 @@
     {
       "id": "583f98fb-c4b8-4df3-8d40-60ac0ed69882",
       "slug": "muse-glimmer",
-      "name": "Muse Glimmer (high)",
+      "name": "Muse Glimmer (High)",
       "creator": "Meta",
       "creatorSlug": "meta",
       "isClosed": false,
@@ -8958,11 +9030,11 @@
         "price_1m_output_tokens": 1.35
       },
       "speed": {
-        "tps": 164.426,
-        "ttft": 0.448
+        "tps": 164.652,
+        "ttft": 0.522
       },
       "hfId": "meta-models/Muse-Glimmer-30B",
-      "mode": "high",
+      "mode": "High",
       "releaseDate": "2026-08-10"
     },
     {
@@ -9210,7 +9282,7 @@
         "price_1m_output_tokens": 5
       },
       "speed": {
-        "tps": 116.98,
+        "tps": 129.703,
         "ttft": 13.08
       },
       "hfId": null,
@@ -9220,7 +9292,7 @@
     {
       "id": "29855680-7469-43eb-8b88-cd3fb1d99da3",
       "slug": "gpt-5-mini",
-      "name": "GPT-5 mini (high)",
+      "name": "GPT-5 mini (High)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -9250,7 +9322,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "high",
+      "mode": "High",
       "releaseDate": "2025-08-07"
     },
     {
@@ -9292,7 +9364,7 @@
     {
       "id": "84b49308-6b93-47aa-a4f6-776ee1a1e8cd",
       "slug": "o4-mini",
-      "name": "o4-mini (high)",
+      "name": "o4-mini (High)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -9322,7 +9394,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "high",
+      "mode": "High",
       "releaseDate": "2025-04-16"
     },
     {
@@ -9354,8 +9426,8 @@
         "price_1m_output_tokens": 2.5
       },
       "speed": {
-        "tps": 114.403,
-        "ttft": 2.458
+        "tps": 114.579,
+        "ttft": 2.031
       },
       "hfId": "inclusionAI/Ring-2.6-1T",
       "mode": null,
@@ -9750,8 +9822,8 @@
         "price_1m_output_tokens": 3.2
       },
       "speed": {
-        "tps": 131.356,
-        "ttft": 1.05
+        "tps": 129.572,
+        "ttft": 1.048
       },
       "hfId": "Qwen/Qwen3.5-122B-A10B",
       "mode": "Reasoning",
@@ -9894,8 +9966,8 @@
         "price_1m_output_tokens": 5
       },
       "speed": {
-        "tps": 91.305,
-        "ttft": 0.494
+        "tps": 102.644,
+        "ttft": 0.495
       },
       "hfId": null,
       "mode": "Non-reasoning",
@@ -10002,7 +10074,7 @@
         "price_1m_output_tokens": 2.25
       },
       "speed": {
-        "tps": 140.161,
+        "tps": 140.75,
         "ttft": 1.116
       },
       "hfId": "Qwen/Qwen3.6-35B-A3B",
@@ -10218,8 +10290,8 @@
         "price_1m_output_tokens": 0.65
       },
       "speed": {
-        "tps": 77.669,
-        "ttft": 0.3
+        "tps": 77.497,
+        "ttft": 0.294
       },
       "hfId": "ibm-granite/Granite-4.2-30B",
       "mode": null,
@@ -10290,8 +10362,8 @@
         "price_1m_output_tokens": 0
       },
       "speed": {
-        "tps": 35.045,
-        "ttft": 0.974
+        "tps": 34.991,
+        "ttft": 0.977
       },
       "hfId": "google/Gemma-4-31B",
       "mode": "Reasoning",
@@ -10300,7 +10372,7 @@
     {
       "id": "ff9bc5e5-a02f-4270-983e-4b3f834f3363",
       "slug": "grok-3-mini-reasoning",
-      "name": "Grok 3 mini Reasoning (high)",
+      "name": "Grok 3 mini Reasoning (High)",
       "creator": "SpaceXAI",
       "creatorSlug": "xai",
       "isClosed": true,
@@ -10330,7 +10402,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "high",
+      "mode": "High",
       "releaseDate": "2025-02-19"
     },
     {
@@ -10578,8 +10650,8 @@
         "price_1m_output_tokens": 7.5
       },
       "speed": {
-        "tps": 168.131,
-        "ttft": 0.614
+        "tps": 167.324,
+        "ttft": 0.645
       },
       "hfId": "mistralai/Mistral-Medium-3.5-128B",
       "mode": null,
@@ -10615,7 +10687,7 @@
       },
       "speed": {
         "tps": 149.398,
-        "ttft": 1.356
+        "ttft": 1.425
       },
       "hfId": "google/Gemma-4-12B",
       "mode": "Reasoning",
@@ -10624,7 +10696,7 @@
     {
       "id": "0d94dc87-12c8-4d4a-8d99-804ce3f17bc2",
       "slug": "nova-2-0-pro-reasoning-medium",
-      "name": "Nova 2.0 Pro Preview (medium)",
+      "name": "Nova 2.0 Pro Preview (Medium)",
       "creator": "Amazon",
       "creatorSlug": "aws",
       "isClosed": true,
@@ -10650,11 +10722,11 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 123.524,
-        "ttft": 19.87
+        "tps": 123.377,
+        "ttft": 20.505
       },
       "hfId": null,
-      "mode": "medium",
+      "mode": "Medium",
       "releaseDate": "2025-11-27"
     },
     {
@@ -10794,8 +10866,8 @@
         "price_1m_output_tokens": 0.4
       },
       "speed": {
-        "tps": 37.754,
-        "ttft": 1.092
+        "tps": 38.924,
+        "ttft": 0.92
       },
       "hfId": "google/Gemma-4-31B",
       "mode": "Non-reasoning",
@@ -10948,7 +11020,7 @@
     {
       "id": "018c60e8-e908-431a-ba57-c840b1df3987",
       "slug": "nova-2-0-omni-reasoning-medium",
-      "name": "Nova 2.0 Omni (medium)",
+      "name": "Nova 2.0 Omni (Medium)",
       "creator": "Amazon",
       "creatorSlug": "aws",
       "isClosed": true,
@@ -10978,7 +11050,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "medium",
+      "mode": "Medium",
       "releaseDate": "2025-11-26"
     },
     {
@@ -11092,7 +11164,7 @@
     {
       "id": "61bd9367-e520-4ec8-989e-5fbf50e61610",
       "slug": "nova-2-0-lite-reasoning",
-      "name": "Nova 2.0 Lite (high)",
+      "name": "Nova 2.0 Lite (High)",
       "creator": "Amazon",
       "creatorSlug": "aws",
       "isClosed": true,
@@ -11118,11 +11190,11 @@
         "price_1m_output_tokens": 2.5
       },
       "speed": {
-        "tps": 208.543,
+        "tps": 197.528,
         "ttft": 10.167
       },
       "hfId": null,
-      "mode": "high",
+      "mode": "High",
       "releaseDate": "2025-10-29"
     },
     {
@@ -11190,8 +11262,8 @@
         "price_1m_output_tokens": 0.25
       },
       "speed": {
-        "tps": 0,
-        "ttft": 0
+        "tps": 74.343,
+        "ttft": 1.556
       },
       "hfId": "Qwen/Qwen3.5-9B",
       "mode": "Non-reasoning",
@@ -11200,7 +11272,7 @@
     {
       "id": "508943e4-e9e1-4d10-9c0e-a7650e9d7315",
       "slug": "exaone-4-5-33b",
-      "name": "EXAONE 4.5 33B",
+      "name": "EXAONE 4.5 33B (Reasoning)",
       "creator": "LG AI Research",
       "creatorSlug": "lg",
       "isClosed": false,
@@ -11230,7 +11302,7 @@
         "ttft": 0
       },
       "hfId": "LGAI-EXAONE/EXAONE-4.5-33B",
-      "mode": null,
+      "mode": "Reasoning",
       "releaseDate": "2026-04-09"
     },
     {
@@ -11262,8 +11334,8 @@
         "price_1m_output_tokens": 0
       },
       "speed": {
-        "tps": 224.269,
-        "ttft": 0.204
+        "tps": 222.802,
+        "ttft": 0.197
       },
       "hfId": null,
       "mode": null,
@@ -11298,8 +11370,8 @@
         "price_1m_output_tokens": 0.4
       },
       "speed": {
-        "tps": 107.829,
-        "ttft": 0.646
+        "tps": 120.577,
+        "ttft": 0.691
       },
       "hfId": "google/Gemma-4-26B-A4B",
       "mode": "Non-reasoning",
@@ -11334,8 +11406,8 @@
         "price_1m_output_tokens": 0.15
       },
       "speed": {
-        "tps": 28.624,
-        "ttft": 0.469
+        "tps": 23.032,
+        "ttft": 0.538
       },
       "hfId": "Qwen/Qwen3.5-4B",
       "mode": "Reasoning",
@@ -11416,7 +11488,7 @@
     {
       "id": "e18e5e6a-5a31-4c0b-b80b-ac401392f446",
       "slug": "gpt-5-nano",
-      "name": "GPT-5 nano (high)",
+      "name": "GPT-5 nano (High)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -11446,7 +11518,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "high",
+      "mode": "High",
       "releaseDate": "2025-08-07"
     },
     {
@@ -11473,13 +11545,13 @@
         "terminalbench_v2_1": 0.243445692883895
       },
       "pricing": {
-        "price_1m_blended_3_to_1": 0.108,
-        "price_1m_input_tokens": 0.07,
-        "price_1m_output_tokens": 0.22
+        "price_1m_blended_3_to_1": 0.095,
+        "price_1m_input_tokens": 0.06,
+        "price_1m_output_tokens": 0.2
       },
       "speed": {
-        "tps": 284.281,
-        "ttft": 0.469
+        "tps": 291.331,
+        "ttft": 0.414
       },
       "hfId": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16",
       "mode": null,
@@ -11514,8 +11586,8 @@
         "price_1m_output_tokens": 0.9
       },
       "speed": {
-        "tps": 164.673,
-        "ttft": 0.844
+        "tps": 159.779,
+        "ttft": 0.853
       },
       "hfId": "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16",
       "mode": "Reasoning",
@@ -11524,7 +11596,7 @@
     {
       "id": "f4274721-ef28-4121-aa88-8e97267a5a82",
       "slug": "nova-2-0-pro-reasoning-low",
-      "name": "Nova 2.0 Pro Preview (low)",
+      "name": "Nova 2.0 Pro Preview (Low)",
       "creator": "Amazon",
       "creatorSlug": "aws",
       "isClosed": true,
@@ -11550,11 +11622,11 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 130.558,
-        "ttft": 8.083
+        "tps": 124.866,
+        "ttft": 4.21
       },
       "hfId": null,
-      "mode": "low",
+      "mode": "Low",
       "releaseDate": "2025-11-27"
     },
     {
@@ -11740,7 +11812,7 @@
     {
       "id": "fbdf8da1-b341-448c-b3cb-8aff1d8f70b9",
       "slug": "nova-2-0-lite-reasoning-medium",
-      "name": "Nova 2.0 Lite (medium)",
+      "name": "Nova 2.0 Lite (Medium)",
       "creator": "Amazon",
       "creatorSlug": "aws",
       "isClosed": true,
@@ -11766,17 +11838,17 @@
         "price_1m_output_tokens": 2.5
       },
       "speed": {
-        "tps": 195.508,
+        "tps": 192.366,
         "ttft": 13.496
       },
       "hfId": null,
-      "mode": "medium",
+      "mode": "Medium",
       "releaseDate": "2025-10-29"
     },
     {
       "id": "8eb02396-f231-4189-ae15-05f7facebd9b",
       "slug": "gpt-5-nano-medium",
-      "name": "GPT-5 nano (medium)",
+      "name": "GPT-5 nano (Medium)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -11806,7 +11878,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "medium",
+      "mode": "Medium",
       "releaseDate": "2025-08-07"
     },
     {
@@ -11839,7 +11911,7 @@
       },
       "speed": {
         "tps": 225.787,
-        "ttft": 0.956
+        "ttft": 0.944
       },
       "hfId": null,
       "mode": null,
@@ -12018,8 +12090,8 @@
         "price_1m_output_tokens": 0.75
       },
       "speed": {
-        "tps": 674.802,
-        "ttft": 2.831
+        "tps": 661.05,
+        "ttft": 2.736
       },
       "hfId": null,
       "mode": null,
@@ -12316,7 +12388,7 @@
     {
       "id": "6fd796d3-f346-4f66-97df-5da81714fc73",
       "slug": "nova-2-0-lite-reasoning-low",
-      "name": "Nova 2.0 Lite (low)",
+      "name": "Nova 2.0 Lite (Low)",
       "creator": "Amazon",
       "creatorSlug": "aws",
       "isClosed": true,
@@ -12342,17 +12414,17 @@
         "price_1m_output_tokens": 2.5
       },
       "speed": {
-        "tps": 210.553,
-        "ttft": 4.939
+        "tps": 208.623,
+        "ttft": 5.101
       },
       "hfId": null,
-      "mode": "low",
+      "mode": "Low",
       "releaseDate": "2025-10-29"
     },
     {
       "id": "340fb211-4fad-41d3-87d5-ed0d0cd34088",
       "slug": "hypernova-60b",
-      "name": "HyperNova 60B 2605 (high, based on gpt-oss-120b)",
+      "name": "HyperNova 60B 2605 (High, Based on gpt-oss-120b)",
       "creator": "Multiverse Computing",
       "creatorSlug": "multiversecomputing",
       "isClosed": false,
@@ -12382,7 +12454,7 @@
         "ttft": 0
       },
       "hfId": "MultiverseComputingCAI/HyperNova-60B-2605",
-      "mode": "high, based on gpt-oss-120b",
+      "mode": "High, Based on gpt-oss-120b",
       "releaseDate": "2026-05-26"
     },
     {
@@ -12424,7 +12496,7 @@
     {
       "id": "c298d1a8-606c-4971-8613-ccdaaf941043",
       "slug": "gpt-5-4-nano-non-reasoning",
-      "name": "GPT-5.4 nano (Non-Reasoning)",
+      "name": "GPT-5.4 nano (Non-reasoning)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -12454,7 +12526,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "Non-Reasoning",
+      "mode": "Non-reasoning",
       "releaseDate": "2026-03-17"
     },
     {
@@ -12532,7 +12604,7 @@
     {
       "id": "f0083258-8646-45b8-8082-7aaf6c2ea82a",
       "slug": "gpt-oss-120b",
-      "name": "gpt-oss-120b (high)",
+      "name": "gpt-oss-120b (High)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": false,
@@ -12558,11 +12630,11 @@
         "price_1m_output_tokens": 0.595
       },
       "speed": {
-        "tps": 179.665,
-        "ttft": 0.563
+        "tps": 161.877,
+        "ttft": 0.553
       },
       "hfId": null,
-      "mode": "high",
+      "mode": "High",
       "releaseDate": "2025-08-05"
     },
     {
@@ -12640,7 +12712,7 @@
     {
       "id": "c3738fb0-3408-4430-a699-760ae4b70c93",
       "slug": "gpt-5-minimal",
-      "name": "GPT-5 (minimal)",
+      "name": "GPT-5 (Minimal)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -12670,7 +12742,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "minimal",
+      "mode": "Minimal",
       "releaseDate": "2025-08-07"
     },
     {
@@ -12846,8 +12918,8 @@
         "price_1m_output_tokens": 0.6
       },
       "speed": {
-        "tps": 170.992,
-        "ttft": 0.568
+        "tps": 173.192,
+        "ttft": 0.6
       },
       "hfId": "mistralai/Mistral-Small-4-119B-2603",
       "mode": "Reasoning",
@@ -12954,8 +13026,8 @@
         "price_1m_output_tokens": 1.2
       },
       "speed": {
-        "tps": 169.739,
-        "ttft": 1.18
+        "tps": 170.636,
+        "ttft": 1.195
       },
       "hfId": "Qwen/Qwen3-Next-80B-A3B-Instruct",
       "mode": "Reasoning",
@@ -12990,8 +13062,8 @@
         "price_1m_output_tokens": 0.2
       },
       "speed": {
-        "tps": 32.082,
-        "ttft": 1.134
+        "tps": 31.456,
+        "ttft": 1.117
       },
       "hfId": "Qwen/Qwen3.5-9B",
       "mode": "Reasoning",
@@ -13000,7 +13072,7 @@
     {
       "id": "ae447455-940d-4d30-9139-a664fa896eaf",
       "slug": "gpt-5-4-mini-non-reasoning",
-      "name": "GPT-5.4 mini (Non-Reasoning)",
+      "name": "GPT-5.4 mini (Non-reasoning)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -13030,13 +13102,13 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "Non-Reasoning",
+      "mode": "Non-reasoning",
       "releaseDate": "2026-03-17"
     },
     {
       "id": "b36ff8f3-0323-49d1-a063-ab09704fdb0c",
       "slug": "nova-2-0-omni-reasoning-low",
-      "name": "Nova 2.0 Omni (low)",
+      "name": "Nova 2.0 Omni (Low)",
       "creator": "Amazon",
       "creatorSlug": "aws",
       "isClosed": true,
@@ -13066,7 +13138,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "low",
+      "mode": "Low",
       "releaseDate": "2025-11-26"
     },
     {
@@ -13134,8 +13206,8 @@
         "price_1m_output_tokens": 0.25
       },
       "speed": {
-        "tps": 66.645,
-        "ttft": 0.329
+        "tps": 66.839,
+        "ttft": 0.305
       },
       "hfId": "ibm-granite/Granite-4.2-8B",
       "mode": null,
@@ -13206,8 +13278,8 @@
         "price_1m_output_tokens": 0
       },
       "speed": {
-        "tps": 52.16,
-        "ttft": 1.77
+        "tps": 56.98,
+        "ttft": 1.636
       },
       "hfId": "inclusionAI/Ling-3.0-tiny",
       "mode": null,
@@ -13252,7 +13324,7 @@
     {
       "id": "076f2674-bc4b-4925-be59-50832eb8c090",
       "slug": "o3-mini-high",
-      "name": "o3-mini (high)",
+      "name": "o3-mini (High)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -13282,7 +13354,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "high",
+      "mode": "High",
       "releaseDate": "2025-01-31"
     },
     {
@@ -13386,8 +13458,8 @@
         "price_1m_output_tokens": 0.8
       },
       "speed": {
-        "tps": 339.504,
-        "ttft": 1.152
+        "tps": 345.084,
+        "ttft": 1.042
       },
       "hfId": "arcee-ai/Trinity-Large-Thinking",
       "mode": null,
@@ -13422,8 +13494,8 @@
         "price_1m_output_tokens": 0.15
       },
       "speed": {
-        "tps": 25.929,
-        "ttft": 0.526
+        "tps": 20.576,
+        "ttft": 0.723
       },
       "hfId": "Qwen/Qwen3.5-4B",
       "mode": "Non-reasoning",
@@ -13432,7 +13504,7 @@
     {
       "id": "369329e4-629f-425d-975a-e8980aec2965",
       "slug": "intellect-3",
-      "name": "INTELLECT-3 (based on GLM-4.5-Air)",
+      "name": "INTELLECT-3 (Based on GLM-4.5-Air)",
       "creator": "Prime Intellect",
       "creatorSlug": "prime-intellect",
       "isClosed": false,
@@ -13462,7 +13534,7 @@
         "ttft": 0
       },
       "hfId": "PrimeIntellect/INTELLECT-3",
-      "mode": "based on GLM-4.5-Air",
+      "mode": "Based on GLM-4.5-Air",
       "releaseDate": "2025-11-27"
     },
     {
@@ -13674,7 +13746,7 @@
         "price_1m_output_tokens": 1.095
       },
       "speed": {
-        "tps": 266.326,
+        "tps": 265.979,
         "ttft": 0.248
       },
       "hfId": "nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning",
@@ -13684,7 +13756,7 @@
     {
       "id": "c99f3bde-7c08-4de8-bd5c-8ee9123ebffa",
       "slug": "gpt-oss-120b-low",
-      "name": "gpt-oss-120b (low)",
+      "name": "gpt-oss-120b (Low)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": false,
@@ -13710,11 +13782,11 @@
         "price_1m_output_tokens": 0.545
       },
       "speed": {
-        "tps": 193.592,
-        "ttft": 0.544
+        "tps": 167.63,
+        "ttft": 0.546
       },
       "hfId": null,
-      "mode": "low",
+      "mode": "Low",
       "releaseDate": "2025-08-05"
     },
     {
@@ -13782,8 +13854,8 @@
         "price_1m_output_tokens": 0.91
       },
       "speed": {
-        "tps": 94.148,
-        "ttft": 0.582
+        "tps": 86.214,
+        "ttft": 0.59
       },
       "hfId": null,
       "mode": null,
@@ -13854,8 +13926,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 128.424,
-        "ttft": 0.681
+        "tps": 120.708,
+        "ttft": 0.69
       },
       "hfId": null,
       "mode": "Non-reasoning",
@@ -13864,7 +13936,7 @@
     {
       "id": "16149b9c-a1e9-4669-a5cb-ff3c00d78f89",
       "slug": "gpt-oss-20b-low",
-      "name": "gpt-oss-20b (low)",
+      "name": "gpt-oss-20b (Low)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": false,
@@ -13890,11 +13962,11 @@
         "price_1m_output_tokens": 0.215
       },
       "speed": {
-        "tps": 216.717,
-        "ttft": 0.5
+        "tps": 211.135,
+        "ttft": 0.484
       },
       "hfId": "openai/gpt-oss-20b",
-      "mode": "low",
+      "mode": "Low",
       "releaseDate": "2025-08-05"
     },
     {
@@ -13962,8 +14034,8 @@
         "price_1m_output_tokens": 0
       },
       "speed": {
-        "tps": 78.706,
-        "ttft": 0.243
+        "tps": 68.498,
+        "ttft": 0.307
       },
       "hfId": null,
       "mode": null,
@@ -13972,7 +14044,7 @@
     {
       "id": "bc26bfdb-4923-4442-a6ca-e77392923581",
       "slug": "gpt-5-mini-minimal",
-      "name": "GPT-5 mini (minimal)",
+      "name": "GPT-5 mini (Minimal)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -14002,13 +14074,13 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "minimal",
+      "mode": "Minimal",
       "releaseDate": "2025-08-07"
     },
     {
       "id": "a38d719a-709c-4983-b3e7-7090389ae9a6",
       "slug": "k2-v2",
-      "name": "K2-V2 (high)",
+      "name": "K2-V2 (High)",
       "creator": "Institute of Foundation Models",
       "creatorSlug": "ifm",
       "isClosed": false,
@@ -14038,7 +14110,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "high",
+      "mode": "High",
       "releaseDate": "2025-12-05"
     },
     {
@@ -14251,7 +14323,7 @@
       },
       "speed": {
         "tps": 171.439,
-        "ttft": 1.08
+        "ttft": 1.029
       },
       "hfId": null,
       "mode": null,
@@ -14575,7 +14647,7 @@
       },
       "speed": {
         "tps": 145.214,
-        "ttft": 1.436
+        "ttft": 1.391
       },
       "hfId": "google/Gemma-4-12B",
       "mode": "Non-reasoning",
@@ -14646,8 +14718,8 @@
         "price_1m_output_tokens": 1.5
       },
       "speed": {
-        "tps": 77.233,
-        "ttft": 0.705
+        "tps": 75.045,
+        "ttft": 0.733
       },
       "hfId": null,
       "mode": null,
@@ -14682,8 +14754,8 @@
         "price_1m_output_tokens": 1.2
       },
       "speed": {
-        "tps": 123.311,
-        "ttft": 0.903
+        "tps": 102.584,
+        "ttft": 0.896
       },
       "hfId": "Qwen/Qwen3-Coder-Next",
       "mode": null,
@@ -14898,8 +14970,8 @@
         "price_1m_output_tokens": 0.12
       },
       "speed": {
-        "tps": 232.022,
-        "ttft": 0.244
+        "tps": 231.694,
+        "ttft": 0.237
       },
       "hfId": "ibm-granite/Granite-4.2-3B",
       "mode": null,
@@ -14980,7 +15052,7 @@
     {
       "id": "dd738be7-2b69-4775-91a5-8851d3341c2d",
       "slug": "k2-v2-medium",
-      "name": "K2-V2 (medium)",
+      "name": "K2-V2 (Medium)",
       "creator": "Institute of Foundation Models",
       "creatorSlug": "ifm",
       "isClosed": false,
@@ -15010,7 +15082,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "medium",
+      "mode": "Medium",
       "releaseDate": "2025-12-05"
     },
     {
@@ -15114,8 +15186,8 @@
         "price_1m_output_tokens": 0.6
       },
       "speed": {
-        "tps": 152.498,
-        "ttft": 0.564
+        "tps": 147.5,
+        "ttft": 0.543
       },
       "hfId": "mistralai/Mistral-Small-4-119B-2603",
       "mode": "Non-reasoning",
@@ -15160,7 +15232,7 @@
     {
       "id": "36f73aaf-d38a-4b56-a2b3-d04d17186910",
       "slug": "gpt-oss-20b",
-      "name": "gpt-oss-20b (high)",
+      "name": "gpt-oss-20b (High)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": false,
@@ -15186,11 +15258,11 @@
         "price_1m_output_tokens": 0.18
       },
       "speed": {
-        "tps": 180.275,
-        "ttft": 0.425
+        "tps": 183.634,
+        "ttft": 0.421
       },
       "hfId": "openai/gpt-oss-20b",
-      "mode": "high",
+      "mode": "High",
       "releaseDate": "2025-08-05"
     },
     {
@@ -15366,7 +15438,7 @@
         "price_1m_output_tokens": 0.1
       },
       "speed": {
-        "tps": 78.213,
+        "tps": 82.811,
         "ttft": 0.327
       },
       "hfId": "google/gemma-4-E4B",
@@ -15402,8 +15474,8 @@
         "price_1m_output_tokens": 0.2
       },
       "speed": {
-        "tps": 151.534,
-        "ttft": 0.588
+        "tps": 159.08,
+        "ttft": 0.591
       },
       "hfId": "nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16",
       "mode": "Reasoning",
@@ -15484,7 +15556,7 @@
     {
       "id": "45790612-02e3-4c42-b5bd-cd7ed2ea1f2f",
       "slug": "sarvam-105b",
-      "name": "Sarvam 105B (high)",
+      "name": "Sarvam 105B (High)",
       "creator": "Sarvam",
       "creatorSlug": "sarvam",
       "isClosed": true,
@@ -15514,7 +15586,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "high",
+      "mode": "High",
       "releaseDate": "2026-03-06"
     },
     {
@@ -15582,8 +15654,8 @@
         "price_1m_output_tokens": 2.5
       },
       "speed": {
-        "tps": 224.195,
-        "ttft": 0.851
+        "tps": 215.132,
+        "ttft": 0.884
       },
       "hfId": null,
       "mode": "Non-reasoning",
@@ -16518,8 +16590,8 @@
         "price_1m_output_tokens": 0.68
       },
       "speed": {
-        "tps": 134.665,
-        "ttft": 0.658
+        "tps": 127.005,
+        "ttft": 0.663
       },
       "hfId": null,
       "mode": null,
@@ -17022,8 +17094,8 @@
         "price_1m_output_tokens": 0.97
       },
       "speed": {
-        "tps": 111.037,
-        "ttft": 0.955
+        "tps": 110.304,
+        "ttft": 0.944
       },
       "hfId": "Qwen/Qwen3-Omni-30B-A3B-Instruct",
       "mode": "Reasoning",
@@ -17202,8 +17274,8 @@
         "price_1m_output_tokens": 0.72
       },
       "speed": {
-        "tps": 90.345,
-        "ttft": 0.638
+        "tps": 82.739,
+        "ttft": 0.655
       },
       "hfId": "meta-llama/Llama-3.3-70B-Instruct",
       "mode": null,
@@ -17598,8 +17670,8 @@
         "price_1m_output_tokens": 3
       },
       "speed": {
-        "tps": 42.81,
-        "ttft": 0.744
+        "tps": 41.311,
+        "ttft": 0.76
       },
       "hfId": "NousResearch/Hermes-4-405B",
       "mode": "Reasoning",
@@ -17706,7 +17778,7 @@
         "price_1m_output_tokens": 0.1
       },
       "speed": {
-        "tps": 73.61,
+        "tps": 81.153,
         "ttft": 0.29
       },
       "hfId": "google/gemma-4-E4B",
@@ -17778,8 +17850,8 @@
         "price_1m_output_tokens": 0.16
       },
       "speed": {
-        "tps": 98.01,
-        "ttft": 6.943
+        "tps": 99.035,
+        "ttft": 6.682
       },
       "hfId": "nvidia/NVIDIA-Nemotron-Nano-9B-V2",
       "mode": "Reasoning",
@@ -17814,8 +17886,8 @@
         "price_1m_output_tokens": 3
       },
       "speed": {
-        "tps": 42.306,
-        "ttft": 0.715
+        "tps": 41.514,
+        "ttft": 0.723
       },
       "hfId": "NousResearch/Hermes-4-405B",
       "mode": "Non-reasoning",
@@ -18040,7 +18112,7 @@
     {
       "id": "dae31abc-0587-44d0-ba53-f78e96b6e486",
       "slug": "k2-v2-low",
-      "name": "K2-V2 (low)",
+      "name": "K2-V2 (Low)",
       "creator": "Institute of Foundation Models",
       "creatorSlug": "ifm",
       "isClosed": false,
@@ -18070,7 +18142,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "low",
+      "mode": "Low",
       "releaseDate": "2025-12-05"
     },
     {
@@ -18652,7 +18724,7 @@
     {
       "id": "05e45a36-b5c6-47a1-8adb-9ddc19add5b3",
       "slug": "gpt-5-nano-minimal",
-      "name": "GPT-5 nano (minimal)",
+      "name": "GPT-5 nano (Minimal)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -18682,7 +18754,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "minimal",
+      "mode": "Minimal",
       "releaseDate": "2025-08-07"
     },
     {
@@ -18894,8 +18966,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 62.343,
-        "ttft": 0.362
+        "tps": 64.087,
+        "ttft": 0.402
       },
       "hfId": null,
       "mode": null,
@@ -19110,8 +19182,8 @@
         "price_1m_output_tokens": 0.2
       },
       "speed": {
-        "tps": 220.784,
-        "ttft": 0.379
+        "tps": 219.143,
+        "ttft": 0.363
       },
       "hfId": "nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16",
       "mode": "Non-reasoning",
@@ -19146,8 +19218,8 @@
         "price_1m_output_tokens": 0.195
       },
       "speed": {
-        "tps": 155.151,
-        "ttft": 1.188
+        "tps": 157.019,
+        "ttft": 1.324
       },
       "hfId": "nvidia/NVIDIA-Nemotron-Nano-9B-V2",
       "mode": "Non-reasoning",
@@ -19732,7 +19804,7 @@
     {
       "id": "764dd095-6ebd-4760-8eb3-cbc40964db2e",
       "slug": "sarvam-30b",
-      "name": "Sarvam 30B (high)",
+      "name": "Sarvam 30B (High)",
       "creator": "Sarvam",
       "creatorSlug": "sarvam",
       "isClosed": true,
@@ -19762,7 +19834,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "high",
+      "mode": "High",
       "releaseDate": "2026-03-06"
     },
     {
@@ -20262,8 +20334,8 @@
         "price_1m_output_tokens": 0.7
       },
       "speed": {
-        "tps": 2093.754,
-        "ttft": 0.466
+        "tps": 2151.558,
+        "ttft": 0.489
       },
       "hfId": null,
       "mode": null,
@@ -20370,8 +20442,8 @@
         "price_1m_output_tokens": 0
       },
       "speed": {
-        "tps": 45.428,
-        "ttft": 0.331
+        "tps": 44.999,
+        "ttft": 0.334
       },
       "hfId": null,
       "mode": null,
@@ -20658,8 +20730,8 @@
         "price_1m_output_tokens": 0.2
       },
       "speed": {
-        "tps": 82.683,
-        "ttft": 0.561
+        "tps": 78.699,
+        "ttft": 0.66
       },
       "hfId": "mistralai/Ministral-3-14B-Instruct-2512",
       "mode": null,
@@ -20730,8 +20802,8 @@
         "price_1m_output_tokens": 0.97
       },
       "speed": {
-        "tps": 109.295,
-        "ttft": 0.887
+        "tps": 107.658,
+        "ttft": 0.881
       },
       "hfId": "Qwen/Qwen3-Omni-30B-A3B-Instruct",
       "mode": null,
@@ -21018,8 +21090,8 @@
         "price_1m_output_tokens": 0.5
       },
       "speed": {
-        "tps": 43.611,
-        "ttft": 1.022
+        "tps": 41.458,
+        "ttft": 0.983
       },
       "hfId": null,
       "mode": null,
@@ -21090,8 +21162,8 @@
         "price_1m_output_tokens": 0.14
       },
       "speed": {
-        "tps": 231.722,
-        "ttft": 0.571
+        "tps": 223.487,
+        "ttft": 0.591
       },
       "hfId": null,
       "mode": null,
@@ -21270,7 +21342,7 @@
         "price_1m_output_tokens": 0.6
       },
       "speed": {
-        "tps": 204.401,
+        "tps": 201.634,
         "ttft": 0.781
       },
       "hfId": "nvidia/NVIDIA-Nemotron-Nano-12B-v2-VL-BF16",
@@ -21342,8 +21414,8 @@
         "price_1m_output_tokens": 0
       },
       "speed": {
-        "tps": 17.178,
-        "ttft": 0.37
+        "tps": 17.216,
+        "ttft": 0.352
       },
       "hfId": null,
       "mode": null,
@@ -21702,8 +21774,8 @@
         "price_1m_output_tokens": 0.8
       },
       "speed": {
-        "tps": 96.334,
-        "ttft": 0.805
+        "tps": 94.545,
+        "ttft": 0.834
       },
       "hfId": null,
       "mode": null,
@@ -22170,7 +22242,7 @@
         "price_1m_output_tokens": 0.15
       },
       "speed": {
-        "tps": 100.078,
+        "tps": 97.568,
         "ttft": 0.487
       },
       "hfId": "mistralai/Ministral-3-8B-Instruct-2512",
@@ -22350,8 +22422,8 @@
         "price_1m_output_tokens": 0.345
       },
       "speed": {
-        "tps": 15.919,
-        "ttft": 1.395
+        "tps": 14.493,
+        "ttft": 1.339
       },
       "hfId": "meta-llama/Llama-3.2-11B-Vision-Instruct",
       "mode": "Vision",
@@ -22504,7 +22576,7 @@
     {
       "id": "34ef2b5c-3df3-437e-b9c5-81346f8c14a8",
       "slug": "sarvam-m-reasoning",
-      "name": "Sarvam M (Reasoning, based on Mistral Small 3.1)",
+      "name": "Sarvam M (Reasoning, Based on Mistral Small 3.1)",
       "creator": "Sarvam",
       "creatorSlug": "sarvam",
       "isClosed": true,
@@ -22534,7 +22606,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "Reasoning, based on Mistral Small 3.1",
+      "mode": "Reasoning, Based on Mistral Small 3.1",
       "releaseDate": "2025-05-23"
     },
     {
@@ -23682,8 +23754,8 @@
         "price_1m_output_tokens": 0.1
       },
       "speed": {
-        "tps": 242.827,
-        "ttft": 0.58
+        "tps": 236.406,
+        "ttft": 0.559
       },
       "hfId": "mistralai/Ministral-3-3B-Instruct-2512",
       "mode": null,
@@ -24187,7 +24259,7 @@
       },
       "speed": {
         "tps": 132.216,
-        "ttft": 0.213
+        "ttft": 0.216
       },
       "hfId": null,
       "mode": null,
@@ -24294,8 +24366,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 90.718,
-        "ttft": 0.86
+        "tps": 101.724,
+        "ttft": 1.028
       },
       "hfId": null,
       "mode": "Adaptive Reasoning, Low Effort, Default Fallback",
@@ -24520,7 +24592,7 @@
     {
       "id": "5bb1f426-2d64-4d03-99fb-8041ee85c33b",
       "slug": "gpt-5-4-pro",
-      "name": "GPT-5.4 Pro (xhigh)",
+      "name": "GPT-5.4 Pro (Xhigh)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -24550,13 +24622,13 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "xhigh",
+      "mode": "Xhigh",
       "releaseDate": "2026-03-05"
     },
     {
       "id": "e3396f8f-7994-4df5-bdab-43745681ef0a",
       "slug": "gpt-5-5-pro",
-      "name": "GPT-5.5 Pro (xhigh)",
+      "name": "GPT-5.5 Pro (Xhigh)",
       "creator": "OpenAI",
       "creatorSlug": "openai",
       "isClosed": true,
@@ -24586,7 +24658,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "xhigh",
+      "mode": "Xhigh",
       "releaseDate": "2026-04-23"
     },
     {

@@ -354,6 +354,7 @@
   "ring-flash-2-0": "inclusionAI/Ring-flash-2.0",
   "seed-oss-36b-instruct": "ByteDance-Seed/Seed-OSS-36B-Instruct",
   "solar-mini": null,
+  "solar-mini4": null,
   "solar-open-100b-reasoning": "upstage/Solar-Open-100B",
   "solar-open2-250b": "upstage/Solar-Open2-250B",
   "solar-pro-2-preview": null,

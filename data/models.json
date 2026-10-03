@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-02T10:26:01.019Z",
+  "generatedAt": "2026-10-03T09:47:46.543Z",
   "models": [
     {
       "id": "2f3c4dc9-a450-4303-8697-0237257cf08f",
       "slug": "claude-opus-5-5",
-      "name": "Claude Opus 5.5 (Adaptive Reasoning, Max Effort, Default Fallback)",
+      "name": "Claude Opus 5.5 (Max, Default Fallback)",
       "creator": "Anthropic",
       "creatorSlug": "anthropic",
       "isClosed": true,
@@ -30,17 +30,17 @@
         "price_1m_output_tokens": 20
       },
       "speed": {
-        "tps": 96.396,
-        "ttft": 465.439
+        "tps": 97.574,
+        "ttft": 488.334
       },
       "hfId": null,
-      "mode": "Adaptive Reasoning, Max Effort, Default Fallback",
+      "mode": "Max, Default Fallback",
       "releaseDate": "2026-09-22"
     },
     {
       "id": "b171d979-5ec1-45de-b8b9-db1ee65e77ec",
       "slug": "claude-sonnet-5-5",
-      "name": "Claude Sonnet 5.5 (Adaptive Reasoning, Max Effort, Default Fallback)",
+      "name": "Claude Sonnet 5.5 (Max, Default Fallback)",
       "creator": "Anthropic",
       "creatorSlug": "anthropic",
       "isClosed": true,
@@ -66,17 +66,17 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 145.398,
-        "ttft": 261.168
+        "tps": 140.474,
+        "ttft": 261.115
       },
       "hfId": null,
-      "mode": "Adaptive Reasoning, Max Effort, Default Fallback",
+      "mode": "Max, Default Fallback",
       "releaseDate": "2026-09-28"
     },
     {
       "id": "df5bf99d-d228-4715-b41b-19ca86118777",
       "slug": "claude-opus-5-5-xhigh",
-      "name": "Claude Opus 5.5 (Adaptive Reasoning, Xhigh Effort, Default Fallback)",
+      "name": "Claude Opus 5.5 (Xhigh, Default Fallback)",
       "creator": "Anthropic",
       "creatorSlug": "anthropic",
       "isClosed": true,
@@ -102,17 +102,17 @@
         "price_1m_output_tokens": 20
       },
       "speed": {
-        "tps": 81.109,
-        "ttft": 50.457
+        "tps": 78.732,
+        "ttft": 51.187
       },
       "hfId": null,
-      "mode": "Adaptive Reasoning, Xhigh Effort, Default Fallback",
+      "mode": "Xhigh, Default Fallback",
       "releaseDate": "2026-09-22"
     },
     {
       "id": "f314eade-2232-44bf-a3ab-9b326bc67de6",
       "slug": "claude-opus-5-5-high",
-      "name": "Claude Opus 5.5 (Adaptive Reasoning, High Effort, Default Fallback)",
+      "name": "Claude Opus 5.5 (High, Default Fallback)",
       "creator": "Anthropic",
       "creatorSlug": "anthropic",
       "isClosed": true,
@@ -138,17 +138,17 @@
         "price_1m_output_tokens": 20
       },
       "speed": {
-        "tps": 81.263,
-        "ttft": 18.099
+        "tps": 81.626,
+        "ttft": 17.547
       },
       "hfId": null,
-      "mode": "Adaptive Reasoning, High Effort, Default Fallback",
+      "mode": "High, Default Fallback",
       "releaseDate": "2026-09-22"
     },
     {
       "id": "3e87c73e-a257-495e-9730-367a66229811",
       "slug": "claude-fable-5-1",
-      "name": "Claude Fable 5.1 (Adaptive Reasoning, Max Effort, Default Fallback)",
+      "name": "Claude Fable 5.1 (Max, Default Fallback)",
       "creator": "Anthropic",
       "creatorSlug": "anthropic",
       "isClosed": true,
@@ -174,17 +174,17 @@
         "price_1m_output_tokens": 50
       },
       "speed": {
-        "tps": 70.155,
-        "ttft": 134.538
+        "tps": 71.224,
+        "ttft": 137.867
       },
       "hfId": null,
-      "mode": "Adaptive Reasoning, Max Effort, Default Fallback",
+      "mode": "Max, Default Fallback",
       "releaseDate": "2026-09-01"
     },
     {
       "id": "9b166bf3-42db-4f63-8338-1c4a1244ffe8",
       "slug": "claude-fable-5-1-xhigh",
-      "name": "Claude Fable 5.1 (Adaptive Reasoning, Xhigh Effort, Default Fallback)",
+      "name": "Claude Fable 5.1 (Xhigh, Default Fallback)",
       "creator": "Anthropic",
       "creatorSlug": "anthropic",
       "isClosed": true,
@@ -210,11 +210,11 @@
         "price_1m_output_tokens": 50
       },
       "speed": {
-        "tps": 62.866,
+        "tps": 61.016,
         "ttft": 37.157
       },
       "hfId": null,
-      "mode": "Adaptive Reasoning, Xhigh Effort, Default Fallback",
+      "mode": "Xhigh, Default Fallback",
       "releaseDate": "2026-09-01"
     },
     {
@@ -246,8 +246,8 @@
         "price_1m_output_tokens": 50
       },
       "speed": {
-        "tps": 56.513,
-        "ttft": 192.954
+        "tps": 56.834,
+        "ttft": 197.034
       },
       "hfId": null,
       "mode": "Max",
@@ -318,8 +318,8 @@
         "price_1m_output_tokens": 50
       },
       "speed": {
-        "tps": 51.995,
-        "ttft": 74.33
+        "tps": 53.656,
+        "ttft": 71.597
       },
       "hfId": null,
       "mode": "Xhigh",
@@ -328,7 +328,7 @@
     {
       "id": "975aeaef-50bd-4a65-9c73-f1015adcd4d4",
       "slug": "claude-sonnet-5-5-xhigh",
-      "name": "Claude Sonnet 5.5 (Adaptive Reasoning, Xhigh Effort, Default Fallback)",
+      "name": "Claude Sonnet 5.5 (Xhigh, Default Fallback)",
       "creator": "Anthropic",
       "creatorSlug": "anthropic",
       "isClosed": true,
@@ -354,11 +354,11 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 112.626,
-        "ttft": 16.972
+        "tps": 112.96,
+        "ttft": 13.81
       },
       "hfId": null,
-      "mode": "Adaptive Reasoning, Xhigh Effort, Default Fallback",
+      "mode": "Xhigh, Default Fallback",
       "releaseDate": "2026-09-28"
     },
     {
@@ -390,8 +390,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 62.499,
-        "ttft": 147.682
+        "tps": 59.154,
+        "ttft": 155.387
       },
       "hfId": null,
       "mode": "Max",
@@ -400,7 +400,7 @@
     {
       "id": "ea9e0da6-169f-43c6-92f5-730a10d6ff8d",
       "slug": "claude-opus-5-5-medium",
-      "name": "Claude Opus 5.5 (Adaptive Reasoning, Medium Effort, Default Fallback)",
+      "name": "Claude Opus 5.5 (Medium, Default Fallback)",
       "creator": "Anthropic",
       "creatorSlug": "anthropic",
       "isClosed": true,
@@ -426,17 +426,17 @@
         "price_1m_output_tokens": 20
       },
       "speed": {
-        "tps": 77.944,
-        "ttft": 14.579
+        "tps": 79.489,
+        "ttft": 12.043
       },
       "hfId": null,
-      "mode": "Adaptive Reasoning, Medium Effort, Default Fallback",
+      "mode": "Medium, Default Fallback",
       "releaseDate": "2026-09-22"
     },
     {
       "id": "9d7d72cd-d95d-45a0-b109-4ad292c9aabd",
       "slug": "claude-fable-5-1-high",
-      "name": "Claude Fable 5.1 (Adaptive Reasoning, High Effort, Default Fallback)",
+      "name": "Claude Fable 5.1 (High, Default Fallback)",
       "creator": "Anthropic",
       "creatorSlug": "anthropic",
       "isClosed": true,
@@ -462,11 +462,11 @@
         "price_1m_output_tokens": 50
       },
       "speed": {
-        "tps": 56.008,
+        "tps": 56.047,
         "ttft": 6.8
       },
       "hfId": null,
-      "mode": "Adaptive Reasoning, High Effort, Default Fallback",
+      "mode": "High, Default Fallback",
       "releaseDate": "2026-09-01"
     },
     {
@@ -498,8 +498,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 60.409,
-        "ttft": 62.454
+        "tps": 54.153,
+        "ttft": 69.336
       },
       "hfId": null,
       "mode": "Xhigh",
@@ -534,8 +534,8 @@
         "price_1m_output_tokens": 50
       },
       "speed": {
-        "tps": 52.151,
-        "ttft": 31.407
+        "tps": 53.437,
+        "ttft": 29.184
       },
       "hfId": null,
       "mode": "High",
@@ -544,7 +544,7 @@
     {
       "id": "b8fc61f7-5e9a-49e6-8547-6ac56db24627",
       "slug": "claude-opus-5",
-      "name": "Claude Opus 5 (Adaptive Reasoning, Max Effort)",
+      "name": "Claude Opus 5 (Max)",
       "creator": "Anthropic",
       "creatorSlug": "anthropic",
       "isClosed": true,
@@ -574,7 +574,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "Adaptive Reasoning, Max Effort",
+      "mode": "Max",
       "releaseDate": "2026-07-24"
     },
     {
@@ -606,7 +606,7 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 57.864,
+        "tps": 52.438,
         "ttft": 23.033
       },
       "hfId": null,
@@ -616,7 +616,7 @@
     {
       "id": "1305c921-7aaa-4d6d-99b5-99b3acf15e19",
       "slug": "claude-opus-5-xhigh",
-      "name": "Claude Opus 5 (Adaptive Reasoning, Xhigh Effort)",
+      "name": "Claude Opus 5 (Xhigh)",
       "creator": "Anthropic",
       "creatorSlug": "anthropic",
       "isClosed": true,
@@ -646,13 +646,13 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "Adaptive Reasoning, Xhigh Effort",
+      "mode": "Xhigh",
       "releaseDate": "2026-07-24"
     },
     {
       "id": "cd55210d-358e-4df1-ba9c-9acb5f186cc9",
       "slug": "claude-fable-5",
-      "name": "Claude Fable 5 (Adaptive Reasoning, Max Effort, Opus 4.8 Fallback)",
+      "name": "Claude Fable 5 (Max, Opus 4.8 Fallback)",
       "creator": "Anthropic",
       "creatorSlug": "anthropic",
       "isClosed": true,
@@ -682,7 +682,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "Adaptive Reasoning, Max Effort, Opus 4.8 Fallback",
+      "mode": "Max, Opus 4.8 Fallback",
       "releaseDate": "2026-06-09"
     },
     {
@@ -714,8 +714,8 @@
         "price_1m_output_tokens": 50
       },
       "speed": {
-        "tps": 51.763,
-        "ttft": 4.544
+        "tps": 52.617,
+        "ttft": 4.224
       },
       "hfId": null,
       "mode": "Medium",
@@ -724,7 +724,7 @@
     {
       "id": "3b7de71c-e034-4591-8ca6-6b6be2fa471f",
       "slug": "claude-fable-5-1-medium",
-      "name": "Claude Fable 5.1 (Adaptive Reasoning, Medium Effort, Default Fallback)",
+      "name": "Claude Fable 5.1 (Medium, Default Fallback)",
       "creator": "Anthropic",
       "creatorSlug": "anthropic",
       "isClosed": true,
@@ -750,17 +750,17 @@
         "price_1m_output_tokens": 50
       },
       "speed": {
-        "tps": 53.279,
-        "ttft": 5.9
+        "tps": 56.869,
+        "ttft": 6.555
       },
       "hfId": null,
-      "mode": "Adaptive Reasoning, Medium Effort, Default Fallback",
+      "mode": "Medium, Default Fallback",
       "releaseDate": "2026-09-01"
     },
     {
       "id": "712be54a-77ae-41b2-9a58-21181479d6ee",
       "slug": "claude-opus-5-high",
-      "name": "Claude Opus 5 (Adaptive Reasoning, High Effort)",
+      "name": "Claude Opus 5 (High)",
       "creator": "Anthropic",
       "creatorSlug": "anthropic",
       "isClosed": true,
@@ -790,7 +790,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "Adaptive Reasoning, High Effort",
+      "mode": "High",
       "releaseDate": "2026-07-24"
     },
     {
@@ -822,8 +822,8 @@
         "price_1m_output_tokens": 4.25
       },
       "speed": {
-        "tps": 171.012,
-        "ttft": 43.349
+        "tps": 163.786,
+        "ttft": 45.908
       },
       "hfId": null,
       "mode": "Max",
@@ -858,7 +858,7 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 61.411,
+        "tps": 56.156,
         "ttft": 3.646
       },
       "hfId": null,
@@ -894,8 +894,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 96.316,
-        "ttft": 106.858
+        "tps": 119.995,
+        "ttft": 100.163
       },
       "hfId": null,
       "mode": "Max",
@@ -940,7 +940,7 @@
     {
       "id": "05776db7-f5c0-40f7-b824-079160f8cfa8",
       "slug": "claude-fable-5-1-low",
-      "name": "Claude Fable 5.1 (Adaptive Reasoning, Low Effort, Default Fallback)",
+      "name": "Claude Fable 5.1 (Low, Default Fallback)",
       "creator": "Anthropic",
       "creatorSlug": "anthropic",
       "isClosed": true,
@@ -966,17 +966,17 @@
         "price_1m_output_tokens": 50
       },
       "speed": {
-        "tps": 54.648,
-        "ttft": 3.492
+        "tps": 55.253,
+        "ttft": 3.641
       },
       "hfId": null,
-      "mode": "Adaptive Reasoning, Low Effort, Default Fallback",
+      "mode": "Low, Default Fallback",
       "releaseDate": "2026-09-01"
     },
     {
       "id": "268525e2-f873-4178-bc07-e6a0ee1f002d",
       "slug": "claude-sonnet-5-5-high",
-      "name": "Claude Sonnet 5.5 (Adaptive Reasoning, High Effort, Default Fallback)",
+      "name": "Claude Sonnet 5.5 (High, Default Fallback)",
       "creator": "Anthropic",
       "creatorSlug": "anthropic",
       "isClosed": true,
@@ -1002,11 +1002,11 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 110.532,
-        "ttft": 7.735
+        "tps": 109.393,
+        "ttft": 9.123
       },
       "hfId": null,
-      "mode": "Adaptive Reasoning, High Effort, Default Fallback",
+      "mode": "High, Default Fallback",
       "releaseDate": "2026-09-28"
     },
     {
@@ -1038,8 +1038,8 @@
         "price_1m_output_tokens": 6
       },
       "speed": {
-        "tps": 82.71,
-        "ttft": 19.289
+        "tps": 81.634,
+        "ttft": 22.446
       },
       "hfId": null,
       "mode": "Xhigh",
@@ -1074,8 +1074,8 @@
         "price_1m_output_tokens": 6
       },
       "speed": {
-        "tps": 83.388,
-        "ttft": 19.362
+        "tps": 78.479,
+        "ttft": 17.604
       },
       "hfId": null,
       "mode": "High",
@@ -1110,8 +1110,8 @@
         "price_1m_output_tokens": 0.87
       },
       "speed": {
-        "tps": 46.231,
-        "ttft": 3.118
+        "tps": 46.034,
+        "ttft": 3.643
       },
       "hfId": "XiaomiMiMo/MiMo-V2.6-Pro-RL",
       "mode": null,
@@ -1146,7 +1146,7 @@
         "price_1m_output_tokens": 50
       },
       "speed": {
-        "tps": 46.656,
+        "tps": 49.254,
         "ttft": 1.666
       },
       "hfId": null,
@@ -1182,8 +1182,8 @@
         "price_1m_output_tokens": 6
       },
       "speed": {
-        "tps": 39.338,
-        "ttft": 1.692
+        "tps": 37.962,
+        "ttft": 1.872
       },
       "hfId": null,
       "mode": "0902",
@@ -1219,7 +1219,7 @@
       },
       "speed": {
         "tps": 194.525,
-        "ttft": 33.725
+        "ttft": 32.888
       },
       "hfId": null,
       "mode": "Xhigh",
@@ -1228,7 +1228,7 @@
     {
       "id": "ff51be8f-e362-4a7e-9043-687ba15de207",
       "slug": "claude-opus-5-medium",
-      "name": "Claude Opus 5 (Adaptive Reasoning, Medium Effort)",
+      "name": "Claude Opus 5 (Medium)",
       "creator": "Anthropic",
       "creatorSlug": "anthropic",
       "isClosed": true,
@@ -1258,7 +1258,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "Adaptive Reasoning, Medium Effort",
+      "mode": "Medium",
       "releaseDate": "2026-07-24"
     },
     {
@@ -1290,8 +1290,8 @@
         "price_1m_output_tokens": 4.4
       },
       "speed": {
-        "tps": 72.824,
-        "ttft": 2.655
+        "tps": 75.206,
+        "ttft": 2.691
       },
       "hfId": "zai-org/GLM-5.3-Flash",
       "mode": "Max",
@@ -1362,8 +1362,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 93.757,
-        "ttft": 30.434
+        "tps": 110.055,
+        "ttft": 25.259
       },
       "hfId": null,
       "mode": "Xhigh",
@@ -1470,8 +1470,8 @@
         "price_1m_output_tokens": 2.7
       },
       "speed": {
-        "tps": 84.74,
-        "ttft": 1.974
+        "tps": 84.069,
+        "ttft": 1.959
       },
       "hfId": null,
       "mode": null,
@@ -1506,8 +1506,8 @@
         "price_1m_output_tokens": 15
       },
       "speed": {
-        "tps": 36.258,
-        "ttft": 3.013
+        "tps": 36.018,
+        "ttft": 2.621
       },
       "hfId": "moonshotai/Kimi-K3",
       "mode": "Max",
@@ -1542,8 +1542,8 @@
         "price_1m_output_tokens": 6
       },
       "speed": {
-        "tps": 107.061,
-        "ttft": 19.629
+        "tps": 0,
+        "ttft": 0
       },
       "hfId": null,
       "mode": "Medium",
@@ -1578,8 +1578,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 82.263,
-        "ttft": 16.273
+        "tps": 96.887,
+        "ttft": 12.943
       },
       "hfId": null,
       "mode": "High",
@@ -1624,7 +1624,7 @@
     {
       "id": "4416ca93-fde6-4b7b-abbc-3a6be109cc3d",
       "slug": "claude-opus-5-5-low",
-      "name": "Claude Opus 5.5 (Adaptive Reasoning, Low Effort, Default Fallback)",
+      "name": "Claude Opus 5.5 (Low, Default Fallback)",
       "creator": "Anthropic",
       "creatorSlug": "anthropic",
       "isClosed": true,
@@ -1650,11 +1650,11 @@
         "price_1m_output_tokens": 20
       },
       "speed": {
-        "tps": 76.983,
-        "ttft": 6.565
+        "tps": 77.204,
+        "ttft": 6.241
       },
       "hfId": null,
-      "mode": "Adaptive Reasoning, Low Effort, Default Fallback",
+      "mode": "Low, Default Fallback",
       "releaseDate": "2026-09-22"
     },
     {
@@ -1686,8 +1686,8 @@
         "price_1m_output_tokens": 6
       },
       "speed": {
-        "tps": 67.45,
-        "ttft": 3.377
+        "tps": 67.693,
+        "ttft": 6.198
       },
       "hfId": null,
       "mode": "Low",
@@ -1722,8 +1722,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 53.201,
-        "ttft": 2
+        "tps": 51.838,
+        "ttft": 2.43
       },
       "hfId": null,
       "mode": "Low",
@@ -1758,8 +1758,8 @@
         "price_1m_output_tokens": 12
       },
       "speed": {
-        "tps": 110.849,
-        "ttft": 121.526
+        "tps": 110.113,
+        "ttft": 93.843
       },
       "hfId": null,
       "mode": "Max",
@@ -1794,8 +1794,8 @@
         "price_1m_output_tokens": 0.5
       },
       "speed": {
-        "tps": 50.997,
-        "ttft": 3.126
+        "tps": 52.907,
+        "ttft": 2.992
       },
       "hfId": "zai-org/GLM-5.3-Flash",
       "mode": null,
@@ -1804,7 +1804,7 @@
     {
       "id": "992b7b84-5069-4c6a-9295-834252553d50",
       "slug": "claude-opus-4-8",
-      "name": "Claude Opus 4.8 (Adaptive Reasoning, Max Effort)",
+      "name": "Claude Opus 4.8 (Max)",
       "creator": "Anthropic",
       "creatorSlug": "anthropic",
       "isClosed": true,
@@ -1834,7 +1834,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "Adaptive Reasoning, Max Effort",
+      "mode": "Max",
       "releaseDate": "2026-05-28"
     },
     {
@@ -1866,8 +1866,8 @@
         "price_1m_output_tokens": 3.75
       },
       "speed": {
-        "tps": 261.454,
-        "ttft": 13.552
+        "tps": 268.03,
+        "ttft": 12.487
       },
       "hfId": null,
       "mode": "High",
@@ -1876,7 +1876,7 @@
     {
       "id": "042e8a37-fcd0-40f4-8f41-99215fb68eda",
       "slug": "claude-sonnet-5-5-medium",
-      "name": "Claude Sonnet 5.5 (Adaptive Reasoning, Medium Effort, Default Fallback)",
+      "name": "Claude Sonnet 5.5 (Medium, Default Fallback)",
       "creator": "Anthropic",
       "creatorSlug": "anthropic",
       "isClosed": true,
@@ -1902,17 +1902,17 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 111.866,
-        "ttft": 1.285
+        "tps": 110.736,
+        "ttft": 1.825
       },
       "hfId": null,
-      "mode": "Adaptive Reasoning, Medium Effort, Default Fallback",
+      "mode": "Medium, Default Fallback",
       "releaseDate": "2026-09-28"
     },
     {
       "id": "e9a09db3-8fd6-41dd-ba2f-20e0a2bff7f2",
       "slug": "claude-opus-4-7",
-      "name": "Claude Opus 4.7 (Adaptive Reasoning, Max Effort)",
+      "name": "Claude Opus 4.7 (Max)",
       "creator": "Anthropic",
       "creatorSlug": "anthropic",
       "isClosed": true,
@@ -1942,7 +1942,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "Adaptive Reasoning, Max Effort",
+      "mode": "Max",
       "releaseDate": "2026-04-16"
     },
     {
@@ -2010,8 +2010,8 @@
         "price_1m_output_tokens": 6
       },
       "speed": {
-        "tps": 39.056,
-        "ttft": 1.751
+        "tps": 38.886,
+        "ttft": 1.746
       },
       "hfId": "Qwen/Qwen3.8-2.4T-A95B",
       "mode": null,
@@ -2046,8 +2046,8 @@
         "price_1m_output_tokens": 0.47
       },
       "speed": {
-        "tps": 52.688,
-        "ttft": 1.459
+        "tps": 52.183,
+        "ttft": 1.475
       },
       "hfId": "Qwen/Qwen3.8-Flash-Next",
       "mode": null,
@@ -2226,8 +2226,8 @@
         "price_1m_output_tokens": 1.2
       },
       "speed": {
-        "tps": 226.5,
-        "ttft": 0.78
+        "tps": 220.886,
+        "ttft": 0.846
       },
       "hfId": "deepseek-ai/DeepSeek-V4.1-Flash",
       "mode": "Max",
@@ -2236,7 +2236,7 @@
     {
       "id": "20928ba9-3a3f-415f-9519-b84ff64ecf34",
       "slug": "claude-opus-5-low",
-      "name": "Claude Opus 5 (Adaptive Reasoning, Low Effort)",
+      "name": "Claude Opus 5 (Low)",
       "creator": "Anthropic",
       "creatorSlug": "anthropic",
       "isClosed": true,
@@ -2266,7 +2266,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "Adaptive Reasoning, Low Effort",
+      "mode": "Low",
       "releaseDate": "2026-07-24"
     },
     {
@@ -2452,7 +2452,7 @@
     {
       "id": "23c86e4a-c769-43c0-a056-79e3cd15834f",
       "slug": "claude-sonnet-5",
-      "name": "Claude Sonnet 5 (Adaptive Reasoning, Max Effort)",
+      "name": "Claude Sonnet 5 (Max)",
       "creator": "Anthropic",
       "creatorSlug": "anthropic",
       "isClosed": true,
@@ -2478,11 +2478,11 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 95.123,
-        "ttft": 152.635
+        "tps": 0,
+        "ttft": 0
       },
       "hfId": null,
-      "mode": "Adaptive Reasoning, Max Effort",
+      "mode": "Max",
       "releaseDate": "2026-06-30"
     },
     {
@@ -2514,8 +2514,8 @@
         "price_1m_output_tokens": 0.5
       },
       "speed": {
-        "tps": 138.803,
-        "ttft": 85.233
+        "tps": 137.613,
+        "ttft": 84.209
       },
       "hfId": null,
       "mode": "Max",
@@ -2550,8 +2550,8 @@
         "price_1m_output_tokens": 12
       },
       "speed": {
-        "tps": 99.383,
-        "ttft": 21.257
+        "tps": 105.011,
+        "ttft": 23.947
       },
       "hfId": null,
       "mode": "Xhigh",
@@ -2586,8 +2586,8 @@
         "price_1m_output_tokens": 0.28
       },
       "speed": {
-        "tps": 58.456,
-        "ttft": 3.654
+        "tps": 53.285,
+        "ttft": 4.244
       },
       "hfId": "XiaomiMiMo/MiMo-V2.6-Flash-RL",
       "mode": null,
@@ -2730,8 +2730,8 @@
         "price_1m_output_tokens": 3.96
       },
       "speed": {
-        "tps": 104.703,
-        "ttft": 1.164
+        "tps": 115.683,
+        "ttft": 1.039
       },
       "hfId": "deepseek-ai/DeepSeek-V4-Pro-0813",
       "mode": "Max",
@@ -2740,7 +2740,7 @@
     {
       "id": "bbc2ffea-cf6b-43be-8c41-1769347e234d",
       "slug": "claude-sonnet-5-5-low",
-      "name": "Claude Sonnet 5.5 (Adaptive Reasoning, Low Effort, Default Fallback)",
+      "name": "Claude Sonnet 5.5 (Low, Default Fallback)",
       "creator": "Anthropic",
       "creatorSlug": "anthropic",
       "isClosed": true,
@@ -2766,11 +2766,11 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 110.722,
-        "ttft": 0.917
+        "tps": 108.911,
+        "ttft": 0.871
       },
       "hfId": null,
-      "mode": "Adaptive Reasoning, Low Effort, Default Fallback",
+      "mode": "Low, Default Fallback",
       "releaseDate": "2026-09-28"
     },
     {
@@ -2802,8 +2802,8 @@
         "price_1m_output_tokens": 6
       },
       "speed": {
-        "tps": 86.043,
-        "ttft": 2.677
+        "tps": 0,
+        "ttft": 0
       },
       "hfId": null,
       "mode": "Low",
@@ -2838,8 +2838,8 @@
         "price_1m_output_tokens": 1.32
       },
       "speed": {
-        "tps": 223.706,
-        "ttft": 0.714
+        "tps": 225.35,
+        "ttft": 0.759
       },
       "hfId": "deepseek-ai/DeepSeek-V4-Flash-Vision-Exp",
       "mode": "Max",
@@ -2874,8 +2874,8 @@
         "price_1m_output_tokens": 0.5
       },
       "speed": {
-        "tps": 131.692,
-        "ttft": 26.098
+        "tps": 138.896,
+        "ttft": 21.646
       },
       "hfId": null,
       "mode": "Xhigh",
@@ -2920,7 +2920,7 @@
     {
       "id": "99f376bf-cbcb-4124-bf3e-6b0a4e6e9bea",
       "slug": "claude-sonnet-5-xhigh",
-      "name": "Claude Sonnet 5 (Adaptive Reasoning, Xhigh Effort)",
+      "name": "Claude Sonnet 5 (Xhigh)",
       "creator": "Anthropic",
       "creatorSlug": "anthropic",
       "isClosed": true,
@@ -2946,11 +2946,11 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 80.866,
-        "ttft": 18.899
+        "tps": 0,
+        "ttft": 0
       },
       "hfId": null,
-      "mode": "Adaptive Reasoning, Xhigh Effort",
+      "mode": "Xhigh",
       "releaseDate": "2026-06-30"
     },
     {
@@ -3018,8 +3018,8 @@
         "price_1m_output_tokens": 4.4
       },
       "speed": {
-        "tps": 74.73,
-        "ttft": 3.316
+        "tps": 73.721,
+        "ttft": 3.014
       },
       "hfId": "zai-org/GLM-5.3",
       "mode": "Low",
@@ -3054,8 +3054,8 @@
         "price_1m_output_tokens": 12
       },
       "speed": {
-        "tps": 93.757,
-        "ttft": 2.763
+        "tps": 94.702,
+        "ttft": 2.368
       },
       "hfId": null,
       "mode": "High",
@@ -3090,8 +3090,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 85.774,
-        "ttft": 1.819
+        "tps": 93.874,
+        "ttft": 1.615
       },
       "hfId": null,
       "mode": "Low",
@@ -3135,7 +3135,7 @@
     },
     {
       "id": "46f11cdf-1725-4abb-b39b-bd6bd948149c",
-      "slug": "jt236b",
+      "slug": "jt-4-1-flash-236b-a21b",
       "name": "JT-4.1 Flash 236B A21B (Reasoning)",
       "creator": "China Mobile",
       "creatorSlug": "china-mobile",
@@ -3306,8 +3306,8 @@
         "price_1m_output_tokens": 3
       },
       "speed": {
-        "tps": 45.839,
-        "ttft": 1.219
+        "tps": 46.637,
+        "ttft": 1.182
       },
       "hfId": "Qwen/Qwen3.8-27B",
       "mode": "Xhigh",
@@ -3486,8 +3486,8 @@
         "price_1m_output_tokens": 0.5
       },
       "speed": {
-        "tps": 131.134,
-        "ttft": 9.166
+        "tps": 127.962,
+        "ttft": 8.893
       },
       "hfId": null,
       "mode": "High",
@@ -3558,8 +3558,8 @@
         "price_1m_output_tokens": 14
       },
       "speed": {
-        "tps": 99.281,
-        "ttft": 55.02
+        "tps": 102.846,
+        "ttft": 39.219
       },
       "hfId": null,
       "mode": "Xhigh",
@@ -3640,7 +3640,7 @@
     {
       "id": "53c98840-47af-49aa-94e6-469fb17e9a1b",
       "slug": "claude-opus-4-6-adaptive",
-      "name": "Claude Opus 4.6 (Adaptive Reasoning, Max Effort)",
+      "name": "Claude Opus 4.6 (Max)",
       "creator": "Anthropic",
       "creatorSlug": "anthropic",
       "isClosed": true,
@@ -3670,13 +3670,13 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "Adaptive Reasoning, Max Effort",
+      "mode": "Max",
       "releaseDate": "2026-02-05"
     },
     {
       "id": "ba0224cf-0351-4f56-8508-b3f1a740ae4a",
       "slug": "claude-sonnet-5-high",
-      "name": "Claude Sonnet 5 (Adaptive Reasoning, High Effort)",
+      "name": "Claude Sonnet 5 (High)",
       "creator": "Anthropic",
       "creatorSlug": "anthropic",
       "isClosed": true,
@@ -3702,11 +3702,11 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 81.944,
-        "ttft": 9.026
+        "tps": 0,
+        "ttft": 0
       },
       "hfId": null,
-      "mode": "Adaptive Reasoning, High Effort",
+      "mode": "High",
       "releaseDate": "2026-06-30"
     },
     {
@@ -3748,7 +3748,7 @@
     {
       "id": "2fa8e143-77a8-4d05-bfa8-d3b54634c00f",
       "slug": "claude-opus-4-7-non-reasoning",
-      "name": "Claude Opus 4.7 (Non-reasoning, High Effort)",
+      "name": "Claude Opus 4.7 (Non-reasoning, High)",
       "creator": "Anthropic",
       "creatorSlug": "anthropic",
       "isClosed": true,
@@ -3778,7 +3778,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "Non-reasoning, High Effort",
+      "mode": "Non-reasoning, High",
       "releaseDate": "2026-04-16"
     },
     {
@@ -3846,8 +3846,8 @@
         "price_1m_output_tokens": 0
       },
       "speed": {
-        "tps": 116.538,
-        "ttft": 22.036
+        "tps": 121.977,
+        "ttft": 9.983
       },
       "hfId": "IFM/K2-Horizon-375B-A23B",
       "mode": null,
@@ -3990,8 +3990,8 @@
         "price_1m_output_tokens": 12
       },
       "speed": {
-        "tps": 94.889,
-        "ttft": 2.002
+        "tps": 96.06,
+        "ttft": 1.864
       },
       "hfId": null,
       "mode": "Medium",
@@ -4026,8 +4026,8 @@
         "price_1m_output_tokens": 15
       },
       "speed": {
-        "tps": 35.3,
-        "ttft": 3.578
+        "tps": 36.434,
+        "ttft": 4.19
       },
       "hfId": "moonshotai/Kimi-K3",
       "mode": "Low",
@@ -4036,7 +4036,7 @@
     {
       "id": "df8d14e0-3997-4e4d-b4ad-9c047acc9c69",
       "slug": "claude-sonnet-4-6-adaptive",
-      "name": "Claude Sonnet 4.6 (Adaptive Reasoning, Max Effort)",
+      "name": "Claude Sonnet 4.6 (Max)",
       "creator": "Anthropic",
       "creatorSlug": "anthropic",
       "isClosed": true,
@@ -4066,7 +4066,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "Adaptive Reasoning, Max Effort",
+      "mode": "Max",
       "releaseDate": "2026-02-17"
     },
     {
@@ -4134,8 +4134,8 @@
         "price_1m_output_tokens": 12
       },
       "speed": {
-        "tps": 129.627,
-        "ttft": 27.893
+        "tps": 125.645,
+        "ttft": 26.718
       },
       "hfId": null,
       "mode": null,
@@ -4206,8 +4206,8 @@
         "price_1m_output_tokens": 1.2
       },
       "speed": {
-        "tps": 91.177,
-        "ttft": 0.781
+        "tps": 74.309,
+        "ttft": 1.105
       },
       "hfId": "MiniMaxAI/MiniMax-M3",
       "mode": null,
@@ -4314,8 +4314,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 85.511,
-        "ttft": 0.983
+        "tps": 94.419,
+        "ttft": 1.122
       },
       "hfId": null,
       "mode": "Non-reasoning",
@@ -4494,8 +4494,8 @@
         "price_1m_output_tokens": 1.2
       },
       "speed": {
-        "tps": 90.613,
-        "ttft": 1.067
+        "tps": 92.876,
+        "ttft": 1.074
       },
       "hfId": null,
       "mode": null,
@@ -4504,7 +4504,7 @@
     {
       "id": "effcd151-7c31-4437-af3d-e88daeae9385",
       "slug": "claude-sonnet-5-medium",
-      "name": "Claude Sonnet 5 (Adaptive Reasoning, Medium Effort)",
+      "name": "Claude Sonnet 5 (Medium)",
       "creator": "Anthropic",
       "creatorSlug": "anthropic",
       "isClosed": true,
@@ -4530,11 +4530,11 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 78.414,
-        "ttft": 1.858
+        "tps": 0,
+        "ttft": 0
       },
       "hfId": null,
-      "mode": "Adaptive Reasoning, Medium Effort",
+      "mode": "Medium",
       "releaseDate": "2026-06-30"
     },
     {
@@ -4674,8 +4674,8 @@
         "price_1m_output_tokens": 3
       },
       "speed": {
-        "tps": 53.544,
-        "ttft": 1.185
+        "tps": 55.156,
+        "ttft": 1.168
       },
       "hfId": "Qwen/Qwen3.8-27B",
       "mode": "Medium",
@@ -4710,7 +4710,7 @@
         "price_1m_output_tokens": 12
       },
       "speed": {
-        "tps": 92.706,
+        "tps": 98.405,
         "ttft": 1.594
       },
       "hfId": null,
@@ -4719,7 +4719,7 @@
     },
     {
       "id": "901ec71b-51ec-4f53-b807-06ee17b890b4",
-      "slug": "jt-4-1-flash-236b-a21b",
+      "slug": "jt-4-1-flash-236b-a21b-non-reasoning",
       "name": "JT-4.1 Flash 236B A21B (Non-reasoning)",
       "creator": "China Mobile",
       "creatorSlug": "china-mobile",
@@ -4890,8 +4890,8 @@
         "price_1m_output_tokens": 1.8
       },
       "speed": {
-        "tps": 156.329,
-        "ttft": 0.47
+        "tps": 155.104,
+        "ttft": 0.55
       },
       "hfId": null,
       "mode": "Max, Based on GLM-5.2",
@@ -5008,7 +5008,7 @@
     {
       "id": "4386585e-71b4-4a0c-8a63-afb333419cd6",
       "slug": "claude-opus-4-6",
-      "name": "Claude Opus 4.6 (Non-reasoning, High Effort)",
+      "name": "Claude Opus 4.6 (Non-reasoning, High)",
       "creator": "Anthropic",
       "creatorSlug": "anthropic",
       "isClosed": true,
@@ -5038,7 +5038,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "Non-reasoning, High Effort",
+      "mode": "Non-reasoning, High",
       "releaseDate": "2026-02-05"
     },
     {
@@ -5106,7 +5106,7 @@
         "price_1m_output_tokens": 3
       },
       "speed": {
-        "tps": 53.509,
+        "tps": 55.774,
         "ttft": 1.209
       },
       "hfId": "Qwen/Qwen3.8-27B",
@@ -5178,8 +5178,8 @@
         "price_1m_output_tokens": 30
       },
       "speed": {
-        "tps": 140.839,
-        "ttft": 0.851
+        "tps": 148.587,
+        "ttft": 0.914
       },
       "hfId": null,
       "mode": "June 2026",
@@ -5250,8 +5250,8 @@
         "price_1m_output_tokens": 4
       },
       "speed": {
-        "tps": 78.892,
-        "ttft": 1.159
+        "tps": 86.053,
+        "ttft": 1.296
       },
       "hfId": "moonshotai/Kimi-K2.7-Code",
       "mode": null,
@@ -5286,8 +5286,8 @@
         "price_1m_output_tokens": 1.2
       },
       "speed": {
-        "tps": 128.834,
-        "ttft": 1.875
+        "tps": 175.441,
+        "ttft": 1.857
       },
       "hfId": "thinkingmachines/Inkling-Small",
       "mode": null,
@@ -5394,8 +5394,8 @@
         "price_1m_output_tokens": 0.555
       },
       "speed": {
-        "tps": 86.832,
-        "ttft": 2.125
+        "tps": 89.17,
+        "ttft": 2.077
       },
       "hfId": "tencent/Hy3-preview",
       "mode": null,
@@ -5466,8 +5466,8 @@
         "price_1m_output_tokens": 0.28
       },
       "speed": {
-        "tps": 48.743,
-        "ttft": 2.261
+        "tps": 0,
+        "ttft": 0
       },
       "hfId": "XiaomiMiMo/MiMo-V2.5",
       "mode": null,
@@ -5502,8 +5502,8 @@
         "price_1m_output_tokens": 1.6
       },
       "speed": {
-        "tps": 55.572,
-        "ttft": 1.67
+        "tps": 55.821,
+        "ttft": 1.685
       },
       "hfId": null,
       "mode": null,
@@ -5610,8 +5610,8 @@
         "price_1m_output_tokens": 4.05
       },
       "speed": {
-        "tps": 184.151,
-        "ttft": 2.375
+        "tps": 167.598,
+        "ttft": 2.282
       },
       "hfId": "thinkingmachines/Inkling",
       "mode": "Xhigh",
@@ -5800,7 +5800,7 @@
     {
       "id": "2e40e695-3cec-43da-83f9-615af30b8e91",
       "slug": "claude-sonnet-4-6",
-      "name": "Claude Sonnet 4.6 (Non-reasoning, High Effort)",
+      "name": "Claude Sonnet 4.6 (Non-reasoning, High)",
       "creator": "Anthropic",
       "creatorSlug": "anthropic",
       "isClosed": true,
@@ -5830,7 +5830,7 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "Non-reasoning, High Effort",
+      "mode": "Non-reasoning, High",
       "releaseDate": "2026-02-17"
     },
     {
@@ -5863,7 +5863,7 @@
       },
       "speed": {
         "tps": 247.779,
-        "ttft": 0.756
+        "ttft": 0.778
       },
       "hfId": "deepseek-ai/DeepSeek-V4.1-Flash",
       "mode": "Non-reasoning",
@@ -5980,7 +5980,7 @@
     {
       "id": "142b93bf-09c4-42dc-9c3a-50b1a222cbd4",
       "slug": "claude-sonnet-5-low",
-      "name": "Claude Sonnet 5 (Adaptive Reasoning, Low Effort)",
+      "name": "Claude Sonnet 5 (Low)",
       "creator": "Anthropic",
       "creatorSlug": "anthropic",
       "isClosed": true,
@@ -6006,11 +6006,11 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 74.215,
-        "ttft": 1.926
+        "tps": 0,
+        "ttft": 0
       },
       "hfId": null,
-      "mode": "Adaptive Reasoning, Low Effort",
+      "mode": "Low",
       "releaseDate": "2026-06-30"
     },
     {
@@ -6150,8 +6150,8 @@
         "price_1m_output_tokens": 0.4
       },
       "speed": {
-        "tps": 199.9,
-        "ttft": 1.1
+        "tps": 188.808,
+        "ttft": 1.03
       },
       "hfId": null,
       "mode": null,
@@ -6412,7 +6412,7 @@
     {
       "id": "f2e21112-192e-4aed-ae82-68ca3b38e667",
       "slug": "claude-sonnet-4-6-non-reasoning-low-effort",
-      "name": "Claude Sonnet 4.6 (Non-reasoning, Low Effort)",
+      "name": "Claude Sonnet 4.6 (Non-reasoning, Low)",
       "creator": "Anthropic",
       "creatorSlug": "anthropic",
       "isClosed": true,
@@ -6442,13 +6442,13 @@
         "ttft": 0
       },
       "hfId": null,
-      "mode": "Non-reasoning, Low Effort",
+      "mode": "Non-reasoning, Low",
       "releaseDate": "2026-02-17"
     },
     {
       "id": "d58b9ada-fd9d-4fff-a086-242034657963",
       "slug": "claude-sonnet-5-non-reasoning",
-      "name": "Claude Sonnet 5 (Non-reasoning, High Effort)",
+      "name": "Claude Sonnet 5 (Non-reasoning, High)",
       "creator": "Anthropic",
       "creatorSlug": "anthropic",
       "isClosed": true,
@@ -6474,11 +6474,11 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 73.328,
-        "ttft": 1.637
+        "tps": 0,
+        "ttft": 0
       },
       "hfId": null,
-      "mode": "Non-reasoning, High Effort",
+      "mode": "Non-reasoning, High",
       "releaseDate": "2026-06-30"
     },
     {
@@ -6582,8 +6582,8 @@
         "price_1m_output_tokens": 2.5
       },
       "speed": {
-        "tps": 172.677,
-        "ttft": 0.82
+        "tps": 163.775,
+        "ttft": 0.901
       },
       "hfId": "nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16",
       "mode": "Reasoning",
@@ -6906,8 +6906,8 @@
         "price_1m_output_tokens": 0.22
       },
       "speed": {
-        "tps": 331.676,
-        "ttft": 1.217
+        "tps": 361.649,
+        "ttft": 1.197
       },
       "hfId": "inclusionAI/Ling-3.0-flash-Fin",
       "mode": null,
@@ -7122,7 +7122,7 @@
         "price_1m_output_tokens": 2.5
       },
       "speed": {
-        "tps": 343.46,
+        "tps": 344.376,
         "ttft": 7.174
       },
       "hfId": null,
@@ -7338,7 +7338,7 @@
         "price_1m_output_tokens": 0.5
       },
       "speed": {
-        "tps": 128.731,
+        "tps": 124.805,
         "ttft": 2.093
       },
       "hfId": null,
@@ -7410,8 +7410,8 @@
         "price_1m_output_tokens": 3.6
       },
       "speed": {
-        "tps": 86.33,
-        "ttft": 1.594
+        "tps": 86.212,
+        "ttft": 1.588
       },
       "hfId": "Qwen/Qwen3.5-397B-A17B",
       "mode": "Non-reasoning",
@@ -7698,8 +7698,8 @@
         "price_1m_output_tokens": 12
       },
       "speed": {
-        "tps": 89.415,
-        "ttft": 0.764
+        "tps": 100.296,
+        "ttft": 0.762
       },
       "hfId": null,
       "mode": "Non-reasoning",
@@ -7914,8 +7914,8 @@
         "price_1m_output_tokens": 4.8
       },
       "speed": {
-        "tps": 107.276,
-        "ttft": 1.143
+        "tps": 124.898,
+        "ttft": 1.12
       },
       "hfId": null,
       "mode": null,
@@ -8017,13 +8017,13 @@
         "terminalbench_v2_1": null
       },
       "pricing": {
-        "price_1m_blended_3_to_1": 1.98,
-        "price_1m_input_tokens": 1.32,
-        "price_1m_output_tokens": 3.96
+        "price_1m_blended_3_to_1": 1.427,
+        "price_1m_input_tokens": 0.91,
+        "price_1m_output_tokens": 2.98
       },
       "speed": {
-        "tps": 151.902,
-        "ttft": 1.045
+        "tps": 131.371,
+        "ttft": 1.05
       },
       "hfId": "deepseek-ai/DeepSeek-V4-Pro-0813",
       "mode": "Non-reasoning",
@@ -8058,8 +8058,8 @@
         "price_1m_output_tokens": 8
       },
       "speed": {
-        "tps": 117.213,
-        "ttft": 8.557
+        "tps": 113.629,
+        "ttft": 7.653
       },
       "hfId": null,
       "mode": null,
@@ -8094,8 +8094,8 @@
         "price_1m_output_tokens": 3
       },
       "speed": {
-        "tps": 54.608,
-        "ttft": 1.218
+        "tps": 54.674,
+        "ttft": 1.165
       },
       "hfId": "Qwen/Qwen3.8-27B",
       "mode": "Non-reasoning",
@@ -8130,8 +8130,8 @@
         "price_1m_output_tokens": 0.22
       },
       "speed": {
-        "tps": 331.527,
-        "ttft": 1.76
+        "tps": 360.189,
+        "ttft": 1.804
       },
       "hfId": "inclusionAI/Ling-3.0-flash",
       "mode": null,
@@ -8310,8 +8310,8 @@
         "price_1m_output_tokens": 1.15
       },
       "speed": {
-        "tps": 204.863,
-        "ttft": 1.369
+        "tps": 0,
+        "ttft": 0
       },
       "hfId": "stepfun-ai/Step-3.7-Flash",
       "mode": null,
@@ -8779,7 +8779,7 @@
       },
       "speed": {
         "tps": 133.599,
-        "ttft": 0.862
+        "ttft": 0.761
       },
       "hfId": null,
       "mode": "Non-reasoning",
@@ -8814,8 +8814,8 @@
         "price_1m_output_tokens": 3.6
       },
       "speed": {
-        "tps": 87.717,
-        "ttft": 1.777
+        "tps": 88.332,
+        "ttft": 1.664
       },
       "hfId": "Qwen/Qwen3.5-397B-A17B",
       "mode": "Reasoning",
@@ -8850,8 +8850,8 @@
         "price_1m_output_tokens": 0.87
       },
       "speed": {
-        "tps": 24.967,
-        "ttft": 1.189
+        "tps": 0,
+        "ttft": 0
       },
       "hfId": "XiaomiMiMo/MiMo-V2.5-Pro",
       "mode": "Non-reasoning",
@@ -8886,8 +8886,8 @@
         "price_1m_output_tokens": 2.25
       },
       "speed": {
-        "tps": 144.886,
-        "ttft": 1.144
+        "tps": 145.923,
+        "ttft": 1.1
       },
       "hfId": "Qwen/Qwen3.6-35B-A3B",
       "mode": "Reasoning",
@@ -9030,8 +9030,8 @@
         "price_1m_output_tokens": 3.2
       },
       "speed": {
-        "tps": 143.855,
-        "ttft": 1.04
+        "tps": 144.676,
+        "ttft": 1.023
       },
       "hfId": "Qwen/Qwen3.5-122B-A10B",
       "mode": "Non-reasoning",
@@ -9102,8 +9102,8 @@
         "price_1m_output_tokens": 1.35
       },
       "speed": {
-        "tps": 146.657,
-        "ttft": 0.569
+        "tps": 141.149,
+        "ttft": 0.549
       },
       "hfId": "meta-models/Muse-Glimmer-30B",
       "mode": "High",
@@ -9354,8 +9354,8 @@
         "price_1m_output_tokens": 5
       },
       "speed": {
-        "tps": 126.021,
-        "ttft": 14.396
+        "tps": 115.257,
+        "ttft": 14.969
       },
       "hfId": null,
       "mode": "Reasoning",
@@ -9498,8 +9498,8 @@
         "price_1m_output_tokens": 2.5
       },
       "speed": {
-        "tps": 122.27,
-        "ttft": 1.952
+        "tps": 128.715,
+        "ttft": 2.021
       },
       "hfId": "inclusionAI/Ring-2.6-1T",
       "mode": null,
@@ -9894,8 +9894,8 @@
         "price_1m_output_tokens": 3.2
       },
       "speed": {
-        "tps": 130.222,
-        "ttft": 1.021
+        "tps": 131.778,
+        "ttft": 1.001
       },
       "hfId": "Qwen/Qwen3.5-122B-A10B",
       "mode": "Reasoning",
@@ -10038,8 +10038,8 @@
         "price_1m_output_tokens": 5
       },
       "speed": {
-        "tps": 107.348,
-        "ttft": 0.442
+        "tps": 107.764,
+        "ttft": 0.458
       },
       "hfId": null,
       "mode": "Non-reasoning",
@@ -10146,8 +10146,8 @@
         "price_1m_output_tokens": 2.25
       },
       "speed": {
-        "tps": 151.553,
-        "ttft": 1.1
+        "tps": 158.769,
+        "ttft": 1.103
       },
       "hfId": "Qwen/Qwen3.6-35B-A3B",
       "mode": "Non-reasoning",
@@ -10362,8 +10362,8 @@
         "price_1m_output_tokens": 0.65
       },
       "speed": {
-        "tps": 77.89,
-        "ttft": 0.284
+        "tps": 78.168,
+        "ttft": 0.272
       },
       "hfId": "ibm-granite/Granite-4.2-30B",
       "mode": null,
@@ -10434,8 +10434,8 @@
         "price_1m_output_tokens": 0
       },
       "speed": {
-        "tps": 35.249,
-        "ttft": 0.974
+        "tps": 35.496,
+        "ttft": 0.986
       },
       "hfId": "google/Gemma-4-31B",
       "mode": "Reasoning",
@@ -10722,8 +10722,8 @@
         "price_1m_output_tokens": 7.5
       },
       "speed": {
-        "tps": 169.484,
-        "ttft": 0.573
+        "tps": 169.488,
+        "ttft": 0.583
       },
       "hfId": "mistralai/Mistral-Medium-3.5-128B",
       "mode": null,
@@ -10758,8 +10758,8 @@
         "price_1m_output_tokens": 0.3
       },
       "speed": {
-        "tps": 147.832,
-        "ttft": 1.348
+        "tps": 144.183,
+        "ttft": 1.405
       },
       "hfId": "google/Gemma-4-12B",
       "mode": "Reasoning",
@@ -10794,8 +10794,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 129.817,
-        "ttft": 19.301
+        "tps": 123.957,
+        "ttft": 15.766
       },
       "hfId": null,
       "mode": "Medium",
@@ -10938,8 +10938,8 @@
         "price_1m_output_tokens": 0.4
       },
       "speed": {
-        "tps": 35.819,
-        "ttft": 0.971
+        "tps": 39.562,
+        "ttft": 0.97
       },
       "hfId": "google/Gemma-4-31B",
       "mode": "Non-reasoning",
@@ -11262,8 +11262,8 @@
         "price_1m_output_tokens": 2.5
       },
       "speed": {
-        "tps": 216.074,
-        "ttft": 10.349
+        "tps": 214.522,
+        "ttft": 10.789
       },
       "hfId": null,
       "mode": "High",
@@ -11334,8 +11334,8 @@
         "price_1m_output_tokens": 0.25
       },
       "speed": {
-        "tps": 81.253,
-        "ttft": 0.404
+        "tps": 83.235,
+        "ttft": 0.39
       },
       "hfId": "Qwen/Qwen3.5-9B",
       "mode": "Non-reasoning",
@@ -11406,8 +11406,8 @@
         "price_1m_output_tokens": 0
       },
       "speed": {
-        "tps": 220.959,
-        "ttft": 0.208
+        "tps": 198.165,
+        "ttft": 0.223
       },
       "hfId": null,
       "mode": null,
@@ -11442,8 +11442,8 @@
         "price_1m_output_tokens": 0.4
       },
       "speed": {
-        "tps": 119.816,
-        "ttft": 0.686
+        "tps": 111.426,
+        "ttft": 0.679
       },
       "hfId": "google/Gemma-4-26B-A4B",
       "mode": "Non-reasoning",
@@ -11478,8 +11478,8 @@
         "price_1m_output_tokens": 0.15
       },
       "speed": {
-        "tps": 14.575,
-        "ttft": 0.587
+        "tps": 18.639,
+        "ttft": 0.521
       },
       "hfId": "Qwen/Qwen3.5-4B",
       "mode": "Reasoning",
@@ -11622,8 +11622,8 @@
         "price_1m_output_tokens": 0.2
       },
       "speed": {
-        "tps": 291.356,
-        "ttft": 0.406
+        "tps": 287.905,
+        "ttft": 0.398
       },
       "hfId": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16",
       "mode": null,
@@ -11658,8 +11658,8 @@
         "price_1m_output_tokens": 0.9
       },
       "speed": {
-        "tps": 159.252,
-        "ttft": 0.859
+        "tps": 155.986,
+        "ttft": 0.85
       },
       "hfId": "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16",
       "mode": "Reasoning",
@@ -11694,8 +11694,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 137.72,
-        "ttft": 4.709
+        "tps": 141.442,
+        "ttft": 3.21
       },
       "hfId": null,
       "mode": "Low",
@@ -11910,8 +11910,8 @@
         "price_1m_output_tokens": 2.5
       },
       "speed": {
-        "tps": 195.364,
-        "ttft": 12.332
+        "tps": 226.558,
+        "ttft": 11.769
       },
       "hfId": null,
       "mode": "Medium",
@@ -11982,8 +11982,8 @@
         "price_1m_output_tokens": 0.8
       },
       "speed": {
-        "tps": 232.838,
-        "ttft": 0.945
+        "tps": 242.135,
+        "ttft": 0.959
       },
       "hfId": null,
       "mode": null,
@@ -12162,8 +12162,8 @@
         "price_1m_output_tokens": 0.75
       },
       "speed": {
-        "tps": 825.509,
-        "ttft": 2.863
+        "tps": 901.529,
+        "ttft": 2.807
       },
       "hfId": null,
       "mode": null,
@@ -12486,8 +12486,8 @@
         "price_1m_output_tokens": 2.5
       },
       "speed": {
-        "tps": 206.793,
-        "ttft": 5.056
+        "tps": 208.54,
+        "ttft": 4.158
       },
       "hfId": null,
       "mode": "Low",
@@ -12702,8 +12702,8 @@
         "price_1m_output_tokens": 0.595
       },
       "speed": {
-        "tps": 152.258,
-        "ttft": 0.536
+        "tps": 164.104,
+        "ttft": 0.516
       },
       "hfId": null,
       "mode": "High",
@@ -12990,8 +12990,8 @@
         "price_1m_output_tokens": 0.6
       },
       "speed": {
-        "tps": 173.192,
-        "ttft": 0.668
+        "tps": 177.587,
+        "ttft": 0.61
       },
       "hfId": "mistralai/Mistral-Small-4-119B-2603",
       "mode": "Reasoning",
@@ -13098,8 +13098,8 @@
         "price_1m_output_tokens": 1.2
       },
       "speed": {
-        "tps": 170.51,
-        "ttft": 1.146
+        "tps": 173.413,
+        "ttft": 1.187
       },
       "hfId": "Qwen/Qwen3-Next-80B-A3B-Instruct",
       "mode": "Reasoning",
@@ -13134,8 +13134,8 @@
         "price_1m_output_tokens": 0.2
       },
       "speed": {
-        "tps": 37.853,
-        "ttft": 1.061
+        "tps": 53.452,
+        "ttft": 1.046
       },
       "hfId": "Qwen/Qwen3.5-9B",
       "mode": "Reasoning",
@@ -13278,8 +13278,8 @@
         "price_1m_output_tokens": 0.25
       },
       "speed": {
-        "tps": 59.346,
-        "ttft": 0.346
+        "tps": 54.947,
+        "ttft": 0.45
       },
       "hfId": "ibm-granite/Granite-4.2-8B",
       "mode": null,
@@ -13350,8 +13350,8 @@
         "price_1m_output_tokens": 0
       },
       "speed": {
-        "tps": 58.514,
-        "ttft": 1.636
+        "tps": 54.453,
+        "ttft": 1.648
       },
       "hfId": "inclusionAI/Ling-3.0-tiny",
       "mode": null,
@@ -13530,8 +13530,8 @@
         "price_1m_output_tokens": 0.8
       },
       "speed": {
-        "tps": 365.757,
-        "ttft": 1.028
+        "tps": 371.385,
+        "ttft": 1.014
       },
       "hfId": "arcee-ai/Trinity-Large-Thinking",
       "mode": null,
@@ -13566,8 +13566,8 @@
         "price_1m_output_tokens": 0.15
       },
       "speed": {
-        "tps": 14.286,
-        "ttft": 0.757
+        "tps": 14.328,
+        "ttft": 0.799
       },
       "hfId": "Qwen/Qwen3.5-4B",
       "mode": "Non-reasoning",
@@ -13818,8 +13818,8 @@
         "price_1m_output_tokens": 1.095
       },
       "speed": {
-        "tps": 263.788,
-        "ttft": 0.242
+        "tps": 264.833,
+        "ttft": 0.247
       },
       "hfId": "nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning",
       "mode": null,
@@ -13854,8 +13854,8 @@
         "price_1m_output_tokens": 0.545
       },
       "speed": {
-        "tps": 156.949,
-        "ttft": 0.527
+        "tps": 160.336,
+        "ttft": 0.509
       },
       "hfId": null,
       "mode": "Low",
@@ -13926,8 +13926,8 @@
         "price_1m_output_tokens": 0.91
       },
       "speed": {
-        "tps": 83.244,
-        "ttft": 0.59
+        "tps": 77.27,
+        "ttft": 0.6
       },
       "hfId": null,
       "mode": null,
@@ -13998,8 +13998,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 119.927,
-        "ttft": 0.716
+        "tps": 126.736,
+        "ttft": 0.742
       },
       "hfId": null,
       "mode": "Non-reasoning",
@@ -14034,8 +14034,8 @@
         "price_1m_output_tokens": 0.215
       },
       "speed": {
-        "tps": 217.167,
-        "ttft": 0.485
+        "tps": 211.466,
+        "ttft": 0.514
       },
       "hfId": "openai/gpt-oss-20b",
       "mode": "Low",
@@ -14106,7 +14106,7 @@
         "price_1m_output_tokens": 0
       },
       "speed": {
-        "tps": 78.201,
+        "tps": 83.749,
         "ttft": 0.269
       },
       "hfId": null,
@@ -14394,7 +14394,7 @@
         "price_1m_output_tokens": 1.2
       },
       "speed": {
-        "tps": 169.353,
+        "tps": 175.881,
         "ttft": 1.022
       },
       "hfId": null,
@@ -14718,8 +14718,8 @@
         "price_1m_output_tokens": 0.3
       },
       "speed": {
-        "tps": 154.077,
-        "ttft": 1.403
+        "tps": 150.511,
+        "ttft": 1.396
       },
       "hfId": "google/Gemma-4-12B",
       "mode": "Non-reasoning",
@@ -14790,8 +14790,8 @@
         "price_1m_output_tokens": 1.5
       },
       "speed": {
-        "tps": 79.16,
-        "ttft": 0.723
+        "tps": 80.64,
+        "ttft": 0.753
       },
       "hfId": null,
       "mode": null,
@@ -14826,8 +14826,8 @@
         "price_1m_output_tokens": 1.2
       },
       "speed": {
-        "tps": 83.712,
-        "ttft": 0.896
+        "tps": 103.429,
+        "ttft": 0.878
       },
       "hfId": "Qwen/Qwen3-Coder-Next",
       "mode": null,
@@ -15042,8 +15042,8 @@
         "price_1m_output_tokens": 0.12
       },
       "speed": {
-        "tps": 231.262,
-        "ttft": 0.233
+        "tps": 229.497,
+        "ttft": 0.243
       },
       "hfId": "ibm-granite/Granite-4.2-3B",
       "mode": null,
@@ -15258,7 +15258,7 @@
         "price_1m_output_tokens": 0.6
       },
       "speed": {
-        "tps": 154.338,
+        "tps": 164.23,
         "ttft": 0.526
       },
       "hfId": "mistralai/Mistral-Small-4-119B-2603",
@@ -15331,7 +15331,7 @@
       },
       "speed": {
         "tps": 196.13,
-        "ttft": 0.412
+        "ttft": 0.427
       },
       "hfId": "openai/gpt-oss-20b",
       "mode": "High",
@@ -15510,8 +15510,8 @@
         "price_1m_output_tokens": 0.1
       },
       "speed": {
-        "tps": 82.811,
-        "ttft": 0.351
+        "tps": 73.646,
+        "ttft": 0.398
       },
       "hfId": "google/gemma-4-E4B",
       "mode": "Reasoning",
@@ -15546,8 +15546,8 @@
         "price_1m_output_tokens": 0.2
       },
       "speed": {
-        "tps": 159.08,
-        "ttft": 0.593
+        "tps": 199.827,
+        "ttft": 0.556
       },
       "hfId": "nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16",
       "mode": "Reasoning",
@@ -15726,8 +15726,8 @@
         "price_1m_output_tokens": 2.5
       },
       "speed": {
-        "tps": 223.601,
-        "ttft": 0.896
+        "tps": 221.778,
+        "ttft": 0.886
       },
       "hfId": null,
       "mode": "Non-reasoning",
@@ -16662,8 +16662,8 @@
         "price_1m_output_tokens": 0.68
       },
       "speed": {
-        "tps": 108.024,
-        "ttft": 0.643
+        "tps": 81.465,
+        "ttft": 0.682
       },
       "hfId": null,
       "mode": null,
@@ -17166,8 +17166,8 @@
         "price_1m_output_tokens": 0.97
       },
       "speed": {
-        "tps": 109.737,
-        "ttft": 0.922
+        "tps": 110.356,
+        "ttft": 0.93
       },
       "hfId": "Qwen/Qwen3-Omni-30B-A3B-Instruct",
       "mode": "Reasoning",
@@ -17346,8 +17346,8 @@
         "price_1m_output_tokens": 0.72
       },
       "speed": {
-        "tps": 79.293,
-        "ttft": 0.624
+        "tps": 81.218,
+        "ttft": 0.618
       },
       "hfId": "meta-llama/Llama-3.3-70B-Instruct",
       "mode": null,
@@ -17742,8 +17742,8 @@
         "price_1m_output_tokens": 3
       },
       "speed": {
-        "tps": 36.891,
-        "ttft": 0.751
+        "tps": 38.353,
+        "ttft": 0.696
       },
       "hfId": "NousResearch/Hermes-4-405B",
       "mode": "Reasoning",
@@ -17850,8 +17850,8 @@
         "price_1m_output_tokens": 0.1
       },
       "speed": {
-        "tps": 79.759,
-        "ttft": 0.28
+        "tps": 68.642,
+        "ttft": 0.295
       },
       "hfId": "google/gemma-4-E4B",
       "mode": "Non-reasoning",
@@ -17922,8 +17922,8 @@
         "price_1m_output_tokens": 0.16
       },
       "speed": {
-        "tps": 97.615,
-        "ttft": 5.832
+        "tps": 66.365,
+        "ttft": 10.706
       },
       "hfId": "nvidia/NVIDIA-Nemotron-Nano-9B-V2",
       "mode": "Reasoning",
@@ -17958,8 +17958,8 @@
         "price_1m_output_tokens": 3
       },
       "speed": {
-        "tps": 37.282,
-        "ttft": 0.744
+        "tps": 39.13,
+        "ttft": 0.738
       },
       "hfId": "NousResearch/Hermes-4-405B",
       "mode": "Non-reasoning",
@@ -18000,42 +18000,6 @@
       "hfId": null,
       "mode": "Feb '25",
       "releaseDate": "2025-02-25"
-    },
-    {
-      "id": "9ee13921-62a4-425a-a22b-df3302198d93",
-      "slug": "nvidia-nemotron-3-nano-4b",
-      "name": "NVIDIA Nemotron 3 Nano 4B",
-      "creator": "NVIDIA",
-      "creatorSlug": "nvidia",
-      "isClosed": false,
-      "params": {
-        "total": 3973556832,
-        "active": 3973556832
-      },
-      "paramsUnknown": false,
-      "license": null,
-      "scores": {
-        "artificial_analysis_intelligence_index": 7.4,
-        "artificial_analysis_coding_index": 8,
-        "gpqa": 0.513,
-        "hle": 0.049,
-        "lcr": 0.216666666666667,
-        "scicode": 0.161,
-        "tau_banking": null,
-        "terminalbench_v2_1": 0.0374531835205993
-      },
-      "pricing": {
-        "price_1m_blended_3_to_1": 0,
-        "price_1m_input_tokens": 0,
-        "price_1m_output_tokens": 0
-      },
-      "speed": {
-        "tps": 0,
-        "ttft": 0
-      },
-      "hfId": "nvidia/NVIDIA-Nemotron-3-Nano-4B-BF16",
-      "mode": null,
-      "releaseDate": "2026-03-16"
     },
     {
       "id": "26c0b5df-efa7-470f-a65e-2d883329e493",
@@ -19038,8 +19002,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 66.572,
-        "ttft": 0.413
+        "tps": 68.22,
+        "ttft": 0.468
       },
       "hfId": null,
       "mode": null,
@@ -19254,8 +19218,8 @@
         "price_1m_output_tokens": 0.2
       },
       "speed": {
-        "tps": 228.079,
-        "ttft": 0.347
+        "tps": 240.771,
+        "ttft": 0.359
       },
       "hfId": "nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16",
       "mode": "Non-reasoning",
@@ -19290,8 +19254,8 @@
         "price_1m_output_tokens": 0.195
       },
       "speed": {
-        "tps": 158.167,
-        "ttft": 1.435
+        "tps": 157.725,
+        "ttft": 1.393
       },
       "hfId": "nvidia/NVIDIA-Nemotron-Nano-9B-V2",
       "mode": "Non-reasoning",
@@ -20406,8 +20370,8 @@
         "price_1m_output_tokens": 0.7
       },
       "speed": {
-        "tps": 2157.61,
-        "ttft": 0.513
+        "tps": 2392.271,
+        "ttft": 0.487
       },
       "hfId": null,
       "mode": null,
@@ -20514,8 +20478,8 @@
         "price_1m_output_tokens": 0
       },
       "speed": {
-        "tps": 44.85,
-        "ttft": 0.332
+        "tps": 45.223,
+        "ttft": 0.336
       },
       "hfId": null,
       "mode": null,
@@ -20766,8 +20730,8 @@
         "price_1m_output_tokens": 0.25
       },
       "speed": {
-        "tps": 32.843,
-        "ttft": 26.749
+        "tps": 54.18,
+        "ttft": 9.431
       },
       "hfId": "ibm-granite/Granite-4.0-H-Small",
       "mode": null,
@@ -20802,8 +20766,8 @@
         "price_1m_output_tokens": 0.2
       },
       "speed": {
-        "tps": 75.954,
-        "ttft": 0.669
+        "tps": 90.028,
+        "ttft": 0.564
       },
       "hfId": "mistralai/Ministral-3-14B-Instruct-2512",
       "mode": null,
@@ -20874,8 +20838,8 @@
         "price_1m_output_tokens": 0.97
       },
       "speed": {
-        "tps": 107.46,
-        "ttft": 0.887
+        "tps": 108.196,
+        "ttft": 0.892
       },
       "hfId": "Qwen/Qwen3-Omni-30B-A3B-Instruct",
       "mode": null,
@@ -21162,8 +21126,8 @@
         "price_1m_output_tokens": 0.5
       },
       "speed": {
-        "tps": 33.162,
-        "ttft": 1.103
+        "tps": 31.733,
+        "ttft": 1.046
       },
       "hfId": null,
       "mode": null,
@@ -21234,8 +21198,8 @@
         "price_1m_output_tokens": 0.14
       },
       "speed": {
-        "tps": 242.493,
-        "ttft": 0.562
+        "tps": 272.419,
+        "ttft": 0.605
       },
       "hfId": null,
       "mode": null,
@@ -21414,8 +21378,8 @@
         "price_1m_output_tokens": 0.6
       },
       "speed": {
-        "tps": 194.963,
-        "ttft": 0.781
+        "tps": 184.05,
+        "ttft": 0.817
       },
       "hfId": "nvidia/NVIDIA-Nemotron-Nano-12B-v2-VL-BF16",
       "mode": "Non-reasoning",
@@ -21486,8 +21450,8 @@
         "price_1m_output_tokens": 0
       },
       "speed": {
-        "tps": 17.244,
-        "ttft": 0.351
+        "tps": 17.249,
+        "ttft": 0.345
       },
       "hfId": null,
       "mode": null,
@@ -21846,8 +21810,8 @@
         "price_1m_output_tokens": 0.8
       },
       "speed": {
-        "tps": 94.426,
-        "ttft": 0.816
+        "tps": 94.853,
+        "ttft": 0.823
       },
       "hfId": null,
       "mode": null,
@@ -22314,8 +22278,8 @@
         "price_1m_output_tokens": 0.15
       },
       "speed": {
-        "tps": 100.566,
-        "ttft": 0.519
+        "tps": 109.286,
+        "ttft": 0.463
       },
       "hfId": "mistralai/Ministral-3-8B-Instruct-2512",
       "mode": null,
@@ -22494,8 +22458,8 @@
         "price_1m_output_tokens": 0.345
       },
       "speed": {
-        "tps": 14.493,
-        "ttft": 1.366
+        "tps": 13.941,
+        "ttft": 1.618
       },
       "hfId": "meta-llama/Llama-3.2-11B-Vision-Instruct",
       "mode": "Vision",
@@ -23826,8 +23790,8 @@
         "price_1m_output_tokens": 0.1
       },
       "speed": {
-        "tps": 227.136,
-        "ttft": 0.494
+        "tps": 235.296,
+        "ttft": 0.446
       },
       "hfId": "mistralai/Ministral-3-3B-Instruct-2512",
       "mode": null,
@@ -24330,12 +24294,48 @@
         "price_1m_output_tokens": 0
       },
       "speed": {
-        "tps": 130.481,
-        "ttft": 0.217
+        "tps": 129.805,
+        "ttft": 0.214
       },
       "hfId": null,
       "mode": null,
       "releaseDate": "2026-02-17"
+    },
+    {
+      "id": "9ee13921-62a4-425a-a22b-df3302198d93",
+      "slug": "nvidia-nemotron-3-nano-4b",
+      "name": "NVIDIA Nemotron 3 Nano 4B",
+      "creator": "NVIDIA",
+      "creatorSlug": "nvidia",
+      "isClosed": false,
+      "params": {
+        "total": 3973556832,
+        "active": 3973556832
+      },
+      "paramsUnknown": false,
+      "license": null,
+      "scores": {
+        "artificial_analysis_intelligence_index": 4.8,
+        "artificial_analysis_coding_index": 8,
+        "gpqa": 0.513,
+        "hle": 0.049,
+        "lcr": 0.216666666666667,
+        "scicode": 0.161,
+        "tau_banking": null,
+        "terminalbench_v2_1": 0.0374531835205993
+      },
+      "pricing": {
+        "price_1m_blended_3_to_1": 0,
+        "price_1m_input_tokens": 0,
+        "price_1m_output_tokens": 0
+      },
+      "speed": {
+        "tps": 0,
+        "ttft": 0
+      },
+      "hfId": "nvidia/NVIDIA-Nemotron-3-Nano-4B-BF16",
+      "mode": null,
+      "releaseDate": "2026-03-16"
     },
     {
       "id": "2e6400f5-85ca-4ebc-ba8f-c2811a631138",

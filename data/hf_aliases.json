@@ -180,6 +180,7 @@
   "ling-3-0-flash-vl": "inclusionAI/Ling-3.0-flash-VL",
   "ling-3-0-tiny": "inclusionAI/Ling-3.0-tiny",
   "ling-3-0-tiny-rc2": null,
+  "ling-3-1-flash": null,
   "ling-flash-2-0": "inclusionAI/Ling-flash-2.0",
   "ling-mini-2-0": "inclusionAI/Ling-mini-2.0",
   "llama-2-chat-13b": "meta-llama/Llama-2-13b-chat-hf",

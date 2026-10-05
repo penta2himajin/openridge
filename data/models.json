@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-04T10:31:09.613Z",
+  "generatedAt": "2026-10-05T11:21:45.032Z",
   "models": [
     {
       "id": "2f3c4dc9-a450-4303-8697-0237257cf08f",
@@ -30,8 +30,8 @@
         "price_1m_output_tokens": 20
       },
       "speed": {
-        "tps": 96.738,
-        "ttft": 528.192
+        "tps": 96.75,
+        "ttft": 489.353
       },
       "hfId": null,
       "mode": "Max, Default Fallback",
@@ -66,8 +66,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 144.036,
-        "ttft": 286.916
+        "tps": 137.651,
+        "ttft": 257.046
       },
       "hfId": null,
       "mode": "Max, Default Fallback",
@@ -102,8 +102,8 @@
         "price_1m_output_tokens": 20
       },
       "speed": {
-        "tps": 77.194,
-        "ttft": 63.118
+        "tps": 78.462,
+        "ttft": 54.304
       },
       "hfId": null,
       "mode": "Xhigh, Default Fallback",
@@ -138,8 +138,8 @@
         "price_1m_output_tokens": 20
       },
       "speed": {
-        "tps": 73.258,
-        "ttft": 21.719
+        "tps": 72.4,
+        "ttft": 18.134
       },
       "hfId": null,
       "mode": "High, Default Fallback",
@@ -174,8 +174,8 @@
         "price_1m_output_tokens": 50
       },
       "speed": {
-        "tps": 68.717,
-        "ttft": 149.393
+        "tps": 68.931,
+        "ttft": 136.029
       },
       "hfId": null,
       "mode": "Max, Default Fallback",
@@ -210,8 +210,8 @@
         "price_1m_output_tokens": 50
       },
       "speed": {
-        "tps": 60.574,
-        "ttft": 38.611
+        "tps": 59.757,
+        "ttft": 30.383
       },
       "hfId": null,
       "mode": "Xhigh, Default Fallback",
@@ -246,8 +246,8 @@
         "price_1m_output_tokens": 50
       },
       "speed": {
-        "tps": 64.225,
-        "ttft": 203.995
+        "tps": 65.114,
+        "ttft": 157.678
       },
       "hfId": null,
       "mode": "Max",
@@ -318,8 +318,8 @@
         "price_1m_output_tokens": 50
       },
       "speed": {
-        "tps": 59.63,
-        "ttft": 85.891
+        "tps": 60.593,
+        "ttft": 59.773
       },
       "hfId": null,
       "mode": "Xhigh",
@@ -354,8 +354,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 105.028,
-        "ttft": 16.573
+        "tps": 102.951,
+        "ttft": 10.988
       },
       "hfId": null,
       "mode": "Xhigh, Default Fallback",
@@ -390,8 +390,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 58.225,
-        "ttft": 230.85
+        "tps": 60.455,
+        "ttft": 157.396
       },
       "hfId": null,
       "mode": "Max",
@@ -426,8 +426,8 @@
         "price_1m_output_tokens": 20
       },
       "speed": {
-        "tps": 73.868,
-        "ttft": 13.741
+        "tps": 71.282,
+        "ttft": 10.903
       },
       "hfId": null,
       "mode": "Medium, Default Fallback",
@@ -462,8 +462,8 @@
         "price_1m_output_tokens": 50
       },
       "speed": {
-        "tps": 55.052,
-        "ttft": 13.514
+        "tps": 52.4,
+        "ttft": 10.598
       },
       "hfId": null,
       "mode": "High, Default Fallback",
@@ -498,8 +498,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 54.56,
-        "ttft": 90.2
+        "tps": 53.867,
+        "ttft": 71.275
       },
       "hfId": null,
       "mode": "Xhigh",
@@ -534,8 +534,8 @@
         "price_1m_output_tokens": 50
       },
       "speed": {
-        "tps": 54.261,
-        "ttft": 35.581
+        "tps": 55.921,
+        "ttft": 24.86
       },
       "hfId": null,
       "mode": "High",
@@ -606,8 +606,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 51.733,
-        "ttft": 31.519
+        "tps": 50.622,
+        "ttft": 23.856
       },
       "hfId": null,
       "mode": "High",
@@ -714,8 +714,8 @@
         "price_1m_output_tokens": 50
       },
       "speed": {
-        "tps": 53.399,
-        "ttft": 4.079
+        "tps": 53.643,
+        "ttft": 3.967
       },
       "hfId": null,
       "mode": "Medium",
@@ -750,8 +750,8 @@
         "price_1m_output_tokens": 50
       },
       "speed": {
-        "tps": 56.022,
-        "ttft": 5.888
+        "tps": 55.73,
+        "ttft": 4.11
       },
       "hfId": null,
       "mode": "Medium, Default Fallback",
@@ -822,8 +822,8 @@
         "price_1m_output_tokens": 4.25
       },
       "speed": {
-        "tps": 157.499,
-        "ttft": 42.148
+        "tps": 163.786,
+        "ttft": 31.832
       },
       "hfId": null,
       "mode": "Max",
@@ -858,8 +858,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 52.222,
-        "ttft": 5.419
+        "tps": 49.144,
+        "ttft": 5.053
       },
       "hfId": null,
       "mode": "Medium",
@@ -894,8 +894,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 95.915,
-        "ttft": 107.216
+        "tps": 0,
+        "ttft": 0
       },
       "hfId": null,
       "mode": "Max",
@@ -966,8 +966,8 @@
         "price_1m_output_tokens": 50
       },
       "speed": {
-        "tps": 51.525,
-        "ttft": 3.342
+        "tps": 47.584,
+        "ttft": 2.275
       },
       "hfId": null,
       "mode": "Low, Default Fallback",
@@ -1002,8 +1002,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 103.07,
-        "ttft": 9.228
+        "tps": 100.443,
+        "ttft": 7.152
       },
       "hfId": null,
       "mode": "High, Default Fallback",
@@ -1038,8 +1038,8 @@
         "price_1m_output_tokens": 6
       },
       "speed": {
-        "tps": 75.979,
-        "ttft": 19.497
+        "tps": 75.053,
+        "ttft": 12.305
       },
       "hfId": null,
       "mode": "Xhigh",
@@ -1074,8 +1074,8 @@
         "price_1m_output_tokens": 6
       },
       "speed": {
-        "tps": 76.142,
-        "ttft": 17.135
+        "tps": 76.393,
+        "ttft": 10.722
       },
       "hfId": null,
       "mode": "High",
@@ -1110,8 +1110,8 @@
         "price_1m_output_tokens": 0.87
       },
       "speed": {
-        "tps": 43.404,
-        "ttft": 4.034
+        "tps": 46.034,
+        "ttft": 4.28
       },
       "hfId": "XiaomiMiMo/MiMo-V2.6-Pro-RL",
       "mode": null,
@@ -1146,8 +1146,8 @@
         "price_1m_output_tokens": 50
       },
       "speed": {
-        "tps": 52.769,
-        "ttft": 1.458
+        "tps": 57.821,
+        "ttft": 1.254
       },
       "hfId": null,
       "mode": "Low",
@@ -1183,7 +1183,7 @@
       },
       "speed": {
         "tps": 36.677,
-        "ttft": 1.844
+        "ttft": 1.837
       },
       "hfId": null,
       "mode": "0902",
@@ -1218,8 +1218,8 @@
         "price_1m_output_tokens": 4.25
       },
       "speed": {
-        "tps": 161.96,
-        "ttft": 30.07
+        "tps": 150.879,
+        "ttft": 27.512
       },
       "hfId": null,
       "mode": "Xhigh",
@@ -1290,8 +1290,8 @@
         "price_1m_output_tokens": 4.4
       },
       "speed": {
-        "tps": 75.197,
-        "ttft": 2.696
+        "tps": 76.014,
+        "ttft": 2.728
       },
       "hfId": "zai-org/GLM-5.3-Flash",
       "mode": "Max",
@@ -1362,8 +1362,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 121.866,
-        "ttft": 29.156
+        "tps": 0,
+        "ttft": 0
       },
       "hfId": null,
       "mode": "Xhigh",
@@ -1470,7 +1470,7 @@
         "price_1m_output_tokens": 2.7
       },
       "speed": {
-        "tps": 84.482,
+        "tps": 89.294,
         "ttft": 1.912
       },
       "hfId": null,
@@ -1506,8 +1506,8 @@
         "price_1m_output_tokens": 15
       },
       "speed": {
-        "tps": 34.483,
-        "ttft": 2.799
+        "tps": 36.875,
+        "ttft": 2.618
       },
       "hfId": "moonshotai/Kimi-K3",
       "mode": "Max",
@@ -1578,8 +1578,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 85.682,
-        "ttft": 14.556
+        "tps": 0,
+        "ttft": 0
       },
       "hfId": null,
       "mode": "High",
@@ -1650,8 +1650,8 @@
         "price_1m_output_tokens": 20
       },
       "speed": {
-        "tps": 73.536,
-        "ttft": 4.74
+        "tps": 73.142,
+        "ttft": 1.843
       },
       "hfId": null,
       "mode": "Low, Default Fallback",
@@ -1686,8 +1686,8 @@
         "price_1m_output_tokens": 6
       },
       "speed": {
-        "tps": 67.924,
-        "ttft": 6.198
+        "tps": 69.868,
+        "ttft": 5.58
       },
       "hfId": null,
       "mode": "Low",
@@ -1722,8 +1722,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 50.837,
-        "ttft": 2.461
+        "tps": 52.188,
+        "ttft": 1.982
       },
       "hfId": null,
       "mode": "Low",
@@ -1758,8 +1758,8 @@
         "price_1m_output_tokens": 12
       },
       "speed": {
-        "tps": 115.386,
-        "ttft": 106.82
+        "tps": 119.55,
+        "ttft": 84.258
       },
       "hfId": null,
       "mode": "Max",
@@ -1794,8 +1794,8 @@
         "price_1m_output_tokens": 0.5
       },
       "speed": {
-        "tps": 49.105,
-        "ttft": 2.986
+        "tps": 51.032,
+        "ttft": 2.865
       },
       "hfId": "zai-org/GLM-5.3-Flash",
       "mode": null,
@@ -1867,7 +1867,7 @@
       },
       "speed": {
         "tps": 214.093,
-        "ttft": 0.831
+        "ttft": 0.934
       },
       "hfId": null,
       "mode": null,
@@ -1902,8 +1902,8 @@
         "price_1m_output_tokens": 3.75
       },
       "speed": {
-        "tps": 243.468,
-        "ttft": 10.092
+        "tps": 238.216,
+        "ttft": 9.258
       },
       "hfId": null,
       "mode": "High",
@@ -1938,8 +1938,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 100.694,
-        "ttft": 1.028
+        "tps": 89.498,
+        "ttft": 0.709
       },
       "hfId": null,
       "mode": "Medium, Default Fallback",
@@ -2046,8 +2046,8 @@
         "price_1m_output_tokens": 6
       },
       "speed": {
-        "tps": 36.431,
-        "ttft": 1.73
+        "tps": 36.844,
+        "ttft": 1.816
       },
       "hfId": "Qwen/Qwen3.8-2.4T-A95B",
       "mode": null,
@@ -2083,7 +2083,7 @@
       },
       "speed": {
         "tps": 52.95,
-        "ttft": 1.564
+        "ttft": 1.617
       },
       "hfId": "Qwen/Qwen3.8-Flash-Next",
       "mode": null,
@@ -2262,8 +2262,8 @@
         "price_1m_output_tokens": 1.2
       },
       "speed": {
-        "tps": 207.371,
-        "ttft": 0.787
+        "tps": 209.664,
+        "ttft": 0.802
       },
       "hfId": "deepseek-ai/DeepSeek-V4.1-Flash",
       "mode": "Max",
@@ -2550,8 +2550,8 @@
         "price_1m_output_tokens": 0.5
       },
       "speed": {
-        "tps": 136.423,
-        "ttft": 84.421
+        "tps": 139.327,
+        "ttft": 75.426
       },
       "hfId": null,
       "mode": "Max",
@@ -2586,8 +2586,8 @@
         "price_1m_output_tokens": 12
       },
       "speed": {
-        "tps": 105.644,
-        "ttft": 33.793
+        "tps": 111.188,
+        "ttft": 12.561
       },
       "hfId": null,
       "mode": "Xhigh",
@@ -2622,8 +2622,8 @@
         "price_1m_output_tokens": 0.28
       },
       "speed": {
-        "tps": 57.409,
-        "ttft": 4.605
+        "tps": 53.252,
+        "ttft": 3.944
       },
       "hfId": "XiaomiMiMo/MiMo-V2.6-Flash-RL",
       "mode": null,
@@ -2766,8 +2766,8 @@
         "price_1m_output_tokens": 3.96
       },
       "speed": {
-        "tps": 112.316,
-        "ttft": 1.072
+        "tps": 107.178,
+        "ttft": 1.097
       },
       "hfId": "deepseek-ai/DeepSeek-V4-Pro-0813",
       "mode": "Max",
@@ -2802,8 +2802,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 100.693,
-        "ttft": 0.818
+        "tps": 95.793,
+        "ttft": 0.748
       },
       "hfId": null,
       "mode": "Low, Default Fallback",
@@ -2874,8 +2874,8 @@
         "price_1m_output_tokens": 1.32
       },
       "speed": {
-        "tps": 218.71,
-        "ttft": 0.717
+        "tps": 219.214,
+        "ttft": 0.765
       },
       "hfId": "deepseek-ai/DeepSeek-V4-Flash-Vision-Exp",
       "mode": "Max",
@@ -2910,8 +2910,8 @@
         "price_1m_output_tokens": 0.5
       },
       "speed": {
-        "tps": 136.926,
-        "ttft": 24.001
+        "tps": 138.774,
+        "ttft": 15.956
       },
       "hfId": null,
       "mode": "Xhigh",
@@ -3054,8 +3054,8 @@
         "price_1m_output_tokens": 4.4
       },
       "speed": {
-        "tps": 78.514,
-        "ttft": 2.777
+        "tps": 75.857,
+        "ttft": 2.724
       },
       "hfId": "zai-org/GLM-5.3",
       "mode": "Low",
@@ -3090,8 +3090,8 @@
         "price_1m_output_tokens": 12
       },
       "speed": {
-        "tps": 94.702,
-        "ttft": 5.326
+        "tps": 107.922,
+        "ttft": 1.923
       },
       "hfId": null,
       "mode": "High",
@@ -3126,8 +3126,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 89.627,
-        "ttft": 1.778
+        "tps": 0,
+        "ttft": 0
       },
       "hfId": null,
       "mode": "Low",
@@ -3342,8 +3342,8 @@
         "price_1m_output_tokens": 3
       },
       "speed": {
-        "tps": 46.436,
-        "ttft": 1.189
+        "tps": 46.637,
+        "ttft": 1.213
       },
       "hfId": "Qwen/Qwen3.8-27B",
       "mode": "Xhigh",
@@ -3522,8 +3522,8 @@
         "price_1m_output_tokens": 0.5
       },
       "speed": {
-        "tps": 127.616,
-        "ttft": 13.493
+        "tps": 126.652,
+        "ttft": 11.328
       },
       "hfId": null,
       "mode": "High",
@@ -3594,8 +3594,8 @@
         "price_1m_output_tokens": 14
       },
       "speed": {
-        "tps": 105.144,
-        "ttft": 43.969
+        "tps": 108.63,
+        "ttft": 34.298
       },
       "hfId": null,
       "mode": "Xhigh",
@@ -3882,8 +3882,8 @@
         "price_1m_output_tokens": 0
       },
       "speed": {
-        "tps": 119.89,
-        "ttft": 15.63
+        "tps": 119.516,
+        "ttft": 11.899
       },
       "hfId": "IFM/K2-Horizon-375B-A23B",
       "mode": null,
@@ -4026,8 +4026,8 @@
         "price_1m_output_tokens": 12
       },
       "speed": {
-        "tps": 97.385,
-        "ttft": 1.811
+        "tps": 100.587,
+        "ttft": 1.232
       },
       "hfId": null,
       "mode": "Medium",
@@ -4062,8 +4062,8 @@
         "price_1m_output_tokens": 15
       },
       "speed": {
-        "tps": 34.35,
-        "ttft": 4.19
+        "tps": 38.934,
+        "ttft": 4.27
       },
       "hfId": "moonshotai/Kimi-K3",
       "mode": "Low",
@@ -4170,8 +4170,8 @@
         "price_1m_output_tokens": 12
       },
       "speed": {
-        "tps": 127.614,
-        "ttft": 17.367
+        "tps": 124.296,
+        "ttft": 14.392
       },
       "hfId": null,
       "mode": null,
@@ -4242,8 +4242,8 @@
         "price_1m_output_tokens": 1.2
       },
       "speed": {
-        "tps": 74.309,
-        "ttft": 1.187
+        "tps": 76.23,
+        "ttft": 1.19
       },
       "hfId": "MiniMaxAI/MiniMax-M3",
       "mode": null,
@@ -4350,8 +4350,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 89.655,
-        "ttft": 0.975
+        "tps": 0,
+        "ttft": 0
       },
       "hfId": null,
       "mode": "Non-reasoning",
@@ -4530,8 +4530,8 @@
         "price_1m_output_tokens": 1.2
       },
       "speed": {
-        "tps": 98.019,
-        "ttft": 1.078
+        "tps": 98.049,
+        "ttft": 1.101
       },
       "hfId": null,
       "mode": null,
@@ -4710,8 +4710,8 @@
         "price_1m_output_tokens": 3
       },
       "speed": {
-        "tps": 51.516,
-        "ttft": 1.203
+        "tps": 49.022,
+        "ttft": 1.3
       },
       "hfId": "Qwen/Qwen3.8-27B",
       "mode": "Medium",
@@ -4746,8 +4746,8 @@
         "price_1m_output_tokens": 12
       },
       "speed": {
-        "tps": 95.178,
-        "ttft": 1.594
+        "tps": 99.92,
+        "ttft": 1.314
       },
       "hfId": null,
       "mode": "Low",
@@ -4926,8 +4926,8 @@
         "price_1m_output_tokens": 1.8
       },
       "speed": {
-        "tps": 152.931,
-        "ttft": 0.564
+        "tps": 151.951,
+        "ttft": 0.567
       },
       "hfId": null,
       "mode": "Max, Based on GLM-5.2",
@@ -5142,8 +5142,8 @@
         "price_1m_output_tokens": 3
       },
       "speed": {
-        "tps": 51.17,
-        "ttft": 1.225
+        "tps": 50.94,
+        "ttft": 1.245
       },
       "hfId": "Qwen/Qwen3.8-27B",
       "mode": "Low",
@@ -5214,8 +5214,8 @@
         "price_1m_output_tokens": 30
       },
       "speed": {
-        "tps": 124.98,
-        "ttft": 0.846
+        "tps": 124.469,
+        "ttft": 0.886
       },
       "hfId": null,
       "mode": "June 2026",
@@ -5286,8 +5286,8 @@
         "price_1m_output_tokens": 4
       },
       "speed": {
-        "tps": 92.595,
-        "ttft": 1.188
+        "tps": 93.349,
+        "ttft": 1.359
       },
       "hfId": "moonshotai/Kimi-K2.7-Code",
       "mode": null,
@@ -5322,8 +5322,8 @@
         "price_1m_output_tokens": 1.2
       },
       "speed": {
-        "tps": 218.66,
-        "ttft": 1.815
+        "tps": 202.155,
+        "ttft": 1.986
       },
       "hfId": "thinkingmachines/Inkling-Small",
       "mode": null,
@@ -5430,8 +5430,8 @@
         "price_1m_output_tokens": 0.555
       },
       "speed": {
-        "tps": 92.174,
-        "ttft": 2.044
+        "tps": 90.085,
+        "ttft": 2.03
       },
       "hfId": "tencent/Hy3-preview",
       "mode": null,
@@ -5538,8 +5538,8 @@
         "price_1m_output_tokens": 1.6
       },
       "speed": {
-        "tps": 55.737,
-        "ttft": 1.639
+        "tps": 55.509,
+        "ttft": 1.615
       },
       "hfId": null,
       "mode": null,
@@ -5646,8 +5646,8 @@
         "price_1m_output_tokens": 4.05
       },
       "speed": {
-        "tps": 168.868,
-        "ttft": 2.375
+        "tps": 178.515,
+        "ttft": 2.283
       },
       "hfId": "thinkingmachines/Inkling",
       "mode": "Xhigh",
@@ -5898,8 +5898,8 @@
         "price_1m_output_tokens": 1.2
       },
       "speed": {
-        "tps": 216.88,
-        "ttft": 0.787
+        "tps": 215.977,
+        "ttft": 0.873
       },
       "hfId": "deepseek-ai/DeepSeek-V4.1-Flash",
       "mode": "Non-reasoning",
@@ -6186,8 +6186,8 @@
         "price_1m_output_tokens": 0.4
       },
       "speed": {
-        "tps": 182.645,
-        "ttft": 1.014
+        "tps": 0,
+        "ttft": 0
       },
       "hfId": null,
       "mode": null,
@@ -6618,8 +6618,8 @@
         "price_1m_output_tokens": 2.5
       },
       "speed": {
-        "tps": 168.912,
-        "ttft": 0.902
+        "tps": 172.631,
+        "ttft": 0.885
       },
       "hfId": "nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16",
       "mode": "Reasoning",
@@ -6942,8 +6942,8 @@
         "price_1m_output_tokens": 0.22
       },
       "speed": {
-        "tps": 353.09,
-        "ttft": 1.186
+        "tps": 346.22,
+        "ttft": 1.163
       },
       "hfId": "inclusionAI/Ling-3.0-flash-Fin",
       "mode": null,
@@ -7158,7 +7158,7 @@
         "price_1m_output_tokens": 2.5
       },
       "speed": {
-        "tps": 338.647,
+        "tps": 338.926,
         "ttft": 7.1
       },
       "hfId": null,
@@ -7374,7 +7374,7 @@
         "price_1m_output_tokens": 0.5
       },
       "speed": {
-        "tps": 124.805,
+        "tps": 131.507,
         "ttft": 2.416
       },
       "hfId": null,
@@ -7446,8 +7446,8 @@
         "price_1m_output_tokens": 3.6
       },
       "speed": {
-        "tps": 83.101,
-        "ttft": 1.662
+        "tps": 82.812,
+        "ttft": 1.582
       },
       "hfId": "Qwen/Qwen3.5-397B-A17B",
       "mode": "Non-reasoning",
@@ -7734,8 +7734,8 @@
         "price_1m_output_tokens": 12
       },
       "speed": {
-        "tps": 96.575,
-        "ttft": 0.694
+        "tps": 99.368,
+        "ttft": 0.693
       },
       "hfId": null,
       "mode": "Non-reasoning",
@@ -7950,8 +7950,8 @@
         "price_1m_output_tokens": 4.8
       },
       "speed": {
-        "tps": 123.223,
-        "ttft": 1.107
+        "tps": 120.745,
+        "ttft": 1.125
       },
       "hfId": null,
       "mode": null,
@@ -8058,8 +8058,8 @@
         "price_1m_output_tokens": 2.98
       },
       "speed": {
-        "tps": 140.976,
-        "ttft": 1.045
+        "tps": 168.704,
+        "ttft": 0.991
       },
       "hfId": "deepseek-ai/DeepSeek-V4-Pro-0813",
       "mode": "Non-reasoning",
@@ -8094,8 +8094,8 @@
         "price_1m_output_tokens": 8
       },
       "speed": {
-        "tps": 129.186,
-        "ttft": 6.062
+        "tps": 134.247,
+        "ttft": 4.105
       },
       "hfId": null,
       "mode": null,
@@ -8130,8 +8130,8 @@
         "price_1m_output_tokens": 3
       },
       "speed": {
-        "tps": 54.229,
-        "ttft": 1.156
+        "tps": 52.099,
+        "ttft": 1.17
       },
       "hfId": "Qwen/Qwen3.8-27B",
       "mode": "Non-reasoning",
@@ -8167,7 +8167,7 @@
       },
       "speed": {
         "tps": 355.425,
-        "ttft": 1.762
+        "ttft": 1.674
       },
       "hfId": "inclusionAI/Ling-3.0-flash",
       "mode": null,
@@ -8815,7 +8815,7 @@
       },
       "speed": {
         "tps": 126.316,
-        "ttft": 0.745
+        "ttft": 0.77
       },
       "hfId": null,
       "mode": "Non-reasoning",
@@ -8850,8 +8850,8 @@
         "price_1m_output_tokens": 3.6
       },
       "speed": {
-        "tps": 86.361,
-        "ttft": 1.658
+        "tps": 87.495,
+        "ttft": 1.578
       },
       "hfId": "Qwen/Qwen3.5-397B-A17B",
       "mode": "Reasoning",
@@ -8922,8 +8922,8 @@
         "price_1m_output_tokens": 2.25
       },
       "speed": {
-        "tps": 134.874,
-        "ttft": 1.045
+        "tps": 135.557,
+        "ttft": 0.99
       },
       "hfId": "Qwen/Qwen3.6-35B-A3B",
       "mode": "Reasoning",
@@ -9066,8 +9066,8 @@
         "price_1m_output_tokens": 3.2
       },
       "speed": {
-        "tps": 143.658,
-        "ttft": 1.016
+        "tps": 142.953,
+        "ttft": 1.033
       },
       "hfId": "Qwen/Qwen3.5-122B-A10B",
       "mode": "Non-reasoning",
@@ -9138,8 +9138,8 @@
         "price_1m_output_tokens": 1.35
       },
       "speed": {
-        "tps": 136.808,
-        "ttft": 0.503
+        "tps": 141.113,
+        "ttft": 0.49
       },
       "hfId": "meta-models/Muse-Glimmer-30B",
       "mode": "High",
@@ -9390,8 +9390,8 @@
         "price_1m_output_tokens": 5
       },
       "speed": {
-        "tps": 109.741,
-        "ttft": 12.213
+        "tps": 109.326,
+        "ttft": 10.771
       },
       "hfId": null,
       "mode": "Reasoning",
@@ -9534,8 +9534,8 @@
         "price_1m_output_tokens": 2.5
       },
       "speed": {
-        "tps": 128.643,
-        "ttft": 1.981
+        "tps": 125.501,
+        "ttft": 1.843
       },
       "hfId": "inclusionAI/Ring-2.6-1T",
       "mode": null,
@@ -9930,8 +9930,8 @@
         "price_1m_output_tokens": 3.2
       },
       "speed": {
-        "tps": 131.739,
-        "ttft": 0.996
+        "tps": 133.145,
+        "ttft": 0.992
       },
       "hfId": "Qwen/Qwen3.5-122B-A10B",
       "mode": "Reasoning",
@@ -10074,8 +10074,8 @@
         "price_1m_output_tokens": 5
       },
       "speed": {
-        "tps": 103.751,
-        "ttft": 0.483
+        "tps": 101.177,
+        "ttft": 0.499
       },
       "hfId": null,
       "mode": "Non-reasoning",
@@ -10182,8 +10182,8 @@
         "price_1m_output_tokens": 2.25
       },
       "speed": {
-        "tps": 151.13,
-        "ttft": 1.103
+        "tps": 143.674,
+        "ttft": 1.096
       },
       "hfId": "Qwen/Qwen3.6-35B-A3B",
       "mode": "Non-reasoning",
@@ -10398,7 +10398,7 @@
         "price_1m_output_tokens": 0.65
       },
       "speed": {
-        "tps": 77.931,
+        "tps": 77.278,
         "ttft": 0.275
       },
       "hfId": "ibm-granite/Granite-4.2-30B",
@@ -10470,7 +10470,7 @@
         "price_1m_output_tokens": 0
       },
       "speed": {
-        "tps": 35.359,
+        "tps": 35.541,
         "ttft": 0.967
       },
       "hfId": "google/Gemma-4-31B",
@@ -10758,8 +10758,8 @@
         "price_1m_output_tokens": 7.5
       },
       "speed": {
-        "tps": 168.037,
-        "ttft": 0.546
+        "tps": 171.052,
+        "ttft": 0.572
       },
       "hfId": "mistralai/Mistral-Medium-3.5-128B",
       "mode": null,
@@ -10795,7 +10795,7 @@
       },
       "speed": {
         "tps": 146.203,
-        "ttft": 1.38
+        "ttft": 1.403
       },
       "hfId": "google/Gemma-4-12B",
       "mode": "Reasoning",
@@ -10830,8 +10830,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 136.093,
-        "ttft": 15.279
+        "tps": 135.676,
+        "ttft": 13.574
       },
       "hfId": null,
       "mode": "Medium",
@@ -10974,8 +10974,8 @@
         "price_1m_output_tokens": 0.4
       },
       "speed": {
-        "tps": 40.085,
-        "ttft": 0.986
+        "tps": 43.872,
+        "ttft": 0.95
       },
       "hfId": "google/Gemma-4-31B",
       "mode": "Non-reasoning",
@@ -11299,7 +11299,7 @@
       },
       "speed": {
         "tps": 224.62,
-        "ttft": 12.036
+        "ttft": 12.411
       },
       "hfId": null,
       "mode": "High",
@@ -11370,8 +11370,8 @@
         "price_1m_output_tokens": 0.25
       },
       "speed": {
-        "tps": 83.099,
-        "ttft": 0.425
+        "tps": 91.386,
+        "ttft": 0.417
       },
       "hfId": "Qwen/Qwen3.5-9B",
       "mode": "Non-reasoning",
@@ -11442,8 +11442,8 @@
         "price_1m_output_tokens": 0
       },
       "speed": {
-        "tps": 183.462,
-        "ttft": 0.228
+        "tps": 148.336,
+        "ttft": 0.244
       },
       "hfId": null,
       "mode": null,
@@ -11478,8 +11478,8 @@
         "price_1m_output_tokens": 0.4
       },
       "speed": {
-        "tps": 87.237,
-        "ttft": 0.668
+        "tps": 94.651,
+        "ttft": 0.645
       },
       "hfId": "google/Gemma-4-26B-A4B",
       "mode": "Non-reasoning",
@@ -11514,8 +11514,8 @@
         "price_1m_output_tokens": 0.15
       },
       "speed": {
-        "tps": 16.057,
-        "ttft": 0.578
+        "tps": 18.859,
+        "ttft": 0.567
       },
       "hfId": "Qwen/Qwen3.5-4B",
       "mode": "Reasoning",
@@ -11658,7 +11658,7 @@
         "price_1m_output_tokens": 0.2
       },
       "speed": {
-        "tps": 293.398,
+        "tps": 297.553,
         "ttft": 0.406
       },
       "hfId": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16",
@@ -11694,7 +11694,7 @@
         "price_1m_output_tokens": 0.9
       },
       "speed": {
-        "tps": 156.782,
+        "tps": 153.608,
         "ttft": 0.846
       },
       "hfId": "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16",
@@ -11730,8 +11730,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 147.52,
-        "ttft": 3.122
+        "tps": 137.911,
+        "ttft": 2.793
       },
       "hfId": null,
       "mode": "Low",
@@ -11946,8 +11946,8 @@
         "price_1m_output_tokens": 2.5
       },
       "speed": {
-        "tps": 247.482,
-        "ttft": 13.792
+        "tps": 222.03,
+        "ttft": 12.076
       },
       "hfId": null,
       "mode": "Medium",
@@ -12018,8 +12018,8 @@
         "price_1m_output_tokens": 0.8
       },
       "speed": {
-        "tps": 233.695,
-        "ttft": 1.07
+        "tps": 220.32,
+        "ttft": 1.082
       },
       "hfId": null,
       "mode": null,
@@ -12198,8 +12198,8 @@
         "price_1m_output_tokens": 0.75
       },
       "speed": {
-        "tps": 858.457,
-        "ttft": 2.862
+        "tps": 858.831,
+        "ttft": 2.786
       },
       "hfId": null,
       "mode": null,
@@ -12522,8 +12522,8 @@
         "price_1m_output_tokens": 2.5
       },
       "speed": {
-        "tps": 209.783,
-        "ttft": 4.023
+        "tps": 207.703,
+        "ttft": 3.999
       },
       "hfId": null,
       "mode": "Low",
@@ -12738,8 +12738,8 @@
         "price_1m_output_tokens": 0.595
       },
       "speed": {
-        "tps": 186.536,
-        "ttft": 0.501
+        "tps": 211.504,
+        "ttft": 0.487
       },
       "hfId": null,
       "mode": "High",
@@ -13026,8 +13026,8 @@
         "price_1m_output_tokens": 0.6
       },
       "speed": {
-        "tps": 170.91,
-        "ttft": 0.593
+        "tps": 174.97,
+        "ttft": 0.559
       },
       "hfId": "mistralai/Mistral-Small-4-119B-2603",
       "mode": "Reasoning",
@@ -13134,8 +13134,8 @@
         "price_1m_output_tokens": 1.2
       },
       "speed": {
-        "tps": 186.362,
-        "ttft": 1.175
+        "tps": 193.964,
+        "ttft": 1.2
       },
       "hfId": "Qwen/Qwen3-Next-80B-A3B-Instruct",
       "mode": "Reasoning",
@@ -13170,8 +13170,8 @@
         "price_1m_output_tokens": 0.2
       },
       "speed": {
-        "tps": 64.787,
-        "ttft": 1.032
+        "tps": 76.298,
+        "ttft": 1.005
       },
       "hfId": "Qwen/Qwen3.5-9B",
       "mode": "Reasoning",
@@ -13315,7 +13315,7 @@
       },
       "speed": {
         "tps": 45.737,
-        "ttft": 0.442
+        "ttft": 0.431
       },
       "hfId": "ibm-granite/Granite-4.2-8B",
       "mode": null,
@@ -13386,8 +13386,8 @@
         "price_1m_output_tokens": 0
       },
       "speed": {
-        "tps": 46.7,
-        "ttft": 1.659
+        "tps": 43.735,
+        "ttft": 1.766
       },
       "hfId": "inclusionAI/Ling-3.0-tiny",
       "mode": null,
@@ -13566,8 +13566,8 @@
         "price_1m_output_tokens": 0.8
       },
       "speed": {
-        "tps": 377.512,
-        "ttft": 1.034
+        "tps": 375.019,
+        "ttft": 1.012
       },
       "hfId": "arcee-ai/Trinity-Large-Thinking",
       "mode": null,
@@ -13602,8 +13602,8 @@
         "price_1m_output_tokens": 0.15
       },
       "speed": {
-        "tps": 14.029,
-        "ttft": 0.756
+        "tps": 14.615,
+        "ttft": 0.715
       },
       "hfId": "Qwen/Qwen3.5-4B",
       "mode": "Non-reasoning",
@@ -13854,8 +13854,8 @@
         "price_1m_output_tokens": 1.095
       },
       "speed": {
-        "tps": 264.35,
-        "ttft": 0.216
+        "tps": 264.827,
+        "ttft": 0.236
       },
       "hfId": "nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning",
       "mode": null,
@@ -13890,8 +13890,8 @@
         "price_1m_output_tokens": 0.545
       },
       "speed": {
-        "tps": 182.397,
-        "ttft": 0.498
+        "tps": 205.311,
+        "ttft": 0.487
       },
       "hfId": null,
       "mode": "Low",
@@ -13962,8 +13962,8 @@
         "price_1m_output_tokens": 0.91
       },
       "speed": {
-        "tps": 69.778,
-        "ttft": 0.587
+        "tps": 68.637,
+        "ttft": 0.607
       },
       "hfId": null,
       "mode": null,
@@ -14034,8 +14034,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 131.608,
-        "ttft": 0.742
+        "tps": 127.61,
+        "ttft": 0.741
       },
       "hfId": null,
       "mode": "Non-reasoning",
@@ -14070,8 +14070,8 @@
         "price_1m_output_tokens": 0.215
       },
       "speed": {
-        "tps": 228.414,
-        "ttft": 0.568
+        "tps": 254.773,
+        "ttft": 0.574
       },
       "hfId": "openai/gpt-oss-20b",
       "mode": "Low",
@@ -14142,8 +14142,8 @@
         "price_1m_output_tokens": 0
       },
       "speed": {
-        "tps": 101.435,
-        "ttft": 0.24
+        "tps": 106.202,
+        "ttft": 0.234
       },
       "hfId": null,
       "mode": null,
@@ -14430,8 +14430,8 @@
         "price_1m_output_tokens": 1.2
       },
       "speed": {
-        "tps": 179.331,
-        "ttft": 1.019
+        "tps": 185.183,
+        "ttft": 1.023
       },
       "hfId": null,
       "mode": null,
@@ -14754,8 +14754,8 @@
         "price_1m_output_tokens": 0.3
       },
       "speed": {
-        "tps": 148.067,
-        "ttft": 1.396
+        "tps": 146.758,
+        "ttft": 1.421
       },
       "hfId": "google/Gemma-4-12B",
       "mode": "Non-reasoning",
@@ -14826,8 +14826,8 @@
         "price_1m_output_tokens": 1.5
       },
       "speed": {
-        "tps": 81.552,
-        "ttft": 0.706
+        "tps": 80.756,
+        "ttft": 0.689
       },
       "hfId": null,
       "mode": null,
@@ -14862,8 +14862,8 @@
         "price_1m_output_tokens": 1.2
       },
       "speed": {
-        "tps": 115.838,
-        "ttft": 0.895
+        "tps": 114.723,
+        "ttft": 0.887
       },
       "hfId": "Qwen/Qwen3-Coder-Next",
       "mode": null,
@@ -15078,8 +15078,8 @@
         "price_1m_output_tokens": 0.12
       },
       "speed": {
-        "tps": 229.497,
-        "ttft": 0.258
+        "tps": 233.01,
+        "ttft": 0.255
       },
       "hfId": "ibm-granite/Granite-4.2-3B",
       "mode": null,
@@ -15294,8 +15294,8 @@
         "price_1m_output_tokens": 0.6
       },
       "speed": {
-        "tps": 165.452,
-        "ttft": 0.545
+        "tps": 166.705,
+        "ttft": 0.485
       },
       "hfId": "mistralai/Mistral-Small-4-119B-2603",
       "mode": "Non-reasoning",
@@ -15366,8 +15366,8 @@
         "price_1m_output_tokens": 0.18
       },
       "speed": {
-        "tps": 206.843,
-        "ttft": 0.44
+        "tps": 227.873,
+        "ttft": 0.427
       },
       "hfId": "openai/gpt-oss-20b",
       "mode": "High",
@@ -15546,8 +15546,8 @@
         "price_1m_output_tokens": 0.1
       },
       "speed": {
-        "tps": 42.615,
-        "ttft": 0.456
+        "tps": 37.126,
+        "ttft": 0.581
       },
       "hfId": "google/gemma-4-E4B",
       "mode": "Reasoning",
@@ -15582,7 +15582,7 @@
         "price_1m_output_tokens": 0.2
       },
       "speed": {
-        "tps": 205.71,
+        "tps": 193.399,
         "ttft": 0.511
       },
       "hfId": "nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16",
@@ -15762,8 +15762,8 @@
         "price_1m_output_tokens": 2.5
       },
       "speed": {
-        "tps": 221.778,
-        "ttft": 0.777
+        "tps": 217.378,
+        "ttft": 0.77
       },
       "hfId": null,
       "mode": "Non-reasoning",
@@ -16698,8 +16698,8 @@
         "price_1m_output_tokens": 0.68
       },
       "speed": {
-        "tps": 55.315,
-        "ttft": 0.635
+        "tps": 49.037,
+        "ttft": 0.658
       },
       "hfId": null,
       "mode": null,
@@ -17202,8 +17202,8 @@
         "price_1m_output_tokens": 0.97
       },
       "speed": {
-        "tps": 110.672,
-        "ttft": 0.909
+        "tps": 111.318,
+        "ttft": 0.913
       },
       "hfId": "Qwen/Qwen3-Omni-30B-A3B-Instruct",
       "mode": "Reasoning",
@@ -17382,8 +17382,8 @@
         "price_1m_output_tokens": 0.72
       },
       "speed": {
-        "tps": 85.194,
-        "ttft": 0.61
+        "tps": 85.484,
+        "ttft": 0.628
       },
       "hfId": "meta-llama/Llama-3.3-70B-Instruct",
       "mode": null,
@@ -17778,8 +17778,8 @@
         "price_1m_output_tokens": 3
       },
       "speed": {
-        "tps": 39.29,
-        "ttft": 0.69
+        "tps": 40.694,
+        "ttft": 0.688
       },
       "hfId": "NousResearch/Hermes-4-405B",
       "mode": "Reasoning",
@@ -17886,7 +17886,7 @@
         "price_1m_output_tokens": 0.1
       },
       "speed": {
-        "tps": 43.779,
+        "tps": 36.796,
         "ttft": 0.326
       },
       "hfId": "google/gemma-4-E4B",
@@ -17958,8 +17958,8 @@
         "price_1m_output_tokens": 0.16
       },
       "speed": {
-        "tps": 18.657,
-        "ttft": 47.272
+        "tps": 18.299,
+        "ttft": 52.921
       },
       "hfId": "nvidia/NVIDIA-Nemotron-Nano-9B-V2",
       "mode": "Reasoning",
@@ -17994,8 +17994,8 @@
         "price_1m_output_tokens": 3
       },
       "speed": {
-        "tps": 42.267,
-        "ttft": 0.699
+        "tps": 42.944,
+        "ttft": 0.689
       },
       "hfId": "NousResearch/Hermes-4-405B",
       "mode": "Non-reasoning",
@@ -19038,8 +19038,8 @@
         "price_1m_output_tokens": 10
       },
       "speed": {
-        "tps": 69.68,
-        "ttft": 0.418
+        "tps": 67.73,
+        "ttft": 0.389
       },
       "hfId": null,
       "mode": null,
@@ -19254,8 +19254,8 @@
         "price_1m_output_tokens": 0.2
       },
       "speed": {
-        "tps": 240.771,
-        "ttft": 0.418
+        "tps": 227.65,
+        "ttft": 0.475
       },
       "hfId": "nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16",
       "mode": "Non-reasoning",
@@ -19290,8 +19290,8 @@
         "price_1m_output_tokens": 0.195
       },
       "speed": {
-        "tps": 138.744,
-        "ttft": 1.844
+        "tps": 100.968,
+        "ttft": 6.155
       },
       "hfId": "nvidia/NVIDIA-Nemotron-Nano-9B-V2",
       "mode": "Non-reasoning",
@@ -20406,8 +20406,8 @@
         "price_1m_output_tokens": 0.7
       },
       "speed": {
-        "tps": 2392.271,
-        "ttft": 0.472
+        "tps": 2124.464,
+        "ttft": 0.462
       },
       "hfId": null,
       "mode": null,
@@ -20514,8 +20514,8 @@
         "price_1m_output_tokens": 0
       },
       "speed": {
-        "tps": 46.472,
-        "ttft": 0.325
+        "tps": 47.15,
+        "ttft": 0.335
       },
       "hfId": null,
       "mode": null,
@@ -20766,8 +20766,8 @@
         "price_1m_output_tokens": 0.25
       },
       "speed": {
-        "tps": 54.18,
-        "ttft": 9.431
+        "tps": 13.846,
+        "ttft": 36.544
       },
       "hfId": "ibm-granite/Granite-4.0-H-Small",
       "mode": null,
@@ -20802,8 +20802,8 @@
         "price_1m_output_tokens": 0.2
       },
       "speed": {
-        "tps": 91.915,
-        "ttft": 0.551
+        "tps": 92.79,
+        "ttft": 0.497
       },
       "hfId": "mistralai/Ministral-3-14B-Instruct-2512",
       "mode": null,
@@ -20874,7 +20874,7 @@
         "price_1m_output_tokens": 0.97
       },
       "speed": {
-        "tps": 108.516,
+        "tps": 108.783,
         "ttft": 0.895
       },
       "hfId": "Qwen/Qwen3-Omni-30B-A3B-Instruct",
@@ -21162,8 +21162,8 @@
         "price_1m_output_tokens": 0.5
       },
       "speed": {
-        "tps": 40.843,
-        "ttft": 0.996
+        "tps": 42.7,
+        "ttft": 1.032
       },
       "hfId": null,
       "mode": null,
@@ -21234,8 +21234,8 @@
         "price_1m_output_tokens": 0.14
       },
       "speed": {
-        "tps": 272.419,
-        "ttft": 0.616
+        "tps": 258.186,
+        "ttft": 0.595
       },
       "hfId": null,
       "mode": null,
@@ -21414,8 +21414,8 @@
         "price_1m_output_tokens": 0.6
       },
       "speed": {
-        "tps": 185.63,
-        "ttft": 0.79
+        "tps": 205.216,
+        "ttft": 0.807
       },
       "hfId": "nvidia/NVIDIA-Nemotron-Nano-12B-v2-VL-BF16",
       "mode": "Non-reasoning",
@@ -21486,8 +21486,8 @@
         "price_1m_output_tokens": 0
       },
       "speed": {
-        "tps": 17.249,
-        "ttft": 0.355
+        "tps": 17.061,
+        "ttft": 0.372
       },
       "hfId": null,
       "mode": null,
@@ -21846,8 +21846,8 @@
         "price_1m_output_tokens": 0.8
       },
       "speed": {
-        "tps": 94.662,
-        "ttft": 0.744
+        "tps": 94.847,
+        "ttft": 0.846
       },
       "hfId": null,
       "mode": null,
@@ -22314,8 +22314,8 @@
         "price_1m_output_tokens": 0.15
       },
       "speed": {
-        "tps": 109.279,
-        "ttft": 0.429
+        "tps": 107.272,
+        "ttft": 0.421
       },
       "hfId": "mistralai/Ministral-3-8B-Instruct-2512",
       "mode": null,
@@ -22494,8 +22494,8 @@
         "price_1m_output_tokens": 0.345
       },
       "speed": {
-        "tps": 14.483,
-        "ttft": 1.865
+        "tps": 14.949,
+        "ttft": 1.404
       },
       "hfId": "meta-llama/Llama-3.2-11B-Vision-Instruct",
       "mode": "Vision",
@@ -23826,8 +23826,8 @@
         "price_1m_output_tokens": 0.1
       },
       "speed": {
-        "tps": 265.635,
-        "ttft": 0.377
+        "tps": 273.632,
+        "ttft": 0.397
       },
       "hfId": "mistralai/Ministral-3-3B-Instruct-2512",
       "mode": null,
@@ -24330,8 +24330,8 @@
         "price_1m_output_tokens": 0
       },
       "speed": {
-        "tps": 130.407,
-        "ttft": 0.216
+        "tps": 131.825,
+        "ttft": 0.229
       },
       "hfId": null,
       "mode": null,

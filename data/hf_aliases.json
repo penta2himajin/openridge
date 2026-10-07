@@ -235,6 +235,7 @@
   "mistral-large": "mistralai/Mistral-Large-Instruct-2411",
   "mistral-large-2407": "mistralai/Mistral-Large-Instruct-2411",
   "mistral-large-3": null,
+  "mistral-large-4": null,
   "mistral-medium": "mistralai/Mistral-Medium-3.5-128B",
   "mistral-medium-3-5": "mistralai/Mistral-Medium-3.5-128B",
   "mistral-saba": null,

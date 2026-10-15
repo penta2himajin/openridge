@@ -701,6 +701,12 @@
     "repo": "mradermacher/Step3-VL-10B-Base-i1-GGUF",
     "fetchedAt": "2026-05-19T23:57:38.823Z"
   },
+  "step-5": {
+    "bytes": 361121860256,
+    "source": "hf",
+    "repo": "vcruz305/StepFun-5-Preview-GGUF",
+    "fetchedAt": "2026-10-15T09:04:59.139Z"
+  },
   "tri-21b-think-preview": {
     "bytes": null,
     "source": "not-found",

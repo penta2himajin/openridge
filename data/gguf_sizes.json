@@ -463,11 +463,22 @@
     "repo": "mradermacher/Nanbeige4.1-3B-GGUF",
     "fetchedAt": "2026-05-19T23:57:40.776Z"
   },
+  "nemotron-3-5-bolt-74b-a9b": {
+    "bytes": null,
+    "source": "not-found",
+    "fetchedAt": "2026-10-16T08:57:25.734Z"
+  },
   "nemotron-3-5-lightning": {
     "bytes": 25477403616,
     "source": "hf",
     "repo": "bartowski/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-GGUF",
     "fetchedAt": "2026-08-12T05:43:16.349Z"
+  },
+  "nemotron-3-5-super-vl": {
+    "bytes": 70103292320,
+    "source": "hf",
+    "repo": "lmstudio-community/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-GGUF",
+    "fetchedAt": "2026-10-16T08:57:24.833Z"
   },
   "nemotron-cascade-2-30b-a3b": {
     "bytes": 24725740992,

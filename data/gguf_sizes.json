@@ -28,6 +28,12 @@
     "repo": "vcruz305/DeepSeek-V4.1-Flash-GGUF",
     "fetchedAt": "2026-09-11T08:50:17.176Z"
   },
+  "deepseek-v4-1-flash-1017": {
+    "bytes": 444737572416,
+    "source": "hf",
+    "repo": "mrfakename/DeepSeek-V4.1-Flash-1017-GGUF",
+    "fetchedAt": "2026-10-19T09:47:51.068Z"
+  },
   "deepseek-v4-flash": {
     "bytes": null,
     "source": "not-found",

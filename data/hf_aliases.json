@@ -228,6 +228,7 @@
   "minimax-m2-5": "MiniMaxAI/MiniMax-M2.5",
   "minimax-m2-7": "MiniMaxAI/MiniMax-M2.7",
   "minimax-m3": "MiniMaxAI/MiniMax-M3",
+  "minimax-m3-1-flash": null,
   "ministral-3-14b": "mistralai/Ministral-3-14B-Instruct-2512",
   "ministral-3-3b": "mistralai/Ministral-3-3B-Instruct-2512",
   "ministral-3-8b": "mistralai/Ministral-3-8B-Instruct-2512",

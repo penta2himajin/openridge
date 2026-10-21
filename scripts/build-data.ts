@@ -264,9 +264,11 @@ interface HfConfig {
   // Experts-routed-per-token. Every vendor spells this differently:
   // `num_experts_per_tok` (DeepSeek/Qwen/Nemotron), `num_experts_per_token`
   // (Kimi Linear), `top_k_experts` (Gemma 4 / DiffusionGemma),
-  // `experts_top_k` (Motif), `moe_top_k` (StepFun).
+  // `experts_top_k` (Motif), `moe_top_k` (StepFun), `experts_per_token`
+  // (OpenAI's gpt-oss).
   num_experts_per_tok?: number;
   num_experts_per_token?: number;
+  experts_per_token?: number;
   top_k_experts?: number;
   experts_top_k?: number;
   moe_top_k?: number;
@@ -275,6 +277,9 @@ interface HfConfig {
   // inflates the estimate by the sparsity factor (128 vs 8 for Gemma 4).
   num_experts?: number;
   moe_num_experts?: number;
+  // Mixtral / gpt-oss spelling of the pool size. Its presence also marks the
+  // convention where the routed width is the plain `intermediate_size`.
+  num_local_experts?: number;
   n_routed_experts?: number;
   n_shared_experts?: number;
   num_shared_experts?: number;
@@ -315,11 +320,12 @@ const LLM_CONFIG_KEYS = [
   "language_model",
 ] as const;
 
-/** Routed-experts-per-token, across the five spellings in the wild. */
+/** Routed-experts-per-token, across the six spellings in the wild. */
 function expertsPerTok(c: HfConfig): number | undefined {
   return (
     c.num_experts_per_tok ??
     c.num_experts_per_token ??
+    c.experts_per_token ??
     c.top_k_experts ??
     c.experts_top_k ??
     c.moe_top_k
@@ -351,19 +357,22 @@ function denseLayerCount(c: HfConfig, L: number): number {
 }
 
 /**
- * Routed-expert FFN width. Usually a dedicated key, but Thinking Machines
- * inverts the convention — the routed width is the plain `intermediate_size`
- * and the dense layers carry `dense_intermediate_size`. Keying off that
- * sibling rather than off `intermediate_size` alone keeps every other vendor's
- * config reading exactly as before: without it Inkling has no recognised
- * routed width at all, `findMoeConfig` calls a 975B-A41B MoE dense, and the
- * caller plots it at `total`.
+ * Routed-expert FFN width. Usually a dedicated key, but two conventions keep
+ * it in the plain `intermediate_size`: Thinking Machines, whose dense layers
+ * carry `dense_intermediate_size`, and Mixtral / gpt-oss, where every layer is
+ * MoE and `num_local_experts` sizes the pool. Keying off those siblings rather
+ * than off `intermediate_size` alone keeps every other vendor's config reading
+ * exactly as before: without them Inkling and gpt-oss-20b have no recognised
+ * routed width at all, `findMoeConfig` calls them dense, and the caller plots
+ * them at `total`. A pool of 0/1 (Granite 4.0's dense hybrids) is not MoE.
  */
 function moeIntermediate(c: HfConfig): number | undefined {
   return (
     c.moe_intermediate_size ??
     c.shared_intermediate_size ??
-    (c.dense_intermediate_size !== undefined ? c.intermediate_size : undefined)
+    (c.dense_intermediate_size !== undefined || (c.num_local_experts ?? 0) > 1
+      ? c.intermediate_size
+      : undefined)
   );
 }
 
@@ -591,8 +600,11 @@ async function resolveHfRepo(
   // link out to from the tooltip. Rank these behind a plain-named repo when
   // neither is an exact match (confirmed against google/gemma-3-12b-it-qat-*,
   // which HF's search ranks ahead of the canonical google/gemma-3-12b-it).
+  // A memory-budget suffix (`-24GB`) is the same thing under another name:
+  // nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-24GB is an IQ2 build whose 22.4B
+  // `safetensors.total` HF's search ranked ahead of the -BF16 checkpoint.
   const QUANT_MARKER =
-    /gguf|awq|gptq|qat|exl2|mlx|-q\d|int4|int8|fp8|fp4|nvfp|mxfp|bnb|quant/i;
+    /gguf|awq|gptq|qat|exl2|mlx|-q\d|int4|int8|fp8|fp4|nvfp|mxfp|bnb|quant|-\d+gb\b/i;
   const queries = [clean];
   const stripped = stripTrailingQualifier(clean);
   if (stripped) queries.push(stripped);

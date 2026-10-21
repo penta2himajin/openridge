@@ -197,6 +197,17 @@ test("known-MoE-shaped families are stored with active < total", () => {
     "nvidia-nemotron-3-super-120b-a12b",
     "nvidia-nemotron-3-ultra-550b-a55b",
     "nemotron-cascade-2-30b-a3b",
+    "nemotron-3-5-super-vl",
+    // Also once aliased to NVIDIA's IQ2 "-24GB" build (22.4B total).
+    "nemotron-3-5-bolt-74b-a9b",
+    // Gated repo: config.json 401s without an access-approved token, so the
+    // estimator never saw the routing and the point fell back to dense.
+    "muse-spark-open",
+    // Mixtral-style naming (routed width in plain `intermediate_size`) that
+    // the estimator read as dense.
+    "gpt-oss-20b",
+    "gpt-oss-20b-low",
+    "hypernova-60b",
     // 2.8T total / 104B active — was stored fully dense, the single largest
     // misplacement on the chart.
     "kimi-k3-low",

@@ -127,7 +127,7 @@ GET https://huggingface.co/api/models/<owner>/<repo>
 
    **推定が効かない構造**: Nemotron-H 系の Mamba-2 / MoE ハイブリッドは大半の層が Mamba で、`num_hidden_layers` から attention / MoE 層数を導けない。この系統は推定を諦めて `moe_overrides.json` に実測値を置く。**新しい Nemotron が出るたびに override が要る**（Nemotron 3.5 Super VL / Bolt はこれが漏れて dense 表示になっていた）。
 
-   **config が読めない repo**: gated repo（`meta-models/Muse-Spark-Open-816B-A42B` 等）は API の `safetensors.total` は返すが、`raw/main/config.json` はアクセス承認済みトークン無しだと 401 になる。refresh は `HF_API_TOKEN` 無しで走るので、推定は null → `total` にフォールバックし dense 表示になる。gated な MoE は `moe_overrides.json` に値を置く。
+   **config が読めない repo**: gated repo（`meta-models/Muse-Spark-Open-816B-A42B` 等）は API の `safetensors.total` は返すが、`raw/main/config.json` はアクセス承認済みトークン無しだと 401 になる。refresh の `HF_API_TOKEN` がその repo のゲート承認を受けていなければ、推定は null → `total` にフォールバックし dense 表示になる。gated な MoE は `moe_overrides.json` に値を置く。
 
    **attention 項の誤差**: 推定は attention を一律 `4·H²` で置く。MLA（`kv_lora_rank` / `q_lora_rank` を持つ DeepSeek 系・A.X-K2）では**過大**、linear-attention ハイブリッド（Solar Open2 の `linear_attn_config`、Qwen3.5 以降の `full_attention_interval`）では **過小**に出る。加えて `tie_word_embeddings: false` のモデルでは **lm_head を数えていない**（embed のみ計上）。総パラメータの再構成が `safetensors.total` とよく一致するのに active だけ公称値からずれる場合はここが原因なので、実測値を `moe_overrides.json` に入れる。
 

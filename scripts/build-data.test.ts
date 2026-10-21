@@ -315,6 +315,31 @@ test("resolveParams: an NVFP4 re-upload loses to the plain repo it was packed fr
   assert.equal(result.resolved?.total, 31577937344);
 });
 
+test("resolveParams: a -24GB local build loses to the BF16 checkpoint", async (t) => {
+  // Regression: nemotron-3-5-bolt-74b-a9b resolved to NVIDIA's IQ2 "-24GB"
+  // repo, whose 22.4B safetensors.total put a 74B-A9B model at 22.4B dense.
+  // The memory-budget suffix names no quant format, so it ranked first.
+  t.after(() => mock.restoreAll());
+  mockFetch({
+    "api/models/nvidia/Nemotron-3.5-Bolt-74B-A9B": "miss",
+    "api/models/nvidia/Nemotron3.5Bolt74B-A9B": "miss",
+    "search=Nemotron%203.5%20Bolt%2074B-A9B": [
+      { modelId: "nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-24GB" },
+      { modelId: "nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-BF16" },
+    ],
+    "Bolt-74B-A9B-BF16": { safetensors: { total: 74 * B } },
+    "Bolt-74B-A9B-24GB": { safetensors: { total: 22367086600 } },
+  });
+
+  const m = mkEntry({
+    name: "Nemotron 3.5 Bolt 74B-A9B",
+    slug: "nemotron-3-5-bolt-74b-a9b",
+    creatorSlug: "nvidia",
+  });
+  const result = await resolveParams(m, false, {}, new Map(), {}, {});
+  assert.equal(result.hfRepo, "nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-BF16");
+});
+
 test("resolveParams: creator with no trusted HF org never calls fetch and yields no params", async (t) => {
   t.after(() => mock.restoreAll());
   const fetchMock = mockFetch({}); // any call is a bug — no route matches, would 404
@@ -615,6 +640,44 @@ test("computeActiveParams: Inkling-Small lands on its published 12B active", () 
   assert.ok(
     active! > 10 * B && active! < 14 * B,
     `expected ~12B active, got ${active}`,
+  );
+});
+
+test("computeActiveParams: gpt-oss's Mixtral-style naming is MoE, not dense", () => {
+  // openai/gpt-oss-20b — routing is `experts_per_token`, the pool is
+  // `num_local_experts`, and the routed width is the plain `intermediate_size`
+  // (there is no `moe_intermediate_size`). The estimator found no routed width
+  // and the caller plotted this 20.9B-A3.6B model as dense at 20.9B.
+  const active = computeActiveParams({
+    hidden_size: 2880,
+    num_hidden_layers: 24,
+    intermediate_size: 2880,
+    num_local_experts: 32,
+    experts_per_token: 4,
+    vocab_size: 201088,
+  });
+  assert.ok(active !== null, "must not read as dense");
+  // OpenAI model card states 3.6B active against 20.9B total.
+  assert.ok(
+    active! > 3.2 * B && active! < 4.4 * B,
+    `expected ~3.6B active, got ${active}`,
+  );
+});
+
+test("computeActiveParams: an empty num_local_experts pool stays dense", () => {
+  // ibm-granite/Granite-4.0-H-Micro style — the hybrid config class always
+  // carries the MoE keys, zeroed out on the dense variants. A pool of 0 must
+  // not promote `intermediate_size` to a routed width.
+  assert.equal(
+    computeActiveParams({
+      hidden_size: 2560,
+      num_hidden_layers: 40,
+      intermediate_size: 8192,
+      num_local_experts: 0,
+      num_experts_per_tok: 0,
+      vocab_size: 100352,
+    }),
+    null,
   );
 });
 

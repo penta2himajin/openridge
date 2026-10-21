@@ -20,6 +20,11 @@
   "mistralai/Mixtral-8x22B-Instruct-v0.1": { "active": 39000000000 },
   "mistralai/Mixtral-8x7B-Instruct-v0.1": { "active": 12900000000 },
   "moonshotai/Kimi-K3": { "active": 104000000000 },
+  "_comment_muse_spark_open": "Gated repo: config.json 401s without an access-approved HF token, so the estimator never sees the routing and the point fell back to dense. Card: 816B total / 42B active (62 layers, 256 experts, 8 routed). Cross-checked against transformers' MuseSparkTextConfig: per-layer attention + 2×8192×4096 expert pool/unpool + 8×3×4096² routed, ×62, plus untied embed/lm_head ≈ 41.9B.",
+  "meta-models/Muse-Spark-Open-816B-A42B": { "active": 42000000000 },
+  "_comment_gpt_oss": "gpt-oss keeps the routed width in plain intermediate_size (Mixtral convention). OpenAI model card: gpt-oss-20b 20.9B total / 3.6B active (gpt-oss-120b's 5.1B lives in manual_params.json). HyperNova 60B 2605 is a CompactifAI compression of gpt-oss-120b; its model card states 59B total / 4.8B active.",
+  "openai/gpt-oss-20b": { "active": 3600000000 },
+  "MultiverseComputingCAI/HyperNova-60B-2605": { "active": 4800000000 },
   "_comment_qwen_hybrid": "Qwen3.5/3.6/3.8 (and Nex-N2-Pro, a post-train of Qwen3.5-397B-A17B) interleave linear attention with full attention — `full_attention_interval: 4` — so the estimator's uniform 4·H² attention term is far too small, and it also misses the untied lm_head. It came out 18-33% under. Values below are exact: every tensor shape was read from the safetensors shard headers, summed to a total matching safetensors.total byte-for-byte, then active = non-expert weights + experts_per_tok/num_experts of the routed experts + embed + lm_head (excludes the vision tower and the MTP head, which is what reproduces Qwen's own A<N>B figures).",
   "Qwen/Qwen3.5-35B-A3B": { "active": 3454988928 },
   "Qwen/Qwen3.6-35B-A3B": { "active": 3454988928 },
@@ -29,6 +34,11 @@
   "Qwen/Qwen3.8-2.4T-A95B": { "active": 95287866752 },
 
   "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16": { "active": 12000000000 },
+  "_comment_nemotron_3_5": "Nemotron 3.5 Super VL / Bolt are Mamba-2/LatentMoE hybrids like the rest of Nemotron-H, which the estimator cannot model (docs/data-sources.md §2), so both plotted dense. Card values: 120B-A12B and 74B-A9B. Bolt was also aliased to the -24GB repo — NVIDIA's IQ2-quantized local build (safetensors.total 22.4B) — instead of the BF16 checkpoint.",
+  "nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16": {
+    "active": 12000000000
+  },
+  "nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-BF16": { "active": 9000000000 },
   "nvidia/Nemotron-Cascade-2-30B-A3B": { "active": 3000000000 },
   "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16": { "active": 3000000000 },
   "nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16": { "active": 55000000000 },

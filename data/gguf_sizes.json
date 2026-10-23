@@ -440,6 +440,11 @@
     "repo": "DevQuasar/MiniMaxAI.MiniMax-M3-GGUF",
     "fetchedAt": "2026-07-04T02:29:48.085Z"
   },
+  "minimax-m3-1-flash": {
+    "bytes": null,
+    "source": "not-found",
+    "fetchedAt": "2026-10-23T09:15:22.727Z"
+  },
   "ministral-3-3b": {
     "bytes": 2146497824,
     "source": "hf",

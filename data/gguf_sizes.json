@@ -344,6 +344,11 @@
     "repo": "bloomer010/Ling-3.0-tiny-GGUF",
     "fetchedAt": "2026-08-13T09:25:53.090Z"
   },
+  "ling-3-1-flash-1019": {
+    "bytes": null,
+    "source": "not-found",
+    "fetchedAt": "2026-10-28T10:30:07.228Z"
+  },
   "ling-mini-2-0": {
     "bytes": 9941894336,
     "source": "hf",

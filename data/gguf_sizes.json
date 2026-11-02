@@ -479,6 +479,12 @@
     "repo": "mradermacher/Nanbeige4.1-3B-GGUF",
     "fetchedAt": "2026-05-19T23:57:40.776Z"
   },
+  "nanbeige4-3-33b": {
+    "bytes": 20788825216,
+    "source": "hf",
+    "repo": "bartowski/Nanbeige_Nanbeige4.3-33B-GGUF",
+    "fetchedAt": "2026-11-02T12:13:53.469Z"
+  },
   "nemotron-3-5-bolt-74b-a9b": {
     "bytes": null,
     "source": "not-found",
